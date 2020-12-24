@@ -1,0 +1,309 @@
+resources:
+- name: empty-apps
+  type: s3
+  source:
+    endpoint: http://minio:9000
+    bucket: releases
+    regexp: app_(.*)\.tgz
+    access_key_id: minio
+    secret_access_key: minio123
+- name: c2s01-code
+  type: s3
+  source:
+    endpoint: http://minio:9000
+    bucket: releases
+    regexp: c2s01-(.*)\.tgz
+    access_key_id: minio
+    secret_access_key: minio123
+- name: c2s02-code
+  type: s3
+  source:
+    endpoint: http://minio:9000
+    bucket: releases
+    regexp: c2s02-(.*)\.tgz
+    access_key_id: minio
+    secret_access_key: minio123
+- name: c2s03-code
+  type: s3
+  source:
+    endpoint: http://minio:9000
+    bucket: releases
+    regexp: c2s03-(.*)\.tgz
+    access_key_id: minio
+    secret_access_key: minio123
+- name: c2s04-code
+  type: s3
+  source:
+    endpoint: http://minio:9000
+    bucket: releases
+    regexp: c2s04-(.*)\.tgz
+    access_key_id: minio
+    secret_access_key: minio123
+- name: c2s05-code
+  type: s3
+  source:
+    endpoint: http://minio:9000
+    bucket: releases
+    regexp: c2s05-(.*)\.tgz
+    access_key_id: minio
+    secret_access_key: minio123
+- name: c2s06-code
+  type: s3
+  source:
+    endpoint: http://minio:9000
+    bucket: releases
+    regexp: c2s06-(.*)\.tgz
+    access_key_id: minio
+    secret_access_key: minio123
+- name: generator-scripts-repo
+  type: git
+  source:
+    uri: git@github.com:shageman/package-based-rails-applications-book.git
+    branch: main
+    depth: 1
+    private_key: ((private_key))
+  check_every: 10s
+
+
+
+
+jobs:
+- name: generate-empty-app
+  serial_groups: [transform]
+  plan:
+  - get: generator-scripts-repo
+  - task: generate-empty-app
+    file: generator-scripts-repo/generator_scripts/ci/generate-code.yml
+    output_mapping:
+      code_output: empty-apps
+  - put: empty-apps
+    params:
+      file: "empty-apps/*.tgz"
+      acl: public-read
+
+
+
+
+- name: c2s01
+  serial_groups: [transform]
+  plan:
+  - get: generator-scripts-repo
+    trigger: true
+  - get: empty-apps
+    trigger: true
+  - task: c2s01-task
+    file: generator-scripts-repo/generator_scripts/ci/transform-code.yml
+    input_mapping:
+      code_input: empty-apps
+    output_mapping:
+      code_output: c2s01-code
+    params:
+      PREV_CHAPTER: app
+      CHAPTER: c2s01
+  - put: c2s01-code
+    params:
+      file: "c2s01-code/c2s01-*.tgz"
+      acl: public-read
+
+- name: c2s01-test
+  serial_groups: [test]
+  plan:
+  - get: generator-scripts-repo
+  - get: c2s01-code
+    passed: [c2s01]
+    trigger: true
+  - task: c2s01-test-task
+    file: generator-scripts-repo/generator_scripts/ci/test-with-rspec.yml
+    input_mapping:
+      app_code: c2s01-code
+    params:
+      CHAPTER: c2s01
+
+
+
+
+- name: c2s02
+  serial_groups: [transform]
+  plan:
+  - get: generator-scripts-repo
+  - get: c2s01-code
+    passed: [c2s01]
+    trigger: true
+  - task: c2s02-task
+    file: generator-scripts-repo/generator_scripts/ci/transform-code.yml
+    input_mapping:
+      code_input: c2s01-code
+    output_mapping:
+      code_output: c2s02-code
+    params:
+      PREV_CHAPTER: c2s01
+      CHAPTER: c2s02
+  - put: c2s02-code
+    params:
+      file: "c2s02-code/c2s02-*.tgz"
+      acl: public-read
+
+- name: c2s02-test
+  serial_groups: [test]
+  plan:
+  - get: generator-scripts-repo
+  - get: c2s02-code
+    passed: [c2s02]
+    trigger: true
+  - task: c2s02-test-task
+    file: generator-scripts-repo/generator_scripts/ci/test-with-rspec.yml
+    input_mapping:
+      app_code: c2s02-code
+    params:
+      CHAPTER: c2s02
+
+
+
+
+- name: c2s03
+  serial_groups: [transform]
+  plan:
+  - get: generator-scripts-repo
+  - get: c2s02-code
+    passed: [c2s02]
+    trigger: true
+  - task: c2s03-task
+    file: generator-scripts-repo/generator_scripts/ci/transform-code.yml
+    input_mapping:
+      code_input: c2s02-code
+    output_mapping:
+      code_output: c2s03-code
+    params:
+      PREV_CHAPTER: c2s02
+      CHAPTER: c2s03
+  - put: c2s03-code
+    params:
+      file: "c2s03-code/c2s03-*.tgz"
+      acl: public-read
+
+- name: c2s03-test
+  serial_groups: [test]
+  plan:
+  - get: generator-scripts-repo
+  - get: c2s03-code
+    passed: [c2s03]
+    trigger: true
+  - task: c2s03-test-task
+    file: generator-scripts-repo/generator_scripts/ci/test-with-rspec.yml
+    input_mapping:
+      app_code: c2s03-code
+    params:
+      CHAPTER: c2s03
+
+
+
+- name: c2s04
+  serial_groups: [transform]
+  plan:
+  - get: generator-scripts-repo
+  - get: c2s03-code
+    passed: [c2s03]
+    trigger: true
+  - task: c2s04-task
+    file: generator-scripts-repo/generator_scripts/ci/transform-code.yml
+    input_mapping:
+      code_input: c2s03-code
+    output_mapping:
+      code_output: c2s04-code
+    params:
+      PREV_CHAPTER: c2s03
+      CHAPTER: c2s04
+  - put: c2s04-code
+    params:
+      file: "c2s04-code/c2s04-*.tgz"
+      acl: public-read
+
+- name: c2s04-test
+  serial_groups: [test]
+  plan:
+  - get: generator-scripts-repo
+  - get: c2s04-code
+    passed: [c2s04]
+    trigger: true
+  - task: c2s04-test-task
+    file: generator-scripts-repo/generator_scripts/ci/test-with-rspec.yml
+    input_mapping:
+      app_code: c2s04-code
+    params:
+      CHAPTER: c2s04
+
+
+
+
+- name: c2s05
+  serial_groups: [transform]
+  plan:
+  - get: generator-scripts-repo
+  - get: c2s04-code
+    passed: [c2s04]
+    trigger: true
+  - task: c2s05-task
+    file: generator-scripts-repo/generator_scripts/ci/transform-code.yml
+    input_mapping:
+      code_input: c2s04-code
+    output_mapping:
+      code_output: c2s05-code
+    params:
+      PREV_CHAPTER: c2s04
+      CHAPTER: c2s05
+  - put: c2s05-code
+    params:
+      file: "c2s05-code/c2s05-*.tgz"
+      acl: public-read
+
+- name: c2s05-test
+  serial_groups: [test]
+  plan:
+  - get: generator-scripts-repo
+  - get: c2s05-code
+    passed: [c2s05]
+    trigger: true
+  - task: c2s05-test-task
+    file: generator-scripts-repo/generator_scripts/ci/test-with-rspec.yml
+    input_mapping:
+      app_code: c2s05-code
+    params:
+      CHAPTER: c2s05
+
+
+
+
+- name: c2s06
+  serial_groups: [transform]
+  plan:
+  - get: generator-scripts-repo
+  - get: c2s05-code
+    passed: [c2s05]
+    trigger: true
+  - task: c2s06-task
+    file: generator-scripts-repo/generator_scripts/ci/transform-code.yml
+    input_mapping:
+      code_input: c2s05-code
+    output_mapping:
+      code_output: c2s06-code
+    params:
+      PREV_CHAPTER: c2s05
+      CHAPTER: c2s06
+  - put: c2s06-code
+    params:
+      file: "c2s06-code/c2s06-*.tgz"
+      acl: public-read
+
+- name: c2s06-test
+  serial_groups: [test]
+  plan:
+  - get: generator-scripts-repo
+  - get: c2s06-code
+    passed: [c2s06]
+    trigger: true
+  - task: c2s06-test-task
+    file: generator-scripts-repo/generator_scripts/ci/test-with-rspec.yml
+    input_mapping:
+      app_code: c2s06-code
+    params:
+      CHAPTER: c2s06

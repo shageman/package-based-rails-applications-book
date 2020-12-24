@@ -1,0 +1,15 @@
+platform: linux
+image_resource:
+  type: docker-image
+  source:
+    repository: smikino/ruby-node
+    tag: '2-10'
+
+inputs:
+- name: generator-scripts-repo
+
+outputs:
+- name: code_output
+
+run:
+  path: generator-scripts-repo/generator_scripts/ci/generate-code.sh

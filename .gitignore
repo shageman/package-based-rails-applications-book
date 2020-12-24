@@ -1,0 +1,7 @@
+.minio.sys
+_cache
+docker/keys
+docker/minio/data
+pipeline-secrets.yml
+keys
+.DS_Store

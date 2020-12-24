@@ -1,0 +1,13 @@
+platform: linux
+image_resource:
+  type: docker-image
+  source:
+    repository: smikino/ruby-node
+    tag: '2-10'
+
+inputs:
+- name: generator-scripts-repo
+- name: app_code
+
+run:
+  path: generator-scripts-repo/generator_scripts/ci/test-with-rspec.sh
