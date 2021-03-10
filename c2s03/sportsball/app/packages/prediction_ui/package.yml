@@ -1,0 +1,8 @@
+
+enforce_dependencies: true
+enforce_privacy: false
+dependencies:
+- app/packages/games
+- app/packages/teams
+- app/packages/predictor
+

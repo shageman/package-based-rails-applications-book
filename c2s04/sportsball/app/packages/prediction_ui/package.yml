@@ -1,0 +1,9 @@
+
+enforce_dependencies: true
+enforce_privacy: false
+dependencies:
+- app/packages/rails_shims
+- app/packages/games
+- app/packages/teams
+- app/packages/predictor
+
