@@ -1,4 +1,13 @@
 resources:
+- name: generator-scripts-repo
+  type: git
+  source:
+    uri: git@github.com:shageman/package-based-rails-applications-book.git
+    branch: ch4
+    depth: 1
+    private_key: ((private_key))
+  check_every: 10s
+
 - name: empty-apps
   type: s3
   source:
@@ -55,14 +64,14 @@ resources:
     regexp: c2s06-(.*)\.tgz
     access_key_id: minio
     secret_access_key: minio123
-- name: generator-scripts-repo
-  type: git
+- name: c3s01-code
+  type: s3
   source:
-    uri: git@github.com:shageman/package-based-rails-applications-book.git
-    branch: main
-    depth: 1
-    private_key: ((private_key))
-  check_every: 10s
+    endpoint: http://minio:9000
+    bucket: releases
+    regexp: c3s01-(.*)\.tgz
+    access_key_id: minio
+    secret_access_key: minio123
 
 
 
@@ -307,3 +316,38 @@ jobs:
       app_code: c2s06-code
     params:
       CHAPTER: c2s06
+
+- name: c3s01
+  serial_groups: [transform]
+  plan:
+  - get: generator-scripts-repo
+  - get: c2s06-code
+    passed: [c2s06]
+    trigger: true
+  - task: c3s01-task
+    file: generator-scripts-repo/generator_scripts/ci/transform-code.yml
+    input_mapping:
+      code_input: c2s06-code
+    output_mapping:
+      code_output: c3s01-code
+    params:
+      PREV_CHAPTER: c2s06
+      CHAPTER: c3s01
+  - put: c3s01-code
+    params:
+      file: "c3s01-code/c3s01-*.tgz"
+      acl: public-read
+
+- name: c3s01-test
+  serial_groups: [test]
+  plan:
+  - get: generator-scripts-repo
+  - get: c3s01-code
+    passed: [c3s01]
+    trigger: true
+  - task: c3s01-test-task
+    file: generator-scripts-repo/generator_scripts/ci/test-with-rspec.yml
+    input_mapping:
+      app_code: c3s01-code
+    params:
+      CHAPTER: c3s01

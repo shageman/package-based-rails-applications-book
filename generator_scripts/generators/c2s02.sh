@@ -38,7 +38,7 @@ mkdir -p spec/packages/predictor/models; mv spec/models/predictor_spec.rb $_
 mkdir -p spec/packages/games/models; mv spec/models/game_spec.rb $_
 mkdir -p spec/packages/games_admin/requests; mv spec/requests/games_spec.rb $_
 mkdir -p spec/packages/teams_admin/requests; mv spec/requests/teams_spec.rb $_
-mkdir -p spec/packages/welcome_ui/requests; mv spec/requests/welcome_request_spec.rb $_
+mkdir -p spec/packages/welcome_ui/requests; mv spec/requests/welcome_spec.rb $_
 mkdir -p spec/packages/prediction_ui/system; mv spec/system/predictions_spec.rb $_
 mkdir -p spec/packages/games_admin/system; mv spec/system/games_spec.rb $_
 mkdir -p spec/packages/teams_admin/system; mv spec/system/teams_spec.rb $_
