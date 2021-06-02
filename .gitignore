@@ -5,3 +5,12 @@ docker/minio/data
 pipeline-secrets.yml
 keys
 .DS_Store
+
+docker/minio/*
+!docker/minio/data
+
+docker/minio/data/*
+!docker/minio/data/releases
+
+docker/minio/data/releases/*
+!docker/minio/data/releases/app*
