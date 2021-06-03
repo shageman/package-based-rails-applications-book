@@ -93,9 +93,7 @@ fly --target local login --team-name main --concourse-url http://localhost:8080
 
 Then, to configure and start the pipeline
 ~~~~~~~~
-cd generator_scripts
-
-fly -t local set-pipeline -p pbra-full -c generator_scripts/pbra-full.yml --load-vars-from pipeline-secrets.yml
+fly -t local set-pipeline -p pbra-full -c generator_scripts/ci/pbra-full.yml --load-vars-from  pipeline-secrets.yml
 fly -t local unpause-pipeline -p pbra-full
 fly -t local trigger-job -j pbra-full/c2s01
 ~~~~~~~~
