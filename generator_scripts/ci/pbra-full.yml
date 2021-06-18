@@ -8,6 +8,9 @@ resources:
     private_key: ((private_key))
   check_every: 10s
 
+
+
+
 - name: empty-apps
   type: s3
   source:
@@ -70,6 +73,22 @@ resources:
     endpoint: http://minio:9000
     bucket: releases
     regexp: c3s01-(.*)\.tgz
+    access_key_id: minio
+    secret_access_key: minio123
+- name: c3s02-code
+  type: s3
+  source:
+    endpoint: http://minio:9000
+    bucket: releases
+    regexp: c3s02-(.*)\.tgz
+    access_key_id: minio
+    secret_access_key: minio123
+- name: c3s03-code
+  type: s3
+  source:
+    endpoint: http://minio:9000
+    bucket: releases
+    regexp: c3s03-(.*)\.tgz
     access_key_id: minio
     secret_access_key: minio123
 
@@ -321,6 +340,7 @@ jobs:
   serial_groups: [transform]
   plan:
   - get: generator-scripts-repo
+    trigger: true
   - get: c2s06-code
     passed: [c2s06]
     trigger: true
@@ -351,3 +371,75 @@ jobs:
       app_code: c3s01-code
     params:
       CHAPTER: c3s01
+
+- name: c3s02
+  serial_groups: [transform]
+  plan:
+  - get: generator-scripts-repo
+    trigger: true
+  - get: c2s06-code
+    passed: [c2s06]
+    trigger: true
+  - task: c3s02-task
+    file: generator-scripts-repo/generator_scripts/ci/transform-code.yml
+    input_mapping:
+      code_input: c2s06-code
+    output_mapping:
+      code_output: c3s02-code
+    params:
+      PREV_CHAPTER: c2s06
+      CHAPTER: c3s02
+  - put: c3s02-code
+    params:
+      file: "c3s02-code/c3s02-*.tgz"
+      acl: public-read
+
+- name: c3s02-test
+  serial_groups: [test]
+  plan:
+  - get: generator-scripts-repo
+  - get: c3s02-code
+    passed: [c3s02]
+    trigger: true
+  - task: c3s02-test-task
+    file: generator-scripts-repo/generator_scripts/ci/test-with-rspec.yml
+    input_mapping:
+      app_code: c3s02-code
+    params:
+      CHAPTER: c3s02
+
+- name: c3s03
+  serial_groups: [transform]
+  plan:
+  - get: generator-scripts-repo
+    trigger: true
+  - get: c2s06-code
+    passed: [c2s06]
+    trigger: true
+  - task: c3s03-task
+    file: generator-scripts-repo/generator_scripts/ci/transform-code.yml
+    input_mapping:
+      code_input: c2s06-code
+    output_mapping:
+      code_output: c3s03-code
+    params:
+      PREV_CHAPTER: c2s06
+      CHAPTER: c3s03
+  - put: c3s03-code
+    params:
+      file: "c3s03-code/c3s03-*.tgz"
+      acl: public-read
+
+- name: c3s03-test
+  serial_groups: [test]
+  plan:
+  - get: generator-scripts-repo
+  - get: c3s03-code
+    passed: [c3s03]
+    trigger: true
+  - task: c3s03-test-task
+    file: generator-scripts-repo/generator_scripts/ci/test-with-rspec.yml
+    input_mapping:
+      app_code: c3s03-code
+    params:
+      CHAPTER: c3s03
