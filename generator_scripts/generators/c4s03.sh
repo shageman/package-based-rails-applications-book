@@ -27,9 +27,7 @@ Gem::Specification.new do |spec|
 
   spec.metadata['allowed_push_host'] = 'Set to http://mygemserver.com'
 
-  spec.files = Dir.chdir(File.expand_path(__dir__)) do
-    \`git ls-files -z\`.split('\x0').reject { |f| f.match(%r{\A(?:test|spec|features)/}) }
-  end
+  spec.files = Dir['app/**/*.rb', 'lib/**/*.rb'] + Dir['bin/*']
   spec.bindir        = 'exe'
   spec.executables   = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
@@ -40,7 +38,7 @@ end" > testgem/testgem.gemspec
 echo "# frozen_string_literal: true
 
 if defined?(Rails)
-  require 'bai2/engine'
+  require 'testgem/engine'
 else
   require 'zeitwerk'
   loader = Zeitwerk::Loader.new
@@ -57,6 +55,12 @@ module Testgem
   class Error < StandardError; end
   # Your code goes here...
 end" > testgem/lib/testgem.rb
+
+echo "module Testgem
+  class Engine < ::Rails::Engine
+    isolate_namespace Testgem
+  end
+end" > testgem/lib/testgem/engine.rb
 
 mkdir -p testgem/app/services/testgem
 mkdir -p testgem/spec/services/testgem
@@ -80,8 +84,15 @@ end
 
 sed -i "s/true/false/g" testgem/spec/testgem_spec.rb
 
-# cd testgem
-# rake spec
-# cd ..
+cd testgem
+bundle
+rake spec
+cd ..
 
-# bin/packwerk validate
+sed -i "/packages.welcome_ui.app.views/a - testgem/app/services" packwerk.yml
+
+echo "gem 'testgem', path: 'testgem'" >> Gemfile
+
+bin/packwerk validate
+bin/packwerk update-deprecations
+bin/rake pocky:generate[root]
