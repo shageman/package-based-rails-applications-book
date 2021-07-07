@@ -12,7 +12,6 @@ tough when underlying libraries constantly require subtle changes to the sample 
 
 * [Get the book!](https://leanpub.com/package-based-rails-applications)
 * [stephanhagemann.com](http://stephanhagemann.com) - the author's website
-* [pbra.info](http://www.pbra.info) - a collection of resource on Package-based Rails
 
 ## Development
 
