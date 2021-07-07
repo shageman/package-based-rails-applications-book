@@ -1,9 +1,13 @@
 module ObjectCreationMethods
-  def new_team(overrides = {})
+  def team_params(overrides = {})
     defaults = {
-        name: "Some name #{counter}"
+      name: "Some name #{counter}"
     }
-    Team.new { |team| apply(team, defaults, overrides) }
+    defaults.merge(overrides)
+  end
+
+  def new_team(overrides = {})
+    Team.new { |team| apply(team, team_params(overrides), overrides) }
   end
 
   def create_team(overrides = {})

@@ -78,7 +78,7 @@ RSpec.describe "/games", type: :request do
 
       it "renders a successful response (i.e. to display the 'new' template)" do
         post games_url, params: { game: invalid_attributes }
-        expect(response).to be_successful
+        expect(response).not_to be_successful
       end
     end
   end
@@ -108,7 +108,7 @@ RSpec.describe "/games", type: :request do
       it "renders a successful response (i.e. to display the 'edit' template)" do
         game = Game.create! valid_attributes
         patch game_url(game), params: { game: invalid_attributes }
-        expect(response).to be_successful
+        expect(response).not_to be_successful
       end
     end
   end
