@@ -22,9 +22,12 @@ extractChapter () {
     tar -xzf $FILE -C $OUT
 }
 
-extractChapter "c2s01" "../code_public/c2s01"
-extractChapter "c2s02" "../code_public/c2s02"
-extractChapter "c2s03" "../code_public/c2s03"
-extractChapter "c2s04" "../code_public/c2s04"
-extractChapter "c2s05" "../code_public/c2s05"
+extractChapter "c2s01" "c2s01"
+extractChapter "c2s02" "c2s02"
+extractChapter "c2s03" "c2s03"
+extractChapter "c2s04" "c2s04"
+extractChapter "c2s05" "c2s05"
 
+extractChapter "c4s01" "c4s01"
+extractChapter "c4s02" "c4s02"
+extractChapter "c4s03" "c4s03"
