@@ -173,7 +173,7 @@ jobs:
     passed: [c2s01]
     trigger: true
   - task: c2s01-test-task
-    file: generator-scripts-repo/generator_scripts/ci/test-with-rspec.yml
+    file: generator-scripts-repo/generator_scripts/ci/run-tests.yml
     input_mapping:
       app_code: c2s01-code
     params:
@@ -212,7 +212,7 @@ jobs:
     passed: [c2s02]
     trigger: true
   - task: c2s02-test-task
-    file: generator-scripts-repo/generator_scripts/ci/test-with-rspec.yml
+    file: generator-scripts-repo/generator_scripts/ci/run-tests.yml
     input_mapping:
       app_code: c2s02-code
     params:
@@ -251,7 +251,7 @@ jobs:
     passed: [c2s03]
     trigger: true
   - task: c2s03-test-task
-    file: generator-scripts-repo/generator_scripts/ci/test-with-rspec.yml
+    file: generator-scripts-repo/generator_scripts/ci/run-tests.yml
     input_mapping:
       app_code: c2s03-code
     params:
@@ -289,7 +289,7 @@ jobs:
     passed: [c2s04]
     trigger: true
   - task: c2s04-test-task
-    file: generator-scripts-repo/generator_scripts/ci/test-with-rspec.yml
+    file: generator-scripts-repo/generator_scripts/ci/run-tests.yml
     input_mapping:
       app_code: c2s04-code
     params:
@@ -328,7 +328,7 @@ jobs:
     passed: [c2s05]
     trigger: true
   - task: c2s05-test-task
-    file: generator-scripts-repo/generator_scripts/ci/test-with-rspec.yml
+    file: generator-scripts-repo/generator_scripts/ci/run-tests.yml
     input_mapping:
       app_code: c2s05-code
     params:
@@ -367,7 +367,7 @@ jobs:
     passed: [c2s06]
     trigger: true
   - task: c2s06-test-task
-    file: generator-scripts-repo/generator_scripts/ci/test-with-rspec.yml
+    file: generator-scripts-repo/generator_scripts/ci/run-tests.yml
     input_mapping:
       app_code: c2s06-code
     params:
@@ -406,7 +406,7 @@ jobs:
     passed: [c4s01]
     trigger: true
   - task: c4s01-test-task
-    file: generator-scripts-repo/generator_scripts/ci/test-with-rspec.yml
+    file: generator-scripts-repo/generator_scripts/ci/run-tests.yml
     input_mapping:
       app_code: c4s01-code
     params:
@@ -445,7 +445,7 @@ jobs:
     passed: [c4s02]
     trigger: true
   - task: c4s02-test-task
-    file: generator-scripts-repo/generator_scripts/ci/test-with-rspec.yml
+    file: generator-scripts-repo/generator_scripts/ci/run-tests.yml
     input_mapping:
       app_code: c4s02-code
     params:
@@ -484,7 +484,7 @@ jobs:
     passed: [c4s03]
     trigger: true
   - task: c4s03-test-task
-    file: generator-scripts-repo/generator_scripts/ci/test-with-rspec.yml
+    file: generator-scripts-repo/generator_scripts/ci/run-tests.yml
     input_mapping:
       app_code: c4s03-code
     params:
@@ -524,7 +524,7 @@ jobs:
     passed: [c5s06-1]
     trigger: true
   - task: c5s06-1-test-task
-    file: generator-scripts-repo/generator_scripts/ci/test-with-rspec.yml
+    file: generator-scripts-repo/generator_scripts/ci/run-tests.yml
     input_mapping:
       app_code: c5s06-1-code
     params:
@@ -564,7 +564,7 @@ jobs:
     passed: [c5s06-2]
     trigger: true
   - task: c5s06-2-test-task
-    file: generator-scripts-repo/generator_scripts/ci/test-with-rspec.yml
+    file: generator-scripts-repo/generator_scripts/ci/run-tests.yml
     input_mapping:
       app_code: c5s06-2-code
     params:
@@ -605,7 +605,7 @@ jobs:
     passed: [c5s06-3]
     trigger: true
   - task: c5s06-3-test-task
-    file: generator-scripts-repo/generator_scripts/ci/test-with-rspec.yml
+    file: generator-scripts-repo/generator_scripts/ci/run-tests.yml
     input_mapping:
       app_code: c5s06-3-code
     params:
@@ -646,7 +646,7 @@ jobs:
     passed: [c5s07]
     trigger: true
   - task: c5s07-test-task
-    file: generator-scripts-repo/generator_scripts/ci/test-with-rspec.yml
+    file: generator-scripts-repo/generator_scripts/ci/run-tests.yml
     input_mapping:
       app_code: c5s07-code
     params:

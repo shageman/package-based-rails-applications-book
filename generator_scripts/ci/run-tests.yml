@@ -10,4 +10,4 @@ inputs:
 - name: app_code
 
 run:
-  path: generator-scripts-repo/generator_scripts/ci/test-with-rspec.sh
+  path: generator-scripts-repo/generator_scripts/ci/run-tests.sh
