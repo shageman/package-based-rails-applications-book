@@ -375,7 +375,6 @@ jobs:
   serial_groups: [transform]
   plan:
   - get: generator-scripts-repo
-    trigger: true
   - get: c2s06-code
     passed: [c2s06]
     trigger: true
@@ -414,7 +413,6 @@ jobs:
   serial_groups: [transform]
   plan:
   - get: generator-scripts-repo
-    trigger: true
   - get: c2s06-code
     passed: [c2s06]
     trigger: true
@@ -453,7 +451,6 @@ jobs:
   serial_groups: [transform]
   plan:
   - get: generator-scripts-repo
-    trigger: true
   - get: c2s06-code
     passed: [c2s06]
     trigger: true
