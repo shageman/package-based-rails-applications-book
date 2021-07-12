@@ -178,6 +178,7 @@ jobs:
       app_code: c2s01-code
     params:
       CHAPTER: c2s01
+      PACKWERK_CHECK: true
 
 
 
@@ -216,6 +217,7 @@ jobs:
       app_code: c2s02-code
     params:
       CHAPTER: c2s02
+      PACKWERK_CHECK: true
 
 
 
@@ -254,6 +256,7 @@ jobs:
       app_code: c2s03-code
     params:
       CHAPTER: c2s03
+      PACKWERK_CHECK: true
 
 
 
@@ -291,6 +294,7 @@ jobs:
       app_code: c2s04-code
     params:
       CHAPTER: c2s04
+      PACKWERK_CHECK: true
 
 
 
@@ -329,6 +333,7 @@ jobs:
       app_code: c2s05-code
     params:
       CHAPTER: c2s05
+      PACKWERK_CHECK: true
 
 
 
@@ -367,6 +372,7 @@ jobs:
       app_code: c2s06-code
     params:
       CHAPTER: c2s06
+      PACKWERK_CHECK: true
 
 
 
@@ -405,6 +411,7 @@ jobs:
       app_code: c4s01-code
     params:
       CHAPTER: c4s01
+      PACKWERK_CHECK: true
 
 
 
@@ -443,6 +450,7 @@ jobs:
       app_code: c4s02-code
     params:
       CHAPTER: c4s02
+      PACKWERK_CHECK: true
 
 
 
@@ -481,6 +489,7 @@ jobs:
       app_code: c4s03-code
     params:
       CHAPTER: c4s03
+      PACKWERK_CHECK: true
 
 
 
@@ -520,6 +529,7 @@ jobs:
       app_code: c5s06-1-code
     params:
       CHAPTER: c5s06-1
+      PACKWERK_CHECK: true
 
 
 
@@ -560,6 +570,7 @@ jobs:
     params:
       CHAPTER: c5s06-2
       SORBET: true
+      PACKWERK_CHECK: true
 
 
 
@@ -600,6 +611,7 @@ jobs:
     params:
       CHAPTER: c5s06-3
       SORBET: true
+      PACKWERK_CHECK: true
 
 
 
@@ -639,3 +651,4 @@ jobs:
       app_code: c5s07-code
     params:
       CHAPTER: c5s07
+      PACKWERK_CHECK: true

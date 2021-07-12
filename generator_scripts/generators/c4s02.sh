@@ -35,6 +35,4 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 end" > testgem/testgem.gemspec
 
-# No change to directories known to packwerk:
-
-bin/packwerk validate
+echo 'No change to directories known to packwerk -> No further changes neededs'

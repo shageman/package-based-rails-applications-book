@@ -91,5 +91,4 @@ find . -iname 'deprecated_references.yml' -delete
 
 bundle install --local
 bin/packwerk update-deprecations
-bin/packwerk validate
 bin/rake pocky:generate[root]

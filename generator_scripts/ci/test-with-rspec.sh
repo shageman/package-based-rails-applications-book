@@ -11,8 +11,14 @@ bundle
 
 rspec spec --exclude-pattern "**/system/**/*_spec.rb"
 
+bin/packwerk validate
+
 if [[ -z "${SORBET}" ]]; then
   bundle exec srb tc
+fi
+
+if [[ -z "${PACKWERK_CHECK}" ]]; then
+  bin/packwerk check
 fi
 
 exit $?
