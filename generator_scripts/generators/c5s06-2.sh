@@ -10,7 +10,7 @@ gem 'sorbet-runtime'
 gem 'image_processing', '~> 1.2'
 " > Gemfile
 
-bundle install --local
+bundle
 
 bundle exec srb typecheck -e 'puts "Hello, world!"'
 
@@ -40,6 +40,7 @@ bundle exec srb tc
 
 find . -iname 'deprecated_references.yml' -delete
 
+bundle install --local
 bin/packwerk update-deprecations
 bin/packwerk validate
 bin/rake pocky:generate[root]
