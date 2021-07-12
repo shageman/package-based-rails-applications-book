@@ -16,7 +16,7 @@ bundle exec srb typecheck -e 'puts "Hello, world!"'
 
 bundle exec ruby -e 'puts(require "sorbet-runtime")'
 
-bundle exec srb init
+SRB_YES=1 bundle exec srb init
 
 echo '# typed: strict
 
