@@ -154,7 +154,10 @@ load_paths:
 # inflections_file: "config/inflections.yml"
 ' > packwerk.yml
 
-
+echo '--require spec_helper
+--default-path packages
+-I spec
+' > .rspec
 
 find . -iname 'deprecated_references.yml' -delete
 
