@@ -90,5 +90,5 @@ end
 find . -iname 'deprecated_references.yml' -delete
 
 bundle install --local
-bin/packwerk update-deprecations
+bundle exec packwerk update-deprecations
 bin/rake pocky:generate[root]
