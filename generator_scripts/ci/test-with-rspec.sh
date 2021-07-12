@@ -11,4 +11,8 @@ bundle
 
 rspec spec --exclude-pattern "**/system/**/*_spec.rb"
 
+if [[ -z "${SORBET}" ]]; then
+  bundle exec srb tc
+fi
+
 exit $?

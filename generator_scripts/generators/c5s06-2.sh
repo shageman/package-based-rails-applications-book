@@ -36,8 +36,6 @@ module PredictionUi
 end
 ' > packages/prediction_ui/app/services/prediction_ui.rb
 
-bundle exec srb tc
-
 find . -iname 'deprecated_references.yml' -delete
 
 bundle install --local
