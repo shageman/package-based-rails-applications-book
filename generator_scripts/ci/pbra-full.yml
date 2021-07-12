@@ -3,7 +3,7 @@ resources:
   type: git
   source:
     uri: git@github.com:shageman/package-based-rails-applications-book.git
-    branch: ch4
+    branch: main
     depth: 1
     private_key: ((private_key))
   check_every: 10s
@@ -89,6 +89,38 @@ resources:
     endpoint: http://minio:9000
     bucket: releases
     regexp: c4s03-(.*)\.tgz
+    access_key_id: minio
+    secret_access_key: minio123
+- name: c5s06-1-code
+  type: s3
+  source:
+    endpoint: http://minio:9000
+    bucket: releases
+    regexp: c5s06-1-(.*)\.tgz
+    access_key_id: minio
+    secret_access_key: minio123
+- name: c5s06-2-code
+  type: s3
+  source:
+    endpoint: http://minio:9000
+    bucket: releases
+    regexp: c5s06-2-(.*)\.tgz
+    access_key_id: minio
+    secret_access_key: minio123
+- name: c5s06-3-code
+  type: s3
+  source:
+    endpoint: http://minio:9000
+    bucket: releases
+    regexp: c5s06-3-(.*)\.tgz
+    access_key_id: minio
+    secret_access_key: minio123
+- name: c5s07-code
+  type: s3
+  source:
+    endpoint: http://minio:9000
+    bucket: releases
+    regexp: c5s07-(.*)\.tgz
     access_key_id: minio
     secret_access_key: minio123
 
@@ -336,6 +368,9 @@ jobs:
     params:
       CHAPTER: c2s06
 
+
+
+
 - name: c4s01
   serial_groups: [transform]
   plan:
@@ -371,6 +406,9 @@ jobs:
       app_code: c4s01-code
     params:
       CHAPTER: c4s01
+
+
+
 
 - name: c4s02
   serial_groups: [transform]
@@ -408,6 +446,9 @@ jobs:
     params:
       CHAPTER: c4s02
 
+
+
+
 - name: c4s03
   serial_groups: [transform]
   plan:
@@ -443,3 +484,159 @@ jobs:
       app_code: c4s03-code
     params:
       CHAPTER: c4s03
+
+
+
+
+- name: c5s06-1
+  serial_groups: [transform]
+  plan:
+  - get: generator-scripts-repo
+    trigger: true
+  - get: c2s06-code
+    passed: [c2s06]
+    trigger: true
+  - task: c5s06-1-task
+    file: generator-scripts-repo/generator_scripts/ci/transform-code.yml
+    input_mapping:
+      code_input: c2s06-code
+    output_mapping:
+      code_output: c5s06-1-code
+    params:
+      PREV_CHAPTER: c2s06
+      CHAPTER: c5s06-1
+  - put: c5s06-1-code
+    params:
+      file: "c5s06-1-code/c5s06-1-*.tgz"
+      acl: public-read
+
+- name: c5s06-1-test
+  serial_groups: [test]
+  plan:
+  - get: generator-scripts-repo
+  - get: c5s06-1-code
+    passed: [c5s06-1]
+    trigger: true
+  - task: c5s06-1-test-task
+    file: generator-scripts-repo/generator_scripts/ci/test-with-rspec.yml
+    input_mapping:
+      app_code: c5s06-1-code
+    params:
+      CHAPTER: c5s06-1
+
+
+
+
+- name: c5s06-2
+  serial_groups: [transform]
+  plan:
+  - get: generator-scripts-repo
+    trigger: true
+  - get: c2s06-code
+    passed: [c2s06]
+    trigger: true
+  - task: c5s06-2-task
+    file: generator-scripts-repo/generator_scripts/ci/transform-code.yml
+    input_mapping:
+      code_input: c2s06-code
+    output_mapping:
+      code_output: c5s06-2-code
+    params:
+      PREV_CHAPTER: c2s06
+      CHAPTER: c5s06-2
+  - put: c5s06-2-code
+    params:
+      file: "c5s06-2-code/c5s06-2-*.tgz"
+      acl: public-read
+
+- name: c5s06-2-test
+  serial_groups: [test]
+  plan:
+  - get: generator-scripts-repo
+  - get: c5s06-2-code
+    passed: [c5s06-2]
+    trigger: true
+  - task: c5s06-2-test-task
+    file: generator-scripts-repo/generator_scripts/ci/test-with-rspec.yml
+    input_mapping:
+      app_code: c5s06-2-code
+    params:
+      CHAPTER: c5s06-2
+
+
+
+
+- name: c5s06-3
+  serial_groups: [transform]
+  plan:
+  - get: generator-scripts-repo
+    trigger: true
+  - get: c2s06-code
+    passed: [c2s06]
+    trigger: true
+  - task: c5s06-3-task
+    file: generator-scripts-repo/generator_scripts/ci/transform-code.yml
+    input_mapping:
+      code_input: c2s06-code
+    output_mapping:
+      code_output: c5s06-3-code
+    params:
+      PREV_CHAPTER: c2s06
+      CHAPTER: c5s06-3
+  - put: c5s06-3-code
+    params:
+      file: "c5s06-3-code/c5s06-3-*.tgz"
+      acl: public-read
+
+- name: c5s06-3-test
+  serial_groups: [test]
+  plan:
+  - get: generator-scripts-repo
+  - get: c5s06-3-code
+    passed: [c5s06-3]
+    trigger: true
+  - task: c5s06-3-test-task
+    file: generator-scripts-repo/generator_scripts/ci/test-with-rspec.yml
+    input_mapping:
+      app_code: c5s06-3-code
+    params:
+      CHAPTER: c5s06-3
+
+
+
+
+- name: c5s07
+  serial_groups: [transform]
+  plan:
+  - get: generator-scripts-repo
+    trigger: true
+  - get: c2s06-code
+    passed: [c2s06]
+    trigger: true
+  - task: c5s07-task
+    file: generator-scripts-repo/generator_scripts/ci/transform-code.yml
+    input_mapping:
+      code_input: c2s06-code
+    output_mapping:
+      code_output: c5s07-code
+    params:
+      PREV_CHAPTER: c2s06
+      CHAPTER: c5s07
+  - put: c5s07-code
+    params:
+      file: "c5s07-code/c5s07-*.tgz"
+      acl: public-read
+
+- name: c5s07-test
+  serial_groups: [test]
+  plan:
+  - get: generator-scripts-repo
+  - get: c5s07-code
+    passed: [c5s07]
+    trigger: true
+  - task: c5s07-test-task
+    file: generator-scripts-repo/generator_scripts/ci/test-with-rspec.yml
+    input_mapping:
+      app_code: c5s07-code
+    params:
+      CHAPTER: c5s07
