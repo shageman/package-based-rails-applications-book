@@ -529,17 +529,17 @@ jobs:
   plan:
   - get: generator-scripts-repo
     trigger: true
-  - get: c2s06-code
-    passed: [c2s06]
+  - get: c5s06-1-code
+    passed: [c5s06-1]
     trigger: true
   - task: c5s06-2-task
     file: generator-scripts-repo/generator_scripts/ci/transform-code.yml
     input_mapping:
-      code_input: c2s06-code
+      code_input: c5s06-1-code
     output_mapping:
       code_output: c5s06-2-code
     params:
-      PREV_CHAPTER: c2s06
+      PREV_CHAPTER: c5s06-1
       CHAPTER: c5s06-2
   - put: c5s06-2-code
     params:
@@ -568,17 +568,17 @@ jobs:
   plan:
   - get: generator-scripts-repo
     trigger: true
-  - get: c2s06-code
-    passed: [c2s06]
+  - get: c5s06-2-code
+    passed: [c5s06-2]
     trigger: true
   - task: c5s06-3-task
     file: generator-scripts-repo/generator_scripts/ci/transform-code.yml
     input_mapping:
-      code_input: c2s06-code
+      code_input: c5s06-2-code
     output_mapping:
       code_output: c5s06-3-code
     params:
-      PREV_CHAPTER: c2s06
+      PREV_CHAPTER: c5s06-2
       CHAPTER: c5s06-3
   - put: c5s06-3-code
     params:
@@ -606,7 +606,7 @@ jobs:
   serial_groups: [transform]
   plan:
   - get: generator-scripts-repo
-    trigger: true
+    trigger: false
   - get: c2s06-code
     passed: [c2s06]
     trigger: true
