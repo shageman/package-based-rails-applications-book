@@ -8,7 +8,7 @@ echo "
 gem 'sorbet', :group => :development
 gem 'sorbet-runtime'
 gem 'image_processing', '~> 1.2'
-" > Gemfile
+" >> Gemfile
 
 bundle package
 
@@ -41,6 +41,6 @@ bundle exec srb tc
 find . -iname 'deprecated_references.yml' -delete
 
 bundle install --local
-# bin/packwerk update-deprecations
-# bin/packwerk validate
-# bin/rake pocky:generate[root]
+bin/packwerk update-deprecations
+bin/packwerk validate
+bin/rake pocky:generate[root]
