@@ -10,7 +10,7 @@ gem 'sorbet-runtime'
 gem 'image_processing', '~> 1.2'
 " > Gemfile
 
-bundle
+bundle package
 
 bundle exec srb typecheck -e 'puts "Hello, world!"'
 
