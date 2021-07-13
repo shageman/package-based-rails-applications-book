@@ -311,4 +311,4 @@ load_paths:
 # inflections_file: "config/inflections.yml"
 ' > packwerk.yml
 
-sed -i "s/class Saulabs::TrueSkill::Rating/class Saulabs::TrueSkill::Rating < Saulabs::Gauss::Distribution/" sorbet/rbi/hidden-definitions/hidden.rbi
+# sed -i "s/class Saulabs::TrueSkill::Rating/class Saulabs::TrueSkill::Rating < Saulabs::Gauss::Distribution/" sorbet/rbi/hidden-definitions/hidden.rbi
