@@ -311,6 +311,8 @@ load_paths:
 # inflections_file: "config/inflections.yml"
 ' > packwerk.yml
 
+sed -i "s/class Saulabs::TrueSkill::Rating/class Saulabs::TrueSkill::Rating < Saulabs::Gauss::Distribution/" sorbet/rbi/hidden-definitions/hidden.rbi
+
 find . -iname 'deprecated_references.yml' -delete
 
 bundle install --local
