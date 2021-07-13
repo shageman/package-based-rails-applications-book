@@ -9,6 +9,8 @@ pwd
 mkdir -p gems
 export GEM_HOME=`pwd`/gems
 
+bundle env
+
 tar -xzf app_code/$CHAPTER*.tgz -C app_code
 
 cd app_code/sportsball
