@@ -4,6 +4,7 @@ set -v
 set -x
 set -e
 
+echo $GEM_HOME
 bundle install --local
 which packwerk
 
