@@ -4,12 +4,6 @@ set -v
 set -x
 set -e
 
-echo "
-gem 'sorbet', :group => :development
-gem 'sorbet-runtime'
-gem 'image_processing', '~> 1.2'
-" >> Gemfile
-
 bundle package
 
 bundle exec srb typecheck -e 'puts "Hello, world!"'

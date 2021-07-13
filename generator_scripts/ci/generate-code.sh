@@ -27,12 +27,16 @@ rm -rf .git
 
 sed -i 's/'"'"'/"/g' Gemfile
 echo "
+
+gem 'image_processing', '~> 1.2'
 gem 'jquery-rails', '4.3.1'
 gem 'packwerk', group: [:development, :test]
 gem 'pocky', group: [:development, :test], github: 'shageman/pocky', branch: 'main'
 gem 'rspec-rails', group: [:development, :test]
 gem 'shoulda-matchers', group: [:test]
 gem 'slim-rails'
+gem 'sorbet-runtime'
+gem 'sorbet', :group => :development
 gem 'trueskill'
 " >> Gemfile
 
