@@ -6,7 +6,7 @@ set -e
 
 pwd
 
-mkdir -f gems
+mkdir -p gems
 export GEM_HOME=`pwd`/gems
 
 tar -xzf app_code/$CHAPTER*.tgz -C app_code
