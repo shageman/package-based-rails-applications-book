@@ -14,7 +14,7 @@ cd app_code/sportsball
 
 bundle
 
-rspec spec --exclude-pattern "**/system/**/*_spec.rb"
+rspec spec `cat .rspec | tr '\n' ' '` --exclude-pattern '**/system/**/*_spec.rb'
 
 bundle exec packwerk validate
 
