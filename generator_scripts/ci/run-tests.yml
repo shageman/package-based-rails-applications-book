@@ -13,4 +13,4 @@ run:
   path: generator-scripts-repo/generator_scripts/ci/run-tests.sh
 
 caches:
-  - path: /usr/local/bundle
+  - path: gems

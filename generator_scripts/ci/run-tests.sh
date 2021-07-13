@@ -4,6 +4,11 @@ set -v
 set -x
 set -e
 
+pwd
+
+mkdir -f gems
+export GEM_HOME=`pwd`/gems
+
 tar -xzf app_code/$CHAPTER*.tgz -C app_code
 
 cd app_code/sportsball
