@@ -4,6 +4,8 @@ set -v
 set -x
 set -e
 
+which packwerk
+
 mkdir -p packages/predictor_interface/app/public
 
 echo '# typed: strict
