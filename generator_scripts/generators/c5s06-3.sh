@@ -4,6 +4,7 @@ set -v
 set -x
 set -e
 
+bundle install --local
 which packwerk
 
 mkdir -p packages/predictor_interface/app/public
