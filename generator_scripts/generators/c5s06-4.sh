@@ -41,7 +41,7 @@ dependencies:
 
 mv packages/predictor_interface packages/service_locator
 mkdir -p packages/service_locator/app/services
-
+mkdir -p packages/service_locator/spec
 echo '# typed: true
 
 class ServiceLocator
