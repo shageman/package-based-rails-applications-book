@@ -4,10 +4,9 @@ set -v
 set -x
 set -e
 
-pwd
-
 mkdir -p gems
 export GEM_HOME=`pwd`/gems
+export PATH="$GEM_HOME/bin:$PATH"
 
 apt-get -y update
 apt-get -y install ack graphviz

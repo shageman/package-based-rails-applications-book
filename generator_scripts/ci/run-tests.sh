@@ -4,12 +4,9 @@ set -v
 set -x
 set -e
 
-pwd
-
 mkdir -p gems
 export GEM_HOME=`pwd`/gems
 export PATH="$GEM_HOME/bin:$PATH"
-bundle env
 
 tar -xzf app_code/$CHAPTER*.tgz -C app_code
 
