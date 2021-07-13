@@ -148,9 +148,7 @@ jobs:
   serial_groups: [transform]
   plan:
   - get: generator-scripts-repo
-    trigger: true
   - get: empty-apps
-    trigger: true
   - task: c2s01-task
     file: generator-scripts-repo/generator_scripts/ci/transform-code.yml
     input_mapping:
@@ -498,7 +496,6 @@ jobs:
   serial_groups: [transform]
   plan:
   - get: generator-scripts-repo
-    trigger: true
   - get: c2s06-code
     passed: [c2s06]
     trigger: true
@@ -538,7 +535,6 @@ jobs:
   serial_groups: [transform]
   plan:
   - get: generator-scripts-repo
-    trigger: true
   - get: c5s06-1-code
     passed: [c5s06-1]
     trigger: true
@@ -579,7 +575,6 @@ jobs:
   serial_groups: [transform]
   plan:
   - get: generator-scripts-repo
-    trigger: true
   - get: c5s06-2-code
     passed: [c5s06-2]
     trigger: true
