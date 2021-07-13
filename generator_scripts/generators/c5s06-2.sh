@@ -4,6 +4,8 @@ set -v
 set -x
 set -e
 
+SRB_YES=1 bundle exec srb init
+
 echo '# typed: strict
 
 module PredictionUi
