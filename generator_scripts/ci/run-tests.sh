@@ -2,6 +2,7 @@
 
 set -v
 set -x
+set -e
 
 tar -xzf app_code/$CHAPTER*.tgz -C app_code
 
@@ -20,5 +21,3 @@ fi
 if [[ ! -z "$PACKWERK_CHECK" ]]; then
   bundle exec packwerk check
 fi
-
-exit $?
