@@ -4,14 +4,6 @@ set -v
 set -x
 set -e
 
-bundle package
-
-bundle exec srb typecheck -e 'puts "Hello, world!"'
-
-bundle exec ruby -e 'puts(require "sorbet-runtime")'
-
-SRB_YES=1 bundle exec srb init
-
 echo '# typed: strict
 
 module PredictionUi

@@ -4,10 +4,6 @@ set -v
 set -x
 set -e
 
-echo $GEM_HOME
-bundle install --local
-which packwerk
-
 mkdir -p packages/predictor_interface/app/public
 
 echo '# typed: strict
