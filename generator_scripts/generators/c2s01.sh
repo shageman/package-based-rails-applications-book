@@ -89,5 +89,4 @@ do
 done
 
 bundle exec packwerk init
-bin/packwerk validate
 bin/rake pocky:generate[root]

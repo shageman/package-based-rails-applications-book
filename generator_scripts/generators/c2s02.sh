@@ -160,6 +160,5 @@ load_paths:
 ' > packwerk.yml
 
 bundle install --local
-bin/packwerk update-deprecations
-bin/packwerk validate
+bundle exec packwerk update-deprecations
 bin/rake pocky:generate[root]

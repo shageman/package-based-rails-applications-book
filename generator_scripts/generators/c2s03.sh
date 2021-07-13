@@ -47,6 +47,5 @@ enforce_privacy: false
 find . -iname 'deprecated_references.yml' -delete
 
 bundle install --local
-bin/packwerk update-deprecations
-bin/packwerk validate
+bundle exec packwerk update-deprecations
 bin/rake pocky:generate[root]
