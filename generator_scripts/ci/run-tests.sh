@@ -12,9 +12,9 @@ tar -xzf app_code/$CHAPTER*.tgz -C app_code
 
 cd app_code/sportsball
 
-bundle
+bundle install --local
 
-rspec spec `cat .rspec | tr '\n' ' '` --exclude-pattern '**/system/**/*_spec.rb'
+bundle exec rspec spec `cat .rspec | tr '\n' ' '` --exclude-pattern '**/system/**/*_spec.rb'
 
 bundle exec packwerk validate
 
