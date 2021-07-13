@@ -47,6 +47,3 @@ sed -i "/packages.welcome_ui.app.views/a - testengine/app/mailers" packwerk.yml
 sed -i "/packages.welcome_ui.app.views/a - testengine/app/jobs" packwerk.yml
 sed -i "/packages.welcome_ui.app.views/a - testengine/app/helpers" packwerk.yml
 sed -i "/packages.welcome_ui.app.views/a - testengine/app/controllers" packwerk.yml
-
-bundle exec packwerk update-deprecations
-bin/rake pocky:generate[root]

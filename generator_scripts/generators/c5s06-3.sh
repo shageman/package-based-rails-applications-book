@@ -316,9 +316,3 @@ load_paths:
 ' > packwerk.yml
 
 sed -i "s/class Saulabs::TrueSkill::Rating/class Saulabs::TrueSkill::Rating < Saulabs::Gauss::Distribution/" sorbet/rbi/hidden-definitions/hidden.rbi
-
-find . -iname 'deprecated_references.yml' -delete
-
-bundle install --local
-bundle exec packwerk update-deprecations
-bin/rake pocky:generate[root]

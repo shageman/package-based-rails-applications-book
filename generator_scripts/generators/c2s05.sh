@@ -158,9 +158,3 @@ echo '--require spec_helper
 --default-path packages
 -I spec
 ' > .rspec
-
-find . -iname 'deprecated_references.yml' -delete
-
-bundle install --local
-bundle exec packwerk update-deprecations
-bin/rake pocky:generate[root]

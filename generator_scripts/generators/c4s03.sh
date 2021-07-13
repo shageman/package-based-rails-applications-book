@@ -92,6 +92,3 @@ cd ..
 sed -i "/packages.welcome_ui.app.views/a - testgem/app/services" packwerk.yml
 
 echo "gem 'testgem', path: 'testgem'" >> Gemfile
-
-bundle exec packwerk update-deprecations
-bin/rake pocky:generate[root]

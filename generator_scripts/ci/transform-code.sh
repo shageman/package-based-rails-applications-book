@@ -19,5 +19,10 @@ cd code_output/sportsball
 
 ../../generator-scripts-repo/generator_scripts/generators/$CHAPTER.sh
 
+find . -iname 'deprecated_references.yml' -delete
+bundle install --local
+bundle exec packwerk update-deprecations
+bin/rake pocky:generate[root]
+
 cd ..
 tar --exclude='tmp/*' --exclude='gems/*' -zcf $CHAPTER-`date +%Y%m%d%H%M%S`.tgz sportsball; echo "zipping done"

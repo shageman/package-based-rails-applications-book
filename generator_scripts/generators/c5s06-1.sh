@@ -86,9 +86,3 @@ echo 'class PredictionsController < ApplicationController
   end
 end
 ' > packages/prediction_ui/app/controllers/predictions_controller.rb
-
-find . -iname 'deprecated_references.yml' -delete
-
-bundle install --local
-bundle exec packwerk update-deprecations
-bin/rake pocky:generate[root]

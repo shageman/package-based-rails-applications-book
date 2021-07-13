@@ -43,9 +43,3 @@ echo '
 enforce_dependencies: true
 enforce_privacy: false
 ' > app/packages/welcome_ui/package.yml
-
-find . -iname 'deprecated_references.yml' -delete
-
-bundle install --local
-bundle exec packwerk update-deprecations
-bin/rake pocky:generate[root]

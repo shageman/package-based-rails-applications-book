@@ -29,9 +29,3 @@ module PredictionUi
   end
 end
 ' > packages/prediction_ui/app/services/prediction_ui.rb
-
-find . -iname 'deprecated_references.yml' -delete
-
-bundle install --local
-bundle exec packwerk update-deprecations
-bin/rake pocky:generate[root]
