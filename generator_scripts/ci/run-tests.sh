@@ -14,8 +14,6 @@ cd app_code/sportsball
 
 bundle install --local
 
-bundle exec rspec spec --help
-
 bundle exec rspec --exclude-pattern '**/system/**/*_spec.rb' `cat .rspec | tr '\n' ' '`
 
 bundle exec packwerk validate
