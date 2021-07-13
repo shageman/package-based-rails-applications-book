@@ -15,5 +15,5 @@ outputs:
 run:
   path: generator-scripts-repo/generator_scripts/ci/transform-code.sh
 
-cache:
+caches:
   - path: /usr/local/bundle

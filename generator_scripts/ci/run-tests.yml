@@ -12,5 +12,5 @@ inputs:
 run:
   path: generator-scripts-repo/generator_scripts/ci/run-tests.sh
 
-cache:
+caches:
   - path: /usr/local/bundle
