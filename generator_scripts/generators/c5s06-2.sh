@@ -7,7 +7,6 @@ set -e
 bundle install --local
 
 SRB_YES=1 bundle exec srb init
-bundle exec srb rbi gems
 
 echo '# typed: strict
 
