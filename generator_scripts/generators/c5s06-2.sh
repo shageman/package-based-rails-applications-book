@@ -19,6 +19,8 @@ bundle install --local
 # * Copy the contents of the `sorbet` folder into `generator_scripts/generators/c5s06-2` in this repo
 # * Check in changes and rerun this step
 
+unset +x
+
 for FILE in `find ../../generator-scripts-repo/generator_scripts/generators/c5s06-2 -type f`
 do
   array=()
@@ -39,6 +41,8 @@ do
   mkdir -p -p ${NEW_FILEPATH}
   cp $FILE ${NEW_FILEPATH}
 done
+
+unset -x
 
 echo '# typed: strict
 
