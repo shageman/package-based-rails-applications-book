@@ -14,3 +14,6 @@ outputs:
 
 run:
   path: generator-scripts-repo/generator_scripts/ci/transform-code.sh
+
+caches:
+  - path: gems

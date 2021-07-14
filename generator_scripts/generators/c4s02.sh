@@ -34,7 +34,3 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 end" > testgem/testgem.gemspec
-
-# No change to directories known to packwerk:
-
-bin/packwerk validate

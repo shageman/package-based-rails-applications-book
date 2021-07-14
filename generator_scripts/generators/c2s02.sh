@@ -158,8 +158,3 @@ load_paths:
 # Location of inflections file
 # inflections_file: "config/inflections.yml"
 ' > packwerk.yml
-
-bundle install --local
-bin/packwerk update-deprecations
-bin/packwerk validate
-bin/rake pocky:generate[root]

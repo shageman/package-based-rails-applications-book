@@ -4,6 +4,10 @@ set -v
 set -x
 set -e
 
+mkdir -p gems
+export GEM_HOME=`pwd`/gems
+export PATH="$GEM_HOME/bin:$PATH"
+
 apt-get -y update
 apt-get -y install ack graphviz
 
@@ -15,5 +19,10 @@ cd code_output/sportsball
 
 ../../generator-scripts-repo/generator_scripts/generators/$CHAPTER.sh
 
+find . -iname 'deprecated_references.yml' -delete
+bundle install --local
+bundle exec packwerk update-deprecations
+bin/rake pocky:generate[root]
+
 cd ..
-tar --exclude='tmp/*' -zcf $CHAPTER-`date +%Y%m%d%H%M%S`.tgz sportsball; echo "zipping done"
+tar --exclude='tmp/*' --exclude='`pwd`/gems/*' -zcf $CHAPTER-`date +%Y%m%d%H%M%S`.tgz sportsball; echo "zipping done"
