@@ -67,6 +67,8 @@ rm app/views/layouts/application.html.erb
 ack -l rails_helper spec | xargs sed -i "/require 'rails_helper'/d"
 ack -l rails_helper spec | xargs sed -i "/require \"rails_helper\"/d"
 
+set +x
+
 for FILE in `find ../../generator-scripts-repo/generator_scripts/generators/c2s01 -type f`
 do
   array=()
@@ -80,12 +82,16 @@ do
   NEW_FILENAME=${array[1]}
   NEW_FILEPATH=$(/usr/bin/dirname $NEW_FILENAME)
 
-  echo ${FILE}
-  echo ${NEW_FILENAME}
-  echo ${NEW_FILEPATH}
+  # echo ${FILE}
+  # echo ${NEW_FILENAME}
+  # echo ${NEW_FILEPATH}
 
-  mkdir -p -p ${NEW_FILEPATH}
+  mkdir -p ${NEW_FILEPATH}
+  set -x
   cp $FILE ${NEW_FILEPATH}
+  set +x
 done
+
+set -x
 
 bundle exec packwerk init
