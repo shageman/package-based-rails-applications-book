@@ -22,7 +22,7 @@ bundle install --local
 for FILE in `find ../../generator-scripts-repo/generator_scripts/generators/c5s06-2 -type f`
 do
   array=()
-  DELIMITER='c2s01/'
+  DELIMITER='c5s06-2/'
   PARTS=$FILE$DELIMITER
   while test "$PARTS"
   do
