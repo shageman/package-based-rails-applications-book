@@ -12,6 +12,13 @@ bundle install --local
 
 # SRB_YES=1 bundle exec srb init
 
+# If the tests in c5s06-2-test fail because of sorbet, do the following
+# * Find the latest tgz file for this step in `docker/minio/release`
+# * Extract the archive
+# * Run `bundle && bundle exec sorbet init`
+# * Copy the contents of the `sorbet` folder into `generator_scripts/generators/c5s06-2` in this repo
+# * Check in changes and rerun this step
+
 for FILE in `find ../../generator-scripts-repo/generator_scripts/generators/c5s06-2 -type f`
 do
   array=()
