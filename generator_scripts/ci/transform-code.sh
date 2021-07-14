@@ -25,4 +25,4 @@ bundle exec packwerk update-deprecations
 bin/rake pocky:generate[root]
 
 cd ..
-tar --exclude='tmp/*' --exclude='gems/*' -zcf $CHAPTER-`date +%Y%m%d%H%M%S`.tgz sportsball; echo "zipping done"
+tar --exclude='tmp/*' --exclude='`pwd`/gems/*' -zcf $CHAPTER-`date +%Y%m%d%H%M%S`.tgz sportsball; echo "zipping done"
