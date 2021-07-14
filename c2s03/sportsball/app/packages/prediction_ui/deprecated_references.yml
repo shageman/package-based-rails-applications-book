@@ -3,7 +3,7 @@
 #
 # You can regenerate this file using the following command:
 #
-# bundle exec packwerk update-deprecations app/packages/prediction_ui
+# packwerk update-deprecations app/packages/prediction_ui
 ---
 ".":
   "::ApplicationController":

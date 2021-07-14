@@ -3,7 +3,7 @@
 #
 # You can regenerate this file using the following command:
 #
-# bundle exec packwerk update-deprecations app/packages/welcome_ui
+# packwerk update-deprecations app/packages/welcome_ui
 ---
 ".":
   "::ApplicationController":

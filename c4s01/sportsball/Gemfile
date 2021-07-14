@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "2.7.3"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 6.1.3", ">= 6.1.3.2"
+gem "rails", "~> 6.1.4"
 # Use sqlite3 as the database for Active Record
 gem "sqlite3", "~> 1.4"
 # Use Puma as the app server
@@ -55,12 +55,16 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+
+gem 'image_processing', '~> 1.2'
 gem 'jquery-rails', '4.3.1'
 gem 'packwerk', group: [:development, :test]
 gem 'pocky', group: [:development, :test], github: 'shageman/pocky', branch: 'main'
 gem 'rspec-rails', group: [:development, :test]
 gem 'shoulda-matchers', group: [:test]
 gem 'slim-rails'
+gem 'sorbet-runtime'
+gem 'sorbet', :group => :development
 gem 'trueskill'
 
 

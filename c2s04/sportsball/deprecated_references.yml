@@ -3,7 +3,7 @@
 #
 # You can regenerate this file using the following command:
 #
-# bundle exec packwerk update-deprecations .
+# packwerk update-deprecations .
 ---
 app/packages/games:
   "::Game":
