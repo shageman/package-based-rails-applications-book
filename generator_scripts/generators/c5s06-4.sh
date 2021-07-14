@@ -86,6 +86,14 @@ echo 'class ServiceNotFoundError < RuntimeError
 end
 ' > packages/service_locator/app/services/service_not_found_error.rb
 
+echo '
+enforce_dependencies: true
+enforce_privacy: false
+dependencies:
+- packages/service_locator
+- packages/rails_shims
+' > packages/teams/package.yml
+
 echo '# See: Setting up the configuration file
 # https://github.com/Shopify/packwerk/blob/main/USAGE.md#setting-up-the-configuration-file
 
@@ -136,3 +144,4 @@ load_paths:
 # Location of inflections file
 # inflections_file: "config/inflections.yml"
 ' > packwerk.yml
+
