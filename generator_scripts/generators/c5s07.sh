@@ -195,7 +195,7 @@ end
 ' > packages/rails_shims/app/channels/application_cable/connection.rb
 
 echo 'class ApplicationController < ActionController::Base
-  append_view_path(Dir.glob(Rails.root.join('packages/*/app/views')))
+  append_view_path(Dir.glob(Rails.root.join("packages/*/app/views")))
 
   before_action :ensure_session
 
