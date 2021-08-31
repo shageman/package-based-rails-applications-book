@@ -9,6 +9,7 @@ rm -rf packages/prediction_ui/app/views/predictions/create.html.slim
 
 mkdir -p app/javascript/channels
 mkdir -p packages/prediction_ui/app/channels
+mkdir -p packages/prediction_ui/app/models
 mkdir -p packages/predictor/app/models
 
 echo 'import consumer from "./consumer"
