@@ -134,7 +134,7 @@ echo 'class PredictionCompletedSubscriber
     end
   end
 end
-' > packages/prediction_ui/app/models/predictions_completed_subscriber.rb
+' > packages/prediction_ui/app/models/prediction_completed_subscriber.rb
 
 echo 'h1 Predictions
 
