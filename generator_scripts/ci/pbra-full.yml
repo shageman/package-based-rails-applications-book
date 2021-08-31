@@ -123,6 +123,14 @@ resources:
     regexp: c5s06-4-(.*)\.tgz
     access_key_id: minio
     secret_access_key: minio123
+- name: c5s07-code
+  type: s3
+  source:
+    endpoint: http://minio:9000
+    bucket: releases
+    regexp: c5s07-(.*)\.tgz
+    access_key_id: minio
+    secret_access_key: minio123
 
 
 
@@ -646,4 +654,44 @@ jobs:
     params:
       CHAPTER: c5s06-4
       SORBET: true
+      PACKWERK_CHECK: true
+
+
+
+
+- name: c5s07
+  serial_groups: [transform]
+  plan:
+  - get: generator-scripts-repo
+    trigger: false
+  - get: c2s06-code
+    passed: [c2s06]
+    trigger: true
+  - task: c5s07-task
+    file: generator-scripts-repo/generator_scripts/ci/transform-code.yml
+    input_mapping:
+      code_input: c2s06-code
+    output_mapping:
+      code_output: c5s07-code
+    params:
+      PREV_CHAPTER: c2s06
+      CHAPTER: c5s07
+  - put: c5s07-code
+    params:
+      file: "c5s07-code/c5s07-*.tgz"
+      acl: public-read
+
+- name: c5s07-test
+  serial_groups: [test]
+  plan:
+  - get: generator-scripts-repo
+  - get: c5s07-code
+    passed: [c5s07]
+    trigger: true
+  - task: c5s07-test-task
+    file: generator-scripts-repo/generator_scripts/ci/run-tests.yml
+    input_mapping:
+      app_code: c5s07-code
+    params:
+      CHAPTER: c5s07
       PACKWERK_CHECK: true
