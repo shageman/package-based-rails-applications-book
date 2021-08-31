@@ -7,6 +7,8 @@ set -e
 rm -rf config/initializers/configure_prediction_ui.rb
 rm -rf packages/prediction_ui/app/views/predictions/create.html.slim
 
+rm -rf packages/service_locator
+
 mkdir -p app/javascript/channels
 mkdir -p packages/prediction_ui/app/channels
 mkdir -p packages/prediction_ui/app/models
