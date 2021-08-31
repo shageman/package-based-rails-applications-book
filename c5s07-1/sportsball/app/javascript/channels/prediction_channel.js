@@ -2,7 +2,6 @@ import consumer from "./consumer"
 
 consumer.subscriptions.create("PredictionChannel", {
   received(data) {
-    console.log("woop, woop", data)
     this.appendLine(data)
   },
 

@@ -1,8 +1,8 @@
 class PredictionNeededSubscriber
   def self.configure
     ActiveSupport::Notifications.subscribe("prediction_needed") do |name, start, finish, id, payload|
-      predictor = Predictor.new
-      predictor.learn(Team.all, Game.all)
+      predictor = Predictor.new(Team.all)
+      predictor.learn(Game.all)
       prediction = predictor.predict(
         Team.find(payload[:team_1_id]),
         Team.find(payload[:team_2_id])
