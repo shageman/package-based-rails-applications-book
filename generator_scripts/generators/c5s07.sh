@@ -68,8 +68,10 @@ load_paths:
 - packages/games_admin/app/controllers
 - packages/games_admin/app/views
 - packages/games/app/models
+- packages/prediction_ui/app/channels
 - packages/prediction_ui/app/controllers
 - packages/prediction_ui/app/helpers
+- packages/prediction_ui/app/models
 - packages/prediction_ui/app/views
 - packages/predictor/app/models
 - packages/rails_shims/app/channels
