@@ -113,7 +113,7 @@ class PredictionsController < ApplicationController
   end
 
   def create
-    ActiveSupport::Notifications.instrument('prediction_needed', { 
+    ActiveSupport::Notifications.instrument("prediction_needed", { 
       current_user: current_user,
       prediction_request_id: params["prediction_request"]["id"],
       team_1_id: params["first_team"]["id"],
