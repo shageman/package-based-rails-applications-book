@@ -156,53 +156,53 @@ class Predictor
 end
 ' > packages/predictor/app/models/predictor.rb
 
-echo '# typed: false
-RSpec.describe Predictor do
-  before do
-    @team1 = create_team name: "A"
-    @team2 = create_team name: "B"
+# echo '# typed: false
+# RSpec.describe Predictor do
+#   before do
+#     @team1 = create_team name: "A"
+#     @team2 = create_team name: "B"
 
-    @predictor = Predictor.new
-  end
+#     @predictor = Predictor.new
+#   end
 
-  it "predicts teams that have won in the past to win in the future" do
-    game = create_game first_team: @team1, second_team: @team2, winning_team: 1
-    @predictor.learn([@team1, @team2], [game])
+#   it "predicts teams that have won in the past to win in the future" do
+#     game = create_game first_team: @team1, second_team: @team2, winning_team: 1
+#     @predictor.learn([@team1, @team2], [game])
 
-    prediction = @predictor.predict(@team2, @team1)
-    expect(prediction.winner).to eq @team1
+#     prediction = @predictor.predict(@team2, @team1)
+#     expect(prediction.winner).to eq @team1
 
-    prediction = @predictor.predict(@team1, @team2)
-    expect(prediction.winner).to eq @team1
-  end
+#     prediction = @predictor.predict(@team1, @team2)
+#     expect(prediction.winner).to eq @team1
+#   end
 
-  it "changes predictions based on games learned" do
-    game1 = create_game first_team: @team1, second_team: @team2, winning_team: 1
-    game2 = create_game first_team: @team1, second_team: @team2, winning_team: 2
-    game3 = create_game first_team: @team1, second_team: @team2, winning_team: 2
-    @predictor.learn([@team1, @team2], [game1, game2, game3])
+#   it "changes predictions based on games learned" do
+#     game1 = create_game first_team: @team1, second_team: @team2, winning_team: 1
+#     game2 = create_game first_team: @team1, second_team: @team2, winning_team: 2
+#     game3 = create_game first_team: @team1, second_team: @team2, winning_team: 2
+#     @predictor.learn([@team1, @team2], [game1, game2, game3])
 
-    prediction = @predictor.predict(@team1, @team2)
-    expect(prediction.winner).to eq @team2
-  end
+#     prediction = @predictor.predict(@team1, @team2)
+#     expect(prediction.winner).to eq @team2
+#   end
 
-  it "behaves funny when teams are equally strong" do
-    @predictor.learn([@team1, @team2], [])
+#   it "behaves funny when teams are equally strong" do
+#     @predictor.learn([@team1, @team2], [])
 
-    prediction = @predictor.predict(@team1, @team2)
-    expect(prediction).to be_an Prediction
-    expect(prediction.first_team).to eq @team1
-    expect(prediction.second_team).to eq @team2
-    expect(prediction.winner).to eq @team2
+#     prediction = @predictor.predict(@team1, @team2)
+#     expect(prediction).to be_an Prediction
+#     expect(prediction.first_team).to eq @team1
+#     expect(prediction.second_team).to eq @team2
+#     expect(prediction.winner).to eq @team2
 
-    prediction = @predictor.predict(@team2, @team1)
-    expect(prediction).to be_an Prediction
-    expect(prediction.first_team).to eq @team2
-    expect(prediction.second_team).to eq @team1
-    expect(prediction.winner).to eq @team1
-  end
-end
-' > packages/predictor/spec/models/predictor_spec.rb
+#     prediction = @predictor.predict(@team2, @team1)
+#     expect(prediction).to be_an Prediction
+#     expect(prediction.first_team).to eq @team2
+#     expect(prediction.second_team).to eq @team1
+#     expect(prediction.winner).to eq @team1
+#   end
+# end
+# ' > packages/predictor/spec/models/predictor_spec.rb
 
 # RUN EXAMPLE
 
@@ -218,24 +218,36 @@ class Team < ApplicationRecord
 end
 ' > packages/teams/app/models/team.rb
 
+echo '# typed: strict
+
+class Game
+  sig { returns(T.nilable(Integer)) }
+  def first_team_id; end
+
+  sig { returns(T.nilable(Integer)) }
+  def second_team_id; end
+
+  sig { returns(T.nilable(Integer)) }
+  def winning_team; end
+end
+' > packages/games/app/models/game.rbi
+
+echo 'class Game < ApplicationRecord
+  include GameInterface
+  extend T::Sig
+
+  validates :date, :location, :first_team, :second_team, :winning_team,
+            :first_team_score, :second_team_score, presence: true
+  belongs_to :first_team, class_name: "Team"
+  belongs_to :second_team, class_name: "Team"
+end
+' > packages/games/app/models/game.rb
+
 # RUN EXAMPLE
 
 
 
 
-# echo '# typed: strict
-
-# class Game
-#   sig { returns(T.nilable(Integer)) }
-#   def first_team_id; end
-
-#   sig { returns(T.nilable(Integer)) }
-#   def second_team_id; end
-
-#   sig { returns(T.nilable(Integer)) }
-#   def winning_team; end
-# end
-# ' > packages/games/app/models/game.rbi
 
 # RUN EXAMPLE
 

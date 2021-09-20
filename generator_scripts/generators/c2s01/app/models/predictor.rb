@@ -1,7 +1,7 @@
 require "saulabs/trueskill"
 
 class Predictor
-  def initialize(teams)
+  def learn(teams, games)
     @teams_lookup = teams.inject({}) do |memo, team|
       memo[team.id] = {
           team: team,
@@ -9,9 +9,7 @@ class Predictor
       }
       memo
     end
-  end
 
-  def learn(games)
     games.each do |game|
       first_team_rating = @teams_lookup[game.first_team_id][:rating]
       second_team_rating = @teams_lookup[game.second_team_id][:rating]
