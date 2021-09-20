@@ -1,4 +1,3 @@
-# typed: false
 RSpec.describe Predictor do
   before do
     @team1 = create_team name: "A"
@@ -44,4 +43,3 @@ RSpec.describe Predictor do
     expect(prediction.winner).to eq @team1
   end
 end
-

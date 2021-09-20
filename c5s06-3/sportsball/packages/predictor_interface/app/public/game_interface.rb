@@ -10,7 +10,7 @@ module GameInterface
 
   sig { abstract.returns(Integer) }
   def second_team_id; end
-  
+
   sig { abstract.returns(Integer) }
   def winning_team; end
 end
