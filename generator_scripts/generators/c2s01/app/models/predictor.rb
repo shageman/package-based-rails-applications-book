@@ -29,6 +29,8 @@ class Predictor
     Prediction.new(team1, team2, winner)
   end
 
+  private
+
   def higher_mean_team(first_team, second_team)
     @teams_lookup[first_team.id][:rating].first.mean >
         @teams_lookup[second_team.id][:rating].first.mean

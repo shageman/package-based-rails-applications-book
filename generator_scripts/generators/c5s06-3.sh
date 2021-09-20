@@ -6,86 +6,103 @@ set -e
 
 mkdir -p packages/predictor_interface/app/public
 
+mv packages/predictor/app/models/prediction.rb packages/predictor_interface/app/public/prediction.rb
+
 echo '# typed: strict
-Rails.application.reloader.to_prepare do
-  PredictionUi.configure(Predictor.new)
+
+module PredictionUi
+  extend T::Sig
+
+  sig {params(predictor: PredictorInterface).void}
+  def self.configure(predictor)
+    @predictor = T.let(predictor, T.nilable(PredictorInterface))
+    # freeze
+  end
+
+  sig {returns(T.nilable(PredictorInterface))}
+  def self.predictor
+    @predictor
+  end
 end
-' > config/initializers/configure_prediction_ui.rb
+' > packages/prediction_ui/app/services/prediction_ui.rb
+
+
+
 
 echo '# typed: strict
 
-class Game
-  sig { returns(T.nilable(Integer)) }
+module PredictorInterface
+  extend T::Sig
+  extend T::Helpers
+  interface!
+
+  sig { abstract.params(teams: T::Enumerable[TeamInterface], games: T::Enumerable[GameInterface]).void }
+  def learn(teams, games); end
+
+  sig { abstract.params(first_team: TeamInterface, second_team: TeamInterface).returns(Prediction) }
+  def predict(first_team, second_team); end
+end
+' > packages/predictor_interface/app/public/predictor_interface.rb
+
+echo '# typed: strict
+
+module TeamInterface
+  extend T::Sig
+  extend T::Helpers
+  interface!
+
+  sig { abstract.returns(Integer) }
+  def id; end
+end
+' > packages/predictor_interface/app/public/team_interface.rb
+
+echo '# typed: strict
+
+module GameInterface
+  extend T::Sig
+  extend T::Helpers
+  interface!
+
+  sig { abstract.returns(Integer) }
   def first_team_id; end
 
-  sig { returns(T.nilable(Integer)) }
+  sig { abstract.returns(Integer) }
   def second_team_id; end
 
-  sig { returns(T.nilable(Integer)) }
+  sig { abstract.returns(Integer) }
   def winning_team; end
 end
-' > packages/games/app/models/game.rbi
+' > packages/predictor_interface/app/public/game_interface.rb
 
-echo '# typed: false
-class PredictionsController < ApplicationController
-  def new
-    @teams = Team.all
-  end
+# RUN EXAMPLE
 
-  def create
-    PredictionUi.predictor.learn(Team.all, Game.all)
-    @prediction = PredictionUi.predictor.predict(
-        Team.find(params["first_team"]["id"]),
-        Team.find(params["second_team"]["id"]))
-  end
-end
-' > packages/prediction_ui/app/controllers/predictions_controller.rb
 
-echo '# typed: strict
 
-module PredictionUi
-  extend T::Sig
+# echo '# typed: strict
+# Rails.application.reloader.to_prepare do
+#   PredictionUi.configure(Predictor.new)
+# end
+# ' > config/initializers/configure_prediction_ui.rb
 
-  sig {params(predictor: PredictorInterface).void}
-  def self.configure(predictor)
-    @predictor = T.let(predictor, T.nilable(PredictorInterface))
-    # freeze
-  end
+# echo '# typed: false
+# class PredictionsController < ApplicationController
+#   def new
+#     @teams = Team.all
+#   end
 
-  sig {returns(T.nilable(PredictorInterface))}
-  def self.predictor
-    @predictor
-  end
-end
-' > packages/prediction_ui/app/services/prediction_ui.rb
+#   def create
+#     PredictionUi.predictor.learn(Team.all, Game.all)
+#     @prediction = PredictionUi.predictor.predict(
+#         Team.find(params["first_team"]["id"]),
+#         Team.find(params["second_team"]["id"]))
+#   end
+# end
+# ' > packages/prediction_ui/app/controllers/predictions_controller.rb
 
-echo '# typed: strict
+# RUN EXAMPLE
 
-module PredictionUi
-  extend T::Sig
 
-  sig {params(predictor: PredictorInterface).void}
-  def self.configure(predictor)
-    @predictor = T.let(predictor, T.nilable(PredictorInterface))
-    # freeze
-  end
 
-  sig {returns(T.nilable(PredictorInterface))}
-  def self.predictor
-    @predictor
-  end
-end
-' > packages/prediction_ui/app/services/prediction_ui.rb
-
-echo '
-enforce_dependencies: true
-enforce_privacy: false
-dependencies:
-- packages/games
-- packages/predictor_interface
-- packages/rails_shims
-- packages/teams
-' > packages/prediction_ui/package.yml
 
 echo '# typed: strict
 
@@ -105,7 +122,7 @@ class Predictor
     @teams_lookup = T.let({}, T.nilable(T::Hash[Integer, TeamLookup]))
     @teams_lookup = teams.inject({}) do |memo, team|
       memo[team.id] = TeamLookup.new(
-        team: team, 
+        team: team,
         rating: Saulabs::TrueSkill::Rating.new(1500.0, 1000.0, 1.0)
       )
       memo
@@ -187,62 +204,10 @@ RSpec.describe Predictor do
 end
 ' > packages/predictor/spec/models/predictor_spec.rb
 
-echo 'enforce_dependencies: true
-enforce_privacy: false
-dependencies:
-- packages/predictor_interface
-' > packages/predictor/package.yml
+# RUN EXAMPLE
 
-echo '# typed: strict
 
-module GameInterface
-  extend T::Sig
-  extend T::Helpers
-  interface!
 
-  sig { abstract.returns(Integer) }
-  def first_team_id; end
-
-  sig { abstract.returns(Integer) }
-  def second_team_id; end
-  
-  sig { abstract.returns(Integer) }
-  def winning_team; end
-end
-' > packages/predictor_interface/app/public/game_interface.rb
-
-mv packages/predictor/app/models/prediction.rb packages/predictor_interface/app/public/prediction.rb
-
-echo '# typed: strict
-
-module PredictorInterface
-  extend T::Sig
-  extend T::Helpers
-  interface!
-
-  sig { abstract.params(teams: T::Enumerable[TeamInterface], games: T::Enumerable[GameInterface]).void }
-  def learn(teams, games); end
-
-  sig { abstract.params(first_team: TeamInterface, second_team: TeamInterface).returns(Prediction) }
-  def predict(first_team, second_team); end
-end
-' > packages/predictor_interface/app/public/predictor_interface.rb
-
-echo '# typed: strict
-
-module TeamInterface
-  extend T::Sig
-  extend T::Helpers
-  interface!
-
-  sig { abstract.returns(Integer) }
-  def id; end
-end
-' > packages/predictor_interface/app/public/team_interface.rb
-
-echo 'enforce_dependencies: true
-enforce_privacy: true
-' > packages/predictor_interface/package.yml
 
 echo '# typed: strict
 class Team < ApplicationRecord
@@ -253,13 +218,30 @@ class Team < ApplicationRecord
 end
 ' > packages/teams/app/models/team.rb
 
-echo '
-enforce_dependencies: true
-enforce_privacy: false
-dependencies:
-- packages/predictor_interface
-- packages/rails_shims
-' > packages/teams/package.yml
+# RUN EXAMPLE
+
+
+
+
+# echo '# typed: strict
+
+# class Game
+#   sig { returns(T.nilable(Integer)) }
+#   def first_team_id; end
+
+#   sig { returns(T.nilable(Integer)) }
+#   def second_team_id; end
+
+#   sig { returns(T.nilable(Integer)) }
+#   def winning_team; end
+# end
+# ' > packages/games/app/models/game.rbi
+
+# RUN EXAMPLE
+
+
+
+
 
 echo '# See: Setting up the configuration file
 # https://github.com/Shopify/packwerk/blob/main/USAGE.md#setting-up-the-configuration-file
@@ -310,5 +292,33 @@ load_paths:
 # Location of inflections file
 # inflections_file: "config/inflections.yml"
 ' > packwerk.yml
+
+echo 'enforce_dependencies: true
+enforce_privacy: false
+dependencies:
+- packages/predictor_interface
+' > packages/predictor/package.yml
+
+echo 'enforce_dependencies: true
+enforce_privacy: true
+' > packages/predictor_interface/package.yml
+
+echo '
+enforce_dependencies: true
+enforce_privacy: false
+dependencies:
+- packages/predictor_interface
+- packages/rails_shims
+' > packages/teams/package.yml
+
+echo '
+enforce_dependencies: true
+enforce_privacy: false
+dependencies:
+- packages/games
+- packages/predictor_interface
+- packages/rails_shims
+- packages/teams
+' > packages/prediction_ui/package.yml
 
 sed -i "s/class Saulabs::TrueSkill::Rating/class Saulabs::TrueSkill::Rating < Saulabs::Gauss::Distribution/" sorbet/rbi/hidden-definitions/hidden.rbi
