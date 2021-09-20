@@ -1,4 +1,4 @@
 Rails.application.reloader.to_prepare do
-  PredictionUi.configure(Predictor)
+  PredictionUi.configure(Predictor.new)
 end
 

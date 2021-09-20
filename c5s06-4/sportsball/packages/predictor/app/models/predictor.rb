@@ -16,7 +16,7 @@ class Predictor
     @teams_lookup = T.let({}, T.nilable(T::Hash[Integer, TeamLookup]))
     @teams_lookup = teams.inject({}) do |memo, team|
       memo[team.id] = TeamLookup.new(
-        team: team, 
+        team: team,
         rating: Saulabs::TrueSkill::Rating.new(1500.0, 1000.0, 1.0)
       )
       memo
