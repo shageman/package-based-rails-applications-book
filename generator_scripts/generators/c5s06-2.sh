@@ -51,13 +51,13 @@ echo '# typed: strict
 module PredictionUi
   extend T::Sig
 
-  sig {params(predictor: T.class_of(Predictor)).void}
+  sig {params(predictor: Predictor).void}
   def self.configure(predictor)
-    @predictor = T.let(predictor, T.nilable(T.class_of(Predictor)))
+    @predictor = T.let(predictor, T.nilable(Predictor))
     freeze
   end
 
-  sig {returns(T.nilable(T.class_of(Predictor)))}
+  sig {returns(T.nilable(Predictor))}
   def self.predictor
     @predictor
   end

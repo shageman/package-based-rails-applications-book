@@ -68,7 +68,7 @@ load_paths:
 ' > packwerk.yml
 
 echo 'Rails.application.reloader.to_prepare do
-  PredictionUi.configure(Predictor)
+  PredictionUi.configure(Predictor.new)
 end
 ' > config/initializers/configure_prediction_ui.rb
 
@@ -78,7 +78,7 @@ echo 'class PredictionsController < ApplicationController
   end
 
   def create
-    predictor = PredictionUi.predictor.new(Team.all)
+    predictor = PredictionUi.predictor(Team.all)
     predictor.learn(Game.all)
     @prediction = predictor.predict(
         Team.find(params["first_team"]["id"]),
@@ -86,3 +86,12 @@ echo 'class PredictionsController < ApplicationController
   end
 end
 ' > packages/prediction_ui/app/controllers/predictions_controller.rb
+
+echo '
+enforce_dependencies: true
+enforce_privacy: false
+dependencies:
+- packages/rails_shims
+- packages/games
+- packages/teams
+' > packages/prediction_ui/package.yml
