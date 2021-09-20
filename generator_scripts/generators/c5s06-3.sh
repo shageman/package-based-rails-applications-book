@@ -78,31 +78,6 @@ end
 
 
 
-# echo '# typed: strict
-# Rails.application.reloader.to_prepare do
-#   PredictionUi.configure(Predictor.new)
-# end
-# ' > config/initializers/configure_prediction_ui.rb
-
-# echo '# typed: false
-# class PredictionsController < ApplicationController
-#   def new
-#     @teams = Team.all
-#   end
-
-#   def create
-#     PredictionUi.predictor.learn(Team.all, Game.all)
-#     @prediction = PredictionUi.predictor.predict(
-#         Team.find(params["first_team"]["id"]),
-#         Team.find(params["second_team"]["id"]))
-#   end
-# end
-# ' > packages/prediction_ui/app/controllers/predictions_controller.rb
-
-# RUN EXAMPLE
-
-
-
 
 echo '# typed: strict
 
@@ -322,6 +297,15 @@ dependencies:
 - packages/predictor_interface
 - packages/rails_shims
 ' > packages/teams/package.yml
+
+echo '
+enforce_dependencies: true
+enforce_privacy: false
+dependencies:
+- packages/predictor_interface
+- packages/rails_shims
+- packages/teams
+' > packages/games/package.yml
 
 echo '
 enforce_dependencies: true
