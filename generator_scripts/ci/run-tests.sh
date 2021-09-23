@@ -14,9 +14,13 @@ cd app_code/sportsball
 
 bundle install --local
 
+rake db:create && rake db:migrate
+
 bundle exec rspec --exclude-pattern '**/system/**/*_spec.rb' `cat .rspec | tr '\n' ' '`
 
 bundle exec packwerk validate
+
+echo 'puts Team.count' | bundle exec rails c
 
 if [[ ! -z "$SORBET" ]]; then
   bundle exec srb tc
