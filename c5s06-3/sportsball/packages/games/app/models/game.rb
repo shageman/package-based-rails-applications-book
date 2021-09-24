@@ -1,5 +1,5 @@
 class Game < ApplicationRecord
-  include GameInterface
+  include HistoricalPerformanceIndicator
   extend T::Sig
 
   validates :date, :location, :first_team, :second_team, :winning_team,

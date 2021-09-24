@@ -3,7 +3,7 @@
 require "saulabs/trueskill"
 
 class TeamLookup < T::Struct
-  const :team, TeamInterface
+  const :team, Contender
   const :rating, Saulabs::TrueSkill::Rating
 end
 
@@ -11,7 +11,7 @@ class Predictor
   include PredictorInterface
   extend T::Sig
 
-  sig {override.params(teams: T::Enumerable[TeamInterface], games: T::Enumerable[GameInterface]).void}
+  sig {override.params(teams: T::Enumerable[Contender], games: T::Enumerable[HistoricalPerformanceIndicator]).void}
   def learn(teams, games)
     @teams_lookup = T.let({}, T.nilable(T::Hash[Integer, TeamLookup]))
     @teams_lookup = teams.inject({}) do |memo, team|
@@ -32,7 +32,7 @@ class Predictor
     end
   end
 
-  sig {override.params(first_team: TeamInterface, second_team: TeamInterface).returns(Prediction)}
+  sig {override.params(first_team: Contender, second_team: Contender).returns(Prediction)}
   def predict(first_team, second_team)
     team1 = T.must(T.must(@teams_lookup)[first_team.id]).team
     team2 = T.must(T.must(@teams_lookup)[second_team.id]).team
@@ -42,7 +42,7 @@ class Predictor
 
   private
 
-  sig {params(first_team: TeamInterface, second_team: TeamInterface).returns(T::Boolean)}
+  sig {params(first_team: Contender, second_team: Contender).returns(T::Boolean)}
   def higher_mean_team(first_team, second_team)
     T.must(T.must(@teams_lookup)[first_team.id]).rating.mean >
         T.must(T.must(@teams_lookup)[second_team.id]).rating.mean

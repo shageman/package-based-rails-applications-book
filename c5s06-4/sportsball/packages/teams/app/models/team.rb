@@ -1,6 +1,6 @@
 # typed: strict
 class Team < ApplicationRecord
-  include TeamInterface
+  include Contender
   extend T::Sig
 
   validates :name, presence: true
