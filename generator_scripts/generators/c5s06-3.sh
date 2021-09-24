@@ -36,17 +36,17 @@ module PredictorInterface
   extend T::Helpers
   interface!
 
-  sig { abstract.params(teams: T::Enumerable[TeamInterface], games: T::Enumerable[GameInterface]).void }
+  sig { abstract.params(teams: T::Enumerable[Contender], games: T::Enumerable[HistoricalPerformanceIndicator]).void }
   def learn(teams, games); end
 
-  sig { abstract.params(first_team: TeamInterface, second_team: TeamInterface).returns(Prediction) }
+  sig { abstract.params(first_team: Contender, second_team: Contender).returns(Prediction) }
   def predict(first_team, second_team); end
 end
 ' > packages/predictor_interface/app/public/predictor_interface.rb
 
 echo '# typed: strict
 
-module TeamInterface
+module Contender
   extend T::Sig
   extend T::Helpers
   interface!
@@ -54,11 +54,11 @@ module TeamInterface
   sig { abstract.returns(Integer) }
   def id; end
 end
-' > packages/predictor_interface/app/public/team_interface.rb
+' > packages/predictor_interface/app/public/contender.rb
 
 echo '# typed: strict
 
-module GameInterface
+module HistoricalPerformanceIndicator
   extend T::Sig
   extend T::Helpers
   interface!
@@ -72,7 +72,7 @@ module GameInterface
   sig { abstract.returns(Integer) }
   def winning_team; end
 end
-' > packages/predictor_interface/app/public/game_interface.rb
+' > packages/predictor_interface/app/public/historical_performance_indicator.rb
 
 # RUN EXAMPLE
 
@@ -84,7 +84,7 @@ echo '# typed: strict
 require "saulabs/trueskill"
 
 class TeamLookup < T::Struct
-  const :team, TeamInterface
+  const :team, Contender
   const :rating, Saulabs::TrueSkill::Rating
 end
 
@@ -92,7 +92,7 @@ class Predictor
   include PredictorInterface
   extend T::Sig
 
-  sig {override.params(teams: T::Enumerable[TeamInterface], games: T::Enumerable[GameInterface]).void}
+  sig {override.params(teams: T::Enumerable[Contender], games: T::Enumerable[HistoricalPerformanceIndicator]).void}
   def learn(teams, games)
     @teams_lookup = T.let({}, T.nilable(T::Hash[Integer, TeamLookup]))
     @teams_lookup = teams.inject({}) do |memo, team|
@@ -113,7 +113,7 @@ class Predictor
     end
   end
 
-  sig {override.params(first_team: TeamInterface, second_team: TeamInterface).returns(Prediction)}
+  sig {override.params(first_team: Contender, second_team: Contender).returns(Prediction)}
   def predict(first_team, second_team)
     team1 = T.must(T.must(@teams_lookup)[first_team.id]).team
     team2 = T.must(T.must(@teams_lookup)[second_team.id]).team
@@ -123,7 +123,7 @@ class Predictor
 
   private
 
-  sig {params(first_team: TeamInterface, second_team: TeamInterface).returns(T::Boolean)}
+  sig {params(first_team: Contender, second_team: Contender).returns(T::Boolean)}
   def higher_mean_team(first_team, second_team)
     T.must(T.must(@teams_lookup)[first_team.id]).rating.mean >
         T.must(T.must(@teams_lookup)[second_team.id]).rating.mean
@@ -186,7 +186,7 @@ end
 
 echo '# typed: strict
 class Team < ApplicationRecord
-  include TeamInterface
+  include Contender
   extend T::Sig
 
   validates :name, presence: true
@@ -208,7 +208,7 @@ end
 ' > packages/games/app/models/game.rbi
 
 echo 'class Game < ApplicationRecord
-  include GameInterface
+  include HistoricalPerformanceIndicator
   extend T::Sig
 
   validates :date, :location, :first_team, :second_team, :winning_team,
