@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/marcel/all/marcel.rbi
 #
-# marcel-1.0.1
+# marcel-1.0.2
 
 module Marcel
 end

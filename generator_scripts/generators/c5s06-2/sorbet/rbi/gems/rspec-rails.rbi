@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/rspec-rails/all/rspec-rails.rbi
 #
-# rspec-rails-5.0.1
+# rspec-rails-5.0.2
 
 module RSpec
   def self.feature(*args, &example_group_block); end

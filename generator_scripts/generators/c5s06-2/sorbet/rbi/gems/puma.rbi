@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/puma/all/puma.rbi
 #
-# puma-5.3.2
+# puma-5.5.0
 
 class Puma::HttpParser
   def body; end
@@ -49,13 +49,13 @@ module Puma
   def self.stats_object=(val); end
   def self.windows?; end
 end
-module Puma::JSON
+module Puma::JSONSerialization
   def self.generate(value); end
   def self.serialize_object_key(output, value); end
   def self.serialize_string(output, value); end
   def self.serialize_value(output, value); end
 end
-class Puma::JSON::SerializationError < StandardError
+class Puma::JSONSerialization::SerializationError < StandardError
 end
 class Puma::MiniSSL::Socket
   def <<(data); end
@@ -67,10 +67,8 @@ class Puma::MiniSSL::Socket
   def initialize(socket, engine); end
   def peeraddr; end
   def peercert; end
-  def read_and_drop(timeout = nil); end
   def read_nonblock(size, *_); end
   def readpartial(size); end
-  def should_drop_bytes?; end
   def ssl_version_state; end
   def syswrite(data); end
   def to_io; end
@@ -195,6 +193,7 @@ class Puma::DSL
   def prune_bundler(answer = nil); end
   def queue_requests(answer = nil); end
   def quiet(which = nil); end
+  def rack_url_scheme(scheme = nil); end
   def rackup(path); end
   def raise_exception_on_sigterm(answer = nil); end
   def restart_command(cmd); end
@@ -333,7 +332,7 @@ class Puma::ThreadPool
   def busy_threads; end
   def clean_thread_locals; end
   def clean_thread_locals=(arg0); end
-  def initialize(min, max, *extra, &block); end
+  def initialize(name, min, max, *extra, &block); end
   def out_of_band_hook; end
   def out_of_band_hook=(arg0); end
   def pool_capacity; end
@@ -384,6 +383,7 @@ class Puma::Client
   def decode_chunk(chunk); end
   def eagerly_finish; end
   def env; end
+  def expect_proxy_proto=(val); end
   def finish(timeout); end
   def hijacked; end
   def in_data_phase; end
@@ -411,6 +411,7 @@ class Puma::Client
   def timeout_at; end
   def to_io; end
   def try_to_finish; end
+  def try_to_parse_proxy_protocol; end
   def write_chunk(str); end
   def write_error(status_code); end
   extend Forwardable
@@ -470,6 +471,8 @@ class Puma::Binder
   def listeners; end
   def listeners=(arg0); end
   def loc_addr_str(io); end
+  def localhost_authority; end
+  def localhost_authority_context; end
   def loopback_addresses; end
   def parse(binds, logger, log_msg = nil); end
   def proto_env; end
