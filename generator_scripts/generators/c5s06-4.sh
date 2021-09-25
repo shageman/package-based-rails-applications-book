@@ -90,6 +90,14 @@ echo '
 enforce_dependencies: true
 enforce_privacy: false
 dependencies:
+- packages/rails_shims
+- packages/teams
+' > packages/games/package.yml
+
+echo '
+enforce_dependencies: true
+enforce_privacy: false
+dependencies:
 - packages/service_locator
 - packages/rails_shims
 ' > packages/teams/package.yml
