@@ -83,11 +83,6 @@ echo '# typed: strict
 
 require "saulabs/trueskill"
 
-class TeamLookup < T::Struct
-  const :team, Contender
-  const :rating, Saulabs::TrueSkill::Rating
-end
-
 class Predictor
   include PredictorInterface
   extend T::Sig
@@ -128,6 +123,12 @@ class Predictor
     T.must(T.must(@teams_lookup)[first_team.id]).rating.mean >
         T.must(T.must(@teams_lookup)[second_team.id]).rating.mean
   end
+
+  class TeamLookup < T::Struct
+    const :team, Contender
+    const :rating, Saulabs::TrueSkill::Rating
+  end
+  private_constant :TeamLookup
 end
 ' > packages/predictor/app/models/predictor.rb
 
