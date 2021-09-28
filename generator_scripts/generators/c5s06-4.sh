@@ -4,6 +4,8 @@ set -v
 set -x
 set -e
 
+rm config/initializers/configure_prediction_ui.rb
+
 echo '# typed: false
 class PredictionsController < ApplicationController
   def new
@@ -72,7 +74,7 @@ RSpec.describe ServiceLocator do
       expect { subject.get_service(:some_service) }.to raise_error(ServiceNotFoundError)
     end
   end
-  
+
   describe "getting a given service" do
     it "returns that service instance" do
       subject.register_service(:some_set_service, :a)
