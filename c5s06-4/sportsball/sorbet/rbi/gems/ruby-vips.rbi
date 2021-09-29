@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/ruby-vips/all/ruby-vips.rbi
 #
-# ruby-vips-2.1.2
+# ruby-vips-2.1.3
 
 module GObject
   def g_object_get_property(*arg0); end

@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/webpacker/all/webpacker.rbi
 #
-# webpacker-5.4.0
+# webpacker-5.4.3
 
 class Webpacker::Instance
   def commands; end

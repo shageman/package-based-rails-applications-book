@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/smart_properties/all/smart_properties.rbi
 #
-# smart_properties-1.15.0
+# smart_properties-1.16.3
 
 module SmartProperties
   def [](name); end
@@ -115,4 +115,7 @@ module SmartProperties::ClassMethods
   def properties; end
   def property!(name, options = nil); end
   def property(name, options = nil); end
+end
+module SmartProperties::ModuleMethods
+  def included(target); end
 end

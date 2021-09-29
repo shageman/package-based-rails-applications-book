@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/rack-mini-profiler/all/rack-mini-profiler.rbi
 #
-# rack-mini-profiler-2.3.2
+# rack-mini-profiler-2.3.3
 
 module Rack
 end
@@ -258,12 +258,18 @@ class Rack::MiniProfiler::Config
   def base_url_path=(arg0); end
   def collapse_results; end
   def collapse_results=(arg0); end
+  def content_security_policy_nonce; end
+  def content_security_policy_nonce=(arg0); end
   def disable_caching; end
   def disable_caching=(arg0); end
   def enable_advanced_debugging_tools; end
   def enable_advanced_debugging_tools=(arg0); end
+  def enable_hotwire_turbo_drive_support; end
+  def enable_hotwire_turbo_drive_support=(arg0); end
   def enabled; end
   def enabled=(arg0); end
+  def flamegraph_mode; end
+  def flamegraph_mode=(arg0); end
   def flamegraph_sample_rate; end
   def flamegraph_sample_rate=(arg0); end
   def horizontal_position; end

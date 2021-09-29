@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/slim-rails/all/slim-rails.rbi
 #
-# slim-rails-3.2.0
+# slim-rails-3.3.0
 
 module Slim
 end

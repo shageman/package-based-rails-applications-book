@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/activesupport/all/activesupport.rbi
 #
-# activesupport-6.1.4
+# activesupport-6.1.4.1
 
 class Hash
   def _deep_transform_keys_in_object!(object, &block); end
@@ -1860,6 +1860,15 @@ module DateAndTime::Calculations
   def yesterday; end
   def yesterday?; end
 end
+class Integer < Numeric
+  def month; end
+  def months; end
+  def multiple_of?(number); end
+  def ordinal; end
+  def ordinalize; end
+  def year; end
+  def years; end
+end
 class ActiveSupport::Subscriber
   def self.add_event_subscriber(event); end
   def self.attach_to(namespace, subscriber = nil, notifier = nil, inherit_all: nil); end
@@ -2139,15 +2148,6 @@ class ActiveSupport::Reloader < ActiveSupport::ExecutionWrapper
   def self.run!; end
   def self.to_prepare(*args, &block); end
   def self.wrap; end
-end
-class Integer < Numeric
-  def month; end
-  def months; end
-  def multiple_of?(number); end
-  def ordinal; end
-  def ordinalize; end
-  def year; end
-  def years; end
 end
 module ActiveSupport::ForkTracker
   def self.after_fork(&block); end

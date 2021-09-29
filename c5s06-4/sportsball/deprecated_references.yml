@@ -11,18 +11,6 @@ packages/games:
     - dependency
     files:
     - spec/support/object_creation_methods.rb
-packages/prediction_ui:
-  "::PredictionUi":
-    violations:
-    - dependency
-    files:
-    - config/initializers/configure_prediction_ui.rb
-packages/predictor:
-  "::Predictor":
-    violations:
-    - dependency
-    files:
-    - config/initializers/configure_prediction_ui.rb
 packages/teams:
   "::Team":
     violations:

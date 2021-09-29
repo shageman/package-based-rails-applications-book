@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/packwerk/all/packwerk.rbi
 #
-# packwerk-1.3.0
+# packwerk-1.3.2
 
 module Packwerk
   extend ActiveSupport::Autoload

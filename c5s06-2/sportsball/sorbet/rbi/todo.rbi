@@ -2,12 +2,22 @@
 #   srb rbi todo
 
 # typed: strong
-module ::Anonymous_Delegator_28; end
-module ::Anonymous_Delegator_44; end
-module ::Anonymous_Delegator_8; end
 module ::Spring; end
 module ActionDispatch::Response::ContentTypeHeader; end
+module Mail::CheckDeliveryParams; end
+module Mail::Ruby19; end
+module Rack::QueryParser::InvalidParameterError; end
+module Rack::QueryParser::ParameterTypeError; end
+module Rack::QueryParser::Params; end
+module Rack::Request::Env; end
+module Rack::Response::Helpers; end
 module T::InterfaceWrapper::Helpers; end
 module T::Private::Abstract::Hooks; end
 module T::Private::Methods::MethodHooks; end
 module T::Private::Methods::SingletonMethodHooks; end
+module Zip::CompressionMethodError; end
+module Zip::DestinationFileExistsError; end
+module Zip::EntryExistsError; end
+module Zip::EntryNameError; end
+module Zip::Error; end
+module Zip::InternalError; end
