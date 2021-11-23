@@ -4,6 +4,13 @@ set -v
 set -x
 set -e
 
+###############################################################################
+#
+# This step removes all packwerk violations by accepting the dependencies that
+# are present in the application
+#
+###############################################################################
+
 echo '
 enforce_dependencies: true
 enforce_privacy: false

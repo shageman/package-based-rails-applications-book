@@ -4,6 +4,12 @@ set -v
 set -x
 set -e
 
+###############################################################################
+#
+# This step moves Rails-related base classes into their own rails_shims package 
+#
+###############################################################################
+
 mkdir -p app/packages/rails_shims/mailers/; mv app/mailers/application_mailer.rb $_
 mkdir -p app/packages/rails_shims/models/; mv app/models/application_record.rb $_
 mkdir -p app/packages/rails_shims/models/concerns/; mv app/models/concerns/.keep $_

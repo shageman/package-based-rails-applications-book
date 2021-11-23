@@ -4,6 +4,13 @@ set -v
 set -x
 set -e
 
+###############################################################################
+#
+# This step adds a gem (== a component) into the app. Because this gem is not
+# an engine, it can't be added to packwerk as such
+#
+###############################################################################
+
 bundle install --local
 
 bundle gem testgem --no-coc --no-ext --no-mit --no-rubocop --test=rspec --ci=github

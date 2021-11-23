@@ -4,6 +4,13 @@ set -v
 set -x
 set -e
 
+###############################################################################
+#
+# This step moves all package out of app/packages and into packages/. 
+# Collocating specs and app code
+#
+###############################################################################
+
 mv app/packages .
 
 for PACKAGE in `ls -1 packages`

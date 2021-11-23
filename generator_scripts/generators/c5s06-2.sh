@@ -4,6 +4,13 @@ set -v
 set -x
 set -e
 
+###############################################################################
+#
+# This step adds sorbet typing to the prediction_controller to show that the
+# previous step introduced a "hidden" dependency
+#
+###############################################################################
+
 bundle install --local
 
 # This next step iswhat we should be doing.

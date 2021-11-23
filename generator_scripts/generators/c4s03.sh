@@ -4,6 +4,13 @@ set -v
 set -x
 set -e
 
+###############################################################################
+#
+# This step adds a gem (== a component) and adds zeitwerk compatible load dirs
+# and adds an enginification mechanism to allow this gem to a packwerk package
+#
+###############################################################################
+
 bundle install --local
 
 bundle gem testgem --no-coc --no-ext --no-mit --no-rubocop --test=rspec --ci=github

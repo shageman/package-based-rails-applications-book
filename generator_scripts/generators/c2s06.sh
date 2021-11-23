@@ -4,6 +4,11 @@ set -v
 set -x
 set -e
 
+###############################################################################
+#
+# This step excludes the files in spec/support from packwerk analysis
+#
+###############################################################################
 
 echo '# See: Setting up the configuration file
 # https://github.com/Shopify/packwerk/blob/main/USAGE.md#setting-up-the-configuration-file

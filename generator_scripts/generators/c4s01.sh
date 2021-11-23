@@ -4,6 +4,13 @@ set -v
 set -x
 set -e
 
+###############################################################################
+#
+# This step adds a gem (with an engine) into the app (== a component) and adds 
+# it as a package
+#
+###############################################################################
+
 bundle install --local
 
 rails plugin new testengine \

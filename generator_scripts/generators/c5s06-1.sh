@@ -4,6 +4,13 @@ set -v
 set -x
 set -e
 
+###############################################################################
+#
+# This step makes the app use dependency injection to the prediction_ui, so it
+# no longer references Predictor directly
+#
+###############################################################################
+
 mkdir -p packages/prediction_ui/app/services
 
 echo 'module PredictionUi

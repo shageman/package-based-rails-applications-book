@@ -4,6 +4,13 @@ set -v
 set -x
 set -e
 
+###############################################################################
+#
+# This step changes the dependency injection to use an interface instead of the
+# concrete class and such removing the previously discovered violations
+#
+###############################################################################
+
 mkdir -p packages/predictor_interface/app/public
 
 mv packages/predictor/app/models/prediction.rb packages/predictor_interface/app/public/prediction.rb
@@ -170,17 +177,6 @@ echo 'class Game < ApplicationRecord
   belongs_to :second_team, class_name: "Team"
 end
 ' > packages/games/app/models/game.rb
-
-# RUN EXAMPLE
-
-
-
-
-
-# RUN EXAMPLE
-
-
-
 
 
 echo '# See: Setting up the configuration file

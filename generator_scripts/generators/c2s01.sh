@@ -4,6 +4,13 @@ set -v
 set -x
 set -e
 
+###############################################################################
+#
+# This step generates the Sportsball sample app with a standard Rails folder
+# structure
+#
+###############################################################################
+
 bundle install --local
 
 rm -rf test

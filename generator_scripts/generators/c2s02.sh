@@ -4,6 +4,13 @@ set -v
 set -x
 set -e
 
+###############################################################################
+#
+# This step moves all domain code from the app/ folder into packages inside of
+# app/packages 
+#
+###############################################################################
+
 mkdir -p app/packages/predictor/models/; mv app/models/prediction.rb $_
 mkdir -p app/packages/teams/models/; mv app/models/team.rb $_
 mkdir -p app/packages/games/models/; mv app/models/game.rb $_
