@@ -33,7 +33,7 @@ dependencies:
 - packages/service_locator
 ' > packages/prediction_ui/package.yml
 
-echo 'ServiceLocator.instance.register_service(:predictor, Predictor.new)' >> packages/predictor/app/models/predictor.rb
+echo 'ServiceLocator.instance.register_service(:predictor, Predictor.new)' >> config/initializers/register_services.rb
 
 echo 'enforce_dependencies: true
 enforce_privacy: false
