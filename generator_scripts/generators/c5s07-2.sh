@@ -15,6 +15,13 @@ dependencies:
 - packages/predictor
 ' > packages/prediction_needed_subscriber/package.yml
 
+echo 'enforce_dependencies: true
+enforce_privacy: false
+dependencies:
+- packages/games
+- packages/teams
+' > packages/prediction_ui/package.yml
+
 echo '# See: Setting up the configuration file
 # https://github.com/Shopify/packwerk/blob/main/USAGE.md#setting-up-the-configuration-file
 
