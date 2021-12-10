@@ -1,0 +1,3 @@
+class ServiceNotFoundError < RuntimeError
+end
+
