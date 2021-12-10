@@ -1,3 +1,0 @@
-class ServiceNotFoundError < RuntimeError
-end
-
