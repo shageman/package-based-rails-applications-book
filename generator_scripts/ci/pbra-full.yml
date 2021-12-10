@@ -91,38 +91,6 @@ resources:
     regexp: c4s03-(.*)\.tgz
     access_key_id: minio
     secret_access_key: minio123
-- name: c5s06-1-code
-  type: s3
-  source:
-    endpoint: http://minio:9000
-    bucket: releases
-    regexp: c5s06-1-(.*)\.tgz
-    access_key_id: minio
-    secret_access_key: minio123
-- name: c5s06-2-code
-  type: s3
-  source:
-    endpoint: http://minio:9000
-    bucket: releases
-    regexp: c5s06-2-(.*)\.tgz
-    access_key_id: minio
-    secret_access_key: minio123
-- name: c5s06-3-code
-  type: s3
-  source:
-    endpoint: http://minio:9000
-    bucket: releases
-    regexp: c5s06-3-(.*)\.tgz
-    access_key_id: minio
-    secret_access_key: minio123
-- name: c5s06-4-code
-  type: s3
-  source:
-    endpoint: http://minio:9000
-    bucket: releases
-    regexp: c5s06-4-(.*)\.tgz
-    access_key_id: minio
-    secret_access_key: minio123
 - name: c5s07-1-code
   type: s3
   source:
@@ -147,12 +115,20 @@ resources:
     regexp: c5s07-3-(.*)\.tgz
     access_key_id: minio
     secret_access_key: minio123
-- name: c5s07-4-code
+- name: c5s08-code
   type: s3
   source:
     endpoint: http://minio:9000
     bucket: releases
-    regexp: c5s07-4-(.*)\.tgz
+    regexp: c5s08-(.*)\.tgz
+    access_key_id: minio
+    secret_access_key: minio123
+- name: c5s09-code
+  type: s3
+  source:
+    endpoint: http://minio:9000
+    bucket: releases
+    regexp: c5s09-(.*)\.tgz
     access_key_id: minio
     secret_access_key: minio123
 
