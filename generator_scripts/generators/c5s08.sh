@@ -4,7 +4,15 @@ set -v
 set -x
 set -e
 
+###############################################################################
+#
+# This step changes the implementation to use a service locator
+#
+###############################################################################
+
 rm config/initializers/configure_prediction_ui.rb
+
+rm -rf packages/prediction_ui/app/services
 
 echo '# typed: false
 class PredictionsController < ApplicationController
@@ -38,12 +46,16 @@ echo 'ServiceLocator.instance.register_service(:predictor, Predictor.new)' >> co
 echo 'enforce_dependencies: true
 enforce_privacy: false
 dependencies:
-- packages/service_locator
+- packages/predictor_interface
 ' > packages/predictor/package.yml
 
-mv packages/predictor_interface packages/service_locator
-mkdir -p packages/service_locator/app/services
+mkdir -p packages/service_locator/app/public
 mkdir -p packages/service_locator/spec
+
+echo 'enforce_dependencies: true
+enforce_privacy: true
+' > packages/service_locator/package.yml
+
 echo '# typed: true
 
 class ServiceLocator
@@ -86,12 +98,13 @@ end
 
 echo 'class ServiceNotFoundError < RuntimeError
 end
-' > packages/service_locator/app/services/service_not_found_error.rb
+' > packages/service_locator/app/public/service_not_found_error.rb
 
 echo '
 enforce_dependencies: true
 enforce_privacy: false
 dependencies:
+- packages/predictor_interface
 - packages/rails_shims
 - packages/teams
 ' > packages/games/package.yml
@@ -100,7 +113,7 @@ echo '
 enforce_dependencies: true
 enforce_privacy: false
 dependencies:
-- packages/service_locator
+- packages/predictor_interface
 - packages/rails_shims
 ' > packages/teams/package.yml
 
@@ -116,6 +129,7 @@ exclude:
 - "{bin,node_modules,script,tmp,vendor}/**/*"
 - "vendor/bundle/**/*"
 - "**/lib/tasks/**/*.rake"
+- "spec/support/**/*"
 
 # Patterns to find package configuration files
 # package_paths: "**/"
@@ -128,9 +142,9 @@ load_paths:
 - packages/games/app/models
 - packages/prediction_ui/app/controllers
 - packages/prediction_ui/app/helpers
-- packages/prediction_ui/app/services
 - packages/prediction_ui/app/views
 - packages/predictor/app/models
+- packages/predictor_interface/app/public
 - packages/rails_shims/app/channels
 - packages/rails_shims/app/controllers
 - packages/rails_shims/app/controllers/concerns
@@ -140,7 +154,6 @@ load_paths:
 - packages/rails_shims/app/models
 - packages/rails_shims/app/models/concerns
 - packages/service_locator/app/public
-- packages/service_locator/app/services
 - packages/teams_admin/app/controllers
 - packages/teams_admin/app/views
 - packages/teams/app/models
@@ -155,3 +168,10 @@ load_paths:
 # inflections_file: "config/inflections.yml"
 ' > packwerk.yml
 
+echo '
+enforce_dependencies: true
+enforce_privacy: false
+dependencies:
+- packages/predictor
+- packages/service_locator
+' > package.yml

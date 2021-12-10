@@ -37,6 +37,7 @@ exclude:
 - "{bin,node_modules,script,tmp,vendor}/**/*"
 - "vendor/bundle/**/*"
 - "**/lib/tasks/**/*.rake"
+- "spec/support/**/*"
 
 # Patterns to find package configuration files
 # package_paths: "**/"
@@ -101,3 +102,11 @@ dependencies:
 - packages/games
 - packages/teams
 ' > packages/prediction_ui/package.yml
+
+echo '
+enforce_dependencies: true
+enforce_privacy: false
+dependencies:
+- packages/prediction_ui
+- packages/predictor
+' > package.yml
