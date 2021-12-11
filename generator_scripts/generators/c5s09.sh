@@ -4,6 +4,8 @@ set -v
 set -x
 set -e
 
+rm -rf packages/service_locator
+
 rm -rf packages/prediction_ui/app/views/predictions/create.html.slim
 
 mkdir -p app/javascript/channels
@@ -56,6 +58,7 @@ exclude:
 - "{bin,node_modules,script,tmp,vendor}/**/*"
 - "vendor/bundle/**/*"
 - "**/lib/tasks/**/*.rake"
+- "spec/support/**/*"
 
 # Patterns to find package configuration files
 # package_paths: "**/"
@@ -86,6 +89,9 @@ load_paths:
 - packages/teams/app/models
 - packages/welcome_ui/app/controllers
 - packages/welcome_ui/app/views
+
+- packages/prediction_ui/app/services
+- packages/predictor_interface/app/public
 
 # List of custom associations, if any
 # custom_associations:
