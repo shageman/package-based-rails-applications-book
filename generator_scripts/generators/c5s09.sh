@@ -5,6 +5,7 @@ set -x
 set -e
 
 rm -rf packages/service_locator
+rm config/initializers/register_services.rb
 
 rm -rf packages/prediction_ui/app/views/predictions/create.html.slim
 
