@@ -10,6 +10,7 @@ exclude:
 - "{bin,node_modules,script,tmp,vendor}/**/*"
 - "vendor/bundle/**/*"
 - "**/lib/tasks/**/*.rake"
+- "spec/support/**/*"
 
 # Patterns to find package configuration files
 # package_paths: "**/"
@@ -22,9 +23,9 @@ load_paths:
 - packages/games/app/models
 - packages/prediction_ui/app/controllers
 - packages/prediction_ui/app/helpers
-- packages/prediction_ui/app/services
 - packages/prediction_ui/app/views
 - packages/predictor/app/models
+- packages/predictor_interface/app/public
 - packages/rails_shims/app/channels
 - packages/rails_shims/app/controllers
 - packages/rails_shims/app/controllers/concerns
@@ -34,7 +35,6 @@ load_paths:
 - packages/rails_shims/app/models
 - packages/rails_shims/app/models/concerns
 - packages/service_locator/app/public
-- packages/service_locator/app/services
 - packages/teams_admin/app/controllers
 - packages/teams_admin/app/views
 - packages/teams/app/models

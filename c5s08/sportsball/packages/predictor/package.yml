@@ -1,5 +1,5 @@
 enforce_dependencies: true
 enforce_privacy: false
 dependencies:
-- packages/service_locator
+- packages/predictor_interface
 
