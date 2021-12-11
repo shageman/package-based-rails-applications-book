@@ -77,6 +77,7 @@ load_paths:
 - packages/prediction_ui/app/models
 - packages/prediction_ui/app/views
 - packages/predictor/app/models
+- packages/predictor_interface/app/public
 - packages/rails_shims/app/channels
 - packages/rails_shims/app/controllers
 - packages/rails_shims/app/controllers/concerns
@@ -90,9 +91,6 @@ load_paths:
 - packages/teams/app/models
 - packages/welcome_ui/app/controllers
 - packages/welcome_ui/app/views
-
-- packages/prediction_ui/app/services
-- packages/predictor_interface/app/public
 
 # List of custom associations, if any
 # custom_associations:
@@ -231,3 +229,11 @@ dependencies:
 - packages/rails_shims
 - packages/teams
 ' > packages/prediction_ui/package.yml
+
+echo '
+enforce_dependencies: true
+enforce_privacy: false
+dependencies:
+- packages/prediction_needed_subscriber
+- packages/prediction_ui
+' > package.yml
