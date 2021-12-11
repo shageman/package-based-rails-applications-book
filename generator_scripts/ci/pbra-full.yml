@@ -3,7 +3,7 @@ resources:
   type: git
   source:
     uri: git@github.com:shageman/package-based-rails-applications-book.git
-    branch: main
+    branch: events
     depth: 1
     private_key: ((private_key))
   check_every: 10s
@@ -91,38 +91,6 @@ resources:
     regexp: c4s03-(.*)\.tgz
     access_key_id: minio
     secret_access_key: minio123
-- name: c5s06-1-code
-  type: s3
-  source:
-    endpoint: http://minio:9000
-    bucket: releases
-    regexp: c5s06-1-(.*)\.tgz
-    access_key_id: minio
-    secret_access_key: minio123
-- name: c5s06-2-code
-  type: s3
-  source:
-    endpoint: http://minio:9000
-    bucket: releases
-    regexp: c5s06-2-(.*)\.tgz
-    access_key_id: minio
-    secret_access_key: minio123
-- name: c5s06-3-code
-  type: s3
-  source:
-    endpoint: http://minio:9000
-    bucket: releases
-    regexp: c5s06-3-(.*)\.tgz
-    access_key_id: minio
-    secret_access_key: minio123
-- name: c5s06-4-code
-  type: s3
-  source:
-    endpoint: http://minio:9000
-    bucket: releases
-    regexp: c5s06-4-(.*)\.tgz
-    access_key_id: minio
-    secret_access_key: minio123
 - name: c5s07-1-code
   type: s3
   source:
@@ -147,12 +115,20 @@ resources:
     regexp: c5s07-3-(.*)\.tgz
     access_key_id: minio
     secret_access_key: minio123
-- name: c5s07-4-code
+- name: c5s08-code
   type: s3
   source:
     endpoint: http://minio:9000
     bucket: releases
-    regexp: c5s07-4-(.*)\.tgz
+    regexp: c5s08-(.*)\.tgz
+    access_key_id: minio
+    secret_access_key: minio123
+- name: c5s09-code
+  type: s3
+  source:
+    endpoint: http://minio:9000
+    bucket: releases
+    regexp: c5s09-(.*)\.tgz
     access_key_id: minio
     secret_access_key: minio123
 
@@ -523,166 +499,6 @@ jobs:
 
 
 
-
-- name: c5s06-1
-  serial_groups: [transform]
-  plan:
-  - get: generator-scripts-repo
-  - get: c2s06-code
-    passed: [c2s06]
-    trigger: true
-  - task: c5s06-1-task
-    file: generator-scripts-repo/generator_scripts/ci/transform-code.yml
-    input_mapping:
-      code_input: c2s06-code
-    output_mapping:
-      code_output: c5s06-1-code
-    params:
-      PREV_CHAPTER: c2s06
-      CHAPTER: c5s06-1
-  - put: c5s06-1-code
-    params:
-      file: "c5s06-1-code/c5s06-1-*.tgz"
-      acl: public-read
-
-- name: c5s06-1-test
-  serial_groups: [test]
-  plan:
-  - get: generator-scripts-repo
-  - get: c5s06-1-code
-    passed: [c5s06-1]
-    trigger: true
-  - task: c5s06-1-test-task
-    file: generator-scripts-repo/generator_scripts/ci/run-tests.yml
-    input_mapping:
-      app_code: c5s06-1-code
-    params:
-      CHAPTER: c5s06-1
-      PACKWERK_CHECK: true
-
-
-
-
-- name: c5s06-2
-  serial_groups: [transform]
-  plan:
-  - get: generator-scripts-repo
-  - get: c5s06-1-code
-    passed: [c5s06-1]
-    trigger: true
-  - task: c5s06-2-task
-    file: generator-scripts-repo/generator_scripts/ci/transform-code.yml
-    input_mapping:
-      code_input: c5s06-1-code
-    output_mapping:
-      code_output: c5s06-2-code
-    params:
-      PREV_CHAPTER: c5s06-1
-      CHAPTER: c5s06-2
-  - put: c5s06-2-code
-    params:
-      file: "c5s06-2-code/c5s06-2-*.tgz"
-      acl: public-read
-
-- name: c5s06-2-test
-  serial_groups: [test]
-  plan:
-  - get: generator-scripts-repo
-  - get: c5s06-2-code
-    passed: [c5s06-2]
-    trigger: true
-  - task: c5s06-2-test-task
-    file: generator-scripts-repo/generator_scripts/ci/run-tests.yml
-    input_mapping:
-      app_code: c5s06-2-code
-    params:
-      CHAPTER: c5s06-2
-      SORBET: true
-      PACKWERK_CHECK: true
-
-
-
-
-- name: c5s06-3
-  serial_groups: [transform]
-  plan:
-  - get: generator-scripts-repo
-  - get: c5s06-2-code
-    passed: [c5s06-2]
-    trigger: true
-  - task: c5s06-3-task
-    file: generator-scripts-repo/generator_scripts/ci/transform-code.yml
-    input_mapping:
-      code_input: c5s06-2-code
-    output_mapping:
-      code_output: c5s06-3-code
-    params:
-      PREV_CHAPTER: c5s06-2
-      CHAPTER: c5s06-3
-  - put: c5s06-3-code
-    params:
-      file: "c5s06-3-code/c5s06-3-*.tgz"
-      acl: public-read
-
-- name: c5s06-3-test
-  serial_groups: [test]
-  plan:
-  - get: generator-scripts-repo
-  - get: c5s06-3-code
-    passed: [c5s06-3]
-    trigger: true
-  - task: c5s06-3-test-task
-    file: generator-scripts-repo/generator_scripts/ci/run-tests.yml
-    input_mapping:
-      app_code: c5s06-3-code
-    params:
-      CHAPTER: c5s06-3
-      SORBET: true
-      PACKWERK_CHECK: true
-
-
-
-
-- name: c5s06-4
-  serial_groups: [transform]
-  plan:
-  - get: generator-scripts-repo
-  - get: c5s06-3-code
-    passed: [c5s06-3]
-    trigger: true
-  - task: c5s06-4-task
-    file: generator-scripts-repo/generator_scripts/ci/transform-code.yml
-    input_mapping:
-      code_input: c5s06-3-code
-    output_mapping:
-      code_output: c5s06-4-code
-    params:
-      PREV_CHAPTER: c5s06-3
-      CHAPTER: c5s06-4
-  - put: c5s06-4-code
-    params:
-      file: "c5s06-4-code/c5s06-4-*.tgz"
-      acl: public-read
-
-- name: c5s06-4-test
-  serial_groups: [test]
-  plan:
-  - get: generator-scripts-repo
-  - get: c5s06-4-code
-    passed: [c5s06-4]
-    trigger: true
-  - task: c5s06-4-test-task
-    file: generator-scripts-repo/generator_scripts/ci/run-tests.yml
-    input_mapping:
-      app_code: c5s06-4-code
-    params:
-      CHAPTER: c5s06-4
-      SORBET: true
-      PACKWERK_CHECK: true
-
-
-
-
 - name: c5s07-1
   serial_groups: [transform]
   plan:
@@ -803,39 +619,79 @@ jobs:
 
 
 
-- name: c5s07-4
+- name: c5s08
   serial_groups: [transform]
   plan:
   - get: generator-scripts-repo
-    trigger: false
   - get: c5s07-3-code
     passed: [c5s07-3]
     trigger: true
-  - task: c5s07-4-task
+  - task: c5s08-task
     file: generator-scripts-repo/generator_scripts/ci/transform-code.yml
     input_mapping:
       code_input: c5s07-3-code
     output_mapping:
-      code_output: c5s07-4-code
+      code_output: c5s08-code
     params:
       PREV_CHAPTER: c5s07-3
-      CHAPTER: c5s07-4
-  - put: c5s07-4-code
+      CHAPTER: c5s08
+  - put: c5s08-code
     params:
-      file: "c5s07-4-code/c5s07-4-*.tgz"
+      file: "c5s08-code/c5s08-*.tgz"
       acl: public-read
 
-- name: c5s07-4-test
+- name: c5s08-test
   serial_groups: [test]
   plan:
   - get: generator-scripts-repo
-  - get: c5s07-4-code
-    passed: [c5s07-4]
+  - get: c5s08-code
+    passed: [c5s08]
     trigger: true
-  - task: c5s07-4-test-task
+  - task: c5s08-test-task
     file: generator-scripts-repo/generator_scripts/ci/run-tests.yml
     input_mapping:
-      app_code: c5s07-4-code
+      app_code: c5s08-code
     params:
-      CHAPTER: c5s07-4
+      CHAPTER: c5s08
       PACKWERK_CHECK: true
+
+
+
+
+- name: c5s09
+  serial_groups: [transform]
+  plan:
+  - get: generator-scripts-repo
+  - get: c5s08-code
+    passed: [c5s08]
+    trigger: true
+  - task: c5s09-task
+    file: generator-scripts-repo/generator_scripts/ci/transform-code.yml
+    input_mapping:
+      code_input: c5s08-code
+    output_mapping:
+      code_output: c5s09-code
+    params:
+      PREV_CHAPTER: c5s08
+      CHAPTER: c5s09
+  - put: c5s09-code
+    params:
+      file: "c5s09-code/c5s09-*.tgz"
+      acl: public-read
+
+- name: c5s09-test
+  serial_groups: [test]
+  plan:
+  - get: generator-scripts-repo
+  - get: c5s09-code
+    passed: [c5s09]
+    trigger: true
+  - task: c5s09-test-task
+    file: generator-scripts-repo/generator_scripts/ci/run-tests.yml
+    input_mapping:
+      app_code: c5s09-code
+    params:
+      CHAPTER: c5s09
+      PACKWERK_CHECK: true
+
+

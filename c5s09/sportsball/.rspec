@@ -1,0 +1,4 @@
+--require spec_helper
+--default-path packages
+-I spec
+
