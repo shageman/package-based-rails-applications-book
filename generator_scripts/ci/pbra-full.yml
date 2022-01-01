@@ -14,123 +14,123 @@ resources:
 - name: empty-apps
   type: s3
   source:
-    endpoint: http://minio:9000
-    bucket: releases
+    endpoint: https://s3.us-east-1.amazonaws.com
+    bucket: pbra2
     regexp: app_(.*)\.tgz
-    access_key_id: minio
-    secret_access_key: minio123
+    access_key_id: ((aws_key))
+    secret_access_key: ((aws_secret))
 - name: c2s01-code
   type: s3
   source:
-    endpoint: http://minio:9000
-    bucket: releases
+    endpoint: https://s3.us-east-1.amazonaws.com
+    bucket: pbra2
     regexp: c2s01-(.*)\.tgz
-    access_key_id: minio
-    secret_access_key: minio123
+    access_key_id: ((aws_key))
+    secret_access_key: ((aws_secret))
 - name: c2s02-code
   type: s3
   source:
-    endpoint: http://minio:9000
-    bucket: releases
+    endpoint: https://s3.us-east-1.amazonaws.com
+    bucket: pbra2
     regexp: c2s02-(.*)\.tgz
-    access_key_id: minio
-    secret_access_key: minio123
+    access_key_id: ((aws_key))
+    secret_access_key: ((aws_secret))
 - name: c2s03-code
   type: s3
   source:
-    endpoint: http://minio:9000
-    bucket: releases
+    endpoint: https://s3.us-east-1.amazonaws.com
+    bucket: pbra2
     regexp: c2s03-(.*)\.tgz
-    access_key_id: minio
-    secret_access_key: minio123
+    access_key_id: ((aws_key))
+    secret_access_key: ((aws_secret))
 - name: c2s04-code
   type: s3
   source:
-    endpoint: http://minio:9000
-    bucket: releases
+    endpoint: https://s3.us-east-1.amazonaws.com
+    bucket: pbra2
     regexp: c2s04-(.*)\.tgz
-    access_key_id: minio
-    secret_access_key: minio123
+    access_key_id: ((aws_key))
+    secret_access_key: ((aws_secret))
 - name: c2s05-code
   type: s3
   source:
-    endpoint: http://minio:9000
-    bucket: releases
+    endpoint: https://s3.us-east-1.amazonaws.com
+    bucket: pbra2
     regexp: c2s05-(.*)\.tgz
-    access_key_id: minio
-    secret_access_key: minio123
+    access_key_id: ((aws_key))
+    secret_access_key: ((aws_secret))
 - name: c2s06-code
   type: s3
   source:
-    endpoint: http://minio:9000
-    bucket: releases
+    endpoint: https://s3.us-east-1.amazonaws.com
+    bucket: pbra2
     regexp: c2s06-(.*)\.tgz
-    access_key_id: minio
-    secret_access_key: minio123
+    access_key_id: ((aws_key))
+    secret_access_key: ((aws_secret))
 - name: c4s01-code
   type: s3
   source:
-    endpoint: http://minio:9000
-    bucket: releases
+    endpoint: https://s3.us-east-1.amazonaws.com
+    bucket: pbra2
     regexp: c4s01-(.*)\.tgz
-    access_key_id: minio
-    secret_access_key: minio123
+    access_key_id: ((aws_key))
+    secret_access_key: ((aws_secret))
 - name: c4s02-code
   type: s3
   source:
-    endpoint: http://minio:9000
-    bucket: releases
+    endpoint: https://s3.us-east-1.amazonaws.com
+    bucket: pbra2
     regexp: c4s02-(.*)\.tgz
-    access_key_id: minio
-    secret_access_key: minio123
+    access_key_id: ((aws_key))
+    secret_access_key: ((aws_secret))
 - name: c4s03-code
   type: s3
   source:
-    endpoint: http://minio:9000
-    bucket: releases
+    endpoint: https://s3.us-east-1.amazonaws.com
+    bucket: pbra2
     regexp: c4s03-(.*)\.tgz
-    access_key_id: minio
-    secret_access_key: minio123
+    access_key_id: ((aws_key))
+    secret_access_key: ((aws_secret))
 - name: c5s07-1-code
   type: s3
   source:
-    endpoint: http://minio:9000
-    bucket: releases
+    endpoint: https://s3.us-east-1.amazonaws.com
+    bucket: pbra2
     regexp: c5s07-1-(.*)\.tgz
-    access_key_id: minio
-    secret_access_key: minio123
+    access_key_id: ((aws_key))
+    secret_access_key: ((aws_secret))
 - name: c5s07-2-code
   type: s3
   source:
-    endpoint: http://minio:9000
-    bucket: releases
+    endpoint: https://s3.us-east-1.amazonaws.com
+    bucket: pbra2
     regexp: c5s07-2-(.*)\.tgz
-    access_key_id: minio
-    secret_access_key: minio123
+    access_key_id: ((aws_key))
+    secret_access_key: ((aws_secret))
 - name: c5s07-3-code
   type: s3
   source:
-    endpoint: http://minio:9000
-    bucket: releases
+    endpoint: https://s3.us-east-1.amazonaws.com
+    bucket: pbra2
     regexp: c5s07-3-(.*)\.tgz
-    access_key_id: minio
-    secret_access_key: minio123
+    access_key_id: ((aws_key))
+    secret_access_key: ((aws_secret))
 - name: c5s08-code
   type: s3
   source:
-    endpoint: http://minio:9000
-    bucket: releases
+    endpoint: https://s3.us-east-1.amazonaws.com
+    bucket: pbra2
     regexp: c5s08-(.*)\.tgz
-    access_key_id: minio
-    secret_access_key: minio123
+    access_key_id: ((aws_key))
+    secret_access_key: ((aws_secret))
 - name: c5s09-code
   type: s3
   source:
-    endpoint: http://minio:9000
-    bucket: releases
+    endpoint: https://s3.us-east-1.amazonaws.com
+    bucket: pbra2
     regexp: c5s09-(.*)\.tgz
-    access_key_id: minio
-    secret_access_key: minio123
+    access_key_id: ((aws_key))
+    secret_access_key: ((aws_secret))
 
 
 
