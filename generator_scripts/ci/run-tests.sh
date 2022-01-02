@@ -16,7 +16,7 @@ bundle install --local
 
 rake db:create && rake db:migrate
 
-bundle exec rspec --exclude-pattern '**/system/**/*_spec.rb' `cat .rspec | tr '\n' ' '`
+bundle exec rspec
 
 bundle exec packwerk validate
 
