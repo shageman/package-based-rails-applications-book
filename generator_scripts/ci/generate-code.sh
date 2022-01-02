@@ -7,7 +7,7 @@ set -e
 apt-get -y update
 apt-get -y install ack graphviz
 
-gem install bundler -v 2.2.5
+gem install bundler -v 2.3.4
 gem install rails
 
 RAILSVERSION=`rails -v | sed 's/ /_/g'`
