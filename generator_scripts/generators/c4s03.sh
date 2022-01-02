@@ -96,6 +96,4 @@ bundle
 rake spec
 cd ..
 
-sed -i "/packages.welcome_ui.app.views/a - testgem/app/services" packwerk.yml
-
 echo "gem 'testgem', path: 'testgem'" >> Gemfile

@@ -38,7 +38,7 @@ Gem::Specification.new do |spec|
 
   spec.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
 
-  spec.add_dependency 'rails', '~> 6.1.3', '>= 6.1.3.2'
+  spec.add_dependency 'rails', '~> 7.0.0'
 end
 " > testengine/testengine.gemspec
 
@@ -46,11 +46,3 @@ echo '
 enforce_dependencies: true
 enforce_privacy: false
 ' > testengine/package.yml
-
-# Change to directories known to packwerk:
-
-sed -i "/packages.welcome_ui.app.views/a - testengine/app/models" packwerk.yml
-sed -i "/packages.welcome_ui.app.views/a - testengine/app/mailers" packwerk.yml
-sed -i "/packages.welcome_ui.app.views/a - testengine/app/jobs" packwerk.yml
-sed -i "/packages.welcome_ui.app.views/a - testengine/app/helpers" packwerk.yml
-sed -i "/packages.welcome_ui.app.views/a - testengine/app/controllers" packwerk.yml
