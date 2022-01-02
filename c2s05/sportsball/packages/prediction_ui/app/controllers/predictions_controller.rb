@@ -4,8 +4,8 @@ class PredictionsController < ApplicationController
   end
 
   def create
-    predictor = Predictor.new(Team.all)
-    predictor.learn(Game.all)
+    predictor = Predictor.new
+    predictor.learn(Team.all, Game.all)
     @prediction = predictor.predict(
         Team.find(params["first_team"]["id"]),
         Team.find(params["second_team"]["id"]))

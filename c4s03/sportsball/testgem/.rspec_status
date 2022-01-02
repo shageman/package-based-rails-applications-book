@@ -1,5 +1,5 @@
 example_id                                  | status | run_time        |
 ------------------------------------------- | ------ | --------------- |
-./spec/services/testgem/sample_spec.rb[1:1] | passed | 0.00094 seconds |
-./spec/testgem_spec.rb[1:1]                 | passed | 0.00106 seconds |
-./spec/testgem_spec.rb[1:2]                 | passed | 0.00017 seconds |
+./spec/services/testgem/sample_spec.rb[1:1] | passed | 0.00052 seconds |
+./spec/testgem_spec.rb[1:1]                 | passed | 0.00554 seconds |
+./spec/testgem_spec.rb[1:2]                 | passed | 0.00456 seconds |
