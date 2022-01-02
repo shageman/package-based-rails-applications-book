@@ -25,7 +25,7 @@ echo 'module PredictionUi
 end
 ' > packages/prediction_ui/app/services/prediction_ui.rb
 
-echo 'Rails.application.reloader.to_prepare do
+echo 'Rails.application.config.to_prepare do
   PredictionUi.configure(Predictor.new)
 end
 ' > config/initializers/configure_prediction_ui.rb

@@ -41,8 +41,9 @@ dependencies:
 - packages/service_locator
 ' > packages/prediction_ui/package.yml
 
-echo '
-ServiceLocator.instance.register_service(:predictor, Predictor.new)
+echo 'Rails.application.config.to_prepare do
+  ServiceLocator.instance.register_service(:predictor, Predictor.new)
+end
 ' > config/initializers/register_services.rb
 
 echo 'enforce_dependencies: true
