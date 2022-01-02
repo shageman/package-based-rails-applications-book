@@ -78,6 +78,8 @@ If things are still broken, repeat the above steps after doing this (*careful*: 
 docker stop $(docker ps -aq)     # Stop all running containers
 docker rm $(docker ps -a -q)     # Delete all containers
 docker rmi $(docker images -q)   # Delete all images
+docker volume prune
+docker system prune -a
 ~~~~~~~~
 
 What goes wrong?
