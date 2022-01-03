@@ -3,7 +3,7 @@
 #
 # You can regenerate this file using the following command:
 #
-# packwerk update-deprecations app/packages/games
+# bin/packwerk update-deprecations app/packages/games
 ---
 ".":
   "::ApplicationRecord":
