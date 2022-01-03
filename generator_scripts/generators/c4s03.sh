@@ -13,7 +13,7 @@ set -e
 
 bundle install --local
 
-bundle gem testgem --no-coc --no-ext --no-mit --no-rubocop --test=rspec --ci=github
+bundle gem testgem --no-coc --no-ext --no-mit --no-rubocop --test=rspec --ci=github --no-changelog
 
 rm -rf testgem/.git
 rm -rf testgem/.gitignore
@@ -95,7 +95,5 @@ cd testgem
 bundle
 rake spec
 cd ..
-
-sed -i "/packages.welcome_ui.app.views/a - testgem/app/services" packwerk.yml
 
 echo "gem 'testgem', path: 'testgem'" >> Gemfile

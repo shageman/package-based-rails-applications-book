@@ -13,7 +13,7 @@ set -e
 
 bundle install --local
 
-bundle gem testgem --no-coc --no-ext --no-mit --no-rubocop --test=rspec --ci=github
+bundle gem testgem --no-coc --no-ext --no-mit --no-rubocop --test=rspec --ci=github --no-changelog
 
 rm -rf testgem/.git
 rm -rf testgem/.gitignore
