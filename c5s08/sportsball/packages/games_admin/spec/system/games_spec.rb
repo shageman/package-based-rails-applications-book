@@ -15,6 +15,7 @@ RSpec.describe "games admin", type: :system do
     fill_in "First team score", with: 2
     fill_in "Second team score", with: 1
     fill_in "Location", with: "Home"
+    fill_in "Date", with: DateTime.current.strftime("%m%d%Y\t%I%M%P")
 
     click_on "Create Game"
 
