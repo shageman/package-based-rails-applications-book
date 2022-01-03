@@ -2,8 +2,8 @@ platform: linux
 image_resource:
   type: docker-image
   source:
-    repository: smikino/ruby-node
-    tag: '2-10'
+    repository: prograils/ruby-node-chrome
+    tag: '3.0.1'
 
 inputs:
 - name: generator-scripts-repo
