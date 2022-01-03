@@ -38,6 +38,7 @@ gem 'slim-rails'
 gem 'sorbet-runtime'
 gem 'sorbet', :group => :development
 gem 'trueskill'
+gem 'tzinfo-data'
 " >> Gemfile
 
 bundle package
