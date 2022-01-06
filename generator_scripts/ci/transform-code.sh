@@ -11,7 +11,7 @@ export PATH="$GEM_HOME/bin:$PATH"
 apt-get -y update
 apt-get -y install ack graphviz
 
-gem install bundler -v 2.3.4
+gem install bundler -v 2.2.5
 
 tar -xzf code_input/$PREV_CHAPTER*.tgz -C code_output
 
