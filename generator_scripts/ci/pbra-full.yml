@@ -710,17 +710,17 @@ jobs:
   plan:
   - get: generator-scripts-repo
     trigger: false
-  - get: c2s06-code
-    passed: [c2s06]
+  - get: c5s07-3-code
+    passed: [c5s07-3]
     trigger: true
   - task: c6s01-task
     file: generator-scripts-repo/generator_scripts/ci/transform-code.yml
     input_mapping:
-      code_input: c2s06-code
+      code_input: c5s07-3-code
     output_mapping:
       code_output: c6s01-code
     params:
-      PREV_CHAPTER: c2s06
+      PREV_CHAPTER: c5s07-3
       CHAPTER: c6s01
   - put: c6s01-code
     params:
