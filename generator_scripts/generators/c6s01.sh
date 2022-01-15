@@ -4,11 +4,6 @@ set -v
 set -x
 set -e
 
-sed -i 's/enforce_privacy: false/enforce_privacy: true/g' packages/games_admin/package.yml
-sed -i 's/enforce_privacy: false/enforce_privacy: true/g' packages/teams_admin/package.yml
-sed -i 's/enforce_privacy: false/enforce_privacy: true/g' packages/welcome_ui/package.yml
-sed -i 's/enforce_privacy: false/enforce_privacy: true/g' packages/prediction_ui/package.yml
-
 rm packages/prediction_ui/app/services/prediction_ui.rb
 rm config/initializers/configure_prediction_ui.rb
 
@@ -26,3 +21,10 @@ echo 'class PredictionsController < ApplicationController
   end
 end
 ' > packages/prediction_ui/app/controllers/predictions_controller.rb
+
+sed -i 's/enforce_privacy: false/enforce_privacy: true/g' packages/games_admin/package.yml
+sed -i 's/enforce_privacy: false/enforce_privacy: true/g' packages/teams_admin/package.yml
+sed -i 's/enforce_privacy: false/enforce_privacy: true/g' packages/welcome_ui/package.yml
+sed -i 's/enforce_privacy: false/enforce_privacy: true/g' packages/prediction_ui/package.yml
+
+sed -i 's/enforce_privacy: false/enforce_privacy: true/g' packages/predictor_interface/package.yml
