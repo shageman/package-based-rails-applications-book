@@ -39,3 +39,4 @@ extractChapter "c5s07-3" "c5s07-3"
 extractChapter "c5s08" "c5s08"
 extractChapter "c5s09" "c5s09"
     
+extractChapter "c6s01" "c6s01"
