@@ -4,6 +4,14 @@ set -v
 set -x
 set -e
 
+###############################################################################
+#
+# This step adds privacy protection for all packages for which it doesn't cause
+# violations in the current state. The current state is derived from c5s07-3
+# to have typing but removes the dependency injection introduced there.
+#
+###############################################################################
+
 rm packages/prediction_ui/app/services/prediction_ui.rb
 rm config/initializers/configure_prediction_ui.rb
 
@@ -21,6 +29,17 @@ echo 'class PredictionsController < ApplicationController
   end
 end
 ' > packages/prediction_ui/app/controllers/predictions_controller.rb
+
+echo 'enforce_dependencies: true
+enforce_privacy: false
+dependencies:
+- packages/games
+- packages/predictor_interface
+- packages/predictor
+- packages/rails_shims
+- packages/teams
+' > packages/prediction_ui/package.yml
+
 
 sed -i 's/enforce_privacy: false/enforce_privacy: true/g' packages/games_admin/package.yml
 sed -i 's/enforce_privacy: false/enforce_privacy: true/g' packages/teams_admin/package.yml

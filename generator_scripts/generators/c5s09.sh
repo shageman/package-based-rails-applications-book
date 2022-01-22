@@ -4,6 +4,16 @@ set -v
 set -x
 set -e
 
+###############################################################################
+#
+# This step changes the interaction between prediction_ui and predictor to use
+# events. This leads to two forms of events: within the Rails server there are
+# those that request and complete the prediction creation. Between the server 
+# and the frontend a websocket connection allows pushing of new predicitions 
+# into the UI
+#
+###############################################################################
+
 rm -rf packages/service_locator
 rm config/initializers/register_services.rb
 
