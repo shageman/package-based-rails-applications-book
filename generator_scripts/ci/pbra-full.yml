@@ -615,6 +615,7 @@ jobs:
     params:
       CHAPTER: c5s07-2
       PACKWERK_CHECK: true
+      SORBET: true
 
 
 
@@ -655,7 +656,7 @@ jobs:
     params:
       CHAPTER: c5s07-3
       PACKWERK_CHECK: true
-
+      SORBET: true
 
 
 
@@ -773,6 +774,7 @@ jobs:
     params:
       CHAPTER: c6s01
       PACKWERK_CHECK: true
+      SORBET: true
 
 - name: c6s02
   serial_groups: [transform]
@@ -810,7 +812,8 @@ jobs:
     params:
       CHAPTER: c6s02
       PACKWERK_CHECK: true
-
+      SORBET: true
+      
 - name: c6s03
   serial_groups: [transform]
   plan:
@@ -847,6 +850,7 @@ jobs:
     params:
       CHAPTER: c6s03
       PACKWERK_CHECK: true
+      SORBET: true
 
 - name: c6s04-1
   serial_groups: [transform]
@@ -884,6 +888,7 @@ jobs:
     params:
       CHAPTER: c6s04-1
       PACKWERK_CHECK: true
+      SORBET: true
 
 - name: c6s04-2
   serial_groups: [transform]
@@ -921,3 +926,5 @@ jobs:
     params:
       CHAPTER: c6s04-2
       PACKWERK_CHECK: true
+      SORBET: true
+      
