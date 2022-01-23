@@ -48,6 +48,7 @@ namespace :sorbet do
 end
 ' > lib/tasks/sorbet.rake
 
+bundle install --local
 bundle exec rails sorbet:update:all
 
 echo '# typed: strict
