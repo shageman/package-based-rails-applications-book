@@ -48,8 +48,12 @@ namespace :sorbet do
 end
 ' > lib/tasks/sorbet.rake
 
+echo '--dir
+.
+--ignore=/vendor/bundle
+' > sorbet/config
+
 bundle install --local
-SRB_YES=1 bundle exec srb init
 yes | bundle exec rails sorbet:update:all
 
 echo '# typed: strict
