@@ -49,6 +49,7 @@ end
 ' > lib/tasks/sorbet.rake
 
 bundle install --local
+bundle exec srb init
 yes | bundle exec rails sorbet:update:all
 
 echo '# typed: strict
