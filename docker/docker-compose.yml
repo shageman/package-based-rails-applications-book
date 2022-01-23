@@ -24,7 +24,6 @@ services:
       POSTGRES_PASSWORD: dev
 
   web:
-    build: .
     image: concourse/concourse
     command: web
     depends_on: [ db ]
@@ -52,7 +51,6 @@ services:
       CONCOURSE_ENABLE_RESOURCE_CAUSALITY: "true"
 
   worker:
-    build: .
     image: concourse/concourse
     command: worker
     privileged: true
