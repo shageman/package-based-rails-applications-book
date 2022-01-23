@@ -48,6 +48,8 @@ namespace :sorbet do
 end
 ' > lib/tasks/sorbet.rake
 
+mkdir sorbet
+
 echo '--dir
 .
 --ignore=/vendor/bundle
