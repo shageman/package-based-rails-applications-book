@@ -56,6 +56,9 @@ echo '--dir
 ' > sorbet/config
 
 bundle install --local
+
+bin/rails db:create && bin/rails db:migrate
+
 yes | bundle exec rails sorbet:update:all
 
 echo '# typed: strict
