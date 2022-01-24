@@ -57,6 +57,8 @@ echo '--dir
 
 bundle install --local
 
+yes | bundle exec rails sorbet:update:all
+
 bin/rails db:create && bin/rails db:migrate
 
 yes | bundle exec rails sorbet:update:all
