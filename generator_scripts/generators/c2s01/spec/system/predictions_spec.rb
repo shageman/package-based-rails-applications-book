@@ -3,9 +3,9 @@ RSpec.describe "the prediction process", type: :system do
     team1 = create_team name: "UofL"
     team2 = create_team name: "UK"
 
-    create_game first_team: team1, second_team: team2, winning_team: 1
-    create_game first_team: team2, second_team: team1, winning_team: 2
-    create_game first_team: team2, second_team: team1, winning_team: 2
+    create_game first_team_id: team1.id, second_team_id: team2.id, winning_team: 1
+    create_game first_team_id: team2.id, second_team_id: team1.id, winning_team: 2
+    create_game first_team_id: team2.id, second_team_id: team1.id, winning_team: 2
   end
 
   it "get a new prediction" do
