@@ -38,6 +38,8 @@ gem 'slim-rails'
 gem 'sorbet-runtime'
 gem 'sorbet', :group => :development
 gem 'trueskill'
+gem 'tapioca'
+gem 'sorbet-rails'
 " >> Gemfile
 
 sed -i "s/gem.*tzinfo-data.*/gem 'tzinfo-data'/g" Gemfile
