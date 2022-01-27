@@ -82,4 +82,6 @@ gem 'slim-rails'
 gem 'sorbet-runtime'
 gem 'sorbet', :group => :development
 gem 'trueskill'
+gem 'tapioca'
+gem 'sorbet-rails'
 

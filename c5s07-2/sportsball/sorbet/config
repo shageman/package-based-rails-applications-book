@@ -1,5 +1,5 @@
 --dir
 .
 --ignore=/vendor/bundle
+--ignore=/db
 
-# oopsie

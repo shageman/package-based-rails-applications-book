@@ -1,7 +1,6 @@
-
 RSpec.describe "teams/edit", type: :view do
   before(:each) do
-    @team = assign(:team, Team.create!(
+    @team = assign(:team, create_team(
       name: "MyString"
     ))
   end

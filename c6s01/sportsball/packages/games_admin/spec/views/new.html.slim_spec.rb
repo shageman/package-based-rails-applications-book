@@ -1,3 +1,4 @@
+# typed: false
 
 RSpec.describe "games/new", type: :view do
   before(:each) do

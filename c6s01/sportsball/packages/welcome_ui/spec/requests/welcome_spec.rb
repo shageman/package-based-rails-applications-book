@@ -1,3 +1,4 @@
+# typed: false
 RSpec.describe "Welcomes", type: :request do
   describe "GET /index" do
     it "returns http success" do

@@ -1,3 +1,4 @@
+# typed: false
 class PredictionsController < ApplicationController
   def new
     @teams = Team.all

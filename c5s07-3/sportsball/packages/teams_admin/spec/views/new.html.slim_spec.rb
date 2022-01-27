@@ -1,7 +1,7 @@
-
+# typed: false
 RSpec.describe "teams/new", type: :view do
   before(:each) do
-    assign(:team, Team.new(
+    assign(:team, new_team(
       name: "MyString"
     ))
   end

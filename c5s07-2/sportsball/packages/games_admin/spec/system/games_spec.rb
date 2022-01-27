@@ -1,3 +1,4 @@
+# typed: false
 RSpec.describe "games admin", type: :system do
   before :each do
     @team1 = create_team name: "UofL"

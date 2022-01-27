@@ -47,10 +47,6 @@ app/packages/teams:
     files:
     - spec/packages/teams/models/team_spec.rb
     - spec/packages/teams_admin/requests/teams_spec.rb
-    - spec/packages/teams_admin/views/edit.html.slim_spec.rb
-    - spec/packages/teams_admin/views/index.html.slim_spec.rb
-    - spec/packages/teams_admin/views/new.html.slim_spec.rb
-    - spec/packages/teams_admin/views/show.html.slim_spec.rb
     - spec/support/object_creation_methods.rb
 app/packages/teams_admin:
   "::TeamsController":

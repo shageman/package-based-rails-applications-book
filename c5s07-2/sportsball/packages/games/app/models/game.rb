@@ -1,3 +1,4 @@
+# typed: false
 class Game < ApplicationRecord
   validates :date, :location, :first_team, :second_team, :winning_team,
             :first_team_score, :second_team_score, presence: true

@@ -1,11 +1,10 @@
-
 RSpec.describe "teams/index", type: :view do
   before(:each) do
     assign(:teams, [
-      Team.create!(
+      create_team(
         name: "Name"
       ),
-      Team.create!(
+      create_team(
         name: "Name"
       )
     ])

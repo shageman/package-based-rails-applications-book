@@ -1,3 +1,4 @@
+# typed: false
 RSpec.describe "teams admin", type: :system do
   it "allows for the management of teams" do
     visit "/teams"

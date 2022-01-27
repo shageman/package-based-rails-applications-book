@@ -1,3 +1,4 @@
+# typed: false
 RSpec.describe "games/edit", type: :view do
   let(:team1) { create_team }
   let(:team2) { create_team }
