@@ -53,6 +53,7 @@ mkdir sorbet
 echo '--dir
 .
 --ignore=/vendor/bundle
+--ignore=/db
 ' > sorbet/config
 
 bundle install --local
