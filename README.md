@@ -28,7 +28,6 @@ can be executed via the shell script belonging to that chapter.
 
 In one terminal execute the following to install the needed docker containers.
 ~~~~~~~~
-cd docker
 docker-compose up
 ~~~~~~~~
 
@@ -53,9 +52,9 @@ fly --target local login --team-name main --concourse-url http://localhost:8080
 
 Then, to configure and start the pipeline
 ~~~~~~~~
-fly -t local set-pipeline -p pbra-full -c generator_scripts/ci/pbra-full.yml --load-vars-from  pipeline-secrets.yml
-fly -t local unpause-pipeline -p pbra-full
-fly -t local trigger-job -j pbra-full/c2s01
+fly -t local set-pipeline -p pipeline -c pipeline.yml --load-vars-from  pipeline-secrets.yml
+fly -t local unpause-pipeline -p pipeline
+fly -t local trigger-job -j pipeline/c2s01
 ~~~~~~~~
 
 Now, navigating to [http://localhost:8080/teams/main/pipelines/pbra_full](http://localhost:8080/teams/main/pipelines/pbra_full) will show the running pipeline.

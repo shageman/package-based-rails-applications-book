@@ -3,10 +3,10 @@ resources:
   type: git
   source:
     uri: git@github.com:shageman/package-based-rails-applications-book.git
-    branch: main
+    branch: new_sorbet
     depth: 1
     private_key: ((private_key))
-  check_every: 10s
+  check_every: 20s
 
 
 
@@ -14,7 +14,7 @@ resources:
 - name: empty-apps
   type: s3
   source:
-    endpoint: https://s3.us-east-1.amazonaws.com
+    endpoint: ((s3_endpoint))
     bucket: pbra2
     regexp: app_(.*)\.tgz
     access_key_id: ((aws_key))
@@ -22,7 +22,7 @@ resources:
 - name: c2s01-code
   type: s3
   source:
-    endpoint: https://s3.us-east-1.amazonaws.com
+    endpoint: ((s3_endpoint))
     bucket: pbra2
     regexp: c2s01-(.*)\.tgz
     access_key_id: ((aws_key))
@@ -30,7 +30,7 @@ resources:
 - name: c2s02-code
   type: s3
   source:
-    endpoint: https://s3.us-east-1.amazonaws.com
+    endpoint: ((s3_endpoint))
     bucket: pbra2
     regexp: c2s02-(.*)\.tgz
     access_key_id: ((aws_key))
@@ -38,7 +38,7 @@ resources:
 - name: c2s03-code
   type: s3
   source:
-    endpoint: https://s3.us-east-1.amazonaws.com
+    endpoint: ((s3_endpoint))
     bucket: pbra2
     regexp: c2s03-(.*)\.tgz
     access_key_id: ((aws_key))
@@ -46,7 +46,7 @@ resources:
 - name: c2s04-code
   type: s3
   source:
-    endpoint: https://s3.us-east-1.amazonaws.com
+    endpoint: ((s3_endpoint))
     bucket: pbra2
     regexp: c2s04-(.*)\.tgz
     access_key_id: ((aws_key))
@@ -54,7 +54,7 @@ resources:
 - name: c2s05-code
   type: s3
   source:
-    endpoint: https://s3.us-east-1.amazonaws.com
+    endpoint: ((s3_endpoint))
     bucket: pbra2
     regexp: c2s05-(.*)\.tgz
     access_key_id: ((aws_key))
@@ -62,7 +62,7 @@ resources:
 - name: c2s06-code
   type: s3
   source:
-    endpoint: https://s3.us-east-1.amazonaws.com
+    endpoint: ((s3_endpoint))
     bucket: pbra2
     regexp: c2s06-(.*)\.tgz
     access_key_id: ((aws_key))
@@ -70,7 +70,7 @@ resources:
 - name: c4s01-code
   type: s3
   source:
-    endpoint: https://s3.us-east-1.amazonaws.com
+    endpoint: ((s3_endpoint))
     bucket: pbra2
     regexp: c4s01-(.*)\.tgz
     access_key_id: ((aws_key))
@@ -78,7 +78,7 @@ resources:
 - name: c4s02-code
   type: s3
   source:
-    endpoint: https://s3.us-east-1.amazonaws.com
+    endpoint: ((s3_endpoint))
     bucket: pbra2
     regexp: c4s02-(.*)\.tgz
     access_key_id: ((aws_key))
@@ -86,7 +86,7 @@ resources:
 - name: c4s03-code
   type: s3
   source:
-    endpoint: https://s3.us-east-1.amazonaws.com
+    endpoint: ((s3_endpoint))
     bucket: pbra2
     regexp: c4s03-(.*)\.tgz
     access_key_id: ((aws_key))
@@ -94,7 +94,7 @@ resources:
 - name: c5s07-1-code
   type: s3
   source:
-    endpoint: https://s3.us-east-1.amazonaws.com
+    endpoint: ((s3_endpoint))
     bucket: pbra2
     regexp: c5s07-1-(.*)\.tgz
     access_key_id: ((aws_key))
@@ -102,7 +102,7 @@ resources:
 - name: c5s07-2-code
   type: s3
   source:
-    endpoint: https://s3.us-east-1.amazonaws.com
+    endpoint: ((s3_endpoint))
     bucket: pbra2
     regexp: c5s07-2-(.*)\.tgz
     access_key_id: ((aws_key))
@@ -110,7 +110,7 @@ resources:
 - name: c5s07-3-code
   type: s3
   source:
-    endpoint: https://s3.us-east-1.amazonaws.com
+    endpoint: ((s3_endpoint))
     bucket: pbra2
     regexp: c5s07-3-(.*)\.tgz
     access_key_id: ((aws_key))
@@ -118,7 +118,7 @@ resources:
 - name: c5s08-code
   type: s3
   source:
-    endpoint: https://s3.us-east-1.amazonaws.com
+    endpoint: ((s3_endpoint))
     bucket: pbra2
     regexp: c5s08-(.*)\.tgz
     access_key_id: ((aws_key))
@@ -126,7 +126,7 @@ resources:
 - name: c5s09-code
   type: s3
   source:
-    endpoint: https://s3.us-east-1.amazonaws.com
+    endpoint: ((s3_endpoint))
     bucket: pbra2
     regexp: c5s09-(.*)\.tgz
     access_key_id: ((aws_key))
@@ -134,7 +134,7 @@ resources:
 - name: c6s01-code
   type: s3
   source:
-    endpoint: https://s3.us-east-1.amazonaws.com
+    endpoint: ((s3_endpoint))
     bucket: pbra2
     regexp: c6s01-(.*)\.tgz
     access_key_id: ((aws_key))
@@ -142,7 +142,7 @@ resources:
 - name: c6s02-code
   type: s3
   source:
-    endpoint: https://s3.us-east-1.amazonaws.com
+    endpoint: ((s3_endpoint))
     bucket: pbra2
     regexp: c6s02-(.*)\.tgz
     access_key_id: ((aws_key))
@@ -150,7 +150,7 @@ resources:
 - name: c6s03-code
   type: s3
   source:
-    endpoint: https://s3.us-east-1.amazonaws.com
+    endpoint: ((s3_endpoint))
     bucket: pbra2
     regexp: c6s03-(.*)\.tgz
     access_key_id: ((aws_key))
@@ -158,7 +158,7 @@ resources:
 - name: c6s04-1-code
   type: s3
   source:
-    endpoint: https://s3.us-east-1.amazonaws.com
+    endpoint: ((s3_endpoint))
     bucket: pbra2
     regexp: c6s04-1-(.*)\.tgz
     access_key_id: ((aws_key))
@@ -166,7 +166,7 @@ resources:
 - name: c6s04-2-code
   type: s3
   source:
-    endpoint: https://s3.us-east-1.amazonaws.com
+    endpoint: ((s3_endpoint))
     bucket: pbra2
     regexp: c6s04-2-(.*)\.tgz
     access_key_id: ((aws_key))
@@ -927,4 +927,3 @@ jobs:
       CHAPTER: c6s04-2
       PACKWERK_CHECK: true
       SORBET: true
-      
