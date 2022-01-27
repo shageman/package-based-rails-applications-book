@@ -14,6 +14,8 @@ set -e
 rm packages/teams/app/models/team.rb
 rm packages/teams/spec/models/team_spec.rb
 
+mkdir packages/teams/app/public
+
 echo 'enforce_dependencies: true
 enforce_privacy: true
 dependencies:
