@@ -216,5 +216,6 @@ dependencies:
 - packages/teams
 ' > packages/prediction_ui/package.yml
 
+bundle install --local
 
 yes | bundle exec rails sorbet:update:all
