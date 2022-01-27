@@ -215,3 +215,6 @@ dependencies:
 - packages/rails_shims
 - packages/teams
 ' > packages/prediction_ui/package.yml
+
+
+yes | bundle exec rails sorbet:update:all
