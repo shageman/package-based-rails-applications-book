@@ -1,0 +1,7 @@
+
+enforce_dependencies: true
+enforce_privacy: true
+dependencies:
+- packages/rails_shims
+- packages/games
+
