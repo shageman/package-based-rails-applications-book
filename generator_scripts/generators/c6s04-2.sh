@@ -407,6 +407,7 @@ end
 
 sed -i 's/team.reload/  team = TeamRepository.get(team.id)/g' packages/teams_admin/spec/requests/teams_spec.rb
 
+bundle install --local
 
 bin/rails sorbet:update:all
 
