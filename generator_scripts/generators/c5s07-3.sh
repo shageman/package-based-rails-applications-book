@@ -216,4 +216,6 @@ dependencies:
 - packages/teams
 ' > packages/prediction_ui/package.yml
 
-sed -i "s/class Saulabs::TrueSkill::Rating/class Saulabs::TrueSkill::Rating < Saulabs::Gauss::Distribution/" sorbet/rbi/hidden-definitions/hidden.rbi
+bundle install --local
+
+yes | bundle exec rails sorbet:update:all
