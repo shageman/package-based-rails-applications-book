@@ -405,7 +405,9 @@ class PredictionsController < ApplicationController
 end
 ' > packages/prediction_ui/app/controllers/predictions_controller.rb
 
-sed -i 's/team.reload/  team = TeamRepository.get(team.id)/g' packages/teams_admin/spec/requests/teams_spec.rb
+sed -i 's/team.reload/team = TeamRepository.get(team.id)/g' packages/teams_admin/spec/requests/teams_spec.rb
+sed -i 's/Team, :count/TeamRepository, :count/g' packages/teams_admin/spec/requests/teams_spec.rb
+sed -i 's/Team.all.last/TeamRecord.all.last/g' packages/teams_admin/spec/requests/teams_spec.rb
 
 bundle install --local
 
