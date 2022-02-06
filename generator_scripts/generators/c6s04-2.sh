@@ -6,8 +6,8 @@ set -e
 
 ###############################################################################
 #
-# This step hides the Game and Team ActiveReccord objects within their packages
-# and exposes needed APIs 
+# This step hides the Team ActiveReccord objects within their packages
+# and exposes needed APIs
 #
 ###############################################################################
 
@@ -49,7 +49,7 @@ class Team
 
   include Contender
   extend T::Sig
-  
+
   validates :name, presence: true
 
   attr_reader :id, :name
@@ -89,13 +89,13 @@ RSpec.describe Team, type: :model do
     it "does what you expect" do
       expect(Team.new(7, "test").id).to eq(7)
     end
-  end 
-  
+  end
+
   describe "#name" do
     it "does what you expect" do
       expect(Team.new(7, "test").name).to eq("test")
     end
-  end 
+  end
 
   describe "#persisted?" do
     it "is true with an id" do
@@ -105,13 +105,13 @@ RSpec.describe Team, type: :model do
     it "is false without an id" do
       expect(Team.new(nil, "test").persisted?).to eq(false)
     end
-  end 
+  end
 
   describe "#to_hash" do
     it "hashes based on params" do
       expect(Team.new(7, "test").to_hash).to eq({id: 7, name: "test"})
     end
-  end 
+  end
 
   describe "#==" do
     it "returns true for objects with the same attributes" do
@@ -146,13 +146,18 @@ class TeamRepository
 
   def self.add(team)
     team_record = TeamRecord.create(team.to_hash)
-    Team.new(team_record.id, team_record.name)
+    team = Team.new(team_record.id, team_record.name)
+    team.instance_variable_set(:"@errors", team_record.errors)
+    team
   end
 
   def self.edit(team)
-    record = TeamRecord.find_by_id(team.id)
-    return false unless record
-    record.update(team.to_hash)
+    team_record = TeamRecord.find_by_id(team.id)
+    return false unless team_record
+    team_record.update(team.to_hash)
+    team = Team.new(team_record.id, team_record.name)
+    team.instance_variable_set(:"@errors", team_record.errors)
+    team
   end
 
   def self.delete(team)
@@ -177,7 +182,7 @@ RSpec.describe TeamRepository do
       team = create_team
       expect(TeamRepository.get(team.id + 1)).to eq(nil)
     end
-  end 
+  end
 
   describe "#list" do
     it "returns all teams" do
@@ -185,7 +190,7 @@ RSpec.describe TeamRepository do
       team2 = create_team
       expect(TeamRepository.list).to eq([team1, team2])
     end
-  end 
+  end
 
   describe "#add and #count and #list" do
     it "adds a new team to the repository" do
@@ -197,13 +202,13 @@ RSpec.describe TeamRepository do
       expect(actual_team.id).to_not be_nil
       expect(actual_team.name).to eq("something")
     end
-  end 
+  end
 
   describe "#edit" do
     it "changes a team in the repository when found" do
       team = create_team(name: "alpha")
       new_team = Team.new(team.id, "beta")
-      expect(TeamRepository.edit(new_team)).to eq(true)
+      expect(TeamRepository.edit(new_team)).to eq(new_team)
       expect(TeamRepository.list).to eq([new_team])
     end
 
@@ -219,10 +224,10 @@ RSpec.describe TeamRepository do
       team = create_team(name: "alpha")
       expect(TeamRepository.list).to eq([team])
       new_team = Team.new(team.id, nil)
-      expect(TeamRepository.edit(new_team)).to eq(false)
+      expect(TeamRepository.edit(new_team)).to eq(new_team)
       expect(TeamRepository.list).to eq([team])
     end
-  end 
+  end
 
   describe "#delete" do
     it "removes teams from the repository when found" do
@@ -231,16 +236,16 @@ RSpec.describe TeamRepository do
       team3 = create_team
       expect(TeamRepository.list).to eq([team1, team2, team3])
       expect(TeamRepository.delete(team2)).to eq(1)
-      expect(TeamRepository.list).to eq([team1, team3]) 
+      expect(TeamRepository.list).to eq([team1, team3])
     end
 
     it "removes teams from the repository when found" do
       team = create_team
       expect(TeamRepository.list).to eq([team])
       expect(TeamRepository.delete(Team.new(-1, ""))).to eq(0)
-      expect(TeamRepository.list).to eq([team]) 
+      expect(TeamRepository.list).to eq([team])
     end
-  end 
+  end
 end
 ' > packages/teams/spec/public/team_repository_spec.rb
 
@@ -284,7 +289,8 @@ class TeamsController < ApplicationController
   # PATCH/PUT /teams/1 or /teams/1.json
   def update
     respond_to do |format|
-      if TeamRepository.edit(Team.new(params[:id], team_params[:name]))
+      @team = TeamRepository.edit(Team.new(params[:id], team_params[:name]))
+      if @team.errors.empty?
         format.html { redirect_to team_url(@team), notice: "Team was successfully updated." }
         format.json { render :show, status: :ok, location: @team }
       else
@@ -346,7 +352,7 @@ module ObjectCreationMethods
 
   def create_team(overrides = {})
     team = TeamRepository.add(new_team(overrides))
-    Kernel.raise "Team creation failed" unless team.persisted?    
+    Kernel.raise "Team creation failed" unless team.persisted?
     team
   end
 
@@ -405,9 +411,140 @@ class PredictionsController < ApplicationController
 end
 ' > packages/prediction_ui/app/controllers/predictions_controller.rb
 
-sed -i 's/team.reload/team = TeamRepository.get(team.id)/g' packages/teams_admin/spec/requests/teams_spec.rb
-sed -i 's/Team, :count/TeamRepository, :count/g' packages/teams_admin/spec/requests/teams_spec.rb
-sed -i 's/Team.all.last/TeamRecord.all.last/g' packages/teams_admin/spec/requests/teams_spec.rb
+echo '# typed: false
+# This spec was generated by rspec-rails when you ran the scaffold generator.
+# It demonstrates how one might use RSpec to test the controller code that
+# was generated by Rails when you ran the scaffold generator.
+#
+# It assumes that the implementation code is generated by the rails scaffold
+# generator. If you are using any extension libraries to generate different
+# controller code, this generated spec may or may not pass.
+#
+# It only uses APIs available in rails and/or rspec-rails. There are a number
+# of tools you can use to make these specs even more expressive, but we"re
+# sticking to rails and rspec-rails APIs to keep things simple and stable.
+
+RSpec.describe "/teams", type: :request do
+  let(:team1) { create_team }
+  let(:team2) { create_team }
+
+  # Team. As you add validations to Team, be sure to
+  # adjust the attributes here as well.
+  let(:valid_attributes) {
+    team_params(name: "something")
+  }
+
+  let(:invalid_attributes) {
+    team_params(name: nil)
+  }
+
+  describe "GET /index" do
+    it "renders a successful response" do
+      create_team valid_attributes
+      get teams_url
+      expect(response).to be_successful
+    end
+  end
+
+  describe "GET /show" do
+    it "renders a successful response" do
+      team = create_team valid_attributes
+      get team_url(team)
+      expect(response).to be_successful
+    end
+  end
+
+  describe "GET /new" do
+    it "renders a successful response" do
+      get new_team_url
+      expect(response).to be_successful
+    end
+  end
+
+  describe "GET /edit" do
+    it "render a successful response" do
+      team = create_team valid_attributes
+      get edit_team_url(team)
+      expect(response).to be_successful
+    end
+  end
+
+  describe "POST /create" do
+    context "with valid parameters" do
+      it "creates a new Team" do
+        expect {
+          post teams_url, params: { team: valid_attributes }
+        }.to change(TeamRepository, :count).by(1)
+      end
+
+      it "redirects to the created team" do
+        post teams_url, params: { team: valid_attributes }
+        expect(response).to redirect_to(team_url(TeamRecord.all.last))
+      end
+    end
+
+    context "with invalid parameters" do
+      it "does not create a new Team" do
+        expect {
+          post teams_url, params: { team: invalid_attributes }
+        }.to change(TeamRepository, :count).by(0)
+      end
+
+      it "renders a successful response (i.e. to display the new template)" do
+        post teams_url, params: { team: invalid_attributes }
+        expect(response).not_to be_successful
+        expect(response.body).to include("Name can&#39;t be blank")
+      end
+    end
+  end
+
+  describe "PATCH /update" do
+    context "with valid parameters" do
+      let(:new_attributes) {
+        { name: "test" }
+      }
+
+      it "updates the requested team" do
+        team = create_team valid_attributes
+        patch team_url(team), params: { team: new_attributes }
+        team = TeamRepository.get(team.id)
+        expect(team.name).to eq("test")
+      end
+
+      it "redirects to the team" do
+        team = create_team valid_attributes
+        patch team_url(team), params: { team: new_attributes }
+        team = TeamRepository.get(team.id)
+        expect(response).to redirect_to(team_url(team))
+      end
+    end
+
+    context "with invalid parameters" do
+      it "renders a successful response (i.e. to display the edit template)" do
+        team = create_team valid_attributes
+        patch team_url(team), params: { team: invalid_attributes }
+        expect(response).to have_http_status(422)
+        expect(response.body).to include("Name can&#39;t be blank")
+      end
+    end
+  end
+
+  describe "DELETE /destroy" do
+    it "destroys the requested team" do
+      team = create_team valid_attributes
+      expect {
+        delete team_url(team)
+      }.to change(TeamRepository, :count).by(-1)
+    end
+
+    it "redirects to the teams list" do
+      team = create_team valid_attributes
+      delete team_url(team)
+      expect(response).to redirect_to(teams_url)
+    end
+  end
+end
+' > packages/teams_admin/spec/requests/teams_spec.rb
 
 bundle install --local
 

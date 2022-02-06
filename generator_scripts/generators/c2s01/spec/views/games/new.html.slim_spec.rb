@@ -1,23 +1,19 @@
-RSpec.describe "games/edit", type: :view do
-  let(:team1) { create_team }
-  let(:team2) { create_team }
-
+RSpec.describe "games/new", type: :view do
   before(:each) do
-    @game = assign(:game, create_game(
+    assign(:game, new_game(
       location: "MyString",
-      first_team_id: team1.id,
-      second_team_id: team2.id,
+      first_team_id: 1,
+      second_team_id: 1,
       winning_team: 1,
       first_team_score: 1,
-      second_team_score: 1,
-      date: Date.current
+      second_team_score: 1
     ))
   end
 
-  it "renders the edit game form" do
+  it "renders new game form" do
     render
 
-    assert_select "form[action=?][method=?]", game_path(@game), "post" do
+    assert_select "form[action=?][method=?]", games_path, "post" do
 
       assert_select "input[name=?]", "game[location]"
 
