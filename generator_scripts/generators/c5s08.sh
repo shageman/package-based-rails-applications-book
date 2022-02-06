@@ -6,7 +6,8 @@ set -e
 
 ###############################################################################
 #
-# This step changes the implementation to use a service locator
+# This step replaces the dependency injection with the service locator pattern.
+# Typing a service locator is tricky. So we don't do it here.
 #
 ###############################################################################
 
