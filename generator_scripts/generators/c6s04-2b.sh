@@ -16,6 +16,8 @@ rm packages/games/app/models/game.rbi
 rm packages/games/deprecated_references.yml
 rm packages/games/spec/models/game_spec.rb
 
+mkdir -p packages/games/app/public/
+mkdir -p packages/games/spec/public/
 echo '# typed: false
 class GameRecord < ApplicationRecord
   self.table_name = "games"
