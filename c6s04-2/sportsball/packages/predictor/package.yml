@@ -1,5 +1,0 @@
-enforce_dependencies: true
-enforce_privacy: false
-dependencies:
-- packages/predictor_interface
-
