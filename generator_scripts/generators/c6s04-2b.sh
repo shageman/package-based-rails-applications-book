@@ -213,7 +213,7 @@ RSpec.describe GameRepository do
     it "adds a new game to the repository" do
       expect(GameRepository.count).to eq(0)
       expect(GameRepository.list).to eq([])
-      GameRepository.add(new_game(id: nil, location: 'here'))
+      GameRepository.add(new_game(id: nil, location: "here"))
       expect(GameRepository.count).to eq(1)
       actual_game = GameRepository.list.first
       expect(actual_game.id).to_not be_nil
