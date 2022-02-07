@@ -26,7 +26,7 @@ RSpec.describe "/games", type: :request do
 
   describe "GET /index" do
     it "renders a successful response" do
-      Game.create! valid_attributes
+      create_game valid_attributes
       get games_url
       expect(response).to be_successful
     end
@@ -34,7 +34,7 @@ RSpec.describe "/games", type: :request do
 
   describe "GET /show" do
     it "renders a successful response" do
-      game = Game.create! valid_attributes
+      game = create_game valid_attributes
       get game_url(game)
       expect(response).to be_successful
     end
@@ -49,7 +49,7 @@ RSpec.describe "/games", type: :request do
 
   describe "GET /edit" do
     it "render a successful response" do
-      game = Game.create! valid_attributes
+      game = create_game valid_attributes
       get edit_game_url(game)
       expect(response).to be_successful
     end
@@ -90,14 +90,14 @@ RSpec.describe "/games", type: :request do
       }
 
       it "updates the requested game" do
-        game = Game.create! valid_attributes
+        game = create_game valid_attributes
         patch game_url(game), params: { game: new_attributes }
         game.reload
         expect(game.location).to eq('test')
       end
 
       it "redirects to the game" do
-        game = Game.create! valid_attributes
+        game = create_game valid_attributes
         patch game_url(game), params: { game: new_attributes }
         game.reload
         expect(response).to redirect_to(game_url(game))
@@ -106,7 +106,7 @@ RSpec.describe "/games", type: :request do
 
     context "with invalid parameters" do
       it "renders a successful response (i.e. to display the 'edit' template)" do
-        game = Game.create! valid_attributes
+        game = create_game valid_attributes
         patch game_url(game), params: { game: invalid_attributes }
         expect(response).not_to be_successful
       end
@@ -115,14 +115,14 @@ RSpec.describe "/games", type: :request do
 
   describe "DELETE /destroy" do
     it "destroys the requested game" do
-      game = Game.create! valid_attributes
+      game = create_game valid_attributes
       expect {
         delete game_url(game)
       }.to change(Game, :count).by(-1)
     end
 
     it "redirects to the games list" do
-      game = Game.create! valid_attributes
+      game = create_game valid_attributes
       delete game_url(game)
       expect(response).to redirect_to(games_url)
     end

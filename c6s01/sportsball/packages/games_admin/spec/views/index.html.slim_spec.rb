@@ -4,7 +4,7 @@ RSpec.describe "games/index", type: :view do
   let(:team2) { create_team }
   before(:each) do
     assign(:games, [
-      Game.create!(
+      create_game(
         location: "Location1",
         first_team_id: team1.id,
         second_team_id: team2.id,
@@ -13,7 +13,7 @@ RSpec.describe "games/index", type: :view do
         second_team_score: 6,
         date: Date.current
       ),
-      Game.create!(
+      create_game(
         location: "Location2",
         first_team_id: team1.id,
         second_team_id: team2.id,

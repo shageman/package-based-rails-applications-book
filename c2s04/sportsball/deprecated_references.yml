@@ -12,10 +12,6 @@ app/packages/games:
     files:
     - spec/packages/games/models/game_spec.rb
     - spec/packages/games_admin/requests/games_spec.rb
-    - spec/packages/games_admin/views/edit.html.slim_spec.rb
-    - spec/packages/games_admin/views/index.html.slim_spec.rb
-    - spec/packages/games_admin/views/new.html.slim_spec.rb
-    - spec/packages/games_admin/views/show.html.slim_spec.rb
     - spec/support/object_creation_methods.rb
 app/packages/games_admin:
   "::GamesController":

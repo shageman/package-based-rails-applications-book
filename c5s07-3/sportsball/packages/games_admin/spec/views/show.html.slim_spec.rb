@@ -4,7 +4,7 @@ RSpec.describe "games/show", type: :view do
   let(:team2) { create_team }
 
   before(:each) do
-    @game = assign(:game, Game.create!(
+    @game = assign(:game, create_game(
       location: "Location",
       first_team_id: team1.id,
       second_team_id: team2.id,
