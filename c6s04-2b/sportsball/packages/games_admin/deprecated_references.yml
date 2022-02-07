@@ -1,0 +1,18 @@
+# This file contains a list of dependencies that are not part of the long term plan for packages/games_admin.
+# We should generally work to reduce this list, but not at the expense of actually getting work done.
+#
+# You can regenerate this file using the following command:
+#
+# bin/packwerk update-deprecations packages/games_admin
+---
+packages/teams:
+  "::Team":
+    violations:
+    - dependency
+    files:
+    - packages/games_admin/app/controllers/games_controller.rb
+  "::TeamRepository":
+    violations:
+    - dependency
+    files:
+    - packages/games_admin/app/controllers/games_controller.rb
