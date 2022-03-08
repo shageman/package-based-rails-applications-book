@@ -58,7 +58,7 @@ extractChapter "c2s06" "c2s05"
 
 extractChapter "c4s01" "c2s06"
 extractChapter "c4s02" "c2s06"
-extractChapter "c4s03" "c2s06"
+extractChapter "c4s03" "c4s02"
 
 extractChapter "c5s07-1" "c2s06"
 extractChapter "c5s07-2" "c5s07-1"
