@@ -11,6 +11,10 @@ set -e
 #
 ###############################################################################
 
+bundle install --local
+
+sed -i "/spec.require_paths/a\\  spec.add_development_dependency 'zeitwerk'" testgem/testgem.gemspec
+
 echo "# frozen_string_literal: true
 
 if defined?(Rails)
