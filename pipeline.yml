@@ -513,17 +513,17 @@ jobs:
   serial_groups: [transform]
   plan:
   - get: generator-scripts-repo
-  - get: c2s06-code
-    passed: [c2s06]
+  - get: c4s02-code
+    passed: [c4s02]
     trigger: true
   - task: c4s03-task
     file: generator-scripts-repo/generator_scripts/ci/transform-code.yml
     input_mapping:
-      code_input: c2s06-code
+      code_input: c4s02-code
     output_mapping:
       code_output: c4s03-code
     params:
-      PREV_CHAPTER: c2s06
+      PREV_CHAPTER: c4s02
       CHAPTER: c4s03
   - put: c4s03-code
     params:
