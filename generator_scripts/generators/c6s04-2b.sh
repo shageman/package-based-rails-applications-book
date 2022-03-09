@@ -844,9 +844,14 @@ module ObjectCreationMethods
 end
 ' > spec/support/object_creation_methods.rb
 
-# sed -i 's/team.reload/team = TeamRepository.get(team.id)/g' packages/teams_admin/spec/requests/teams_spec.rb
-# sed -i 's/Team, :count/TeamRepository, :count/g' packages/teams_admin/spec/requests/teams_spec.rb
-# sed -i 's/Team.all.last/TeamRecord.all.last/g' packages/teams_admin/spec/requests/teams_spec.rb
+echo '
+enforce_dependencies: true
+enforce_privacy: true
+dependencies:
+- packages/rails_shims
+- packages/games
+- packages/teams
+' > packages/games_admin/package.yml
 
 bundle install --local
 
