@@ -9,8 +9,6 @@ if [ "$1" == "FRESH" ]; then
     pushd $ROOT_FOLDER && git init && touch README && git add . && git commit -m "Initial commit" && popd
 fi
 
-
-
 extractChapter () {
     NAME=$1
     BRANCH_NAME=$NAME
@@ -18,6 +16,12 @@ extractChapter () {
 
     if [ "$BRANCH_NAME" == "main" ]; then
         NAME="app"
+    fi
+
+    if [ "$1" == "FRESH" ]; then
+      echo ""
+    else
+      BASE_BRANCH=$BRANCH_NAME
     fi
 
     COMMIT_MESSAGE=$CM
