@@ -66,7 +66,7 @@ RSpec.describe "/teams", type: :request do
 
       it "redirects to the created team" do
         post teams_url, params: { team: valid_attributes }
-        expect(response).to redirect_to(team_url(TeamRecord.all.last))
+        expect(response).to redirect_to(team_url(TeamRepository.list.last.id))
       end
     end
 
