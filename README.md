@@ -68,6 +68,7 @@ The folder `code/docker/minio/data/releases` contains a couple of files named `a
 You can manually start the `generate-empty-app` concourse step to generate an empty app with the current version of Rails and the other dependencies of the app.
 
 Every run of the chapter-generation pipeline will use the latest version of Rails found in this folder. If you happen to delete all of the app archives, the chapter-generation pipeline will not work. In that case, either generate a new empty app or reset to the state of this repo to get the pipeline running again.
+
 ### Issues
 
 If your pipelines don't work after a docker shutdown, try `fly prune-worker`.
@@ -85,3 +86,41 @@ What goes wrong?
 
 * concourse can't find `generator_scripts` anymore (errors with "no such file"). Definitely do the above
 * nothing works reliably anymore. Reinstall docker.
+
+
+### Speeding up the pipeline
+
+Some recent issues with concourse-docker have forced me to rerun the code build pipeline from the very start a lot. If there are changes to the steps at the tail of the pipeline only, the following calls speed up the time to get there:
+
+```
+fly pause-job -t local -j pipeline/c2s01-test
+fly pause-job -t local -j pipeline/c2s02-test
+fly pause-job -t local -j pipeline/c2s03-test
+fly pause-job -t local -j pipeline/c2s04-test
+fly pause-job -t local -j pipeline/c2s05-test
+fly pause-job -t local -j pipeline/c2s06-test
+
+fly pause-job -t local -j pipeline/c4s01-test
+fly pause-job -t local -j pipeline/c4s02-test
+fly pause-job -t local -j pipeline/c4s03-test
+
+fly pause-job -t local -j pipeline/c5s07-1-test
+fly pause-job -t local -j pipeline/c5s07-2-test
+fly pause-job -t local -j pipeline/c5s07-3-test
+fly pause-job -t local -j pipeline/c5s08-test
+fly pause-job -t local -j pipeline/c5s09-test
+
+fly pause-job -t local -j pipeline/c6s01-test
+fly pause-job -t local -j pipeline/c6s02-test
+fly pause-job -t local -j pipeline/c6s03-test
+fly pause-job -t local -j pipeline/c6s04-1-test
+fly pause-job -t local -j pipeline/c6s04-2a-test
+fly pause-job -t local -j pipeline/c6s04-2b-test
+
+
+
+fly pause-job -t local -j pipeline/c4s01
+fly pause-job -t local -j pipeline/c4s02
+fly pause-job -t local -j pipeline/c5s08
+fly pause-job -t local -j pipeline/c6s04-1
+```
