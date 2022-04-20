@@ -36,7 +36,7 @@ RSpec.describe TeamRecord do
 end
 ' > packages/teams/spec/models/team_record_spec.rb
 
-echo '# typed: true
+echo '# typed: strict
 class Team
   include ActiveModel::Conversion
   extend ActiveModel::Naming
@@ -47,30 +47,32 @@ class Team
 
   validates :name, presence: true
 
-  attr_reader :id, :name
+  sig {returns(Integer)}
+  attr_reader :id
 
+  sig {returns(String)}
+  attr_reader :name
+
+  sig { params(id: Integer, name: String).void }
   def initialize(id, name)
     @id = id
     @name = name
   end
 
+  sig { returns(T::Boolean) }
   def persisted?
     !!id
   end
 
+  sig { returns(T::Hash[Symbol, T.untyped]) }
   def to_hash
     { id: id, name: name}
   end
 
-  def hash
-    to_hash.hash
-  end
-
+  sig { params(other: T::untyped).returns(T::Boolean) }
   def ==(other)
     id == other.id && name == other.name
   end
-
-  alias eql? ==
 end
 ' > packages/teams/app/public/team.rb
 
@@ -135,17 +137,22 @@ RSpec.describe Team, type: :model do
 end
 ' > packages/teams/spec/public/team_spec.rb
 
-echo '# typed: false
+echo '# typed: strict
 class TeamRepository
+  extend T::Sig
+
+  sig { params(id: Integer).returns(T.nilable(Team)) }
   def self.get(id)
     team_record = TeamRecord.find_by_id(id)
     Team.new(team_record.id, team_record.name) if team_record
   end
 
+  sig { returns(T::Array[Team]) }
   def self.list
     TeamRecord.all.map { |t| Team.new(t.id, t.name) }
   end
 
+  sig { params(team: Team).returns(Team) }
   def self.add(team)
     team_record = TeamRecord.create(team.to_hash)
     team = Team.new(team_record.id, team_record.name)
@@ -153,6 +160,7 @@ class TeamRepository
     team
   end
 
+  sig { params(team: Team).returns(T.any(FalseClass, Team)) }
   def self.edit(team)
     team_record = TeamRecord.find_by_id(team.id)
     return false unless team_record
@@ -162,10 +170,12 @@ class TeamRepository
     team
   end
 
+  sig { params(team: Team).void }
   def self.delete(team)
     TeamRecord.delete(team.id)
   end
 
+  sig { returns(Integer) }
   def self.count
     TeamRecord.count
   end
