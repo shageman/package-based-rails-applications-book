@@ -15,3 +15,6 @@ mv ./packages/games/app/models/game.rb ./packages/games/app/public
 
 mkdir -p ./packages/teams/app/public
 mv ./packages/teams/app/models/team.rb ./packages/teams/app/public
+
+sed -i 's/enforce_privacy: false/enforce_privacy: true/g' packages/games/package.yml
+sed -i 's/enforce_privacy: false/enforce_privacy: true/g' packages/teams/package.yml
