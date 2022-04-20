@@ -16,8 +16,11 @@ rm packages/games/app/models/game.rbi
 rm packages/games/deprecated_references.yml
 rm packages/games/spec/models/game_spec.rb
 
+sed -i 's/enforce_privacy: false/enforce_privacy: true/g' packages/games/package.yml
+
 mkdir -p packages/games/app/public/
 mkdir -p packages/games/spec/public/
+
 echo '# typed: false
 class GameRecord < ApplicationRecord
   self.table_name = "games"
@@ -210,7 +213,7 @@ RSpec.describe GameRepository do
   end
 
   describe "#add and #count and #list" do
-    it "adds a new game to the repository" do
+    it "adds a new game to the repository which is counted and listed" do
       expect(GameRepository.count).to eq(0)
       expect(GameRepository.list).to eq([])
       GameRepository.add(new_game(id: nil, location: "here"))
@@ -368,6 +371,7 @@ RSpec.describe Game, type: :model do
     end
   end
 
+# TODO: needs to be fixed analogous to Team
   describe "#==" do
     it "returns true for objects with the same attributes" do
       game1 = new_game(first_team_id: 1, second_team_id: 2)
@@ -844,16 +848,6 @@ module ObjectCreationMethods
 end
 ' > spec/support/object_creation_methods.rb
 
-echo '
-enforce_dependencies: true
-enforce_privacy: true
-dependencies:
-- packages/rails_shims
-- packages/games
-- packages/teams
-' > packages/games_admin/package.yml
-
 bundle install --local
 
 bin/rails sorbet:update:all
-

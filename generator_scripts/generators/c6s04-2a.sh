@@ -17,12 +17,7 @@ rm packages/teams/spec/models/team_spec.rb
 mkdir packages/teams/app/public
 mkdir packages/teams/spec/public
 
-echo 'enforce_dependencies: true
-enforce_privacy: true
-dependencies:
-- packages/predictor_interface
-- packages/rails_shims
-' > packages/teams/package.yml
+sed -i 's/enforce_privacy: false/enforce_privacy: true/g' packages/teams/package.yml
 
 echo '# typed: false
 class TeamRecord < ApplicationRecord
@@ -67,9 +62,15 @@ class Team
     { id: id, name: name}
   end
 
+  def hash
+    to_hash.hash
+  end
+
   def ==(other)
     id == other.id && name == other.name
   end
+
+  alias eql? ==
 end
 ' > packages/teams/app/public/team.rb
 
@@ -113,22 +114,23 @@ RSpec.describe Team, type: :model do
     end
   end
 
-  describe "#==" do
-    it "returns true for objects with the same attributes" do
-      team1 = Team.new(1, "test")
-      team2 = Team.new(1, "test")
-      expect(team1 == team2).to eq(true)
-    end
+  describe "comparisons" do
+    it "should behave as expected" do
+      expect(Team.new(1, "1")).to eq Team.new(1, "1")
 
-    it "returns false for objects with different attributes" do
-      team1 = Team.new(5, "test")
-      team2 = Team.new(1, "test")
-      expect(team1 == team2).to eq(false)
+      t = (1..2).map { |i| Team.new(i, "#{i}") }
+      t2 = (1..2).map { |i| Team.new(i, "#{i}") }
+      expect(t - t2).to eq([])
 
-      team1 = Team.new(1, "test")
-      team2 = Team.new(1, "nothing")
-      expect(team1 == team2).to eq(false)
-    end
+      t = (1..15).map { |i| Team.new(i, "#{i}") }
+      t2 = (1..14).map { |i| Team.new(i, "#{i}") }
+      expect(t - t2).to eq([Team.new(15, "15")])
+
+      ## testing hash and eql? based comparisons
+      t = (1..20).map { |i| Team.new(i, "#{i}") }
+      t2 = (1..19).map { |i| Team.new(i, "#{i}") }
+      expect(t - t2).to eq([Team.new(20, "20")])
+    end 
   end
 end
 ' > packages/teams/spec/public/team_spec.rb
@@ -193,7 +195,7 @@ RSpec.describe TeamRepository do
   end
 
   describe "#add and #count and #list" do
-    it "adds a new team to the repository" do
+    it "adds a new team to the repository which is counted and listed" do
       expect(TeamRepository.count).to eq(0)
       expect(TeamRepository.list).to eq([])
       TeamRepository.add(Team.new(nil, "something"))
@@ -239,7 +241,7 @@ RSpec.describe TeamRepository do
       expect(TeamRepository.list).to eq([team1, team3])
     end
 
-    it "removes teams from the repository when found" do
+    it "does not remove team from the repository when NOT found" do
       team = create_team
       expect(TeamRepository.list).to eq([team])
       expect(TeamRepository.delete(Team.new(-1, ""))).to eq(0)
@@ -549,4 +551,3 @@ end
 bundle install --local
 
 bin/rails sorbet:update:all
-
