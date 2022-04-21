@@ -1,6 +1,6 @@
 platform: linux
 image_resource:
-  type: docker-image
+  type: registry-image
   source:
     repository: prograils/ruby-node-chrome
     tag: '3.0.1'

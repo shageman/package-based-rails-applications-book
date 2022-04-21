@@ -3,7 +3,7 @@ resources:
   type: git
   source:
     uri: git@github.com:shageman/package-based-rails-applications-book.git
-    branch: main
+    branch: ch6_wip
     depth: 1
     private_key: ((private_key))
   check_every: 20s

@@ -28,7 +28,7 @@ can be executed via the shell script belonging to that chapter.
 
 In one terminal execute the following to install the needed docker containers.
 ~~~~~~~~
-docker-compose up
+docker-compose up -d
 ~~~~~~~~
 
 The services should be running at these locations:
