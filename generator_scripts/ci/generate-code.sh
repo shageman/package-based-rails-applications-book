@@ -30,7 +30,7 @@ echo "
 
 gem 'image_processing', '~> 1.2'
 gem 'jquery-rails', '4.3.1'
-gem 'packwerk', group: [:development, :test]
+gem 'packwerk', group: [:development, :test], github: 'shageman/packwerk'
 gem 'pocky', group: [:development, :test], github: 'shageman/pocky', branch: 'main'
 gem 'rspec-rails', group: [:development, :test]
 gem 'shoulda-matchers', group: [:test]
