@@ -10,7 +10,7 @@ tough when underlying libraries constantly require subtle changes to the sample 
 
 ## References
 
-* [Get the book!](https://leanpub.com/package-based-rails-applications)
+* [Get the book!](https://gradualmodularity.com)
 * [stephanhagemann.com](http://stephanhagemann.com) - the author's website
 
 ## Development
