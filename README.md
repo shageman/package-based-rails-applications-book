@@ -57,7 +57,7 @@ fly -t local unpause-pipeline -p pipeline
 fly -t local trigger-job -j pipeline/c2s01
 ~~~~~~~~
 
-Now, navigating to [http://localhost:8080/teams/main/pipelines/pbra_full](http://localhost:8080/teams/main/pipelines/pbra_full) will show the running pipeline.
+Now, navigating to [http://localhost:8080/teams/main/pipelines/pipeline](http://localhost:8080/teams/main/pipelines/pipeline) will show the running pipeline.
 
 The output of the pipeline is *all* of the versions of the Sportsball codebase discussed in the book. Specifically, the output is a series of zip files in `./docker/minio/data/releases` - one zip file for each chapter / step of the pipeline.
 
