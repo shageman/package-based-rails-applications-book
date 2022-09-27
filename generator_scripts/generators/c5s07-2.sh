@@ -56,6 +56,13 @@ echo '--dir
 --ignore=/db
 ' > sorbet/config
 
+echo "
+gem 'sorbet-runtime'
+gem 'sorbet', :group => :development
+gem 'tapioca'
+gem 'sorbet-rails'
+" >> Gemfile
+
 bundle install --local
 
 bin/rails db:create && bin/rails db:migrate
