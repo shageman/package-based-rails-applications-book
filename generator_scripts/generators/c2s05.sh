@@ -41,7 +41,7 @@ echo "class ApplicationController < ActionController::Base
 end
 " > packages/rails_shims/app/controllers/application_controller.rb
 
-sed -e '/# Adjust RSpec configuration for package folder structure/,+16d' spec/spec_helper.rb
+sed -i '/Adjust RSpec configuration for package folder structure/,+16d' spec/spec_helper.rb
 
 echo "
 # Adjust RSpec configuration for package folder structure
