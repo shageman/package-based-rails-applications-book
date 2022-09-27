@@ -1,8 +1,25 @@
-# frozen_string_literal: true
+#frozen_string_literal: true
 
-require_relative "testgem/version"
+pp 'zeitwerk!!'
+
+# require ...
+# require ...
+# require ...
+# require ...
+# require ...
+# require ...
+# require ...
 
 module Testgem
   class Error < StandardError; end
   # Your code goes here...
 end
+
+require 'zeitwerk'
+ 
+loader = Zeitwerk::Loader.new
+loader.push_dir File.join(__dir__)
+loader.tag = "testgem"
+loader.setup
+
+require_relative 'testgem/version'
