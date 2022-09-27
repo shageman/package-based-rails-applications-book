@@ -179,6 +179,14 @@ resources:
     regexp: c6s04-2b-(.*)\.tgz
     access_key_id: ((aws_key))
     secret_access_key: ((aws_secret))
+- name: c7s01-code
+  type: s3
+  source:
+    endpoint: ((s3_endpoint))
+    bucket: pbra2
+    regexp: c7s01-(.*)\.tgz
+    access_key_id: ((aws_key))
+    secret_access_key: ((aws_secret))
 
 
 
@@ -971,5 +979,46 @@ jobs:
       app_code: c6s04-2b-code
     params:
       CHAPTER: c6s04-2b
+      PACKWERK_CHECK: true
+      SORBET: true
+
+
+
+
+- name: c7s01
+  serial_groups: [transform]
+  plan:
+  - get: generator-scripts-repo
+    trigger: false
+  - get: c6s04-2b-code
+    passed: [c6s04-2b]
+    trigger: true
+  - task: c7s01-task
+    file: generator-scripts-repo/generator_scripts/ci/transform-code.yml
+    input_mapping:
+      code_input: c6s04-2b-code
+    output_mapping:
+      code_output: c7s01-code
+    params:
+      PREV_CHAPTER: c6s04-2b
+      CHAPTER: c7s01
+  - put: c7s01-code
+    params:
+      file: "c7s01-code/c7s01-*.tgz"
+      acl: public-read
+
+- name: c7s01-test
+  serial_groups: [test]
+  plan:
+  - get: generator-scripts-repo
+  - get: c7s01-code
+    passed: [c7s01]
+    trigger: true
+  - task: c7s01-test-task
+    file: generator-scripts-repo/generator_scripts/ci/run-tests.yml
+    input_mapping:
+      app_code: c7s01-code
+    params:
+      CHAPTER: c7s01
       PACKWERK_CHECK: true
       SORBET: true
