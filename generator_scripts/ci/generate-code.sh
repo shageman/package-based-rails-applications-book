@@ -40,11 +40,26 @@ gem 'sorbet', :group => :development
 gem 'trueskill'
 gem 'tapioca'
 gem 'sorbet-rails'
+gem 'stimpack'
 " >> Gemfile
 
 sed -i "s/gem.*tzinfo-data.*/gem 'tzinfo-data'/g" Gemfile
 
 bundle package
+
+sed -i '/image_processing/d' Gemfile
+sed -i '/jquery-rails/d' Gemfile
+sed -i '/packwerk/d' Gemfile
+sed -i '/pocky/d' Gemfile
+sed -i '/rspec-rails/d' Gemfile
+sed -i '/shoulda/d' Gemfile
+sed -i '/slim-rails/d' Gemfile
+sed -i '/sorbet-runtime/d' Gemfile
+sed -i '/sorbet/d' Gemfile
+sed -i '/trueskill/d' Gemfile
+sed -i '/tapioca/d' Gemfile
+sed -i '/sorbet-rails/d' Gemfile
+sed -i '/stimpack/d' Gemfile
 
 cd ..
 
