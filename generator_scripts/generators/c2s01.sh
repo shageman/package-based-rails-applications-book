@@ -11,6 +11,15 @@ set -e
 #
 ###############################################################################
 
+echo "
+gem 'packwerk', group: [:development, :test]
+gem 'pocky', group: [:development, :test], github: 'shageman/pocky', branch: 'main'
+gem 'rspec-rails', group: [:development, :test]
+gem 'shoulda-matchers', group: [:test]
+gem 'slim-rails'
+gem 'trueskill'
+" >> Gemfile
+
 bundle install --local
 
 rm -rf test
