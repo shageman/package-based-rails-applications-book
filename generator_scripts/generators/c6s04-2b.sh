@@ -850,4 +850,4 @@ end
 
 bundle install --local
 
-bin/rails sorbet:update:all
+yes | bin/rails sorbet:update:all
