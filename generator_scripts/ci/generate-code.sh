@@ -47,6 +47,15 @@ sed -i "s/gem.*tzinfo-data.*/gem 'tzinfo-data'/g" Gemfile
 
 bundle package
 
+# Move the vendored gems into a directory we control, so we can hold onto them
+# This is so that all transformation steps do not fetch gems from rubygems
+
+touch vendor/cache/.keep
+mkdir VENDORED_GEMS
+mv vendor/cache/* VENDORED_GEMS/
+
+# Clean up the gemfile, so we start "fresh"
+
 sed -i '/image_processing/d' Gemfile
 sed -i '/jquery-rails/d' Gemfile
 sed -i '/packwerk/d' Gemfile

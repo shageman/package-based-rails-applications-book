@@ -12,6 +12,7 @@ tar -xzf app_code/$CHAPTER*.tgz -C app_code
 
 cd app_code/sportsball
 
+mv VENDORED_GEMS/* vendor/cache/ # get our saved local gems back
 bundle install --local
 
 rake db:create && rake db:migrate
