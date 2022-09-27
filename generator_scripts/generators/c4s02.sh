@@ -41,3 +41,32 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 end" > testgem/testgem.gemspec
+
+mkdir -p testgem/app/services/testgem
+mkdir -p testgem/spec/services/testgem
+
+echo "module Testgem
+  class Sample
+    def test
+      3
+    end
+  end
+end" > app/services/testgem/sample.rb
+
+echo "# frozen_string_literal: true
+
+RSpec.describe Testgem::Sample do
+  it 'returns 3 when tested' do
+    expect(subject.test).to eq(3)
+  end
+end
+" > spec/services/testgem/sample_spec.rb
+
+sed -i "s/true/false/g" testgem/spec/testgem_spec.rb
+
+cd testgem
+bundle
+rake spec
+cd ..
+
+echo "gem 'testgem', path: 'testgem'" >> Gemfile

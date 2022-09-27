@@ -42,31 +42,7 @@ echo "module Testgem
   end
 end" > testgem/lib/testgem/engine.rb
 
-mkdir -p testgem/app/services/testgem
-mkdir -p testgem/spec/services/testgem
-
-echo "module Testgem
-  class Sample
-    def test
-      3
-    end
-  end
-end" > testgem/app/services/testgem/sample.rb
-
-echo "# frozen_string_literal: true
-
-RSpec.describe Testgem::Sample do
-  it 'returns 3 when tested' do
-    expect(subject.test).to eq(3)
-  end
-end
-" > testgem/spec/services/testgem/sample_spec.rb
-
-sed -i "s/true/false/g" testgem/spec/testgem_spec.rb
-
 cd testgem
 bundle
 rake spec
 cd ..
-
-echo "gem 'testgem', path: 'testgem'" >> Gemfile
