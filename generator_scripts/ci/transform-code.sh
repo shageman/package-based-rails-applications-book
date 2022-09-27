@@ -17,6 +17,8 @@ tar -xzf code_input/$PREV_CHAPTER*.tgz -C code_output
 
 cd code_output/sportsball
 
+mv VENDORED_GEMS/* vendor/cache/ # get our saved local gems back
+
 ../../generator-scripts-repo/generator_scripts/generators/$CHAPTER.sh
 
 find . -iname 'deprecated_references.yml' -delete
