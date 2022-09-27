@@ -42,6 +42,16 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 end" > testgem/testgem.gemspec
 
+echo "# frozen_string_literal: true
+
+require_relative 'testgem/version'
+require_relative '../app/services/testgem/sample'
+
+module Testgem
+  class Error < StandardError; end
+  # Your code goes here...
+end" > testgem/lib/testgem.rb
+
 mkdir -p testgem/app/services/testgem
 mkdir -p testgem/spec/services/testgem
 
@@ -51,7 +61,7 @@ echo "module Testgem
       3
     end
   end
-end" > app/services/testgem/sample.rb
+end" > testgem/app/services/testgem/sample.rb
 
 echo "# frozen_string_literal: true
 
@@ -60,7 +70,7 @@ RSpec.describe Testgem::Sample do
     expect(subject.test).to eq(3)
   end
 end
-" > spec/services/testgem/sample_spec.rb
+" > testgem/spec/services/testgem/sample_spec.rb
 
 sed -i "s/true/false/g" testgem/spec/testgem_spec.rb
 
