@@ -25,23 +25,24 @@ cd sportsball
 
 rm -rf .git
 
-sed -i 's/'"'"'/"/g' Gemfile
-echo "
+gsed -i 's/'"'"'/"/g' Gemfile
+echo '
+### GEMS NEEDED LATER
 
-gem 'image_processing', '~> 1.2'
-gem 'jquery-rails', '4.3.1'
-gem 'packwerk', group: [:development, :test]
-gem 'pocky', group: [:development, :test], github: 'shageman/pocky', branch: 'main'
-gem 'rspec-rails', group: [:development, :test]
-gem 'shoulda-matchers', group: [:test]
-gem 'slim-rails'
-gem 'sorbet-runtime'
-gem 'sorbet', :group => :development
-gem 'trueskill'
-gem 'tapioca'
-gem 'sorbet-rails'
-gem 'stimpack'
-" >> Gemfile
+gem "image_processing", "~> 1.2"
+gem "jquery-rails", "4.3.1"
+gem "packwerk", group: [:development, :test]
+gem "pocky", group: [:development, :test], github: "shageman/pocky", branch: "main"
+gem "rspec-rails", group: [:development, :test]
+gem "shoulda-matchers", group: [:test]
+gem "slim-rails"
+gem "sorbet-runtime"
+gem "sorbet", :group => :development
+gem "trueskill"
+gem "tapioca"
+gem "sorbet-rails"
+gem "stimpack"
+' >> Gemfile
 
 sed -i "s/gem.*tzinfo-data.*/gem 'tzinfo-data'/g" Gemfile
 
@@ -55,20 +56,7 @@ mkdir VENDORED_GEMS
 mv vendor/cache/* VENDORED_GEMS/
 
 # Clean up the gemfile, so we start "fresh"
-
-sed -i '/image_processing/d' Gemfile
-sed -i '/jquery-rails/d' Gemfile
-sed -i '/packwerk/d' Gemfile
-sed -i '/pocky/d' Gemfile
-sed -i '/rspec-rails/d' Gemfile
-sed -i '/shoulda/d' Gemfile
-sed -i '/slim-rails/d' Gemfile
-sed -i '/sorbet-runtime/d' Gemfile
-sed -i '/sorbet/d' Gemfile
-sed -i '/trueskill/d' Gemfile
-sed -i '/tapioca/d' Gemfile
-sed -i '/sorbet-rails/d' Gemfile
-sed -i '/stimpack/d' Gemfile
+sed -i '/### GEMS NEEDED LATER/,+100d' Gemfile
 
 cd ..
 
