@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-ROOT_FOLDER="../code3"
+ROOT_FOLDER="../package-based-rails-applications"
 CM=$2
 
 if [ "$1" == "FRESH" ]; then
