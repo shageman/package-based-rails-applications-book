@@ -24,7 +24,7 @@ bundle exec packwerk validate
 echo 'puts Team.count' | bundle exec rails c
 
 if [[ ! -z "$SORBET" ]]; then
-  bundle exec srb tc -v 3
+  bundle exec srb tc --verbose
 fi
 
 if [[ ! -z "$PACKWERK_CHECK" ]]; then
