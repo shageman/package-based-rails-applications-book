@@ -21,25 +21,29 @@ can be executed via the shell script belonging to that chapter.
 
 *These instructions assume that you have [docker](https://www.docker.com/) running on OSX.*
 
-### Starting Concourse and Minio on Docker
+### Starting Concourse on Docker
 
 [Concourse](https://github.com/concourse/concourse) acts as our CI server, which will run the pipeline.
-[Minio](https://github.com/minio/minio) is our local S3 compatible serverm, which will hold the outputs of the pipeline.
+You will need to add S3 secrets to the config in `pipeline-secrets.yml` to give the pipeline a place to store the outputs :
+
+~~~~~~~~
+---
+private_key: YOUR_KEY_TO_GIT_REPO
+aws_key: YOUR_KEY
+aws_secret: YOUR_SECRET
+s3_endpoint: https://s3.us-east-1.amazonaws.com
+~~~~~~~~
 
 In one terminal execute the following to install and run the needed docker containers.
 ~~~~~~~~
-CONCOURSE_RUNTIME=containerd docker-compose up 
+CONCOURSE_RUNTIME=containerd docker-compose up -d
 ~~~~~~~~
 
-The services should be running at these locations:
-
-* Concourse: [http://localhost:8080/](http://localhost:8080/)
-* Minio: [http://localhost:9000/](http://localhost:9000/)
+This will bring up Concourse at [http://localhost:8080/](http://localhost:8080/).
 
 If any of the containers fail to start, please check the docs of the docker images used for updates to their respective config:
 
 * [concourse docker](https://github.com/concourse/concourse-docker)
-* [minio docker](https://github.com/minio/minio)
 
 ### Get the Pipeline Running
 
@@ -71,56 +75,17 @@ Every run of the chapter-generation pipeline will use the latest version of Rail
 
 ### Issues
 
-If your pipelines don't work after a docker shutdown, try `fly prune-worker`.
+Some things to try if there are issues with concourse (in order of impact):
 
-If things are still broken, repeat the above steps after doing this (*careful*: this will wipe out all of the docker images and their disks running on your machine):
-~~~~~~~~
-docker stop $(docker ps -aq)     # Stop all running containers
-docker rm $(docker ps -a -q)     # Delete all containers
-docker rmi $(docker images -q)   # Delete all images
-docker volume prune
-docker system prune -a
-~~~~~~~~
+* `fly prune-worker`
+* `docker-compose down`
+* ~~~~~~~~
+  docker stop $(docker ps -aq)     # Stop all running containers
+  docker rm $(docker ps -a -q)     # Delete all containers
+  docker rmi $(docker images -q)   # Delete all images
+  docker volume prune
+  docker system prune -a
+  ~~~~~~~~
+* reinstall docker
 
-What goes wrong?
-
-* concourse can't find `generator_scripts` anymore (errors with "no such file"). Definitely do the above
-* nothing works reliably anymore. Reinstall docker.
-
-
-### Speeding up the pipeline
-
-Some recent issues with concourse-docker have forced me to rerun the code build pipeline from the very start a lot. If there are changes to the steps at the tail of the pipeline only, the following calls speed up the time to get there:
-
-```
-fly pause-job -t local -j pipeline/c2s01-test
-fly pause-job -t local -j pipeline/c2s02-test
-fly pause-job -t local -j pipeline/c2s03-test
-fly pause-job -t local -j pipeline/c2s04-test
-fly pause-job -t local -j pipeline/c2s05-test
-fly pause-job -t local -j pipeline/c2s06-test
-
-fly pause-job -t local -j pipeline/c4s01-test
-fly pause-job -t local -j pipeline/c4s02-test
-fly pause-job -t local -j pipeline/c4s03-test
-
-fly pause-job -t local -j pipeline/c5s07-1-test
-fly pause-job -t local -j pipeline/c5s07-2-test
-fly pause-job -t local -j pipeline/c5s07-3-test
-fly pause-job -t local -j pipeline/c5s08-test
-fly pause-job -t local -j pipeline/c5s09-test
-
-fly pause-job -t local -j pipeline/c6s01-test
-fly pause-job -t local -j pipeline/c6s02-test
-fly pause-job -t local -j pipeline/c6s03-test
-fly pause-job -t local -j pipeline/c6s04-1-test
-fly pause-job -t local -j pipeline/c6s04-2a-test
-fly pause-job -t local -j pipeline/c6s04-2b-test
-
-
-
-fly pause-job -t local -j pipeline/c4s01
-fly pause-job -t local -j pipeline/c4s02
-fly pause-job -t local -j pipeline/c5s08
-fly pause-job -t local -j pipeline/c6s04-1
-```
+(I have done all of these at various times. YMMV)
