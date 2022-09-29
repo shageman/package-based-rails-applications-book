@@ -24,6 +24,11 @@ bundle exec packwerk validate
 echo 'puts Team.count' | bundle exec rails c
 
 if [[ ! -z "$SORBET" ]]; then
+  bundle | grep ffi    
+  bundle exec ruby --version
+  bundle exec ruby -e 'require "rbconfig"; pp RbConfig::CONFIG' | grep "cpu"
+  ruby -e 'require "ffi";; module MyLib; extend FFI::Library; ffi_lib "c"; attach_function :puts, [:string], :int; end'
+
   bundle exec srb tc --verbose
 fi
 
