@@ -26,9 +26,9 @@ can be executed via the shell script belonging to that chapter.
 [Concourse](https://github.com/concourse/concourse) acts as our CI server, which will run the pipeline.
 [Minio](https://github.com/minio/minio) is our local S3 compatible serverm, which will hold the outputs of the pipeline.
 
-In one terminal execute the following to install the needed docker containers.
+In one terminal execute the following to install and run the needed docker containers.
 ~~~~~~~~
-docker-compose up
+CONCOURSE_RUNTIME=containerd docker-compose up 
 ~~~~~~~~
 
 The services should be running at these locations:
