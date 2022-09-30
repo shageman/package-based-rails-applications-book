@@ -25,7 +25,7 @@ cd sportsball
 
 rm -rf .git
 
-gsed -i 's/'"'"'/"/g' Gemfile
+sed -i 's/'"'"'/"/g' Gemfile
 echo '
 ### GEMS NEEDED LATER
 
