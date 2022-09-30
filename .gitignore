@@ -14,3 +14,5 @@ docker/minio/data/*
 
 docker/minio/data/releases/*
 !docker/minio/data/releases/app*
+
+tmp
