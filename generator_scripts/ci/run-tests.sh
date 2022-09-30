@@ -6,7 +6,9 @@ set -e
 
 # mkdir -p gems
 # export GEM_HOME=`pwd`/gems
-# export PATH="$GEM_HOME/bin:$PATH"
+# echo $GEM_HOME
+export SRB_PATH="/tmp/build/$(ls -1 /tmp/build)/gems/bin"
+export PATH="$SRB_PATH:$PATH"
 
 tar -xzf app_code/$CHAPTER*.tgz -C app_code
 

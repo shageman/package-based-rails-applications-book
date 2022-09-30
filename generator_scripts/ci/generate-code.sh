@@ -37,7 +37,7 @@ gem "rspec-rails", group: [:development, :test]
 gem "shoulda-matchers", group: [:test]
 gem "slim-rails"
 gem "sorbet-runtime"
-gem "sorbet", :group => :development
+gem "sorbet", ">=0.5.10461", :group => :development
 gem "trueskill"
 gem "tapioca"
 gem "sorbet-rails"

@@ -2,7 +2,7 @@ platform: linux
 image_resource:
   type: registry-image
   source:
-    repository: arm64v8/ruby
+    repository: ruby
     tag: '3.1.2-bullseye'
 
 inputs:
