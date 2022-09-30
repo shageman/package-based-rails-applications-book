@@ -24,6 +24,7 @@ bundle exec packwerk validate
 echo 'puts Team.count' | bundle exec rails c
 
 if [[ ! -z "$SORBET" ]]; then
+  bundle exec ruby -e 'require "rbconfig"; pp RbConfig::CONFIG' | grep "cpu"
   bundle exec srb tc --verbose
 fi
 
