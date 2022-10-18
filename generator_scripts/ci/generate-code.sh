@@ -46,7 +46,7 @@ gem "stimpack"
 
 sed -i "s/gem.*tzinfo-data.*/gem 'tzinfo-data'/g" Gemfile
 
-bundle package
+bundle package --all
 
 # Move the vendored gems into a directory we control, so we can hold onto them
 # This is so that all transformation steps do not fetch gems from rubygems
