@@ -65,7 +65,7 @@ gem 'sorbet-rails'
 
 bundle install --local
 
-/tmp/build/c7fc5370/gems/bin/srb tc
+bundle exec srb tc
 
 bin/rails db:create && bin/rails db:migrate
 
