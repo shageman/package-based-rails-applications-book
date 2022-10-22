@@ -218,4 +218,4 @@ dependencies:
 
 bundle install --local
 
-yes | bundle exec rails sorbet:update:all
+# yes | bundle exec rails sorbet:update:all

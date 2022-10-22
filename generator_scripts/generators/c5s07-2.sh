@@ -65,11 +65,11 @@ gem 'sorbet-rails'
 
 bundle install --local
 
-bundle exec srb tc
+# bundle exec srb tc
 
 bin/rails db:create && bin/rails db:migrate
 
-yes | bundle exec rails sorbet:update:all
+# yes | bundle exec rails sorbet:update:all
 
 echo '# typed: strict
 
