@@ -10,11 +10,11 @@ services:
       PGDATA: /database
 
   concourse:
-    image: rdclda/concourse:7.8.2
+    image: rdclda/concourse:7.8.3
     command: quickstart
     privileged: true
-    depends_on: [concourse-db]
-    ports: ["8080:8080"]
+    depends_on: [ concourse-db ]
+    ports: [ "8080:8080" ]
     environment:
       CONCOURSE_POSTGRES_HOST: concourse-db
       CONCOURSE_POSTGRES_USER: concourse_user
@@ -33,3 +33,4 @@ services:
       CONCOURSE_CLUSTER_NAME: arm64
       CONCOURSE_WORKER_CONTAINERD_DNS_SERVER: "8.8.8.8"
       CONCOURSE_WORKER_RUNTIME: "containerd"
+      CONCOURSE_CONTAINERD_DNS_PROXY_ENABLE: true
