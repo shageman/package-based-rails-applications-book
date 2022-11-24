@@ -1,0 +1,19 @@
+platform: linux
+image_resource:
+  type: registry-image
+  source:
+    repository: ruby
+    tag: '3.1.2-bullseye'
+
+# inputs:
+# - name: generator-scripts-repo
+# - name: code_input
+
+# outputs:
+# - name: code_output
+
+run:
+  path: generator-scripts-repo/generator_scripts/ci/transform-code.sh
+
+caches:
+  - path: gems
