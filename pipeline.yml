@@ -12,9 +12,7 @@ resources:
 - name: generator-scripts-repo
   type: git
   source:
-    # uri: git@git-server:git-server/repos/generator_scripts.git
-    # uri: ssh://git@localhost:2222/git-server/repos/generator_scripts.git
-    uri: ssh://git@localhost:22/git-server/repos/generator_scripts.git
+    uri: git@github.com:shageman/resource_tester.git
     branch: main
     depth: 1
     private_key: ((private_key))
