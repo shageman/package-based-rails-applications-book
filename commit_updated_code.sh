@@ -19,4 +19,4 @@ git ls-files --others --exclude-standard | grep 'create_games.rb$' | xargs rm
 
 
 
-git ls-files --others --exclude-standard | grep 'vendor/cache' | xargs rm
+git ls-files --others --exclude-standard | grep 'vendor/cache/pocky' | xargs rm
