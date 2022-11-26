@@ -1,8 +1,18 @@
 resources:
+# - name: generator-scripts-repo_old
+#   type: git
+#   source:
+#     # uri: git@github.com:shageman/package-based-rails-applications-book.git
+#     uri: https://github.com/shageman/package-based-rails-applications-book.git
+#     branch: resource_tester
+#     depth: 1
+#     # private_key: ((private_key))
+#   check_every: 20s
+
 - name: generator-scripts-repo
   type: git
   source:
-    uri: git@github.com:shageman/package-based-rails-applications-book.git
+    uri: git@github.com:shageman/resource_tester.git
     branch: main
     depth: 1
     private_key: ((private_key))
@@ -15,7 +25,7 @@ resources:
   type: s3
   source:
     endpoint: ((s3_endpoint))
-    bucket: pbra2
+    bucket: ((s3_bucket))
     regexp: app_(.*)\.tgz
     access_key_id: ((aws_key))
     secret_access_key: ((aws_secret))
@@ -23,7 +33,7 @@ resources:
   type: s3
   source:
     endpoint: ((s3_endpoint))
-    bucket: pbra2
+    bucket: ((s3_bucket))
     regexp: c2s01-(.*)\.tgz
     access_key_id: ((aws_key))
     secret_access_key: ((aws_secret))
@@ -31,7 +41,7 @@ resources:
   type: s3
   source:
     endpoint: ((s3_endpoint))
-    bucket: pbra2
+    bucket: ((s3_bucket))
     regexp: c2s02-(.*)\.tgz
     access_key_id: ((aws_key))
     secret_access_key: ((aws_secret))
@@ -39,7 +49,7 @@ resources:
   type: s3
   source:
     endpoint: ((s3_endpoint))
-    bucket: pbra2
+    bucket: ((s3_bucket))
     regexp: c2s03-(.*)\.tgz
     access_key_id: ((aws_key))
     secret_access_key: ((aws_secret))
@@ -47,7 +57,7 @@ resources:
   type: s3
   source:
     endpoint: ((s3_endpoint))
-    bucket: pbra2
+    bucket: ((s3_bucket))
     regexp: c2s04-(.*)\.tgz
     access_key_id: ((aws_key))
     secret_access_key: ((aws_secret))
@@ -55,7 +65,7 @@ resources:
   type: s3
   source:
     endpoint: ((s3_endpoint))
-    bucket: pbra2
+    bucket: ((s3_bucket))
     regexp: c2s05-(.*)\.tgz
     access_key_id: ((aws_key))
     secret_access_key: ((aws_secret))
@@ -63,7 +73,7 @@ resources:
   type: s3
   source:
     endpoint: ((s3_endpoint))
-    bucket: pbra2
+    bucket: ((s3_bucket))
     regexp: c2s06-(.*)\.tgz
     access_key_id: ((aws_key))
     secret_access_key: ((aws_secret))
@@ -71,7 +81,7 @@ resources:
   type: s3
   source:
     endpoint: ((s3_endpoint))
-    bucket: pbra2
+    bucket: ((s3_bucket))
     regexp: c4s01-(.*)\.tgz
     access_key_id: ((aws_key))
     secret_access_key: ((aws_secret))
@@ -79,7 +89,7 @@ resources:
   type: s3
   source:
     endpoint: ((s3_endpoint))
-    bucket: pbra2
+    bucket: ((s3_bucket))
     regexp: c4s02-(.*)\.tgz
     access_key_id: ((aws_key))
     secret_access_key: ((aws_secret))
@@ -87,7 +97,7 @@ resources:
   type: s3
   source:
     endpoint: ((s3_endpoint))
-    bucket: pbra2
+    bucket: ((s3_bucket))
     regexp: c4s03-(.*)\.tgz
     access_key_id: ((aws_key))
     secret_access_key: ((aws_secret))
@@ -95,7 +105,7 @@ resources:
   type: s3
   source:
     endpoint: ((s3_endpoint))
-    bucket: pbra2
+    bucket: ((s3_bucket))
     regexp: c5s07-1-(.*)\.tgz
     access_key_id: ((aws_key))
     secret_access_key: ((aws_secret))
@@ -103,7 +113,7 @@ resources:
   type: s3
   source:
     endpoint: ((s3_endpoint))
-    bucket: pbra2
+    bucket: ((s3_bucket))
     regexp: c5s07-2-(.*)\.tgz
     access_key_id: ((aws_key))
     secret_access_key: ((aws_secret))
@@ -111,7 +121,7 @@ resources:
   type: s3
   source:
     endpoint: ((s3_endpoint))
-    bucket: pbra2
+    bucket: ((s3_bucket))
     regexp: c5s07-3-(.*)\.tgz
     access_key_id: ((aws_key))
     secret_access_key: ((aws_secret))
@@ -119,7 +129,7 @@ resources:
   type: s3
   source:
     endpoint: ((s3_endpoint))
-    bucket: pbra2
+    bucket: ((s3_bucket))
     regexp: c5s08-(.*)\.tgz
     access_key_id: ((aws_key))
     secret_access_key: ((aws_secret))
@@ -127,7 +137,7 @@ resources:
   type: s3
   source:
     endpoint: ((s3_endpoint))
-    bucket: pbra2
+    bucket: ((s3_bucket))
     regexp: c5s09-(.*)\.tgz
     access_key_id: ((aws_key))
     secret_access_key: ((aws_secret))
@@ -135,7 +145,7 @@ resources:
   type: s3
   source:
     endpoint: ((s3_endpoint))
-    bucket: pbra2
+    bucket: ((s3_bucket))
     regexp: c6s01-(.*)\.tgz
     access_key_id: ((aws_key))
     secret_access_key: ((aws_secret))
@@ -143,7 +153,7 @@ resources:
   type: s3
   source:
     endpoint: ((s3_endpoint))
-    bucket: pbra2
+    bucket: ((s3_bucket))
     regexp: c6s02-(.*)\.tgz
     access_key_id: ((aws_key))
     secret_access_key: ((aws_secret))
@@ -151,7 +161,7 @@ resources:
   type: s3
   source:
     endpoint: ((s3_endpoint))
-    bucket: pbra2
+    bucket: ((s3_bucket))
     regexp: c6s03-(.*)\.tgz
     access_key_id: ((aws_key))
     secret_access_key: ((aws_secret))
@@ -159,7 +169,7 @@ resources:
   type: s3
   source:
     endpoint: ((s3_endpoint))
-    bucket: pbra2
+    bucket: ((s3_bucket))
     regexp: c6s04-1-(.*)\.tgz
     access_key_id: ((aws_key))
     secret_access_key: ((aws_secret))
@@ -167,7 +177,7 @@ resources:
   type: s3
   source:
     endpoint: ((s3_endpoint))
-    bucket: pbra2
+    bucket: ((s3_bucket))
     regexp: c6s04-2a-(.*)\.tgz
     access_key_id: ((aws_key))
     secret_access_key: ((aws_secret))
@@ -175,7 +185,7 @@ resources:
   type: s3
   source:
     endpoint: ((s3_endpoint))
-    bucket: pbra2
+    bucket: ((s3_bucket))
     regexp: c6s04-2b-(.*)\.tgz
     access_key_id: ((aws_key))
     secret_access_key: ((aws_secret))
@@ -183,7 +193,7 @@ resources:
   type: s3
   source:
     endpoint: ((s3_endpoint))
-    bucket: pbra2
+    bucket: ((s3_bucket))
     regexp: c7s01-(.*)\.tgz
     access_key_id: ((aws_key))
     secret_access_key: ((aws_secret))
@@ -990,17 +1000,17 @@ jobs:
   plan:
   - get: generator-scripts-repo
     trigger: false
-  - get: c6s04-2b-code
-    passed: [c6s04-2b]
+  - get: c2s06-code
+    # passed: [c2s06]
     trigger: true
   - task: c7s01-task
     file: generator-scripts-repo/generator_scripts/ci/transform-code.yml
     input_mapping:
-      code_input: c6s04-2b-code
+      code_input: c2s06-code
     output_mapping:
       code_output: c7s01-code
     params:
-      PREV_CHAPTER: c6s04-2b
+      PREV_CHAPTER: c2s06
       CHAPTER: c7s01
   - put: c7s01-code
     params:
