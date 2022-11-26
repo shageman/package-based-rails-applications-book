@@ -15,6 +15,8 @@ docker/minio/data/*
 docker/minio/data/releases/*
 !docker/minio/data/releases/app*
 
+docker/git-server
+
 tmp
 
 experiments
