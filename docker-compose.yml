@@ -1,6 +1,19 @@
 version: '3'
 
 services:
+  minio:
+    image: minio/minio:RELEASE.2022-01-27T03-53-02Z
+    volumes:
+      - ./docker/minio/data:/data:Z
+      - ./docker/minio/data:/root/.minio:Z
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: minio
+      MINIO_ROOT_PASSWORD: minio123
+    command: server /data --console-address ":9001"
+
   concourse-db:
     image: postgres
     environment:
@@ -8,29 +21,55 @@ services:
       POSTGRES_PASSWORD: concourse_pass
       POSTGRES_USER: concourse_user
       PGDATA: /database
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
 
-  concourse:
+  concourse-web:
     image: rdclda/concourse:7.8.3
-    command: quickstart
-    privileged: true
+    command: web
+    links: [ concourse-db ]
     depends_on: [ concourse-db ]
     ports: [ "8080:8080" ]
+    volumes: [ "./docker/keys/web:/concourse-keys" ]
     environment:
+      CONCOURSE_EXTERNAL_URL: http://localhost:8080
       CONCOURSE_POSTGRES_HOST: concourse-db
       CONCOURSE_POSTGRES_USER: concourse_user
       CONCOURSE_POSTGRES_PASSWORD: concourse_pass
       CONCOURSE_POSTGRES_DATABASE: concourse
-      # replace this with your external IP address
-      CONCOURSE_EXTERNAL_URL: http://localhost:8080
       CONCOURSE_ADD_LOCAL_USER: test:test
       CONCOURSE_MAIN_TEAM_LOCAL_USER: test
-      # instead of relying on the default "detect"
-      CONCOURSE_WORKER_BAGGAGECLAIM_DRIVER: overlay
+
       CONCOURSE_CLIENT_SECRET: Y29uY291cnNlLXdlYgo=
       CONCOURSE_TSA_CLIENT_SECRET: Y29uY291cnNlLXdvcmtlcgo=
       CONCOURSE_X_FRAME_OPTIONS: allow
       CONCOURSE_CONTENT_SECURITY_POLICY: "*"
       CONCOURSE_CLUSTER_NAME: arm64
-      CONCOURSE_WORKER_CONTAINERD_DNS_SERVER: "8.8.8.8"
-      CONCOURSE_WORKER_RUNTIME: "containerd"
-      CONCOURSE_CONTAINERD_DNS_PROXY_ENABLE: true
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
+
+  worker:
+    image: rdclda/concourse:7.8.3
+    command: worker
+    privileged: true
+    depends_on: [ concourse-web ]
+    volumes: [ "./docker/keys/worker:/concourse-keys" ]
+    links: [ concourse-web ]
+    stop_signal: SIGUSR2
+    environment:
+      CONCOURSE_TSA_HOST: concourse-web:2222
+      # enable DNS proxy to support Docker's 127.x.x.x DNS server
+      CONCOURSE_CONTAINERD_DNS_PROXY_ENABLE: "true"
+      CONCOURSE_BAGGAGECLAIM_DRIVER: overlay
+      CONCOURSE_RUNTIME: containerd
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
