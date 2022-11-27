@@ -88,6 +88,9 @@ services:
       CONCOURSE_CONTAINERD_DNS_PROXY_ENABLE: "true"
       CONCOURSE_BAGGAGECLAIM_DRIVER: overlay
       CONCOURSE_RUNTIME: containerd
+
+      CONCOURSE_CONTAINER_PLACEMENT_STRATEGY: limit-active-tasks
+      CONCOURSE_MAX_ACTIVE_TASKS_PER_WORKER: 4
     logging:
       driver: "json-file"
       options:

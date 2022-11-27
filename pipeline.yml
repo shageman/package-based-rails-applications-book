@@ -193,7 +193,6 @@ resources:
 
 jobs:
 - name: generate-empty-app
-  serial_groups: [transform]
   plan:
   - get: generator-scripts-repo
   - task: generate-empty-app
@@ -209,7 +208,6 @@ jobs:
 
 
 - name: c2s01
-  serial_groups: [transform]
   plan:
   - get: generator-scripts-repo
   - get: empty-apps
@@ -228,7 +226,6 @@ jobs:
       acl: public-read
 
 - name: c2s01-test
-  serial_groups: [test]
   plan:
   - get: generator-scripts-repo
   - get: c2s01-code
@@ -246,7 +243,6 @@ jobs:
 
 
 - name: c2s02
-  serial_groups: [transform]
   plan:
   - get: generator-scripts-repo
   - get: c2s01-code
@@ -267,7 +263,6 @@ jobs:
       acl: public-read
 
 - name: c2s02-test
-  serial_groups: [test]
   plan:
   - get: generator-scripts-repo
   - get: c2s02-code
@@ -285,7 +280,6 @@ jobs:
 
 
 - name: c2s03
-  serial_groups: [transform]
   plan:
   - get: generator-scripts-repo
   - get: c2s02-code
@@ -306,7 +300,6 @@ jobs:
       acl: public-read
 
 - name: c2s03-test
-  serial_groups: [test]
   plan:
   - get: generator-scripts-repo
   - get: c2s03-code
@@ -323,7 +316,6 @@ jobs:
 
 
 - name: c2s04
-  serial_groups: [transform]
   plan:
   - get: generator-scripts-repo
   - get: c2s03-code
@@ -344,7 +336,6 @@ jobs:
       acl: public-read
 
 - name: c2s04-test
-  serial_groups: [test]
   plan:
   - get: generator-scripts-repo
   - get: c2s04-code
@@ -362,7 +353,6 @@ jobs:
 
 
 - name: c2s05
-  serial_groups: [transform]
   plan:
   - get: generator-scripts-repo
   - get: c2s04-code
@@ -383,7 +373,6 @@ jobs:
       acl: public-read
 
 - name: c2s05-test
-  serial_groups: [test]
   plan:
   - get: generator-scripts-repo
   - get: c2s05-code
@@ -401,7 +390,6 @@ jobs:
 
 
 - name: c2s06
-  serial_groups: [transform]
   plan:
   - get: generator-scripts-repo
   - get: c2s05-code
@@ -422,7 +410,6 @@ jobs:
       acl: public-read
 
 - name: c2s06-test
-  serial_groups: [test]
   plan:
   - get: generator-scripts-repo
   - get: c2s06-code
@@ -440,7 +427,6 @@ jobs:
 
 
 - name: c4s01
-  serial_groups: [transform]
   plan:
   - get: generator-scripts-repo
   - get: c2s06-code
@@ -461,7 +447,6 @@ jobs:
       acl: public-read
 
 - name: c4s01-test
-  serial_groups: [test]
   plan:
   - get: generator-scripts-repo
   - get: c4s01-code
@@ -479,7 +464,6 @@ jobs:
 
 
 - name: c4s02
-  serial_groups: [transform]
   plan:
   - get: generator-scripts-repo
   - get: c2s06-code
@@ -500,7 +484,6 @@ jobs:
       acl: public-read
 
 - name: c4s02-test
-  serial_groups: [test]
   plan:
   - get: generator-scripts-repo
   - get: c4s02-code
@@ -518,7 +501,6 @@ jobs:
 
 
 - name: c4s03
-  serial_groups: [transform]
   plan:
   - get: generator-scripts-repo
   - get: c4s02-code
@@ -539,7 +521,6 @@ jobs:
       acl: public-read
 
 - name: c4s03-test
-  serial_groups: [test]
   plan:
   - get: generator-scripts-repo
   - get: c4s03-code
@@ -556,7 +537,6 @@ jobs:
 
 
 - name: c5s07-1
-  serial_groups: [transform]
   plan:
   - get: generator-scripts-repo
     trigger: false
@@ -578,7 +558,6 @@ jobs:
       acl: public-read
 
 - name: c5s07-1-test
-  serial_groups: [test]
   plan:
   - get: generator-scripts-repo
   - get: c5s07-1-code
@@ -596,7 +575,6 @@ jobs:
 
 
 - name: c5s07-2
-  serial_groups: [transform]
   plan:
   - get: generator-scripts-repo
     trigger: false
@@ -618,7 +596,6 @@ jobs:
       acl: public-read
 
 - name: c5s07-2-test
-  serial_groups: [test]
   plan:
   - get: generator-scripts-repo
   - get: c5s07-2-code
@@ -637,7 +614,6 @@ jobs:
 
 
 - name: c5s07-3
-  serial_groups: [transform]
   plan:
   - get: generator-scripts-repo
     trigger: false
@@ -659,7 +635,6 @@ jobs:
       acl: public-read
 
 - name: c5s07-3-test
-  serial_groups: [test]
   plan:
   - get: generator-scripts-repo
   - get: c5s07-3-code
@@ -677,7 +652,6 @@ jobs:
 
 
 - name: c5s08
-  serial_groups: [transform]
   plan:
   - get: generator-scripts-repo
   - get: c5s07-3-code
@@ -698,7 +672,6 @@ jobs:
       acl: public-read
 
 - name: c5s08-test
-  serial_groups: [test]
   plan:
   - get: generator-scripts-repo
   - get: c5s08-code
@@ -716,7 +689,6 @@ jobs:
 
 
 - name: c5s09
-  serial_groups: [transform]
   plan:
   - get: generator-scripts-repo
   - get: c5s08-code
@@ -737,7 +709,6 @@ jobs:
       acl: public-read
 
 - name: c5s09-test
-  serial_groups: [test]
   plan:
   - get: generator-scripts-repo
   - get: c5s09-code
@@ -755,7 +726,6 @@ jobs:
 
 
 - name: c6s01
-  serial_groups: [transform]
   plan:
   - get: generator-scripts-repo
     trigger: false
@@ -777,7 +747,6 @@ jobs:
       acl: public-read
 
 - name: c6s01-test
-  serial_groups: [test]
   plan:
   - get: generator-scripts-repo
   - get: c6s01-code
@@ -793,7 +762,6 @@ jobs:
       # SORBET: true
 
 - name: c6s02
-  serial_groups: [transform]
   plan:
   - get: generator-scripts-repo
     trigger: false
@@ -815,7 +783,6 @@ jobs:
       acl: public-read
 
 - name: c6s02-test
-  serial_groups: [test]
   plan:
   - get: generator-scripts-repo
   - get: c6s02-code
@@ -831,7 +798,6 @@ jobs:
       # SORBET: true
 
 - name: c6s03
-  serial_groups: [transform]
   plan:
   - get: generator-scripts-repo
     trigger: false
@@ -853,7 +819,6 @@ jobs:
       acl: public-read
 
 - name: c6s03-test
-  serial_groups: [test]
   plan:
   - get: generator-scripts-repo
   - get: c6s03-code
@@ -869,7 +834,6 @@ jobs:
       # SORBET: true
 
 - name: c6s04-1
-  serial_groups: [transform]
   plan:
   - get: generator-scripts-repo
     trigger: false
@@ -891,7 +855,6 @@ jobs:
       acl: public-read
 
 - name: c6s04-1-test
-  serial_groups: [test]
   plan:
   - get: generator-scripts-repo
   - get: c6s04-1-code
@@ -907,7 +870,6 @@ jobs:
       # SORBET: true
 
 - name: c6s04-2a
-  serial_groups: [transform]
   plan:
   - get: generator-scripts-repo
     trigger: false
@@ -929,7 +891,6 @@ jobs:
       acl: public-read
 
 - name: c6s04-2a-test
-  serial_groups: [test]
   plan:
   - get: generator-scripts-repo
   - get: c6s04-2a-code
@@ -945,7 +906,6 @@ jobs:
       # SORBET: true
 
 - name: c6s04-2b
-  serial_groups: [transform]
   plan:
   - get: generator-scripts-repo
     trigger: false
@@ -967,7 +927,6 @@ jobs:
       acl: public-read
 
 - name: c6s04-2b-test
-  serial_groups: [test]
   plan:
   - get: generator-scripts-repo
   - get: c6s04-2b-code
@@ -986,7 +945,6 @@ jobs:
 
 
 - name: c7s01
-  serial_groups: [transform]
   plan:
   - get: generator-scripts-repo
     trigger: false
@@ -1008,7 +966,6 @@ jobs:
       acl: public-read
 
 - name: c7s01-test
-  serial_groups: [test]
   plan:
   - get: generator-scripts-repo
   - get: c7s01-code
