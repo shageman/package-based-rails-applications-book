@@ -1,18 +1,8 @@
 resources:
-# - name: generator-scripts-repo_old
-#   type: git
-#   source:
-#     # uri: git@github.com:shageman/package-based-rails-applications-book.git
-#     uri: https://github.com/shageman/package-based-rails-applications-book.git
-#     branch: resource_tester
-#     depth: 1
-#     # private_key: ((private_key))
-#   check_every: 20s
-
 - name: generator-scripts-repo
   type: git
   source:
-    uri: git@github.com:shageman/resource_tester.git
+    uri: git@git-server:/git-server/repos/generator_scripts.git
     branch: main
     depth: 1
     private_key: ((private_key))
