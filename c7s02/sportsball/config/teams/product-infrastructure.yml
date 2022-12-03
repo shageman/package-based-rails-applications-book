@@ -1,0 +1,6 @@
+name: Product Infrastructure Team
+owned_globs:
+  - config/**/**
+  - spec/**/**
+  - app/assets/config/manifest.js
+  - app/javascript/**/**

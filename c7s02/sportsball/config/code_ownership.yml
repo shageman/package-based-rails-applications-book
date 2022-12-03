@@ -1,0 +1,6 @@
+owned_globs:
+  - "{app,config,packages,spec}/**/*.{rb,rake,js,jsx,ts,tsx}"
+unowned_globs:
+  - db/**/*
+  - frontend/javascripts/**/__generated__/**/*
+

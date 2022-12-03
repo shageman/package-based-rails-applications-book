@@ -1,0 +1,8 @@
+
+enforce_dependencies: true
+enforce_privacy: false
+dependencies:
+- packages/rails_shims
+
+metadata:
+  owner: Teams Team
