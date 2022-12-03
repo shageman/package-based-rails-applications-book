@@ -16,7 +16,7 @@ resources:
   source:
     endpoint: ((s3_endpoint))
     bucket: ((s3_bucket))
-    regexp: app_(.*)\.tgz
+    regexp: app-(.*)\.tgz
     access_key_id: ((aws_key))
     secret_access_key: ((aws_secret))
 - name: c2s01-code
