@@ -1,0 +1,53 @@
+# This file contains a list of dependencies that are not part of the long term plan for the
+# '.' package.
+# We should generally work to reduce this list over time.
+#
+# You can regenerate this file using the following command:
+#
+# bin/packwerk update-todo
+---
+app/packages/games:
+  "::Game":
+    violations:
+    - dependency
+    files:
+    - spec/packages/games/models/game_spec.rb
+    - spec/packages/games_admin/requests/games_spec.rb
+    - spec/support/object_creation_methods.rb
+app/packages/games_admin:
+  "::GamesController":
+    violations:
+    - dependency
+    files:
+    - spec/packages/games_admin/routing/games_routing_spec.rb
+app/packages/prediction_ui:
+  "::PredictionsHelper":
+    violations:
+    - dependency
+    files:
+    - spec/packages/prediction_ui/helpers/predictions_helper_spec.rb
+app/packages/predictor:
+  "::Prediction":
+    violations:
+    - dependency
+    files:
+    - spec/packages/predictor/models/predictor_spec.rb
+  "::Predictor":
+    violations:
+    - dependency
+    files:
+    - spec/packages/predictor/models/predictor_spec.rb
+app/packages/teams:
+  "::Team":
+    violations:
+    - dependency
+    files:
+    - spec/packages/teams/models/team_spec.rb
+    - spec/packages/teams_admin/requests/teams_spec.rb
+    - spec/support/object_creation_methods.rb
+app/packages/teams_admin:
+  "::TeamsController":
+    violations:
+    - dependency
+    files:
+    - spec/packages/teams_admin/routing/teams_routing_spec.rb

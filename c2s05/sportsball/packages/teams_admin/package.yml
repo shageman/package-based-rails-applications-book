@@ -1,7 +1,4 @@
-
 enforce_dependencies: true
-enforce_privacy: false
 dependencies:
 - packages/rails_shims
 - packages/teams
-

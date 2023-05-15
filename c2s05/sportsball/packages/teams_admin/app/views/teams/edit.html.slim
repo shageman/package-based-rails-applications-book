@@ -1,7 +1,10 @@
 h1 Editing team
 
-== render 'form'
+== render "form", team: @team
 
-=> link_to 'Show', @team
-'|
-=< link_to 'Back', teams_path
+br
+
+div
+  => link_to "Show this team", @team
+  '|
+  =< link_to "Back to teams", teams_path

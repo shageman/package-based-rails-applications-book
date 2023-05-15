@@ -1,9 +1,10 @@
-p#notice = notice
+p style="color: green" = notice
 
-p
-  strong Name:
-  = @team.name
+== render @team
 
-=> link_to 'Edit', edit_team_path(@team)
-'|
-=< link_to 'Back', teams_path
+div
+  => link_to "Edit this team", edit_team_path(@team)
+  '|
+  =< link_to "Back to teams", teams_path
+
+  = button_to "Destroy this team", @team, method: :delete

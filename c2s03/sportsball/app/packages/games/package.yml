@@ -1,6 +1,3 @@
-
 enforce_dependencies: true
-enforce_privacy: false
 dependencies:
 - app/packages/teams
-

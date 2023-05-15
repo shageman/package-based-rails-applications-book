@@ -1,30 +1,38 @@
-= form_for @game do |f|
+= form_with(model: @game) do |form|
   - if @game.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@game.errors.count, 'error')} prohibited this game from being saved:"
+    div style="color: red"
+      h2 = "#{pluralize(@game.errors.count, "error")} prohibited this game from being saved:"
       ul
-        - @game.errors.full_messages.each do |message|
-          li = message
+        - @game.errors.each do |error|
+          li = error.full_message
 
-  .field
-    = f.label :date
-    = f.datetime_field :date
-  .field
-    = f.label :location
-    = f.text_field :location
-  .field
-    = f.label :first_team_id
-    = f.number_field :first_team_id
-  .field
-    = f.label :second_team_id
-    = f.number_field :second_team_id
-  .field
-    = f.label :winning_team
-    = f.number_field :winning_team
-  .field
-    = f.label :first_team_score
-    = f.number_field :first_team_score
-  .field
-    = f.label :second_team_score
-    = f.number_field :second_team_score
-  .actions = f.submit
+  div
+    = form.label :date, style: "display: block"
+    = form.datetime_field :date
+
+  div
+    = form.label :location, style: "display: block"
+    = form.text_field :location
+
+  div
+    = form.label :first_team_id, style: "display: block"
+    = form.number_field :first_team_id
+
+  div
+    = form.label :second_team_id, style: "display: block"
+    = form.number_field :second_team_id
+
+  div
+    = form.label :winning_team, style: "display: block"
+    = form.number_field :winning_team
+
+  div
+    = form.label :first_team_score, style: "display: block"
+    = form.number_field :first_team_score
+
+  div
+    = form.label :second_team_score, style: "display: block"
+    = form.number_field :second_team_score
+
+  div
+    = form.submit

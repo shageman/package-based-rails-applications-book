@@ -1,0 +1,6 @@
+pack_paths:
+ - packs/*
+ - packages/*
+ - app/packages/*
+ - .
+ 

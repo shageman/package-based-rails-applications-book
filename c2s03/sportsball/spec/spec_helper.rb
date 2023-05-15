@@ -38,6 +38,12 @@ Shoulda::Matchers.configure do |config|
   end
 end
 
+def wait_for_turbolinks timeout = nil
+  if has_css?('.turbolinks-progress-bar', visible: true, wait: (0.25).seconds)
+    has_no_css?('.turbolinks-progress-bar', wait: timeout.presence || 5.seconds)
+  end
+end
+
 # Adjust RSpec configuration for package folder structure
 RSpec.configure do |config|
   config.define_derived_metadata(file_path: Regexp.new('/spec/packages/.*/controllers')) { |metadata| metadata[:type] = :controller }

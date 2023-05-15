@@ -10,24 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_07_004255) do
-
+ActiveRecord::Schema[7.0].define(version: 2023_05_04_050741) do
   create_table "games", force: :cascade do |t|
-    t.datetime "date", precision: 6
+    t.datetime "date"
     t.string "location"
     t.integer "first_team_id"
     t.integer "second_team_id"
     t.integer "winning_team"
     t.integer "first_team_score"
     t.integer "second_team_score"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "teams", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
