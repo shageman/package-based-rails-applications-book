@@ -54,5 +54,3 @@ extractChapter "c6s03"
 extractChapter "c6s04-1"
 extractChapter "c6s04-2a"
 extractChapter "c6s04-2b"
-
-extractChapter "c7s01"
