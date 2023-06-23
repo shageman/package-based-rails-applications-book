@@ -1,4 +1,3 @@
-# typed: true
 class Prediction
   attr_reader :first_team, :second_team, :winner
 

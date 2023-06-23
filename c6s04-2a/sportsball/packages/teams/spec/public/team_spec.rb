@@ -38,22 +38,23 @@ RSpec.describe Team, type: :model do
     end
   end
 
-  describe "#==" do
-    it "returns true for objects with the same attributes" do
-      team1 = Team.new(1, "test")
-      team2 = Team.new(1, "test")
-      expect(team1 == team2).to eq(true)
-    end
+  describe "comparisons" do
+    it "should behave as expected" do
+      expect(Team.new(1, "1")).to eq Team.new(1, "1")
 
-    it "returns false for objects with different attributes" do
-      team1 = Team.new(5, "test")
-      team2 = Team.new(1, "test")
-      expect(team1 == team2).to eq(false)
+      t = (1..2).map { |i| Team.new(i, "#{i}") }
+      t2 = (1..2).map { |i| Team.new(i, "#{i}") }
+      expect(t - t2).to eq([])
 
-      team1 = Team.new(1, "test")
-      team2 = Team.new(1, "nothing")
-      expect(team1 == team2).to eq(false)
-    end
+      t = (1..15).map { |i| Team.new(i, "#{i}") }
+      t2 = (1..14).map { |i| Team.new(i, "#{i}") }
+      expect(t - t2).to eq([Team.new(15, "15")])
+
+      ## testing hash and eql? based comparisons
+      t = (1..20).map { |i| Team.new(i, "#{i}") }
+      t2 = (1..19).map { |i| Team.new(i, "#{i}") }
+      expect(t - t2).to eq([Team.new(20, "20")])
+    end 
   end
 end
 

@@ -1,4 +1,3 @@
-# typed: false
 RSpec.describe "teams/edit", type: :view do
   before(:each) do
     @team = assign(:team, create_team(

@@ -1,4 +1,3 @@
-# typed: false
 RSpec.describe "teams/index", type: :view do
   before(:each) do
     assign(:teams, [

@@ -1,3 +1,3 @@
 enforce_dependencies: true
 dependencies:
-- app/packages/teams
+  - app/packages/teams

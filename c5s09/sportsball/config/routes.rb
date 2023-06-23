@@ -1,4 +1,3 @@
-# typed: false
 Rails.application.routes.draw do
   resources :games
   resources :teams

@@ -1,4 +1,3 @@
-# typed: false
 require "saulabs/trueskill"
 
 class Predictor

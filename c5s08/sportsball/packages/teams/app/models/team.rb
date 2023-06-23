@@ -1,4 +1,4 @@
-# typed: false
+# typed: strict
 class Team < ApplicationRecord
   include Contender
   extend T::Sig

@@ -1,4 +1,3 @@
-# typed: false
 class Game < ApplicationRecord
   include HistoricalPerformanceIndicator
   extend T::Sig

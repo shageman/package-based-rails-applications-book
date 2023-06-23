@@ -98,6 +98,7 @@ RSpec.describe Game, type: :model do
     end
   end
 
+# TODO: needs to be fixed analogous to Team
   describe "#==" do
     it "returns true for objects with the same attributes" do
       game1 = new_game(first_team_id: 1, second_team_id: 2)

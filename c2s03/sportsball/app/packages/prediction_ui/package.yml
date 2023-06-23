@@ -1,5 +1,5 @@
 enforce_dependencies: true
 dependencies:
-- app/packages/games
-- app/packages/teams
-- app/packages/predictor
+  - app/packages/games
+  - app/packages/predictor
+  - app/packages/teams

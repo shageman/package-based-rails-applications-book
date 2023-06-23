@@ -32,7 +32,7 @@ RSpec.describe GameRepository do
   end
 
   describe "#add and #count and #list" do
-    it "adds a new game to the repository" do
+    it "adds a new game to the repository which is counted and listed" do
       expect(GameRepository.count).to eq(0)
       expect(GameRepository.list).to eq([])
       GameRepository.add(new_game(id: nil, location: "here"))

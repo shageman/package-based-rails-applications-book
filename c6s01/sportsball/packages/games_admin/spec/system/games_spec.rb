@@ -1,4 +1,3 @@
-# typed: false
 RSpec.describe "games admin", type: :system do
   before :each do
     @team1 = create_team name: "UofL"
@@ -20,6 +19,8 @@ RSpec.describe "games admin", type: :system do
 
     click_on "Create Game"
 
+    wait_for_turbolinks
+    
     expect(page).to have_content "UofL"
   end
 end

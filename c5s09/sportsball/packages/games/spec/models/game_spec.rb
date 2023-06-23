@@ -1,4 +1,3 @@
-# typed: false
 RSpec.describe Game do
   it { should validate_presence_of :date }
   it { should validate_presence_of :location }

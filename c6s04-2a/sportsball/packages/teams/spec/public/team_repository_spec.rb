@@ -21,7 +21,7 @@ RSpec.describe TeamRepository do
   end
 
   describe "#add and #count and #list" do
-    it "adds a new team to the repository" do
+    it "adds a new team to the repository which is counted and listed" do
       expect(TeamRepository.count).to eq(0)
       expect(TeamRepository.list).to eq([])
       TeamRepository.add(Team.new(nil, "something"))
@@ -67,7 +67,7 @@ RSpec.describe TeamRepository do
       expect(TeamRepository.list).to eq([team1, team3])
     end
 
-    it "removes teams from the repository when found" do
+    it "does not remove team from the repository when NOT found" do
       team = create_team
       expect(TeamRepository.list).to eq([team])
       expect(TeamRepository.delete(Team.new(-1, ""))).to eq(0)

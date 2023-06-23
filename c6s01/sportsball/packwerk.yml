@@ -18,3 +18,7 @@ exclude:
 # custom_associations:
 # - "cache_belongs_to"
 
+
+require:
+  - packwerk-extensions
+

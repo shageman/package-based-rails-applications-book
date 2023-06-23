@@ -1,4 +1,3 @@
-# typed: true
 module ObjectCreationMethods
   def team_params(overrides = {})
     defaults = {
