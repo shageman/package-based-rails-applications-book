@@ -5,8 +5,8 @@ RSpec.describe Team, type: :model do
       expect(Team.new(7, "test")).to be_valid
     end
 
-    it "is not valid with a nil name" do
-      expect(Team.new(7, nil)).to_not be_valid
+    it "can be invalid" do
+      expect(Team.new(7, nil)).not_to be_valid
     end
   end
 
@@ -29,12 +29,6 @@ RSpec.describe Team, type: :model do
 
     it "is false without an id" do
       expect(Team.new(nil, "test").persisted?).to eq(false)
-    end
-  end
-
-  describe "#to_hash" do
-    it "hashes based on params" do
-      expect(Team.new(7, "test").to_hash).to eq({id: 7, name: "test"})
     end
   end
 

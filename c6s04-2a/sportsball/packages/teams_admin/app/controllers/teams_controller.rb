@@ -38,7 +38,7 @@ class TeamsController < ApplicationController
   # PATCH/PUT /teams/1 or /teams/1.json
   def update
     respond_to do |format|
-      @team = TeamRepository.edit(Team.new(params[:id], team_params[:name]))
+      @team = TeamRepository.edit(Team.new(params[:id].to_i, team_params[:name]))
       if @team.errors.empty?
         format.html { redirect_to team_url(@team), notice: "Team was successfully updated." }
         format.json { render :show, status: :ok, location: @team }
@@ -62,7 +62,7 @@ class TeamsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_team
-      @team = TeamRepository.get(params[:id])
+      @team = TeamRepository.get(params[:id].to_i)
     end
 
     # Only allow a list of trusted parameters through.

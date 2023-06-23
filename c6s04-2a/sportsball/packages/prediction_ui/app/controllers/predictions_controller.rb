@@ -8,8 +8,8 @@ class PredictionsController < ApplicationController
     predictor = Predictor.new
     predictor.learn(TeamRepository.list, Game.all)
     @prediction = predictor.predict(
-        TeamRepository.get(params["first_team"]["id"]),
-        TeamRepository.get(params["second_team"]["id"]))
+        TeamRepository.get(params["first_team"]["id"].to_i),
+        TeamRepository.get(params["second_team"]["id"].to_i))
   end
 end
 

@@ -5,7 +5,7 @@ module Contender
   extend T::Helpers
   interface!
 
-  sig { abstract.returns(Integer) }
+  sig { abstract.returns(T.nilable(Integer)) }
   def id; end
 end
 

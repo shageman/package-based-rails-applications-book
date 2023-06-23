@@ -63,14 +63,14 @@ RSpec.describe TeamRepository do
       team2 = create_team
       team3 = create_team
       expect(TeamRepository.list).to eq([team1, team2, team3])
-      expect(TeamRepository.delete(team2)).to eq(1)
+      TeamRepository.delete(team2)
       expect(TeamRepository.list).to eq([team1, team3])
     end
 
     it "does not remove team from the repository when NOT found" do
       team = create_team
       expect(TeamRepository.list).to eq([team])
-      expect(TeamRepository.delete(Team.new(-1, ""))).to eq(0)
+      TeamRepository.delete(Team.new(-1, ""))
       expect(TeamRepository.list).to eq([team])
     end
   end

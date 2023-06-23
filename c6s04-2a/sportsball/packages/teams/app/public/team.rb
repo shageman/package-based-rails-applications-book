@@ -9,13 +9,13 @@ class Team
 
   validates :name, presence: true
 
-  sig {returns(Integer)}
+  sig { returns(T.nilable(Integer)).override }
   attr_reader :id
 
-  sig {returns(String)}
+  sig { returns(T.nilable(String)) }
   attr_reader :name
 
-  sig { params(id: Integer, name: String).void }
+  sig { params(id: T.nilable(Integer), name: T.nilable(String)).void }
   def initialize(id, name)
     @id = id
     @name = name
@@ -31,9 +31,19 @@ class Team
     { id: id, name: name}
   end
 
+  sig { returns(Integer) }
+  def hash
+    [id, name].hash
+  end
+
   sig { params(other: T::untyped).returns(T::Boolean) }
   def ==(other)
-    id == other.id && name == other.name
+    eql?(other)
+  end
+
+  def eql?(other)
+    self.class == other.class &&
+      self.id == other.id && self.name == other.name
   end
 end
 
