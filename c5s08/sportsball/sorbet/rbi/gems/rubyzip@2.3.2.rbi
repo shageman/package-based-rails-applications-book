@@ -1797,6 +1797,7 @@ end
 # source://rubyzip//lib/zip/ioextras/abstract_input_stream.rb#6
 module Zip::IOExtras::AbstractInputStream
   include ::Enumerable
+  include ::ActiveSupport::ToJsonWithActiveSupportEncoder
   include ::Zip::IOExtras::FakeIO
 
   # source://rubyzip//lib/zip/ioextras/abstract_input_stream.rb#10
@@ -2136,6 +2137,7 @@ end
 module Zip::NullInputStream
   include ::Zip::NullDecompressor
   include ::Enumerable
+  include ::ActiveSupport::ToJsonWithActiveSupportEncoder
   include ::Zip::IOExtras::FakeIO
   include ::Zip::IOExtras::AbstractInputStream
 end

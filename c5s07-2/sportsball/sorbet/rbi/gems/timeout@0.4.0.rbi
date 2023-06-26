@@ -86,8 +86,6 @@ Timeout::CONDVAR = T.let(T.unsafe(nil), Thread::ConditionVariable)
 #
 # source://timeout//lib/timeout.rb#36
 class Timeout::Error < ::RuntimeError
-  include ::REST::Error
-
   class << self
     # source://timeout//lib/timeout.rb#37
     def handle_timeout(message); end

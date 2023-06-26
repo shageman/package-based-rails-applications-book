@@ -71,9 +71,6 @@ class CodeTeams::Plugin
     sig { params(team: ::CodeTeams::Team, key: ::String).returns(::String) }
     def missing_key_error_message(team, key); end
 
-    # source://sorbet-runtime/0.5.10884/lib/types/private/abstract/declare.rb#37
-    def new(*args, **_arg1, &blk); end
-
     # source://code_teams//lib/code_teams/plugin.rb#31
     sig { params(teams: T::Array[::CodeTeams::Team]).returns(T::Array[::String]) }
     def validation_errors(teams); end
@@ -145,7 +142,7 @@ class CodeTeams::Team
   # @param other [Object]
   # @return [Boolean]
   #
-  # source://sorbet-runtime/0.5.10884/lib/types/private/methods/_methods.rb#255
+  # source://sorbet-runtime/0.5.10885/lib/types/private/methods/_methods.rb#255
   def eql?(*args, **_arg1, &blk); end
 
   # source://code_teams//lib/code_teams.rb#127

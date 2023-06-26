@@ -2265,7 +2265,7 @@ Puma::IS_JRUBY = T.let(T.unsafe(nil), FalseClass)
 Puma::IS_MRI = T.let(T.unsafe(nil), TrueClass)
 
 # source://puma//lib/puma/detect.rb#13
-Puma::IS_OSX = T.let(T.unsafe(nil), TrueClass)
+Puma::IS_OSX = T.let(T.unsafe(nil), FalseClass)
 
 # source://puma//lib/puma/detect.rb#15
 Puma::IS_WINDOWS = T.let(T.unsafe(nil), FalseClass)
@@ -3461,7 +3461,7 @@ class Puma::Server
 
   # @return [Boolean]
   #
-  # source://puma//lib/puma/server.rb#191
+  # source://puma//lib/puma/server.rb#174
   def closed_socket?(socket); end
 
   # source://forwardable/1.3.3/forwardable.rb#231
@@ -3471,7 +3471,7 @@ class Puma::Server
   # 3 == TCP_CORK
   # 1/0 == turn on/off
   #
-  # source://puma//lib/puma/server.rb#164
+  # source://puma//lib/puma/server.rb#146
   def cork_socket(socket); end
 
   # @todo the following may be deprecated in the future
@@ -3670,7 +3670,7 @@ class Puma::Server
   # source://puma//lib/puma/server.rb#38
   def thread; end
 
-  # source://puma//lib/puma/server.rb#167
+  # source://puma//lib/puma/server.rb#155
   def uncork_socket(socket); end
 
   # Triggers a client timeout if the thread-pool shuts down
@@ -3713,6 +3713,9 @@ Puma::Server::STAT_METHODS = T.let(T.unsafe(nil), Array)
 
 # source://puma//lib/puma/server.rb#60
 Puma::Server::ThreadLocalKey = T.let(T.unsafe(nil), Symbol)
+
+# source://puma//lib/puma/server.rb#172
+Puma::Server::UNPACK_TCP_STATE_FROM_TCP_INFO = T.let(T.unsafe(nil), String)
 
 # This class is instantiated by the `Puma::Launcher` and used
 # to boot and serve a Ruby application when no puma "workers" are needed

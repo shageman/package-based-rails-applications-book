@@ -25,10 +25,10 @@ class TTY::Reader
   # @param output [IO] the output stream
   # @param interrupt [Symbol] the way to handle the Ctrl+C key out of :signal, :exit, :noop
   # @param env [Hash] the environment variables
+  # @param track_history [Boolean] disable line history tracking, true by default
   # @param history_cycle [Boolean] allow cycling through history, false by default
   # @param history_duplicates [Boolean] allow duplicate entires, false by default
   # @param history_exclude [Proc] exclude lines from history, by default all lines are stored
-  # @param track_history [Boolean] disable line history tracking, true by default
   # @return [Reader] a new instance of Reader
   #
   # source://tty-reader//lib/tty/reader.rb#79
@@ -185,10 +185,10 @@ class TTY::Reader
   # @api public
   # @option [Boolean]
   # @option [Boolean]
-  # @param [Boolean] [Hash] a customizable set of options
-  # @param value [String] the value to pre-populate line with
   # @param prompt [String] the prompt to display before input
+  # @param value [String] the value to pre-populate line with
   # @param echo [Boolean] whether to echo chars back or not, defaults to false
+  # @param [Boolean] [Hash] a customizable set of options
   # @return [String]
   #
   # source://tty-reader//lib/tty/reader.rb#248
@@ -201,10 +201,10 @@ class TTY::Reader
   # @api public
   # @option [Boolean]
   # @option [Boolean]
-  # @param [Boolean] [Hash] a customizable set of options
-  # @param value [String] the value to pre-populate line with
   # @param prompt [String] the prompt displayed before the input
+  # @param value [String] the value to pre-populate line with
   # @param echo [Boolean] whether to echo chars back or not, defaults to false
+  # @param [Boolean] [Hash] a customizable set of options
   # @return [Array[String]]
   # @yield [String] line
   #
@@ -218,10 +218,10 @@ class TTY::Reader
   # @api public
   # @option [Boolean]
   # @option [Boolean]
-  # @param [Boolean] [Hash] a customizable set of options
-  # @param value [String] the value to pre-populate line with
   # @param prompt [String] the prompt displayed before the input
+  # @param value [String] the value to pre-populate line with
   # @param echo [Boolean] whether to echo chars back or not, defaults to false
+  # @param [Boolean] [Hash] a customizable set of options
   # @return [Array[String]]
   # @yield [String] line
   #

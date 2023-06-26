@@ -373,16 +373,6 @@ class Tilt::FinalizedMapping < ::Tilt::BaseMapping
   def lookup(ext); end
 end
 
-# Kramdown Markdown implementation. See: https://kramdown.gettalong.org/
-#
-# source://tilt//lib/tilt/kramdown.rb#0
-class Tilt::KramdownTemplate < ::Tilt::StaticTemplate
-  private
-
-  # source://tilt//lib/tilt/kramdown.rb#8
-  def _prepare_output; end
-end
-
 # @private
 #
 # source://tilt//lib/tilt/template.rb#11

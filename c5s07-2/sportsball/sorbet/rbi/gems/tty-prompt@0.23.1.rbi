@@ -23,12 +23,12 @@ class TTY::Prompt
   # @param options [Boolean] :quiet
   #   enable quiet mode, don't re-echo the question
   # @param :prefix [String] the prompt prefix, by default empty
+  # @param :interrupt [Symbol] handling of Ctrl+C key out of :signal, :exit, :noop
   # @param :track_history [Boolean] disable line history tracking, true by default
   # @param :enable_color [Boolean] enable color support, true by default
   # @param :active_color [String, Proc] the color used for selected option
   # @param :help_color [String, Proc] the color used for help text
   # @param :error_color [String] the color used for displaying error messages
-  # @param :interrupt [Symbol] handling of Ctrl+C key out of :signal, :exit, :noop
   # @return [Prompt] a new instance of Prompt
   #
   # source://tty-prompt//lib/tty/prompt.rb#120

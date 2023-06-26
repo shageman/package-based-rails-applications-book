@@ -3126,40 +3126,6 @@ module ActiveStorage::Transformers
   extend ::ActiveSupport::Autoload
 end
 
-# source://activestorage//lib/active_storage/transformers/image_processing_transformer.rb#14
-class ActiveStorage::Transformers::ImageProcessingTransformer < ::ActiveStorage::Transformers::Transformer
-  private
-
-  # source://activestorage//lib/active_storage/transformers/image_processing_transformer.rb#32
-  def operations; end
-
-  # source://activestorage//lib/active_storage/transformers/image_processing_transformer.rb#19
-  def process(file, format:); end
-
-  # source://activestorage//lib/active_storage/transformers/image_processing_transformer.rb#28
-  def processor; end
-
-  # source://activestorage//lib/active_storage/transformers/image_processing_transformer.rb#79
-  def validate_arg_array(argument); end
-
-  # source://activestorage//lib/active_storage/transformers/image_processing_transformer.rb#93
-  def validate_arg_hash(argument); end
-
-  # @raise [UnsupportedImageProcessingArgument]
-  #
-  # source://activestorage//lib/active_storage/transformers/image_processing_transformer.rb#71
-  def validate_arg_string(argument); end
-
-  # source://activestorage//lib/active_storage/transformers/image_processing_transformer.rb#51
-  def validate_transformation(name, argument); end
-end
-
-# source://activestorage//lib/active_storage/transformers/image_processing_transformer.rb#17
-class ActiveStorage::Transformers::ImageProcessingTransformer::UnsupportedImageProcessingArgument < ::StandardError; end
-
-# source://activestorage//lib/active_storage/transformers/image_processing_transformer.rb#16
-class ActiveStorage::Transformers::ImageProcessingTransformer::UnsupportedImageProcessingMethod < ::StandardError; end
-
 # A Transformer applies a set of transformations to an image.
 #
 # The following concrete subclasses are included in Active Storage:
