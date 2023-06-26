@@ -20,3 +20,5 @@ docker/git-server
 tmp
 
 experiments
+
+.rspec_status
