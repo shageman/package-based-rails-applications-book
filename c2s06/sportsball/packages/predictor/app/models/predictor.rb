@@ -5,7 +5,7 @@ class Predictor
     @teams_lookup = teams.inject({}) do |memo, team|
       memo[team.id] = {
           team: team,
-          rating: [Saulabs::TrueSkill::Rating.new(1500.0, 1000.0, 1.0)]
+          rating: ::Saulabs::TrueSkill::Rating.new(1500.0, 1000.0, 1.0)
       }
       memo
     end
@@ -14,9 +14,9 @@ class Predictor
       first_team_rating = @teams_lookup[game.first_team_id][:rating]
       second_team_rating = @teams_lookup[game.second_team_id][:rating]
       game_result = game.winning_team == 1 ?
-          [first_team_rating, second_team_rating] :
-          [second_team_rating, first_team_rating]
-      Saulabs::TrueSkill::FactorGraph.new(game_result, [1, 2]).update_skills
+          [[first_team_rating], [second_team_rating]] :
+          [[second_team_rating], [first_team_rating]]
+      ::Saulabs::TrueSkill::FactorGraph.new(game_result, [1, 2]).update_skills
     end
   end
 
@@ -30,7 +30,7 @@ class Predictor
   private
 
   def higher_mean_team(first_team, second_team)
-    @teams_lookup[first_team.id][:rating].first.mean >
-        @teams_lookup[second_team.id][:rating].first.mean
+    @teams_lookup[first_team.id][:rating].mean >
+        @teams_lookup[second_team.id][:rating].mean
   end
 end
