@@ -1,3 +1,4 @@
+# typed: ignore
 
 RSpec.describe TeamsController, type: :routing do
   describe "routing" do

@@ -41,6 +41,7 @@ class Team
     eql?(other)
   end
 
+  sig { params(other: T::untyped).returns(T::Boolean) }
   def eql?(other)
     self.class == other.class &&
       self.id == other.id && self.name == other.name

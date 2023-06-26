@@ -2,7 +2,7 @@
 class TeamRepository
   extend T::Sig
 
-  sig { params(id: Integer).returns(T.nilable(Team)) }
+  sig { params(id: T.nilable(Integer)).returns(T.nilable(Team)) }
   def self.get(id)
     team_record = TeamRecord.find_by_id(id)
     Team.new(team_record.id, team_record.name) if team_record

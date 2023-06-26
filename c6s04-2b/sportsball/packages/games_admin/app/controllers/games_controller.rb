@@ -24,8 +24,8 @@ class GamesController < ApplicationController
   def create
     @game = GameRepository.add(Game.new(
         nil,
-        Team.new(game_params[:first_team_id], nil),
-        Team.new(game_params[:second_team_id], nil),
+        Team.new(game_params[:first_team_id].to_i, nil),
+        Team.new(game_params[:second_team_id].to_i, nil),
         game_params[:winning_team],
         game_params[:first_team_score],
         game_params[:second_team_score],
@@ -48,8 +48,8 @@ class GamesController < ApplicationController
   # PATCH/PUT /games/1 or /games/1.json
   def update
     respond_to do |format|
-      @game.first_team = TeamRepository.get(game_params[:first_team_id]) if game_params.has_key?("first_team_id")
-      @game.second_team = TeamRepository.get(game_params[:second_team_id]) if game_params.has_key?("second_team_id")
+      @game.first_team = TeamRepository.get(game_params[:first_team_id].to_i) if game_params.has_key?("first_team_id")
+      @game.second_team = TeamRepository.get(game_params[:second_team_id].to_i) if game_params.has_key?("second_team_id")
       @game.winning_team = game_params[:winning_team] if game_params.has_key?("winning_team")
       @game.first_team_score = game_params[:first_team_score] if game_params.has_key?("first_team_score")
       @game.second_team_score = game_params[:second_team_score] if game_params.has_key?("second_team_score")
