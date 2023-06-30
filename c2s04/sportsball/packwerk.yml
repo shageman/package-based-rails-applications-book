@@ -7,8 +7,8 @@
 
 # List of patterns for folder paths to exclude
 exclude:
-- "{bin,node_modules,script,tmp,vendor}/**/*"
-- "**/lib/tasks/**/*.rake"
+- '**/lib/tasks/**/*.rake'
+- '{bin,node_modules,script,tmp,vendor}/**/*'
 
 # Patterns to find package configuration files
 # package_paths: "**/"
@@ -17,3 +17,8 @@ exclude:
 # custom_associations:
 # - "cache_belongs_to"
 
+# Whether or not you want the cache enabled (disabled by default)
+# cache: true
+
+# Where you want the cache to be stored (default below)
+# cache_directory: 'tmp/cache/packwerk'

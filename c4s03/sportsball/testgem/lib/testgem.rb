@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+ 
 if defined?(Rails)
   require 'testgem/engine'
 else
@@ -12,7 +12,7 @@ else
   loader.setup
 end
 
-require_relative 'testgem/version'
+require_relative "testgem/version"
 
 module Testgem
   class Error < StandardError; end
