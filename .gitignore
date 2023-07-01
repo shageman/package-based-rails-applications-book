@@ -21,3 +21,4 @@ tmp
 experiments
 docker
 .tgz
+VENDORED_GEMS
