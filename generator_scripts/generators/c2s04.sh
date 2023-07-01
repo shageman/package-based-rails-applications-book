@@ -22,53 +22,13 @@ mkdir -p app/packages/rails_shims/channels/application_cable/; mv app/channels/a
 
 find . -type d -empty -delete
 
-echo "enforce_dependencies: true
-enforce_privacy: false" > app/packages/rails_shims/package.yml
+echo "enforce_dependencies: true" > app/packages/rails_shims/package.yml
 
-echo '
-enforce_dependencies: true
-enforce_privacy: false
-dependencies:
-- app/packages/rails_shims
-- app/packages/teams
-' > app/packages/games/package.yml
+bundle 
 
-echo '
-enforce_dependencies: true
-enforce_privacy: false
-dependencies:
-- app/packages/rails_shims
-- app/packages/games
-' > app/packages/games_admin/package.yml
-
-echo '
-enforce_dependencies: true
-enforce_privacy: false
-dependencies:
-- app/packages/rails_shims
-- app/packages/games
-- app/packages/teams
-- app/packages/predictor
-' > app/packages/prediction_ui/package.yml
-
-echo '
-enforce_dependencies: true
-enforce_privacy: false
-dependencies:
-- app/packages/rails_shims
-' > app/packages/teams/package.yml
-
-echo '
-enforce_dependencies: true
-enforce_privacy: false
-dependencies:
-- app/packages/rails_shims
-- app/packages/teams
-' > app/packages/teams_admin/package.yml
-
-echo '
-enforce_dependencies: true
-enforce_privacy: false
-dependencies:
-- app/packages/rails_shims
-' > app/packages/welcome_ui/package.yml
+bin/packs add_dependency app/packages/games app/packages/rails_shims
+bin/packs add_dependency app/packages/games_admin app/packages/rails_shims
+bin/packs add_dependency app/packages/prediction_ui app/packages/rails_shims
+bin/packs add_dependency app/packages/teams app/packages/rails_shims
+bin/packs add_dependency app/packages/teams_admin app/packages/rails_shims
+bin/packs add_dependency app/packages/welcome_ui app/packages/rails_shims

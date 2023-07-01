@@ -67,6 +67,14 @@ resources:
     regexp: c2s06-(.*)\.tgz
     access_key_id: ((aws_key))
     secret_access_key: ((aws_secret))
+- name: c2s07-code
+  type: s3
+  source:
+    endpoint: ((s3_endpoint))
+    bucket: ((s3_bucket))
+    regexp: c2s07-(.*)\.tgz
+    access_key_id: ((aws_key))
+    secret_access_key: ((aws_secret))
 - name: c4s01-code
   type: s3
   source:
@@ -179,30 +187,6 @@ resources:
     regexp: c6s04-2b-(.*)\.tgz
     access_key_id: ((aws_key))
     secret_access_key: ((aws_secret))
-- name: c7s01-code
-  type: s3
-  source:
-    endpoint: ((s3_endpoint))
-    bucket: ((s3_bucket))
-    regexp: c7s01-(.*)\.tgz
-    access_key_id: ((aws_key))
-    secret_access_key: ((aws_secret))
-- name: c7s02-code
-  type: s3
-  source:
-    endpoint: ((s3_endpoint))
-    bucket: ((s3_bucket))
-    regexp: c7s02-(.*)\.tgz
-    access_key_id: ((aws_key))
-    secret_access_key: ((aws_secret))
-- name: c7s03-code
-  type: s3
-  source:
-    endpoint: ((s3_endpoint))
-    bucket: ((s3_bucket))
-    regexp: c7s03-(.*)\.tgz
-    access_key_id: ((aws_key))
-    secret_access_key: ((aws_secret))
 
 
 
@@ -228,6 +212,8 @@ jobs:
   plan:
   - get: generator-scripts-repo
   - get: empty-apps
+    passed: [generate-empty-app]
+    trigger: true
   - task: c2s01-task
     file: generator-scripts-repo/generator_scripts/ci/transform-code.yml
     input_mapping:
@@ -254,7 +240,8 @@ jobs:
       app_code: c2s01-code
     params:
       CHAPTER: c2s01
-      PACKWERK_CHECK: true
+      EXPECT_NO_PACKAGE_TODO: true
+      SORBET: false
 
 
 
@@ -291,7 +278,8 @@ jobs:
       app_code: c2s02-code
     params:
       CHAPTER: c2s02
-      PACKWERK_CHECK: true
+      EXPECT_NO_PACKAGE_TODO: false
+      SORBET: false
 
 
 
@@ -328,7 +316,8 @@ jobs:
       app_code: c2s03-code
     params:
       CHAPTER: c2s03
-      PACKWERK_CHECK: true
+      EXPECT_NO_PACKAGE_TODO: false
+      SORBET: false
 
 
 
@@ -364,7 +353,8 @@ jobs:
       app_code: c2s04-code
     params:
       CHAPTER: c2s04
-      PACKWERK_CHECK: true
+      EXPECT_NO_PACKAGE_TODO: false
+      SORBET: false
 
 
 
@@ -401,7 +391,8 @@ jobs:
       app_code: c2s05-code
     params:
       CHAPTER: c2s05
-      PACKWERK_CHECK: true
+      EXPECT_NO_PACKAGE_TODO: false
+      SORBET: false
 
 
 
@@ -438,7 +429,47 @@ jobs:
       app_code: c2s06-code
     params:
       CHAPTER: c2s06
-      PACKWERK_CHECK: true
+      EXPECT_NO_PACKAGE_TODO: true
+      SORBET: false
+
+
+
+
+
+- name: c2s07
+  plan:
+  - get: generator-scripts-repo
+  - get: c2s06-code
+    passed: [c2s06]
+    trigger: true
+  - task: c2s07-task
+    file: generator-scripts-repo/generator_scripts/ci/transform-code.yml
+    input_mapping:
+      code_input: c2s06-code
+    output_mapping:
+      code_output: c2s07-code
+    params:
+      PREV_CHAPTER: c2s06
+      CHAPTER: c2s07
+  - put: c2s07-code
+    params:
+      file: "c2s07-code/c2s07-*.tgz"
+      acl: public-read
+
+- name: c2s07-test
+  plan:
+  - get: generator-scripts-repo
+  - get: c2s07-code
+    passed: [c2s07]
+    trigger: true
+  - task: c2s07-test-task
+    file: generator-scripts-repo/generator_scripts/ci/run-tests.yml
+    input_mapping:
+      app_code: c2s07-code
+    params:
+      CHAPTER: c2s07
+      EXPECT_NO_PACKAGE_TODO: true
+      SORBET: false
 
 
 
@@ -446,17 +477,17 @@ jobs:
 - name: c4s01
   plan:
   - get: generator-scripts-repo
-  - get: c2s06-code
-    passed: [c2s06]
+  - get: c2s07-code
+    passed: [c2s07]
     trigger: true
   - task: c4s01-task
     file: generator-scripts-repo/generator_scripts/ci/transform-code.yml
     input_mapping:
-      code_input: c2s06-code
+      code_input: c2s07-code
     output_mapping:
       code_output: c4s01-code
     params:
-      PREV_CHAPTER: c2s06
+      PREV_CHAPTER: c2s07
       CHAPTER: c4s01
   - put: c4s01-code
     params:
@@ -475,7 +506,8 @@ jobs:
       app_code: c4s01-code
     params:
       CHAPTER: c4s01
-      PACKWERK_CHECK: true
+      EXPECT_NO_PACKAGE_TODO: false
+      SORBET: false
 
 
 
@@ -483,17 +515,17 @@ jobs:
 - name: c4s02
   plan:
   - get: generator-scripts-repo
-  - get: c2s06-code
-    passed: [c2s06]
+  - get: c2s07-code
+    passed: [c2s07]
     trigger: true
   - task: c4s02-task
     file: generator-scripts-repo/generator_scripts/ci/transform-code.yml
     input_mapping:
-      code_input: c2s06-code
+      code_input: c2s07-code
     output_mapping:
       code_output: c4s02-code
     params:
-      PREV_CHAPTER: c2s06
+      PREV_CHAPTER: c2s07
       CHAPTER: c4s02
   - put: c4s02-code
     params:
@@ -512,7 +544,8 @@ jobs:
       app_code: c4s02-code
     params:
       CHAPTER: c4s02
-      PACKWERK_CHECK: true
+      EXPECT_NO_PACKAGE_TODO: true
+      SORBET: false
 
 
 
@@ -549,7 +582,8 @@ jobs:
       app_code: c4s03-code
     params:
       CHAPTER: c4s03
-      PACKWERK_CHECK: true
+      EXPECT_NO_PACKAGE_TODO: true
+      SORBET: false
 
 
 
@@ -557,17 +591,17 @@ jobs:
   plan:
   - get: generator-scripts-repo
     trigger: false
-  - get: c2s06-code
-    passed: [c2s06]
+  - get: c2s07-code
+    passed: [c2s07]
     trigger: true
   - task: c5s07-1-task
     file: generator-scripts-repo/generator_scripts/ci/transform-code.yml
     input_mapping:
-      code_input: c2s06-code
+      code_input: c2s07-code
     output_mapping:
       code_output: c5s07-1-code
     params:
-      PREV_CHAPTER: c2s06
+      PREV_CHAPTER: c2s07
       CHAPTER: c5s07-1
   - put: c5s07-1-code
     params:
@@ -586,7 +620,8 @@ jobs:
       app_code: c5s07-1-code
     params:
       CHAPTER: c5s07-1
-      PACKWERK_CHECK: true
+      EXPECT_NO_PACKAGE_TODO: true
+      SORBET: false
 
 
 
@@ -624,8 +659,8 @@ jobs:
       app_code: c5s07-2-code
     params:
       CHAPTER: c5s07-2
-      PACKWERK_CHECK: true
-      # SORBET: true
+      EXPECT_NO_PACKAGE_TODO: false
+      SORBET: true
 
 
 
@@ -663,8 +698,8 @@ jobs:
       app_code: c5s07-3-code
     params:
       CHAPTER: c5s07-3
-      PACKWERK_CHECK: true
-      # SORBET: true
+      EXPECT_NO_PACKAGE_TODO: true
+      SORBET: true
 
 
 
@@ -700,7 +735,8 @@ jobs:
       app_code: c5s08-code
     params:
       CHAPTER: c5s08
-      PACKWERK_CHECK: true
+      EXPECT_NO_PACKAGE_TODO: true
+      SORBET: true
 
 
 
@@ -737,7 +773,8 @@ jobs:
       app_code: c5s09-code
     params:
       CHAPTER: c5s09
-      PACKWERK_CHECK: true
+      EXPECT_NO_PACKAGE_TODO: true
+      SORBET: true
 
 
 
@@ -775,8 +812,8 @@ jobs:
       app_code: c6s01-code
     params:
       CHAPTER: c6s01
-      PACKWERK_CHECK: true
-      # SORBET: true
+      EXPECT_NO_PACKAGE_TODO: true
+      SORBET: true
 
 - name: c6s02
   plan:
@@ -811,8 +848,8 @@ jobs:
       app_code: c6s02-code
     params:
       CHAPTER: c6s02
-      PACKWERK_CHECK: true
-      # SORBET: true
+      EXPECT_NO_PACKAGE_TODO: true
+      SORBET: true
 
 - name: c6s03
   plan:
@@ -847,8 +884,8 @@ jobs:
       app_code: c6s03-code
     params:
       CHAPTER: c6s03
-      PACKWERK_CHECK: true
-      # SORBET: true
+      EXPECT_NO_PACKAGE_TODO: true
+      SORBET: true
 
 - name: c6s04-1
   plan:
@@ -883,8 +920,8 @@ jobs:
       app_code: c6s04-1-code
     params:
       CHAPTER: c6s04-1
-      PACKWERK_CHECK: true
-      # SORBET: true
+      EXPECT_NO_PACKAGE_TODO: true
+      SORBET: true
 
 - name: c6s04-2a
   plan:
@@ -919,8 +956,8 @@ jobs:
       app_code: c6s04-2a-code
     params:
       CHAPTER: c6s04-2a
-      PACKWERK_CHECK: true
-      # SORBET: true
+      EXPECT_NO_PACKAGE_TODO: true
+      SORBET: true
 
 - name: c6s04-2b
   plan:
@@ -955,115 +992,5 @@ jobs:
       app_code: c6s04-2b-code
     params:
       CHAPTER: c6s04-2b
-      PACKWERK_CHECK: true
-      # SORBET: true
-
-
-
-
-- name: c7s01
-  plan:
-  - get: generator-scripts-repo
-    trigger: false
-  - get: c2s06-code
-    # passed: [c2s06]
-    trigger: true
-  - task: c7s01-task
-    file: generator-scripts-repo/generator_scripts/ci/transform-code.yml
-    input_mapping:
-      code_input: c2s06-code
-    output_mapping:
-      code_output: c7s01-code
-    params:
-      PREV_CHAPTER: c2s06
-      CHAPTER: c7s01
-  - put: c7s01-code
-    params:
-      file: "c7s01-code/c7s01-*.tgz"
-      acl: public-read
-
-- name: c7s01-test
-  plan:
-  - get: generator-scripts-repo
-  - get: c7s01-code
-    passed: [c7s01]
-    trigger: true
-  - task: c7s01-test-task
-    file: generator-scripts-repo/generator_scripts/ci/run-tests.yml
-    input_mapping:
-      app_code: c7s01-code
-    params:
-      CHAPTER: c7s01
-      PACKWERK_CHECK: true
-      # SORBET: true
-- name: c7s02
-  plan:
-  - get: generator-scripts-repo
-    trigger: false
-  - get: c7s01-code
-    passed: [c7s01]
-    trigger: true
-  - task: c7s02-task
-    file: generator-scripts-repo/generator_scripts/ci/transform-code.yml
-    input_mapping:
-      code_input: c7s01-code
-    output_mapping:
-      code_output: c7s02-code
-    params:
-      PREV_CHAPTER: c7s01
-      CHAPTER: c7s02
-  - put: c7s02-code
-    params:
-      file: "c7s02-code/c7s02-*.tgz"
-      acl: public-read
-
-- name: c7s02-test
-  plan:
-  - get: generator-scripts-repo
-  - get: c7s02-code
-    passed: [c7s02]
-    trigger: true
-  - task: c7s02-test-task
-    file: generator-scripts-repo/generator_scripts/ci/run-tests.yml
-    input_mapping:
-      app_code: c7s02-code
-    params:
-      CHAPTER: c7s02
-      PACKWERK_CHECK: true
-      SORBET: true
-
-- name: c7s03
-  plan:
-  - get: generator-scripts-repo
-    trigger: false
-  - get: c7s02-code
-    passed: [c7s02]
-    trigger: true
-  - task: c7s03-task
-    file: generator-scripts-repo/generator_scripts/ci/transform-code.yml
-    input_mapping:
-      code_input: c7s02-code
-    output_mapping:
-      code_output: c7s03-code
-    params:
-      PREV_CHAPTER: c7s02
-      CHAPTER: c7s03
-  - put: c7s03-code
-    params:
-      file: "c7s03-code/c7s03-*.tgz"
-      acl: public-read
-
-- name: c7s03-test
-  plan:
-  - get: generator-scripts-repo
-  - get: c7s03-code
-    passed: [c7s03]
-    trigger: true
-  - task: c7s03-test-task
-    file: generator-scripts-repo/generator_scripts/ci/run-tests.yml
-    input_mapping:
-      app_code: c7s03-code
-    params:
-      CHAPTER: c7s03
-      PACKWERK_CHECK: true
+      EXPECT_NO_PACKAGE_TODO: true
       SORBET: true

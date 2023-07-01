@@ -11,42 +11,11 @@ set -e
 #
 ###############################################################################
 
-echo '
-enforce_dependencies: true
-enforce_privacy: false
-dependencies:
-- app/packages/teams
-' > app/packages/games/package.yml
+bundle
 
-echo '
-enforce_dependencies: true
-enforce_privacy: false
-dependencies:
-- app/packages/games
-' > app/packages/games_admin/package.yml
-
-echo '
-enforce_dependencies: true
-enforce_privacy: false
-dependencies:
-- app/packages/games
-- app/packages/teams
-- app/packages/predictor
-' > app/packages/prediction_ui/package.yml
-
-echo '
-enforce_dependencies: true
-enforce_privacy: false
-' > app/packages/teams/package.yml
-
-echo '
-enforce_dependencies: true
-enforce_privacy: false
-dependencies:
-- app/packages/teams
-' > app/packages/teams_admin/package.yml
-
-echo '
-enforce_dependencies: true
-enforce_privacy: false
-' > app/packages/welcome_ui/package.yml
+bin/packs add_dependency app/packages/games app/packages/teams
+bin/packs add_dependency app/packages/games_admin app/packages/games
+bin/packs add_dependency app/packages/prediction_ui app/packages/games
+bin/packs add_dependency app/packages/prediction_ui app/packages/teams
+bin/packs add_dependency app/packages/prediction_ui app/packages/predictor
+bin/packs add_dependency app/packages/teams_admin app/packages/teams

@@ -12,6 +12,15 @@ set -e
 #
 ###############################################################################
 
+echo "
+gem 'packwerk-extensions'
+" >> Gemfile
+
+echo "
+require:
+  - packwerk-extensions
+" >> packwerk.yml
+
 rm packages/prediction_ui/app/services/prediction_ui.rb
 rm config/initializers/configure_prediction_ui.rb
 

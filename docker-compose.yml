@@ -5,7 +5,7 @@ services:
     image: jkarlos/git-server-docker
     restart: always
     ports:
-      - "22:22"
+      - "2222:22"
     volumes:
       - ./docker/git-server/keys:/git-server/keys
       - ./docker/git-server/repos:/git-server/repos
@@ -48,14 +48,14 @@ services:
         max-size: "10m"
 
   concourse-web:
-    image: rdclda/concourse:7.8.3
+    image: concourse/concourse:7.9.1
     command: web
     links: [ concourse-db ]
     depends_on: [ concourse-db ]
     ports: [ "8080:8080" ]
     volumes: [ "./docker/keys/web:/concourse-keys" ]
     environment:
-      CONCOURSE_EXTERNAL_URL: http://localhost:8080
+      CONCOURSE_EXTERNAL_URL: http://concourse-server.local:8080
       CONCOURSE_POSTGRES_HOST: concourse-db
       CONCOURSE_POSTGRES_USER: concourse_user
       CONCOURSE_POSTGRES_PASSWORD: concourse_pass
@@ -67,7 +67,7 @@ services:
       CONCOURSE_TSA_CLIENT_SECRET: Y29uY291cnNlLXdvcmtlcgo=
       CONCOURSE_X_FRAME_OPTIONS: allow
       CONCOURSE_CONTENT_SECURITY_POLICY: "*"
-      CONCOURSE_CLUSTER_NAME: arm64
+      CONCOURSE_CLUSTER_NAME: concourse
     logging:
       driver: "json-file"
       options:
@@ -75,7 +75,7 @@ services:
         max-size: "10m"
 
   worker:
-    image: rdclda/concourse:7.8.3
+    image: concourse/concourse:7.9.1
     command: worker
     privileged: true
     depends_on: [ concourse-web ]

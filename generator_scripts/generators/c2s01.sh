@@ -13,7 +13,7 @@ set -e
 
 echo "
 gem 'packwerk', group: [:development, :test]
-gem 'pocky', group: [:development, :test], github: 'shageman/pocky', branch: 'main'
+gem 'use_packs'
 gem 'rspec-rails', group: [:development, :test]
 gem 'shoulda-matchers', group: [:test]
 gem 'slim-rails'
@@ -21,6 +21,8 @@ gem 'trueskill'
 " >> Gemfile
 
 bundle install --local
+
+bundle binstub use_packs packwerk
 
 rm -rf test
 rails generate rspec:install
@@ -110,4 +112,5 @@ done
 
 set -x
 
-bundle exec packwerk init
+bin/packwerk init
+

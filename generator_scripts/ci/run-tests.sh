@@ -4,9 +4,9 @@ set -v
 set -x
 set -e
 
-# mkdir -p gems
-# export GEM_HOME=`pwd`/gems
-# echo $GEM_HOME
+apt-get -y update
+apt-get -y install ack graphviz make build-essential git
+
 export SRB_PATH="/tmp/build/$(ls -1 /tmp/build)/gems/bin"
 export PATH="$SRB_PATH:$PATH"
 
@@ -19,17 +19,27 @@ bundle install --local
 
 rake db:create && rake db:migrate
 
+bin/rails zeitwerk:check
+
+
+## TESTS
 bundle exec rspec --exclude-pattern '**/system/**/*_spec.rb' `cat .rspec | tr '\n' ' '`
+echo 'puts defined?(TeamRecord) ? TeamRecord.count : Team.count' | bundle exec rails c
 
-bundle exec packwerk validate
 
-echo 'puts Team.count' | bundle exec rails c
-
-if [[ ! -z "$SORBET" ]]; then
+## TYPING
+if [[ "$SORBET" = "true" ]]; then
   bundle exec ruby -e 'require "rbconfig"; pp RbConfig::CONFIG' | grep "cpu"
-  bundle exec srb tc --verbose
+  SRB_SORBET_EXE=/usr/local/bin/sorbet bundle exec srb tc
 fi
 
-if [[ ! -z "$PACKWERK_CHECK" ]]; then
-  bundle exec packwerk check
+
+## PACKWERK
+bin/packwerk validate
+bin/packwerk check
+if [[ "$EXPECT_NO_PACKAGE_TODO" = "true" ]]; then
+  [ "$(find . -name 'package_todo.yml')" ] && exit 1 || echo "No package todo found"
+else
+  [ "$(find . -name 'package_todo.yml')" ] && echo "Found package todo files!" || exit 1 
+  find . -name 'package_todo.yml'
 fi

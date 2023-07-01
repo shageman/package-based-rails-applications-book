@@ -15,26 +15,24 @@ bundle install --local
 
 sed -i "/spec.require_paths/a\\  spec.add_development_dependency 'zeitwerk'" testgem/testgem.gemspec
 
-echo "# frozen_string_literal: true
 
-if defined?(Rails)
-  require 'testgem/engine'
-else
-  require 'zeitwerk'
-  loader = Zeitwerk::Loader.new
-  loader.tag = File.basename(__FILE__, '.rb')
-  loader.inflector = Zeitwerk::GemInflector.new(__FILE__)
-  app_paths = Dir.glob(File.expand_path(File.join(__dir__, '../app', '/*')))
-  app_paths.each { |k| loader.push_dir(k) }
-  loader.setup
+
+sed -i "/require_relative '..\/app\/services\/testgem\/sample'/d" testgem/lib/testgem.rb
+sed -i "/frozen_string_literal/a\ \n\
+if defined?(Rails)\n\
+  require 'testgem/engine'\n\
+else\n\
+  require 'zeitwerk'\n\
+  loader = Zeitwerk::Loader.new\n\
+  loader.tag = File.basename(__FILE__, '.rb')\n\
+  loader.inflector = Zeitwerk::GemInflector.new(__FILE__)\n\
+  app_paths = Dir.glob(File.expand_path(File.join(__dir__, '../app', '/*')))\n\
+  app_paths.each { |k| loader.push_dir(k) }\n\
+  loader.setup\n\
 end
+" testgem/lib/testgem.rb
 
-require_relative 'testgem/version'
-
-module Testgem
-  class Error < StandardError; end
-  # Your code goes here...
-end" > testgem/lib/testgem.rb
+cat testgem/lib/testgem.rb
 
 echo "module Testgem
   class Engine < ::Rails::Engine
@@ -46,3 +44,5 @@ cd testgem
 bundle
 rake spec
 cd ..
+
+echo 'enforce_dependencies: true' > testgem/package.yml

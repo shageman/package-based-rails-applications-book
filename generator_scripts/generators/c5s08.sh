@@ -34,7 +34,6 @@ end
 
 echo '
 enforce_dependencies: true
-enforce_privacy: false
 dependencies:
 - packages/games
 - packages/rails_shims
@@ -48,7 +47,6 @@ end
 ' > config/initializers/register_services.rb
 
 echo 'enforce_dependencies: true
-enforce_privacy: false
 dependencies:
 - packages/predictor_interface
 ' > packages/predictor/package.yml
@@ -56,9 +54,7 @@ dependencies:
 mkdir -p packages/service_locator/app/public
 mkdir -p packages/service_locator/spec
 
-echo 'enforce_dependencies: true
-enforce_privacy: true
-' > packages/service_locator/package.yml
+echo 'enforce_dependencies: true' > packages/service_locator/package.yml
 
 echo '# typed: true
 
@@ -106,7 +102,6 @@ end
 
 echo '
 enforce_dependencies: true
-enforce_privacy: false
 dependencies:
 - packages/predictor_interface
 - packages/rails_shims
@@ -115,7 +110,6 @@ dependencies:
 
 echo '
 enforce_dependencies: true
-enforce_privacy: false
 dependencies:
 - packages/predictor_interface
 - packages/rails_shims
@@ -123,7 +117,6 @@ dependencies:
 
 echo '
 enforce_dependencies: true
-enforce_privacy: false
 dependencies:
 - packages/predictor
 - packages/service_locator

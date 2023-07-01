@@ -20,29 +20,15 @@ rails plugin new testengine \
 rm -rf testengine/.git
 rm -rf testengine/.gitignore
 
-echo "require_relative 'lib/testengine/version'
 
-Gem::Specification.new do |spec|
-  spec.name        = 'testengine'
-  spec.version     = Testengine::VERSION
-  spec.authors     = ['Stephan Hagemann']
-  spec.email       = ['stephan.hagemann@gmail.com']
-  spec.homepage    = ''
-  spec.summary     = 'Summary of Testengine.'
-  spec.description = 'Description of Testengine.'
-  spec.license     = 'MIT'
 
-  # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
-  # to allow pushing to a single host or delete this section to allow pushing to any host.
-  spec.metadata['allowed_push_host'] = 'TODO: Set to \'http://mygemserver.com\''
+sed -i "/spec.metadata\[.homepage_uri.\]/d" testengine/testengine.gemspec
+sed -i "/spec.metadata\[.source_code_uri.\]/d" testengine/testengine.gemspec
+sed -i "/spec.metadata\[.changelog_uri.\]/d" testengine/testengine.gemspec
+sed -i "/allowed_push_host/c\  spec.metadata['allowed_push_host'] = 'http://nowhere.atall'" testengine/testengine.gemspec
+sed -i "s/TODO: //g" testengine/testengine.gemspec
+sed -i "s/TODO//g" testengine/testengine.gemspec
 
-  spec.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
 
-  spec.add_dependency 'rails', '~> 7.0.0'
-end
-" > testengine/testengine.gemspec
 
-echo '
-enforce_dependencies: true
-enforce_privacy: false
-' > testengine/package.yml
+echo 'enforce_dependencies: true' > testengine/package.yml

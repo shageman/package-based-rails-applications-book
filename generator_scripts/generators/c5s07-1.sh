@@ -36,6 +36,7 @@ echo 'class PredictionsController < ApplicationController
   end
 
   def create
+    predictor = PredictionUi.predictor
     predictor.learn(Team.all, Game.all)
     @prediction = predictor.predict(
         Team.find(params["first_team"]["id"]),
@@ -46,7 +47,6 @@ end
 
 echo '
 enforce_dependencies: true
-enforce_privacy: false
 dependencies:
 - packages/rails_shims
 - packages/games
@@ -55,7 +55,6 @@ dependencies:
 
 echo '
 enforce_dependencies: true
-enforce_privacy: false
 dependencies:
 - packages/prediction_ui
 - packages/predictor

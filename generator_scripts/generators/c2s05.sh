@@ -36,10 +36,10 @@ done
 sed -i "/config.paths.add 'app\/packages'/d" config/application.rb
 sed -i "/config.eager_load_paths/a\    config.paths.add 'packages', glob: '*\/app\/{*,*\/concerns}', eager_load: true" config/application.rb
 
-echo "class ApplicationController < ActionController::Base
-  append_view_path(Dir.glob(Rails.root.join('packages/*/app/views')))
-end
-" > packages/rails_shims/app/controllers/application_controller.rb
+
+sed -i "/append_view_path/c\  append_view_path(Dir.glob(Rails.root.join('packages\/*\/app\/views')))" packages/rails_shims/app/controllers/application_controller.rb
+
+
 
 sed -i '/Adjust RSpec configuration for package folder structure/,+16d' spec/spec_helper.rb
 
@@ -63,57 +63,19 @@ end
 
 
 
-echo '
-enforce_dependencies: true
-enforce_privacy: false
-dependencies:
-- packages/rails_shims
-- packages/teams
-' > packages/games/package.yml
+sed -i "s/app\///g" packages/games/package.yml
+sed -i "s/app\///g" packages/games_admin/package.yml
+sed -i "s/app\///g" packages/prediction_ui/package.yml
+sed -i "s/app\///g" packages/teams/package.yml
+sed -i "s/app\///g" packages/teams_admin/package.yml
+sed -i "s/app\///g" packages/welcome_ui/package.yml
 
 echo '
-enforce_dependencies: true
-enforce_privacy: false
-dependencies:
-- packages/rails_shims
-- packages/games
-' > packages/games_admin/package.yml
-
-echo '
-enforce_dependencies: true
-enforce_privacy: false
-dependencies:
-- packages/rails_shims
-- packages/games
-- packages/teams
-- packages/predictor
-' > packages/prediction_ui/package.yml
-
-echo '
-enforce_dependencies: true
-enforce_privacy: false
-dependencies:
-- packages/rails_shims
-' > packages/teams/package.yml
-
-echo '
-enforce_dependencies: true
-enforce_privacy: false
-dependencies:
-- packages/rails_shims
-- packages/teams
-' > packages/teams_admin/package.yml
-
-echo '
-enforce_dependencies: true
-enforce_privacy: false
-dependencies:
-- packages/rails_shims
-' > packages/welcome_ui/package.yml
-
-
-
-echo '--require spec_helper
 --default-path packages
 -I spec
-' > .rspec
+' >> .rspec
+
+echo "pack_paths:
+- packages/*
+- .
+" > packs.yml

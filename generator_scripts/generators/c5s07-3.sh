@@ -100,7 +100,7 @@ class Predictor
     @teams_lookup = teams.inject({}) do |memo, team|
       memo[team.id] = TeamLookup.new(
         team: team,
-        rating: Saulabs::TrueSkill::Rating.new(1500.0, 1000.0, 1.0)
+        rating: ::Saulabs::TrueSkill::Rating.new(1500.0, 1000.0, 1.0)
       )
       memo
     end
@@ -111,7 +111,7 @@ class Predictor
       game_result = game.winning_team == 1 ?
           [[first_team_rating], [second_team_rating]] :
           [[second_team_rating], [first_team_rating]]
-        Saulabs::TrueSkill::FactorGraph.new(game_result, [1, 2]).update_skills
+        ::Saulabs::TrueSkill::FactorGraph.new(game_result, [1, 2]).update_skills
     end
   end
 
@@ -133,7 +133,7 @@ class Predictor
 
   class TeamLookup < T::Struct
     const :team, Contender
-    const :rating, Saulabs::TrueSkill::Rating
+    const :rating, ::Saulabs::TrueSkill::Rating
   end
   private_constant :TeamLookup
 end
@@ -180,18 +180,15 @@ end
 
 
 echo 'enforce_dependencies: true
-enforce_privacy: false
 dependencies:
 - packages/predictor_interface
 ' > packages/predictor/package.yml
 
 echo 'enforce_dependencies: true
-enforce_privacy: true
 ' > packages/predictor_interface/package.yml
 
 echo '
 enforce_dependencies: true
-enforce_privacy: false
 dependencies:
 - packages/predictor_interface
 - packages/rails_shims
@@ -199,7 +196,6 @@ dependencies:
 
 echo '
 enforce_dependencies: true
-enforce_privacy: false
 dependencies:
 - packages/predictor_interface
 - packages/rails_shims
@@ -208,7 +204,6 @@ dependencies:
 
 echo '
 enforce_dependencies: true
-enforce_privacy: false
 dependencies:
 - packages/games
 - packages/predictor_interface

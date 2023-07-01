@@ -172,7 +172,6 @@ end
 ' > packages/rails_shims/app/controllers/application_controller.rb
 
 echo 'enforce_dependencies: true
-enforce_privacy: false
 dependencies:
 - packages/games
 - packages/teams
@@ -180,7 +179,6 @@ dependencies:
 ' > packages/prediction_needed_subscriber/package.yml
 
 echo 'enforce_dependencies: true
-enforce_privacy: false
 dependencies:
 - packages/games
 - packages/rails_shims
@@ -189,7 +187,6 @@ dependencies:
 
 echo '
 enforce_dependencies: true
-enforce_privacy: false
 dependencies:
 - packages/prediction_needed_subscriber
 - packages/prediction_ui

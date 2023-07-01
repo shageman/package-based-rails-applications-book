@@ -64,27 +64,19 @@ mkdir -p spec/packages/prediction_ui/helpers; mv spec/helpers/predictions_helper
 
 find . -type d -empty -delete
 
-echo "enforce_dependencies: true
-enforce_privacy: false" > app/packages/games/package.yml
-echo "enforce_dependencies: true
-enforce_privacy: false" > app/packages/games_admin/package.yml
-echo "enforce_dependencies: true
-enforce_privacy: false" > app/packages/prediction_ui/package.yml
-echo "enforce_dependencies: true
-enforce_privacy: false" > app/packages/predictor/package.yml
-echo "enforce_dependencies: true
-enforce_privacy: false" > app/packages/teams/package.yml
-echo "enforce_dependencies: true
-enforce_privacy: false" > app/packages/teams_admin/package.yml
-echo "enforce_dependencies: true
-enforce_privacy: false" > app/packages/welcome_ui/package.yml
+echo "enforce_dependencies: true" > app/packages/games/package.yml
+echo "enforce_dependencies: true" > app/packages/games_admin/package.yml
+echo "enforce_dependencies: true" > app/packages/prediction_ui/package.yml
+echo "enforce_dependencies: true" > app/packages/predictor/package.yml
+echo "enforce_dependencies: true" > app/packages/teams/package.yml
+echo "enforce_dependencies: true" > app/packages/teams_admin/package.yml
+echo "enforce_dependencies: true" > app/packages/welcome_ui/package.yml
+
+
 
 sed -i "/config.eager_load_paths/a\    config.paths.add 'app/packages', glob: '*/{*,*/concerns}', eager_load: true" config/application.rb
 
-echo "class ApplicationController < ActionController::Base
-  append_view_path(Dir.glob(Rails.root.join('app/packages/*/views')))
-end
-" > app/controllers/application_controller.rb
+sed -i "/ApplicationController/a\  append_view_path(Dir.glob(Rails.root.join('app\/packages\/*\/views')))" app/controllers/application_controller.rb
 
 echo "
 # Adjust RSpec configuration for package folder structure
@@ -104,22 +96,15 @@ RSpec.configure do |config|
 end
 " >> spec/spec_helper.rb
 
-echo '# See: Setting up the configuration file
-# https://github.com/Shopify/packwerk/blob/main/USAGE.md#setting-up-the-configuration-file
+bundle install --local
 
-# List of patterns for folder paths to include
-# include:
-# - "**/*.{rb,rake,erb}"
 
-# List of patterns for folder paths to exclude
-exclude:
-- "{bin,node_modules,script,tmp,vendor}/**/*"
-- "**/lib/tasks/**/*.rake"
+# Uncomment default excludes and add exlude for rake tasks
+sed -i "s/# exclude:/exclude:/g" packwerk.yml
+sed -i "/bin,node_modules/c\- '{bin,node_modules,script,tmp,vendor}\/**\/*'" packwerk.yml
+sed -i "/exclude:/a\- '**\/lib\/tasks\/**\/*.rake'" packwerk.yml
 
-# Patterns to find package configuration files
-# package_paths: "**/"
-
-# List of custom associations, if any
-# custom_associations:
-# - "cache_belongs_to"
-' > packwerk.yml
+echo "pack_paths:
+- app/packages/*
+- .
+" > packs.yml

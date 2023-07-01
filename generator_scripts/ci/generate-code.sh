@@ -5,7 +5,7 @@ set -x
 set -e
 
 apt-get -y update
-apt-get -y install ack graphviz
+apt-get -y install ack graphviz make build-essential git
 
 gem install bundler -v 2.3.4
 gem install rails
@@ -31,8 +31,6 @@ echo '
 
 gem "image_processing", "~> 1.2"
 gem "jquery-rails", "4.3.1"
-gem "packwerk", group: [:development, :test]
-gem "pocky", group: [:development, :test], github: "shageman/pocky", branch: "main"
 gem "rspec-rails", group: [:development, :test]
 gem "shoulda-matchers", group: [:test]
 gem "slim-rails"
@@ -41,7 +39,21 @@ gem "sorbet", ">=0.5.10461", :group => :development
 gem "trueskill"
 gem "tapioca"
 gem "sorbet-rails"
-gem "stimpack"
+
+## Add all RubyAtScale gems
+gem "packwerk", group: [:development, :test]
+gem "code_ownership"
+gem "pack_stats"
+gem "visualize_packwerk"
+gem "parse_packwerk"
+gem "packs"
+gem "packwerk-extensions"
+gem "use_packs"
+gem "rubocop-packs"
+gem "code_teams"
+gem "danger-packwerk"
+gem "packs-rails"
+gem "code_manifest"
 ' >> Gemfile
 
 sed -i "s/gem.*tzinfo-data.*/gem 'tzinfo-data'/g" Gemfile
@@ -60,4 +72,4 @@ sed -i '/### GEMS NEEDED LATER/,+100d' Gemfile
 
 cd ..
 
-tar --exclude='tmp/*' -zcf app_`date +%Y%m%d%H%M%S`_$RAILSVERSION.tgz sportsball; echo "zipping done"
+tar --exclude='tmp/*' -zcf app-`date +%Y%m%d%H%M%S`_$RAILSVERSION.tgz sportsball; echo "zipping done"

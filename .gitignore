@@ -10,13 +10,15 @@ docker/git-server
 
 docker/minio/*
 !docker/minio/data
+
 docker/minio/data/*
 !docker/minio/data/releases
+
 docker/minio/data/releases/*
 !docker/minio/data/releases/app*
 
 tmp
 experiments
+docker
 sportsball
-
-*.tgz
+.tgz

@@ -11,7 +11,7 @@ export SRB_PATH="/tmp/build/$(ls -1 /tmp/build)/gems/bin"
 export PATH="$SRB_PATH:$PATH"
 
 apt-get -y update
-apt-get -y install ack graphviz
+apt-get -y install ack graphviz make build-essential git
 
 gem install bundler -v 2.3.4
 
@@ -23,10 +23,10 @@ cp -r VENDORED_GEMS/* vendor/cache/ # get our saved local gems back
 
 ../../generator-scripts-repo/generator_scripts/generators/$CHAPTER.sh
 
-find . -iname 'deprecated_references.yml' -delete
+find . -iname 'package_todo.yml' -delete
 bundle install --local
-bundle exec packwerk update-deprecations
-bin/rake pocky:generate[root]
+bin/packwerk update
+bin/packs visualize
 
 cd ..
 tar --exclude='tmp/*' --exclude='`pwd`/gems/*' -zcf $CHAPTER-`date +%Y%m%d%H%M%S`.tgz sportsball; echo "zipping done"

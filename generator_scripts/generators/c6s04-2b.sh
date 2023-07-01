@@ -13,13 +13,32 @@ set -e
 
 rm packages/games/app/models/game.rb
 rm packages/games/app/models/game.rbi
-rm packages/games/deprecated_references.yml
 rm packages/games/spec/models/game_spec.rb
 
 sed -i 's/enforce_privacy: false/enforce_privacy: true/g' packages/games/package.yml
 
+sed -i '/^dependencies/a\  - packages\/teams' packages/games_admin/package.yml
+
 mkdir -p packages/games/app/public/
 mkdir -p packages/games/spec/public/
+
+echo '# typed: strict
+
+module HistoricalPerformanceIndicator
+  extend T::Sig
+  extend T::Helpers
+  interface!
+
+  sig { abstract.returns(T.nilable(Integer)) }
+  def first_team_id; end
+
+  sig { abstract.returns(T.nilable(Integer)) }
+  def second_team_id; end
+
+  sig { abstract.returns(T.nilable(Integer)) }
+  def winning_team; end
+end
+' > packages/predictor_interface/app/public/historical_performance_indicator.rb
 
 echo '# typed: false
 class GameRecord < ApplicationRecord
@@ -30,6 +49,21 @@ class GameRecord < ApplicationRecord
 
   validates :date, :location, :first_team_id, :second_team_id, :winning_team,
             :first_team_score, :second_team_score, presence: true
+
+  sig { returns(T.nilable(Integer)).override }
+  def first_team_id
+    self[:first_team_id]
+  end
+
+  sig { returns(T.nilable(Integer)).override }
+  def second_team_id
+    self[:second_team_id]
+  end
+
+  sig { returns(T.nilable(Integer)).override }
+  def winning_team
+    self[:winning_team]
+  end
 end
 ' > packages/games/app/models/game_record.rb
 
@@ -414,8 +448,8 @@ class GamesController < ApplicationController
   def create
     @game = GameRepository.add(Game.new(
         nil,
-        Team.new(game_params[:first_team_id], nil),
-        Team.new(game_params[:second_team_id], nil),
+        Team.new(game_params[:first_team_id].to_i, nil),
+        Team.new(game_params[:second_team_id].to_i, nil),
         game_params[:winning_team],
         game_params[:first_team_score],
         game_params[:second_team_score],
@@ -438,8 +472,8 @@ class GamesController < ApplicationController
   # PATCH/PUT /games/1 or /games/1.json
   def update
     respond_to do |format|
-      @game.first_team = TeamRepository.get(game_params[:first_team_id]) if game_params.has_key?("first_team_id")
-      @game.second_team = TeamRepository.get(game_params[:second_team_id]) if game_params.has_key?("second_team_id")
+      @game.first_team = TeamRepository.get(game_params[:first_team_id].to_i) if game_params.has_key?("first_team_id")
+      @game.second_team = TeamRepository.get(game_params[:second_team_id].to_i) if game_params.has_key?("second_team_id")
       @game.winning_team = game_params[:winning_team] if game_params.has_key?("winning_team")
       @game.first_team_score = game_params[:first_team_score] if game_params.has_key?("first_team_score")
       @game.second_team_score = game_params[:second_team_score] if game_params.has_key?("second_team_score")
@@ -636,8 +670,8 @@ class PredictionsController < ApplicationController
     predictor = Predictor.new
     predictor.learn(TeamRepository.list, GameRepository.list)
     @prediction = predictor.predict(
-        TeamRepository.get(params["first_team"]["id"]),
-        TeamRepository.get(params["second_team"]["id"]))
+        TeamRepository.get(params["first_team"]["id"].to_i),
+        TeamRepository.get(params["second_team"]["id"].to_i))
   end
 end
 ' > packages/prediction_ui/app/controllers/predictions_controller.rb
@@ -681,7 +715,7 @@ class Predictor
     @teams_lookup = teams.inject({}) do |memo, team|
       memo[team.id] = TeamLookup.new(
         team: team,
-        rating: Saulabs::TrueSkill::Rating.new(1500.0, 1000.0, 1.0)
+        rating: ::Saulabs::TrueSkill::Rating.new(1500.0, 1000.0, 1.0)
       )
       memo
     end
@@ -692,7 +726,7 @@ class Predictor
       game_result = game.winning_team == 1 ?
           [[first_team_rating], [second_team_rating]] :
           [[second_team_rating], [first_team_rating]]
-        Saulabs::TrueSkill::FactorGraph.new(game_result, [1, 2]).update_skills
+        ::Saulabs::TrueSkill::FactorGraph.new(game_result, [1, 2]).update_skills
     end
   end
 
@@ -714,7 +748,7 @@ class Predictor
 
   class TeamLookup < T::Struct
     const :team, Contender
-    const :rating, Saulabs::TrueSkill::Rating
+    const :rating, ::Saulabs::TrueSkill::Rating
   end
   private_constant :TeamLookup
 end
@@ -849,5 +883,3 @@ end
 ' > spec/support/object_creation_methods.rb
 
 bundle install --local
-
-yes | bin/rails sorbet:update:all

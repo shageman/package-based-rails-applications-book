@@ -18,39 +18,20 @@ bundle gem testgem --no-coc --no-ext --no-mit --no-rubocop --test=rspec --ci=git
 rm -rf testgem/.git
 rm -rf testgem/.gitignore
 
-echo "# frozen_string_literal: true
 
-require_relative 'lib/testgem/version'
 
-Gem::Specification.new do |spec|
-  spec.name          = 'testgem'
-  spec.version       = Testgem::VERSION
-  spec.authors       = ['Stephan Hagemann']
-  spec.email         = ['stephan.hagemann@gmail.com']
+sed -i "/spec.homepage/d" testgem/testgem.gemspec
+sed -i "/spec.metadata\[.homepage_uri.\]/d" testgem/testgem.gemspec
+sed -i "/spec.metadata\[.source_code_uri.\]/d" testgem/testgem.gemspec
+sed -i "/spec.metadata\[.changelog_uri.\]/d" testgem/testgem.gemspec
+sed -i "/allowed_push_host/c\  spec.metadata['allowed_push_host'] = 'http://nowhere.atall'" testgem/testgem.gemspec
+sed -i "s/TODO: //g" testgem/testgem.gemspec
+sed -i "s/TODO//g" testgem/testgem.gemspec
 
-  spec.summary       = 'Write a short summary, because RubyGems requires one.'
-  spec.description   = 'Write a longer description or delete this line.'
-  spec.required_ruby_version = '>= 2.4.0'
 
-  spec.metadata['allowed_push_host'] = 'Set to http://mygemserver.com'
 
-  spec.files = Dir.chdir(File.expand_path(__dir__)) do
-    \`git ls-files -z\`.split('\x0').reject { |f| f.match(%r{\A(?:test|spec|features)/}) }
-  end
-  spec.bindir        = 'exe'
-  spec.executables   = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
-  spec.require_paths = ['lib']
-end" > testgem/testgem.gemspec
+sed -i "/require_relative/a\require_relative '..\/app\/services\/testgem\/sample'" testgem/lib/testgem.rb
 
-echo "# frozen_string_literal: true
-
-require_relative 'testgem/version'
-require_relative '../app/services/testgem/sample'
-
-module Testgem
-  class Error < StandardError; end
-  # Your code goes here...
-end" > testgem/lib/testgem.rb
 
 mkdir -p testgem/app/services/testgem
 mkdir -p testgem/spec/services/testgem
@@ -80,3 +61,5 @@ rake spec
 cd ..
 
 echo "gem 'testgem', path: 'testgem'" >> Gemfile
+
+echo 'enforce_dependencies: true' > testgem/package.yml
