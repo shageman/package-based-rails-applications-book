@@ -11,5 +11,4 @@ packages/predictor:
     violations:
     - dependency
     files:
-    - packages/prediction_ui/app/controllers/predictions_controller.rb
     - packages/prediction_ui/app/services/prediction_ui.rb
