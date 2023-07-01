@@ -20,5 +20,4 @@ docker/minio/data/releases/*
 tmp
 experiments
 docker
-sportsball
 .tgz
