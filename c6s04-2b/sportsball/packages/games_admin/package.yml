@@ -1,4 +1,5 @@
 enforce_dependencies: true
 dependencies:
+  - packages/teams
   - packages/games
   - packages/rails_shims
