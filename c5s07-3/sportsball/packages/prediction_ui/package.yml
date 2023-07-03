@@ -1,8 +1,6 @@
-
 enforce_dependencies: true
 dependencies:
-- packages/games
-- packages/predictor_interface
-- packages/rails_shims
-- packages/teams
-
+  - packages/games
+  - packages/predictor_interface
+  - packages/rails_shims
+  - packages/teams

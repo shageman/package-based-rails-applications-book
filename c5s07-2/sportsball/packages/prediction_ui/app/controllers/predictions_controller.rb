@@ -11,4 +11,3 @@ class PredictionsController < ApplicationController
         Team.find(params["second_team"]["id"]))
   end
 end
-

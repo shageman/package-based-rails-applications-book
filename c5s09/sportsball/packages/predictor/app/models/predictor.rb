@@ -1,11 +1,9 @@
 # typed: strict
-
 require "saulabs/trueskill"
 
 class Predictor
   include PredictorInterface
   extend T::Sig
-
   sig {override.params(teams: T::Enumerable[Contender], games: T::Enumerable[HistoricalPerformanceIndicator]).void}
   def learn(teams, games)
     @teams_lookup = T.let({}, T.nilable(T::Hash[Integer, TeamLookup]))
@@ -23,7 +21,7 @@ class Predictor
       game_result = game.winning_team == 1 ?
           [[first_team_rating], [second_team_rating]] :
           [[second_team_rating], [first_team_rating]]
-        ::Saulabs::TrueSkill::FactorGraph.new(game_result, [1, 2]).update_skills
+      ::Saulabs::TrueSkill::FactorGraph.new(game_result, [1, 2]).update_skills
     end
   end
 
@@ -36,17 +34,15 @@ class Predictor
   end
 
   private
+  class TeamLookup < T::Struct
+    const :team, Contender
+    const :rating, ::Saulabs::TrueSkill::Rating
+  end
+  private_constant :TeamLookup
 
   sig {params(first_team: Contender, second_team: Contender).returns(T::Boolean)}
   def higher_mean_team(first_team, second_team)
     T.must(T.must(@teams_lookup)[first_team.id]).rating.mean >
         T.must(T.must(@teams_lookup)[second_team.id]).rating.mean
   end
-
-  class TeamLookup < T::Struct
-    const :team, Contender
-    const :rating, ::Saulabs::TrueSkill::Rating
-  end
-  private_constant :TeamLookup
 end
-

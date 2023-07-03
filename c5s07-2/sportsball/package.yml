@@ -1,6 +1,5 @@
-
 enforce_dependencies: true
+enforce_privacy: false
 dependencies:
-- packages/prediction_ui
-- packages/predictor
-
+  - packages/prediction_ui
+  - packages/predictor

@@ -83,3 +83,7 @@ gem 'trueskill'
 
 gem 'packs-rails'
 
+
+
+gem 'packwerk-extensions', group: :development
+

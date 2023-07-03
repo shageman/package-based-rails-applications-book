@@ -1,6 +1,4 @@
-
 enforce_dependencies: true
 dependencies:
-- packages/prediction_ui
-- packages/predictor
-
+  - packages/prediction_ui
+  - packages/predictor

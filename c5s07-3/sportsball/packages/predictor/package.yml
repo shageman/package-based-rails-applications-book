@@ -1,4 +1,3 @@
 enforce_dependencies: true
 dependencies:
-- packages/predictor_interface
-
+  - packages/predictor_interface
