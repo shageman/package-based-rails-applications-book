@@ -11,29 +11,17 @@ set -e
 #
 ###############################################################################
 
-mkdir -p packages/predictor_interface/app/public
-
-mv packages/predictor/app/models/prediction.rb packages/predictor_interface/app/public/prediction.rb
-
-echo '# typed: strict
-
-module PredictionUi
-  extend T::Sig
-
-  sig {params(predictor: PredictorInterface).void}
-  def self.configure(predictor)
-    @predictor = T.let(predictor, T.nilable(PredictorInterface))
-    # freeze
-  end
-
-  sig {returns(T.nilable(PredictorInterface))}
-  def self.predictor
-    @predictor
-  end
-end
-' > packages/prediction_ui/app/services/prediction_ui.rb
+sed -i '/Packs\/TypedPublicApis/,+2d' packages/predictor/package_rubocop.yml
+echo '
+Packs/TypedPublicApis:
+  Enabled: true' >> packages/predictor/package_rubocop.yml
 
 
+mkdir -p packages/predictor_interface/app/public/predictor
+
+mv packages/predictor/app/models/predictor/prediction.rb packages/predictor_interface/app/public/predictor/prediction.rb
+
+sed -i 's/Predictor::Predictor/PredictorInterface/g' packages/prediction_ui/app/services/prediction_ui.rb
 
 
 echo '# typed: strict
@@ -46,7 +34,7 @@ module PredictorInterface
   sig { abstract.params(teams: T::Enumerable[Contender], games: T::Enumerable[HistoricalPerformanceIndicator]).void }
   def learn(teams, games); end
 
-  sig { abstract.params(first_team: Contender, second_team: Contender).returns(Prediction) }
+  sig { abstract.params(first_team: Contender, second_team: Contender).returns(Predictor::Prediction) }
   def predict(first_team, second_team); end
 end
 ' > packages/predictor_interface/app/public/predictor_interface.rb
@@ -81,77 +69,39 @@ module HistoricalPerformanceIndicator
 end
 ' > packages/predictor_interface/app/public/historical_performance_indicator.rb
 
-# RUN EXAMPLE
 
 
+sed -i "1i # typed: strict" packages/predictor/app/public/predictor/predictor.rb
+sed -i '/class Predictor/a\    include PredictorInterface\
+    extend T::Sig' packages/predictor/app/public/predictor/predictor.rb
+
+sed -i '/def learn/s/^/    sig {override.params(teams: T::Enumerable[Contender], games: T::Enumerable[HistoricalPerformanceIndicator]).void}\n/' packages/predictor/app/public/predictor/predictor.rb
+sed -i '/def learn/a\      @teams_lookup = T.let({}, T.nilable(T::Hash[Integer, TeamLookup]))' packages/predictor/app/public/predictor/predictor.rb
+sed -i '/def predict/s/^/    sig {override.params(first_team: Contender, second_team: Contender).returns(Prediction)}\n/' packages/predictor/app/public/predictor/predictor.rb
+sed -i '/def higher_mean_team/s/^/  sig {params(first_team: Contender, second_team: Contender).returns(T::Boolean)}\n/' packages/predictor/app/public/predictor/predictor.rb
+sed -i '/private/a\    class TeamLookup < T::Struct\
+      const :team, Contender\
+      const :rating, ::Saulabs::TrueSkill::Rating\
+    end\
+    private_constant :TeamLookup' packages/predictor/app/public/predictor/predictor.rb
+sed -i 's/@teams_lookup\[first_team.id\]/T.must(T.must(@teams_lookup)[first_team.id])/g' packages/predictor/app/public/predictor/predictor.rb
+sed -i 's/@teams_lookup\[second_team.id\]/T.must(T.must(@teams_lookup)[second_team.id])/g' packages/predictor/app/public/predictor/predictor.rb
+sed -i 's/\[:team\]/.team/g' packages/predictor/app/public/predictor/predictor.rb
+sed -i 's/\[:rating\]/.rating/g' packages/predictor/app/public/predictor/predictor.rb
+sed -i '/memo\[team.id\] =/,+4d' packages/predictor/app/public/predictor/predictor.rb
+sed -i '/teams.inject/a\        memo[team.id] = TeamLookup.new(\
+          team: team,\
+          rating: ::Saulabs::TrueSkill::Rating.new(1500.0, 1000.0, 1.0)\
+        )\
+        memo' packages/predictor/app/public/predictor/predictor.rb
+
+cat packages/predictor/app/public/predictor/predictor.rb
+
+sed -i "1i # typed: strict" packages/teams/app/models/team.rb
+sed -i '/class Team/a\  include Contender\
+  extend T::Sig' packages/teams/app/models/team.rb
 
 
-echo '# typed: strict
-
-require "saulabs/trueskill"
-
-class Predictor
-  include PredictorInterface
-  extend T::Sig
-
-  sig {override.params(teams: T::Enumerable[Contender], games: T::Enumerable[HistoricalPerformanceIndicator]).void}
-  def learn(teams, games)
-    @teams_lookup = T.let({}, T.nilable(T::Hash[Integer, TeamLookup]))
-    @teams_lookup = teams.inject({}) do |memo, team|
-      memo[team.id] = TeamLookup.new(
-        team: team,
-        rating: ::Saulabs::TrueSkill::Rating.new(1500.0, 1000.0, 1.0)
-      )
-      memo
-    end
-
-    games.each do |game|
-      first_team_rating = @teams_lookup[game.first_team_id].rating
-      second_team_rating = @teams_lookup[game.second_team_id].rating
-      game_result = game.winning_team == 1 ?
-          [[first_team_rating], [second_team_rating]] :
-          [[second_team_rating], [first_team_rating]]
-        ::Saulabs::TrueSkill::FactorGraph.new(game_result, [1, 2]).update_skills
-    end
-  end
-
-  sig {override.params(first_team: Contender, second_team: Contender).returns(Prediction)}
-  def predict(first_team, second_team)
-    team1 = T.must(T.must(@teams_lookup)[first_team.id]).team
-    team2 = T.must(T.must(@teams_lookup)[second_team.id]).team
-    winner = higher_mean_team(first_team, second_team) ? team1 : team2
-    Prediction.new(team1, team2, winner)
-  end
-
-  private
-
-  sig {params(first_team: Contender, second_team: Contender).returns(T::Boolean)}
-  def higher_mean_team(first_team, second_team)
-    T.must(T.must(@teams_lookup)[first_team.id]).rating.mean >
-        T.must(T.must(@teams_lookup)[second_team.id]).rating.mean
-  end
-
-  class TeamLookup < T::Struct
-    const :team, Contender
-    const :rating, ::Saulabs::TrueSkill::Rating
-  end
-  private_constant :TeamLookup
-end
-' > packages/predictor/app/models/predictor.rb
-
-# RUN EXAMPLE
-
-
-
-
-echo '# typed: strict
-class Team < ApplicationRecord
-  include Contender
-  extend T::Sig
-
-  validates :name, presence: true
-end
-' > packages/teams/app/models/team.rb
 
 echo '# typed: strict
 
@@ -167,50 +117,45 @@ class Game
 end
 ' > packages/games/app/models/game.rbi
 
-echo 'class Game < ApplicationRecord
-  include HistoricalPerformanceIndicator
-  extend T::Sig
 
-  validates :date, :location, :first_team, :second_team, :winning_team,
-            :first_team_score, :second_team_score, presence: true
-  belongs_to :first_team, class_name: "Team"
-  belongs_to :second_team, class_name: "Team"
-end
-' > packages/games/app/models/game.rb
-
-
-echo 'enforce_dependencies: true
-dependencies:
-- packages/predictor_interface
-' > packages/predictor/package.yml
-
-echo 'enforce_dependencies: true
-' > packages/predictor_interface/package.yml
-
-echo '
-enforce_dependencies: true
-dependencies:
-- packages/predictor_interface
-- packages/rails_shims
-' > packages/teams/package.yml
-
-echo '
-enforce_dependencies: true
-dependencies:
-- packages/predictor_interface
-- packages/rails_shims
-- packages/teams
-' > packages/games/package.yml
-
-echo '
-enforce_dependencies: true
-dependencies:
-- packages/games
-- packages/predictor_interface
-- packages/rails_shims
-- packages/teams
-' > packages/prediction_ui/package.yml
+sed -i "1i # typed: strict" packages/games/app/models/game.rb
+sed -i '/class Game/a\  include HistoricalPerformanceIndicator\
+  extend T::Sig' packages/games/app/models/game.rb
 
 bundle install --local
 
-# yes | bundle exec rails sorbet:update:all
+
+echo "enforce_dependencies: true
+enforce_architecture: true
+layer: utility
+enforce_privacy: true" > packages/predictor_interface/package.yml
+
+bin/packs add_dependency packages/predictor packages/predictor_interface
+bin/packs add_dependency packages/teams packages/predictor_interface
+bin/packs add_dependency packages/games packages/predictor_interface
+bin/packs add_dependency packages/games packages/predictor_interface
+bin/packs add_dependency packages/prediction_ui packages/predictor_interface
+
+
+### !!!!!
+# No idea why all these rubocop configs are needed only now...
+### !!!!!
+
+echo 'Packs/RootNamespaceIsPackName: 
+  Enabled: false' > packages/games/package_rubocop.yml
+
+echo 'Packs/RootNamespaceIsPackName: 
+  Enabled: false' > packages/games_admin/package_rubocop.yml
+
+echo 'Packs/RootNamespaceIsPackName: 
+  Enabled: false
+
+Packs/DocumentedPublicApis:
+  Enabled: false
+
+Packs/ClassMethodsAsPublicApis:
+  Enabled: false
+' > packages/predictor_interface/package_rubocop.yml
+
+echo 'Packs/RootNamespaceIsPackName: 
+  Enabled: false' > packages/rails_shims/package_rubocop.yml

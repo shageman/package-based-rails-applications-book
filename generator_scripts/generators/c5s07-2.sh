@@ -28,23 +28,15 @@ gem 'sorbet-rails'
 
 bundle install --local
 
-echo '# typed: strict
 
-module PredictionUi
-  extend T::Sig
+sed -i "1i # typed: strict" packages/prediction_ui/app/services/prediction_ui.rb
+sed -i '/module PredictionUi/a\  extend T::Sig' packages/prediction_ui/app/services/prediction_ui.rb
+sed -i '/def self.configure/s/^/  sig {params(predictor: Predictor::Predictor).void}\n/' packages/prediction_ui/app/services/prediction_ui.rb
+sed -i '/@predictor = /c\    @predictor = T.let(predictor, T.nilable(Predictor::Predictor))' packages/prediction_ui/app/services/prediction_ui.rb
+sed -i '/self.predictor/s/^/  sig {returns(T.nilable(Predictor::Predictor))}\n/' packages/prediction_ui/app/services/prediction_ui.rb
+sed -i '/freeze/d' packages/prediction_ui/app/services/prediction_ui.rb
 
-  sig {params(predictor: Predictor).void}
-  def self.configure(predictor)
-    @predictor = T.let(predictor, T.nilable(Predictor))
-    freeze
-  end
-
-  sig {returns(T.nilable(Predictor))}
-  def self.predictor
-    @predictor
-  end
-end
-' > packages/prediction_ui/app/services/prediction_ui.rb
+cat packages/prediction_ui/app/services/prediction_ui.rb
 
 bundle install --local
 TAPIOCA_SORBET_EXE=/usr/local/bin/sorbet bundle exec tapioca init
@@ -231,10 +223,10 @@ class Saulabs::TrueSkill::FactorGraph
   def update_skills; end
   def updated_skills; end
 end
-class Predictor::Saulabs::TrueSkill::Rating
-  def self.new(arg0, arg1); end
-  def mean; end
-end
+# class Predictor::Saulabs::TrueSkill::Rating
+#   def self.new(arg0, arg1); end
+#   def mean; end
+# end
 ' > sorbet/rbi/gems/trueskill@1.0.0-manual.rbi
 
 

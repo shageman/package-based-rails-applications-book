@@ -43,3 +43,9 @@ else
   [ "$(find . -name 'package_todo.yml')" ] && echo "Found package todo files!" || exit 1 
   find . -name 'package_todo.yml'
 fi
+
+
+## RUBOCOP
+if [[ "$RUBOCOP" = "true" ]]; then
+  bin/rubocop
+fi

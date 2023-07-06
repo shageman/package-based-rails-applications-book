@@ -11,30 +11,20 @@ set -e
 #
 ###############################################################################
 
-rm packages/teams/app/models/team.rb
-rm packages/teams/spec/models/team_spec.rb
+sed -i 's/class_name: "Team"/class_name: "TeamRecord"/g' packages/games/app/public/game.rb
 
-mkdir packages/teams/app/public
-mkdir packages/teams/spec/public
+mv packages/teams/app/public/team.rb packages/teams/app/models/team_record.rb
+sed -i 's/Team/TeamRecord/g' packages/teams/app/models/team_record.rb
+sed -i '/TeamRecord/a\    self.table_name = "teams"' packages/teams/app/models/team_record.rb
+cat packages/teams/app/models/team_record.rb
 
-sed -i 's/enforce_privacy: false/enforce_privacy: true/g' packages/teams/package.yml
+mv packages/teams/spec/public/team_spec.rb packages/teams/spec/models/team_record_spec.rb
+sed -i 's/Team/TeamRecord/g' packages/teams/spec/models/team_record_spec.rb
 
-echo '# typed: false
-class TeamRecord < ApplicationRecord
-  self.table_name = "teams"
-
-  include Contender
-  extend T::Sig
-
-  validates :name, presence: true
+echo 'class TeamRecord
+  def self.find_by_id(id); end
 end
-' > packages/teams/app/models/team_record.rb
-
-echo '# typed: false
-RSpec.describe TeamRecord do
-  it { should validate_presence_of :name }
-end
-' > packages/teams/spec/models/team_record_spec.rb
+' > packages/teams/app/models/team_record.rbi
 
 echo '# typed: strict
 class Team
@@ -266,372 +256,44 @@ RSpec.describe TeamRepository do
 end
 ' > packages/teams/spec/public/team_repository_spec.rb
 
-echo '# typed: ignore
-class TeamsController < ApplicationController
-  before_action :set_team, only: %i[ show edit update destroy ]
+echo '
+Packs/ClassMethodsAsPublicApis:
+  Enabled: false' >> packages/teams/package_rubocop.yml
 
-  # GET /teams or /teams.json
-  def index
-    @teams = TeamRepository.list
-  end
+sed -i 's/Team.all/TeamRepository.list/g' packages/prediction_ui/app/controllers/predictions_controller.rb
+sed -i 's/Team.find/TeamRepository.get/g' packages/prediction_ui/app/controllers/predictions_controller.rb
+sed -i 's/\["id"\]/["id"].to_i/g' packages/prediction_ui/app/controllers/predictions_controller.rb
 
-  # GET /teams/1 or /teams/1.json
-  def show
-  end
+sed -i 's/\[first_team.id\]/[T.must(first_team.id)]/g' packages/predictor/app/public/predictor/predictor.rb
+sed -i 's/\[second_team.id\]/[T.must(second_team.id)]/g' packages/predictor/app/public/predictor/predictor.rb
 
-  # GET /teams/new
-  def new
-    @team = Team.new(nil, nil)
-  end
+#TODO: what is the reason we need this?
+sed -i '/sig/c\  sig { abstract.returns(T.nilable(Integer)) }' packages/predictor_interface/app/public/contender.rb
 
-  # GET /teams/1/edit
-  def edit
-  end
+sed -i 's/@teams = Team.all/@teams = TeamRepository.list/g' packages/teams_admin/app/controllers/teams_controller.rb
+sed -i 's/@team = Team.new(team_params)/@team = TeamRepository.add(Team.new(nil, team_params[:name]))/g' packages/teams_admin/app/controllers/teams_controller.rb
+sed -i 's/@team = Team.new/@team = Team.new(nil, nil)/g' packages/teams_admin/app/controllers/teams_controller.rb
+sed -i 's/if @team.save/if @team.persisted?/g' packages/teams_admin/app/controllers/teams_controller.rb
+sed -i '/if @team.update(team_params)/c\      @team = TeamRepository.edit(Team.new(params[:id].to_i, team_params[:name]))\
+      if @team.errors.empty?' packages/teams_admin/app/controllers/teams_controller.rb
+sed -i 's/@team.destroy/TeamRepository.delete(@team)/g' packages/teams_admin/app/controllers/teams_controller.rb
+sed -i 's/@team = Team.find(params\[:id\])/@team = TeamRepository.get(params[:id].to_i)/g' packages/teams_admin/app/controllers/teams_controller.rb
+cat packages/teams_admin/app/controllers/teams_controller.rb
 
-  # POST /teams or /teams.json
-  def create
-    @team = TeamRepository.add(Team.new(nil, team_params[:name]))
+sed -i "1i # typed: false" packages/teams_admin/spec/requests/teams_spec.rb
+sed -i 's/to change(Team, :count)/to change(TeamRepository, :count)/g' packages/teams_admin/spec/requests/teams_spec.rb
+sed -i 's/redirect_to(team_url(Team.all.last))/redirect_to(team_url(TeamRepository.list.last.id))/g' packages/teams_admin/spec/requests/teams_spec.rb
+sed -i '/expect(response).not_to be_successful/a\        expect(response.body).to include("Name can&#39;t be blank")' packages/teams_admin/spec/requests/teams_spec.rb
+sed -i 's/team.reload/team = TeamRepository.get(team.id)/g' packages/teams_admin/spec/requests/teams_spec.rb
+cat packages/teams_admin/spec/requests/teams_spec.rb
 
-    respond_to do |format|
-      if @team.persisted?
-        format.html { redirect_to team_url(@team), notice: "Team was successfully created." }
-        format.json { render :show, status: :created, location: @team }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @team.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+sed -i "1i # typed: ignore" packages/teams_admin/spec/routing/teams_routing_spec.rb
 
-  # PATCH/PUT /teams/1 or /teams/1.json
-  def update
-    respond_to do |format|
-      @team = TeamRepository.edit(Team.new(params[:id].to_i, team_params[:name]))
-      if @team.errors.empty?
-        format.html { redirect_to team_url(@team), notice: "Team was successfully updated." }
-        format.json { render :show, status: :ok, location: @team }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @team.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /teams/1 or /teams/1.json
-  def destroy
-    TeamRepository.delete(@team)
-
-    respond_to do |format|
-      format.html { redirect_to teams_url, notice: "Team was successfully destroyed." }
-      format.json { head :no_content }
-    end
-  end
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_team
-      @team = TeamRepository.get(params[:id].to_i)
-    end
-
-    # Only allow a list of trusted parameters through.
-    def team_params
-      params.require(:team).permit(:name)
-    end
-end
-' > packages/teams_admin/app/controllers/teams_controller.rb
-
-echo '# typed: false
-class Game < ApplicationRecord
-  include HistoricalPerformanceIndicator
-  extend T::Sig
-
-  validates :date, :location, :first_team, :second_team, :winning_team,
-            :first_team_score, :second_team_score, presence: true
-  belongs_to :first_team, class_name: "TeamRecord"
-  belongs_to :second_team, class_name: "TeamRecord"
-end
-' > packages/games/app/models/game.rb
-
-echo '# typed: true
-module ObjectCreationMethods
-  def team_params(overrides = {})
-    defaults = {
-      id: nil,
-      name: "Some name #{counter}"
-    }
-    defaults.merge(overrides)
-  end
-
-  def new_team(overrides = {})
-    a = team_params(overrides)
-    Team.new(a[:id], a[:name])
-  end
-
-  def create_team(overrides = {})
-    team = TeamRepository.add(new_team(overrides))
-    Kernel.raise "Team creation failed" unless team.persisted?
-    team
-  end
-
-  def game_params(overrides = {})
-    defaults = {
-      first_team_id: -> { create_team.id },
-      second_team_id: -> { create_team.id },
-      winning_team: 2,
-      first_team_score: 2,
-      second_team_score: 3,
-      location: "Somewhere",
-      date: Date.today
-    }
-    defaults.merge(overrides)
-  end
-
-  def new_game(overrides = {})
-    Game.new { |game| apply(game, game_params(overrides), {}) }
-  end
-
-  def create_game(overrides = {})
-    new_game(overrides).tap(&:save!)
-  end
-
-  private
-
-  def counter
-    @counter ||= 0
-    @counter += 1
-  end
-
-  def apply(object, defaults, overrides)
-    options = defaults.merge(overrides)
-    options.each do |method, value_or_proc|
-      object.__send__(
-          "#{method}=",
-          value_or_proc.is_a?(Proc) ? value_or_proc.call : value_or_proc)
-    end
-  end
-end
-' > spec/support/object_creation_methods.rb
-
-echo '# typed: ignore
-class PredictionsController < ApplicationController
-  def new
-    @teams = TeamRepository.list
-  end
-
-  def create
-    predictor = Predictor.new
-    predictor.learn(TeamRepository.list, Game.all)
-    @prediction = predictor.predict(
-        TeamRepository.get(params["first_team"]["id"].to_i),
-        TeamRepository.get(params["second_team"]["id"].to_i))
-  end
-end
-' > packages/prediction_ui/app/controllers/predictions_controller.rb
-
-echo '# typed: strict
-
-module Contender
-  extend T::Sig
-  extend T::Helpers
-  interface!
-
-  sig { abstract.returns(T.nilable(Integer)) }
-  def id; end
-end
-' > packages/predictor_interface/app/public/contender.rb
-
-echo '# typed: false
-# This spec was generated by rspec-rails when you ran the scaffold generator.
-# It demonstrates how one might use RSpec to test the controller code that
-# was generated by Rails when you ran the scaffold generator.
-#
-# It assumes that the implementation code is generated by the rails scaffold
-# generator. If you are using any extension libraries to generate different
-# controller code, this generated spec may or may not pass.
-#
-# It only uses APIs available in rails and/or rspec-rails. There are a number
-# of tools you can use to make these specs even more expressive, but we"re
-# sticking to rails and rspec-rails APIs to keep things simple and stable.
-
-RSpec.describe "/teams", type: :request do
-  let(:team1) { create_team }
-  let(:team2) { create_team }
-
-  # Team. As you add validations to Team, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) {
-    team_params(name: "something")
-  }
-
-  let(:invalid_attributes) {
-    team_params(name: nil)
-  }
-
-  describe "GET /index" do
-    it "renders a successful response" do
-      create_team valid_attributes
-      get teams_url
-      expect(response).to be_successful
-    end
-  end
-
-  describe "GET /show" do
-    it "renders a successful response" do
-      team = create_team valid_attributes
-      get team_url(team)
-      expect(response).to be_successful
-    end
-  end
-
-  describe "GET /new" do
-    it "renders a successful response" do
-      get new_team_url
-      expect(response).to be_successful
-    end
-  end
-
-  describe "GET /edit" do
-    it "render a successful response" do
-      team = create_team valid_attributes
-      get edit_team_url(team)
-      expect(response).to be_successful
-    end
-  end
-
-  describe "POST /create" do
-    context "with valid parameters" do
-      it "creates a new Team" do
-        expect {
-          post teams_url, params: { team: valid_attributes }
-        }.to change(TeamRepository, :count).by(1)
-      end
-
-      it "redirects to the created team" do
-        post teams_url, params: { team: valid_attributes }
-        expect(response).to redirect_to(team_url(TeamRepository.list.last.id))
-      end
-    end
-
-    context "with invalid parameters" do
-      it "does not create a new Team" do
-        expect {
-          post teams_url, params: { team: invalid_attributes }
-        }.to change(TeamRepository, :count).by(0)
-      end
-
-      it "renders a successful response (i.e. to display the new template)" do
-        post teams_url, params: { team: invalid_attributes }
-        expect(response).not_to be_successful
-        expect(response.body).to include("Name can&#39;t be blank")
-      end
-    end
-  end
-
-  describe "PATCH /update" do
-    context "with valid parameters" do
-      let(:new_attributes) {
-        { name: "test" }
-      }
-
-      it "updates the requested team" do
-        team = create_team valid_attributes
-        patch team_url(team), params: { team: new_attributes }
-        team = TeamRepository.get(team.id)
-        expect(team.name).to eq("test")
-      end
-
-      it "redirects to the team" do
-        team = create_team valid_attributes
-        patch team_url(team), params: { team: new_attributes }
-        team = TeamRepository.get(team.id)
-        expect(response).to redirect_to(team_url(team))
-      end
-    end
-
-    context "with invalid parameters" do
-      it "renders a successful response (i.e. to display the edit template)" do
-        team = create_team valid_attributes
-        patch team_url(team), params: { team: invalid_attributes }
-        expect(response).to have_http_status(422)
-        expect(response.body).to include("Name can&#39;t be blank")
-      end
-    end
-  end
-
-  describe "DELETE /destroy" do
-    it "destroys the requested team" do
-      team = create_team valid_attributes
-      expect {
-        delete team_url(team)
-      }.to change(TeamRepository, :count).by(-1)
-    end
-
-    it "redirects to the teams list" do
-      team = create_team valid_attributes
-      delete team_url(team)
-      expect(response).to redirect_to(teams_url)
-    end
-  end
-end
-' > packages/teams_admin/spec/requests/teams_spec.rb
-
-echo '# typed: false
-
-require "saulabs/trueskill"
-
-class Predictor
-  include PredictorInterface
-  extend T::Sig
-
-  sig {override.params(teams: T::Enumerable[Contender], games: T::Enumerable[HistoricalPerformanceIndicator]).void}
-  def learn(teams, games)
-    @teams_lookup = T.let({}, T.nilable(T::Hash[Integer, TeamLookup]))
-    @teams_lookup = teams.inject({}) do |memo, team|
-      memo[team.id] = TeamLookup.new(
-        team: team,
-        rating: ::Saulabs::TrueSkill::Rating.new(1500.0, 1000.0, 1.0)
-      )
-      memo
-    end
-
-    games.each do |game|
-      first_team_rating = @teams_lookup[game.first_team.id].rating
-      second_team_rating = @teams_lookup[game.second_team.id].rating
-      game_result = game.winning_team == 1 ?
-          [[first_team_rating], [second_team_rating]] :
-          [[second_team_rating], [first_team_rating]]
-        ::Saulabs::TrueSkill::FactorGraph.new(game_result, [1, 2]).update_skills
-    end
-  end
-
-  sig {override.params(first_team: Contender, second_team: Contender).returns(Prediction)}
-  def predict(first_team, second_team)
-    team1 = T.must(T.must(@teams_lookup)[T.must(first_team.id)]).team
-    team2 = T.must(T.must(@teams_lookup)[T.must(second_team.id)]).team
-    winner = higher_mean_team(first_team, second_team) ? team1 : team2
-    Prediction.new(team1, team2, winner)
-  end
-
-  private
-
-  sig {params(first_team: Contender, second_team: Contender).returns(T::Boolean)}
-  def higher_mean_team(first_team, second_team)
-    T.must(T.must(@teams_lookup)[T.must(first_team.id)]).rating.mean >
-        T.must(T.must(@teams_lookup)[T.must(second_team.id)]).rating.mean
-  end
-
-  class TeamLookup < T::Struct
-    const :team, Contender
-    const :rating, Saulabs::TrueSkill::Rating
-  end
-  private_constant :TeamLookup
-end
-
-' > packages/predictor/app/public/predictor.rb
-
-echo 'class TeamRecord
-  def self.find_by_id(id); end
-end
-' > packages/teams/app/models/team_record.rbi
-
-sed -i '1 i\# typed: ignore' packages/teams_admin/spec/routing/teams_routing_spec.rb
+sed -i "1i # typed: true" spec/support/object_creation_methods.rb
+sed -i '/defaults = /a\      id: nil,' spec/support/object_creation_methods.rb
+sed -i '/Team.new/c\    a = team_params(overrides)\
+    Team.new(a[:id], a[:name])' spec/support/object_creation_methods.rb
+sed -i '/new_team(overrides).tap(&:save!)/c\    team = TeamRepository.add(new_team(overrides))\
+    Kernel.raise "Team creation failed" unless team.persisted?\
+    team' spec/support/object_creation_methods.rb
+cat spec/support/object_creation_methods.rb

@@ -9,17 +9,6 @@ services:
     volumes:
       - ./docker/git-server/keys:/git-server/keys
       - ./docker/git-server/repos:/git-server/repos
-  # gitea:
-  #   image: gitea/gitea:1.17.3-rootless
-  #   restart: always
-  #   volumes:
-  #     - ./docker/gitea/data:/var/lib/gitea
-  #     - ./docker/gitea/config:/etc/gitea
-  #     # - /etc/timezone:/etc/timezone:ro
-  #     # - /etc/localtime:/etc/localtime:ro
-  #   ports:
-  #     - "9880:3000"
-  #     - "9822:2222"
 
   minio:
     image: minio/minio:RELEASE.2022-01-27T03-53-02Z

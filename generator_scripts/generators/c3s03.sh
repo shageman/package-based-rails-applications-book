@@ -41,7 +41,7 @@ echo "module Testgem
 end" > testgem/lib/testgem/engine.rb
 
 cd testgem
-bundle
+bundle install --local
 rake spec
 cd ..
 

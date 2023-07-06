@@ -26,36 +26,18 @@ end
 ' > packages/prediction_ui/app/services/prediction_ui.rb
 
 echo 'Rails.application.config.to_prepare do
-  PredictionUi.configure(Predictor.new)
+  PredictionUi.configure(Predictor::Predictor.new)
 end
 ' > config/initializers/configure_prediction_ui.rb
 
-echo 'class PredictionsController < ApplicationController
-  def new
-    @teams = Team.all
-  end
+sed -i '/predictor =/c\    predictor = PredictionUi.predictor' packages/prediction_ui/app/controllers/predictions_controller.rb
 
-  def create
-    predictor = PredictionUi.predictor
-    predictor.learn(Team.all, Game.all)
-    @prediction = predictor.predict(
-        Team.find(params["first_team"]["id"]),
-        Team.find(params["second_team"]["id"]))
-  end
-end
-' > packages/prediction_ui/app/controllers/predictions_controller.rb
+sed -i '/packages\/predictor/d' packages/prediction_ui/package.yml
 
-echo '
-enforce_dependencies: true
-dependencies:
-- packages/rails_shims
-- packages/games
-- packages/teams
-' > packages/prediction_ui/package.yml
+# swap out which packages this package is visible to: before it was packages\/prediction_ui. Now it is the root package
+sed -i 's/packages\/prediction_ui/./' packages/predictor/package.yml
 
-echo '
-enforce_dependencies: true
-dependencies:
-- packages/prediction_ui
-- packages/predictor
-' > package.yml
+bundle install --local
+
+bin/packs add_dependency . packages/prediction_ui
+bin/packs add_dependency . packages/predictor

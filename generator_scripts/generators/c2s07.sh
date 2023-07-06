@@ -15,7 +15,7 @@ echo "
 gem 'packs-rails'
 " >> Gemfile
 
-bundle
+bundle install --local
 
 sed -i '/config\.paths\.add/d' config/application.rb
 

@@ -56,8 +56,16 @@ end
 sed -i "s/true/false/g" testgem/spec/testgem_spec.rb
 
 cd testgem
-bundle
-rake spec
+mkdir -p vendor/cache
+cp ../VENDORED_GEMS/* vendor/cache/
+cp -R ../.bundle .bundle
+
+sed -i '/rspec/c\gem "rspec-core"\
+gem "rspec-expectations"
+' Gemfile
+
+bundle install --local
+bundle exec rspec
 cd ..
 
 echo "gem 'testgem', path: 'testgem'" >> Gemfile

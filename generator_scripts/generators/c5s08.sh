@@ -15,22 +15,7 @@ rm config/initializers/configure_prediction_ui.rb
 
 rm -rf packages/prediction_ui/app/services
 
-echo '# typed: false
-class PredictionsController < ApplicationController
-  def new
-    @teams = Team.all
-  end
-
-  def create
-    predictor = ServiceLocator.instance.get_service(:predictor)
-
-    predictor.learn(Team.all, Game.all)
-    @prediction = predictor.predict(
-        Team.find(params["first_team"]["id"]),
-        Team.find(params["second_team"]["id"]))
-  end
-end
-' > packages/prediction_ui/app/controllers/predictions_controller.rb
+sed -i '/predictor =/c\    predictor = ServiceLocator.instance.get_service(:predictor)' packages/prediction_ui/app/controllers/predictions_controller.rb
 
 echo '
 enforce_dependencies: true
@@ -42,7 +27,7 @@ dependencies:
 ' > packages/prediction_ui/package.yml
 
 echo 'Rails.application.config.to_prepare do
-  ServiceLocator.instance.register_service(:predictor, Predictor.new)
+  ServiceLocator.instance.register_service(:predictor, Predictor::Predictor.new)
 end
 ' > config/initializers/register_services.rb
 
@@ -54,7 +39,18 @@ dependencies:
 mkdir -p packages/service_locator/app/public
 mkdir -p packages/service_locator/spec
 
-echo 'enforce_dependencies: true' > packages/service_locator/package.yml
+echo 'enforce_dependencies: true
+enforce_architecture: true
+layer: utility
+enforce_privacy: true
+' > packages/service_locator/package.yml
+
+echo '
+Packs/ClassMethodsAsPublicApis:
+  Enabled: false
+' > packages/service_locator/package_rubocop.yml
+
+sed -i '/packages\/prediction_ui/c\  - packages/service_locator' package.yml
 
 echo '# typed: true
 
@@ -99,25 +95,3 @@ end
 echo 'class ServiceNotFoundError < RuntimeError
 end
 ' > packages/service_locator/app/public/service_not_found_error.rb
-
-echo '
-enforce_dependencies: true
-dependencies:
-- packages/predictor_interface
-- packages/rails_shims
-- packages/teams
-' > packages/games/package.yml
-
-echo '
-enforce_dependencies: true
-dependencies:
-- packages/predictor_interface
-- packages/rails_shims
-' > packages/teams/package.yml
-
-echo '
-enforce_dependencies: true
-dependencies:
-- packages/predictor
-- packages/service_locator
-' > package.yml

@@ -11,7 +11,7 @@ set -e
 #
 ###############################################################################
 
-bundle
+bundle install --local
 
 bin/packs add_dependency app/packages/games app/packages/teams
 bin/packs add_dependency app/packages/games_admin app/packages/games

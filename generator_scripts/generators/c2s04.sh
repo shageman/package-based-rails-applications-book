@@ -24,7 +24,7 @@ find . -type d -empty -delete
 
 echo "enforce_dependencies: true" > app/packages/rails_shims/package.yml
 
-bundle 
+bundle install --local
 
 bin/packs add_dependency app/packages/games app/packages/rails_shims
 bin/packs add_dependency app/packages/games_admin app/packages/rails_shims
