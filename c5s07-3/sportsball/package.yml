@@ -3,5 +3,5 @@ enforce_privacy: false
 enforce_architecture: true
 layer: app
 dependencies:
-  - packages/prediction_ui
-  - packages/predictor
+  - packs/prediction_ui
+  - packs/predictor

@@ -1,4 +1,0 @@
-enforce_dependencies: true
-dependencies:
-  - packages/games
-  - packages/rails_shims

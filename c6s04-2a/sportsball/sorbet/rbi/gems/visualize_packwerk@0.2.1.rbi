@@ -121,7 +121,7 @@ class VisualizePackwerk::PackageNode < ::T::Struct
   def violations_by_node_name; end
 
   class << self
-    # source://sorbet-runtime/0.5.10888/lib/types/struct.rb#13
+    # source://sorbet-runtime/0.5.10902/lib/types/struct.rb#13
     def inherited(s); end
   end
 end
@@ -224,7 +224,7 @@ class VisualizePackwerk::TeamNode < ::T::Struct
   def violations_by_node_name; end
 
   class << self
-    # source://sorbet-runtime/0.5.10888/lib/types/struct.rb#13
+    # source://sorbet-runtime/0.5.10902/lib/types/struct.rb#13
     def inherited(s); end
   end
 end

@@ -1,0 +1,6 @@
+enforce_dependencies: true
+dependencies:
+- packs/games
+- packs/teams
+- packs/predictor
+

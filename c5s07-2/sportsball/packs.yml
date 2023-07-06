@@ -1,4 +1,4 @@
 pack_paths:
-- packages/*
+- packs/*
 - .
 

@@ -1,0 +1,8 @@
+enforce_dependencies: true
+dependencies:
+  - packs/games
+  - packs/predictor
+  - packs/rails_shims
+  - packs/teams
+enforce_architecture: true
+layer: UI

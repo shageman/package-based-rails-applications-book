@@ -1,9 +1,0 @@
-enforce_dependencies: true
-
-enforce_privacy: true
-enforce_architecture: true
-layer: utility
-
-enforce_visibility: true
-visible_to:
-  - packages/prediction_ui

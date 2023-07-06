@@ -142,7 +142,7 @@ class CodeTeams::Team
   # @param other [Object]
   # @return [Boolean]
   #
-  # source://sorbet-runtime/0.5.10888/lib/types/private/methods/_methods.rb#255
+  # source://sorbet-runtime/0.5.10902/lib/types/private/methods/_methods.rb#255
   def eql?(*args, **_arg1, &blk); end
 
   # source://code_teams//lib/code_teams.rb#127

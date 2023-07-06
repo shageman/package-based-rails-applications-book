@@ -3,5 +3,5 @@ enforce_privacy: false
 enforce_architecture: true
 layer: app
 dependencies:
-  - packages/service_locator
-  - packages/predictor
+  - packs/service_locator
+  - packs/predictor

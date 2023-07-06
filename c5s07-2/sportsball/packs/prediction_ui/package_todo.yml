@@ -1,0 +1,15 @@
+# This file contains a list of dependencies that are not part of the long term plan for the
+# 'packs/prediction_ui' package.
+# We should generally work to reduce this list over time.
+#
+# You can regenerate this file using the following command:
+#
+# bin/packwerk update-todo
+---
+packs/predictor:
+  "::Predictor::Predictor":
+    violations:
+    - dependency
+    - visibility
+    files:
+    - packs/prediction_ui/app/services/prediction_ui.rb

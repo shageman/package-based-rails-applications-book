@@ -6,7 +6,7 @@
 #
 # bin/packwerk update-todo
 ---
-packages/rails_shims:
+packs/rails_shims:
   "::ApplicationCable::Channel":
     violations:
     - dependency

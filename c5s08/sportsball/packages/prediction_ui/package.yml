@@ -1,8 +1,0 @@
-
-enforce_dependencies: true
-dependencies:
-- packages/games
-- packages/rails_shims
-- packages/teams
-- packages/service_locator
-

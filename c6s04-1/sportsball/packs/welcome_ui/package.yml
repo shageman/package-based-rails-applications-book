@@ -1,0 +1,7 @@
+enforce_dependencies: true
+dependencies:
+  - packs/rails_shims
+enforce_architecture: true
+layer: UI
+
+enforce_privacy: true

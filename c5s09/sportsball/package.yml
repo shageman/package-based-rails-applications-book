@@ -1,6 +1,6 @@
 
 enforce_dependencies: true
 dependencies:
-- packages/prediction_needed_subscriber
-- packages/prediction_ui
+- packs/prediction_needed_subscriber
+- packs/prediction_ui
 

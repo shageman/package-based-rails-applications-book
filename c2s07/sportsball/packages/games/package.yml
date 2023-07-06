@@ -1,4 +1,0 @@
-enforce_dependencies: true
-dependencies:
-- packages/rails_shims
-- packages/teams
