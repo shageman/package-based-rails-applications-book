@@ -12,20 +12,20 @@ set -e
 ###############################################################################
 
 bundle install --local
-bin/packs add_dependency packages/games_admin packages/teams
+bin/packs add_dependency packs/games_admin packs/teams
 
-mkdir -p packages/games/app/public
-mkdir -p packages/games/spec/public
+mkdir -p packs/games/app/public
+mkdir -p packs/games/spec/public
 
-sed -i 's/class_name: "Game"/class_name: "GameRecord"/g' packages/games/app/public/game.rb
+sed -i 's/class_name: "Game"/class_name: "GameRecord"/g' packs/games/app/public/game.rb
 
-mv packages/games/app/public/game.rb packages/games/app/models/game_record.rb
-sed -i 's/Game/GameRecord/g' packages/games/app/models/game_record.rb
-sed -i 's/:first_team,/:first_team_id,/g' packages/games/app/models/game_record.rb
-sed -i 's/:second_team,/:second_team_id,/g' packages/games/app/models/game_record.rb
-sed -i '/belongs_to/d' packages/games/app/models/game_record.rb
-sed -i '/GameRecord/a\  self.table_name = "games"' packages/games/app/models/game_record.rb
-sed -i '$d' packages/games/app/models/game_record.rb
+mv packs/games/app/public/game.rb packs/games/app/models/game_record.rb
+sed -i 's/Game/GameRecord/g' packs/games/app/models/game_record.rb
+sed -i 's/:first_team,/:first_team_id,/g' packs/games/app/models/game_record.rb
+sed -i 's/:second_team,/:second_team_id,/g' packs/games/app/models/game_record.rb
+sed -i '/belongs_to/d' packs/games/app/models/game_record.rb
+sed -i '/GameRecord/a\  self.table_name = "games"' packs/games/app/models/game_record.rb
+sed -i '$d' packs/games/app/models/game_record.rb
 echo '
   sig { returns(T.nilable(Integer)).override }
   def first_team_id
@@ -41,15 +41,15 @@ echo '
   def winning_team
     self[:winning_team]
   end
-end' >> packages/games/app/models/game_record.rb
-cat packages/games/app/models/game_record.rb
+end' >> packs/games/app/models/game_record.rb
+cat packs/games/app/models/game_record.rb
 
-mv packages/games/spec/public/game_spec.rb packages/games/spec/models/game_record_spec.rb
-sed -i 's/Game/GameRecord/g' packages/games/spec/models/game_record_spec.rb
-sed -i 's/:first_team }/:first_team_id }/g' packages/games/spec/models/game_record_spec.rb
-sed -i 's/:second_team }/:second_team_id }/g' packages/games/spec/models/game_record_spec.rb
-sed -i '/belong_to/d' packages/games/spec/models/game_record_spec.rb
-cat packages/games/spec/models/game_record_spec.rb
+mv packs/games/spec/public/game_spec.rb packs/games/spec/models/game_record_spec.rb
+sed -i 's/Game/GameRecord/g' packs/games/spec/models/game_record_spec.rb
+sed -i 's/:first_team }/:first_team_id }/g' packs/games/spec/models/game_record_spec.rb
+sed -i 's/:second_team }/:second_team_id }/g' packs/games/spec/models/game_record_spec.rb
+sed -i '/belong_to/d' packs/games/spec/models/game_record_spec.rb
+cat packs/games/spec/models/game_record_spec.rb
 
 echo '# typed: true
 class Game
@@ -128,7 +128,7 @@ class Game
     @second_team&.id
   end
 end
-' > packages/games/app/public/game.rb
+' > packs/games/app/public/game.rb
 
 echo '# typed: false
 RSpec.describe Game, type: :model do
@@ -245,7 +245,7 @@ RSpec.describe Game, type: :model do
     end
   end
 end
-' > packages/games/spec/public/game_spec.rb
+' > packs/games/spec/public/game_spec.rb
 
 echo '# typed: false
 class GameRepository
@@ -297,7 +297,7 @@ class GameRepository
   end
   private_class_method :record_to_game
 end
-' > packages/games/app/public/game_repository.rb
+' > packs/games/app/public/game_repository.rb
 
 echo '# typed: false
 RSpec.describe GameRepository do
@@ -389,18 +389,18 @@ RSpec.describe GameRepository do
     end
   end
 end
-' > packages/games/spec/public/game_repository_spec.rb
+' > packs/games/spec/public/game_repository_spec.rb
 
 echo '
 Packs/ClassMethodsAsPublicApis:
-  Enabled: false' >> packages/games/package_rubocop.yml
+  Enabled: false' >> packs/games/package_rubocop.yml
 
-sed -i 's/Game.all/GameRepository.list/g' packages/prediction_ui/app/controllers/predictions_controller.rb
+sed -i 's/Game.all/GameRepository.list/g' packs/prediction_ui/app/controllers/predictions_controller.rb
 
 #TODO: what is the reason we need this?
-sed -i '/sig/c\  sig { abstract.returns(T.nilable(Integer)) }' packages/predictor_interface/app/public/historical_performance_indicator.rb
+sed -i '/sig/c\  sig { abstract.returns(T.nilable(Integer)) }' packs/predictor_interface/app/public/historical_performance_indicator.rb
 
-sed -i 's/@games = Game.all/@games = GameRepository.list/g' packages/games_admin/app/controllers/games_controller.rb
+sed -i 's/@games = Game.all/@games = GameRepository.list/g' packs/games_admin/app/controllers/games_controller.rb
 sed -i '/@game = Game.new(game_params)/c\    @game = GameRepository.add(Game.new(\
         nil,\
         Team.new(game_params[:first_team_id].to_i, nil),\
@@ -411,9 +411,9 @@ sed -i '/@game = Game.new(game_params)/c\    @game = GameRepository.add(Game.new
         game_params[:location],\
         game_params[:date]\
       )\
-    )' packages/games_admin/app/controllers/games_controller.rb
-sed -i 's/@game = Game.new/@game = Game.new(nil, nil, nil, nil, nil, nil, nil, nil)/g' packages/games_admin/app/controllers/games_controller.rb
-sed -i 's/if @game.save/if @game.persisted?/g' packages/games_admin/app/controllers/games_controller.rb
+    )' packs/games_admin/app/controllers/games_controller.rb
+sed -i 's/@game = Game.new/@game = Game.new(nil, nil, nil, nil, nil, nil, nil, nil)/g' packs/games_admin/app/controllers/games_controller.rb
+sed -i 's/if @game.save/if @game.persisted?/g' packs/games_admin/app/controllers/games_controller.rb
 sed -i '/if @game.update(game_params)/c\      @game.first_team = TeamRepository.get(game_params[:first_team_id].to_i) if game_params.has_key?("first_team_id")\
       @game.second_team = TeamRepository.get(game_params[:second_team_id].to_i) if game_params.has_key?("second_team_id")\
       @game.winning_team = game_params[:winning_team] if game_params.has_key?("winning_team")\
@@ -423,9 +423,9 @@ sed -i '/if @game.update(game_params)/c\      @game.first_team = TeamRepository.
       @game.date = game_params[:date] if game_params.has_key?("date")\
 \
       @game = GameRepository.edit(@game)\
-      if @game.errors.empty?' packages/games_admin/app/controllers/games_controller.rb
-sed -i 's/@game.destroy/GameRepository.delete(@game)/g' packages/games_admin/app/controllers/games_controller.rb
-sed -i 's/@game = Game.find(params\[:id\])/@game = GameRepository.get(params[:id].to_i)/g' packages/games_admin/app/controllers/games_controller.rb
+      if @game.errors.empty?' packs/games_admin/app/controllers/games_controller.rb
+sed -i 's/@game.destroy/GameRepository.delete(@game)/g' packs/games_admin/app/controllers/games_controller.rb
+sed -i 's/@game = Game.find(params\[:id\])/@game = GameRepository.get(params[:id].to_i)/g' packs/games_admin/app/controllers/games_controller.rb
 sed -i '/params.require/c\      params[:game].delete(:id) if params[:game].has_key?(:id)\
       params[:game].delete(:first_team) if params[:game].has_key?(:first_team)\
       params[:game].delete(:second_team) if params[:game].has_key?(:second_team)\
@@ -437,17 +437,17 @@ sed -i '/params.require/c\      params[:game].delete(:id) if params[:game].has_k
         :winning_team,\
         :first_team_score,\
         :second_team_score\
-      )' packages/games_admin/app/controllers/games_controller.rb
-cat packages/games_admin/app/controllers/games_controller.rb
+      )' packs/games_admin/app/controllers/games_controller.rb
+cat packs/games_admin/app/controllers/games_controller.rb
 
-sed -i "1i # typed: false" packages/games_admin/spec/requests/games_spec.rb
-sed -i 's/to change(Game, :count)/to change(GameRepository, :count)/g' packages/games_admin/spec/requests/games_spec.rb
-sed -i 's/redirect_to(game_url(Game.last))/redirect_to(game_url(GameRepository.list.last.id))/g' packages/games_admin/spec/requests/games_spec.rb
-sed -i '/expect(response).not_to be_successful/a\        expect(response.body).to include("Date can&#39;t be blank")' packages/games_admin/spec/requests/games_spec.rb
-sed -i 's/game.reload/game = GameRepository.get(game.id)/g' packages/games_admin/spec/requests/games_spec.rb
-cat packages/games_admin/spec/requests/games_spec.rb
+sed -i "1i # typed: false" packs/games_admin/spec/requests/games_spec.rb
+sed -i 's/to change(Game, :count)/to change(GameRepository, :count)/g' packs/games_admin/spec/requests/games_spec.rb
+sed -i 's/redirect_to(game_url(Game.last))/redirect_to(game_url(GameRepository.list.last.id))/g' packs/games_admin/spec/requests/games_spec.rb
+sed -i '/expect(response).not_to be_successful/a\        expect(response.body).to include("Date can&#39;t be blank")' packs/games_admin/spec/requests/games_spec.rb
+sed -i 's/game.reload/game = GameRepository.get(game.id)/g' packs/games_admin/spec/requests/games_spec.rb
+cat packs/games_admin/spec/requests/games_spec.rb
 
-sed -i "1i # typed: ignore" packages/games_admin/spec/routing/games_routing_spec.rb
+sed -i "1i # typed: ignore" packs/games_admin/spec/routing/games_routing_spec.rb
 
 sed -i '/def game_params/,/##/{/## end/!d}' spec/support/object_creation_methods.rb
 

@@ -11,15 +11,15 @@ set -e
 #
 ###############################################################################
 
-mkdir -p ./packages/rails_shims/app/public
-mkdir -p ./packages/rails_shims/app/public/application_cable
+mkdir -p ./packs/rails_shims/app/public
+mkdir -p ./packs/rails_shims/app/public/application_cable
 
-mv ./packages/rails_shims/app/mailers/application_mailer.rb ./packages/rails_shims/app/public
-mv ./packages/rails_shims/app/models/application_record.rb ./packages/rails_shims/app/public
-mv ./packages/rails_shims/app/jobs/application_job.rb ./packages/rails_shims/app/public
-mv ./packages/rails_shims/app/controllers/application_controller.rb ./packages/rails_shims/app/public
-mv ./packages/rails_shims/app/helpers/application_helper.rb ./packages/rails_shims/app/public
-mv ./packages/rails_shims/app/channels/application_cable/connection.rb ./packages/rails_shims/app/public/application_cable
-mv ./packages/rails_shims/app/channels/application_cable/channel.rb ./packages/rails_shims/app/public/application_cable
+mv ./packs/rails_shims/app/mailers/application_mailer.rb ./packs/rails_shims/app/public
+mv ./packs/rails_shims/app/models/application_record.rb ./packs/rails_shims/app/public
+mv ./packs/rails_shims/app/jobs/application_job.rb ./packs/rails_shims/app/public
+mv ./packs/rails_shims/app/controllers/application_controller.rb ./packs/rails_shims/app/public
+mv ./packs/rails_shims/app/helpers/application_helper.rb ./packs/rails_shims/app/public
+mv ./packs/rails_shims/app/channels/application_cable/connection.rb ./packs/rails_shims/app/public/application_cable
+mv ./packs/rails_shims/app/channels/application_cable/channel.rb ./packs/rails_shims/app/public/application_cable
 
-sed -i 's/enforce_privacy: false/enforce_privacy: true/g' packages/rails_shims/package.yml
+sed -i 's/enforce_privacy: false/enforce_privacy: true/g' packs/rails_shims/package.yml

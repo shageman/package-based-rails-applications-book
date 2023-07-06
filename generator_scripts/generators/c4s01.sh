@@ -23,7 +23,7 @@ require:
 ## Use it
 
 echo "
-enforce_privacy: true" >> packages/predictor/package.yml
+enforce_privacy: true" >> packs/predictor/package.yml
 
 
 ## See failure
@@ -34,8 +34,8 @@ bin/packwerk check && exit 1 || echo "Expected packwerk check error and got it."
 
 ## Fix it
 
-mkdir packages/predictor/app/public
-mv packages/predictor/app/models/predictor.rb packages/predictor/app/public
+mkdir packs/predictor/app/public
+mv packs/predictor/app/models/predictor.rb packs/predictor/app/public
 
 bundle install --local
 bin/packwerk check && echo "Expected no packwerk check error and got none."

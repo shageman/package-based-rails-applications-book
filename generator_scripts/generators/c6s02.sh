@@ -11,9 +11,9 @@ set -e
 ###############################################################################
 
 
-# mkdir -p ./packages/predictor/app/public/predictor
+# mkdir -p ./packs/predictor/app/public/predictor
 
-# mv ./packages/predictor/app/models/predictor/* ./packages/predictor/app/public/predictor
+# mv ./packs/predictor/app/models/predictor/* ./packs/predictor/app/public/predictor
 
 
 ## This section is a not-op since we introduced public/predictor in c4s02

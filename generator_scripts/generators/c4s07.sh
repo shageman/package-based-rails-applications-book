@@ -23,7 +23,7 @@ Packs/ClassMethodsAsPublicApis:
 
 echo '
 Packs/ClassMethodsAsPublicApis:
-  Enabled: true' >> packages/predictor/package_rubocop.yml
+  Enabled: true' >> packs/predictor/package_rubocop.yml
 
 
 ## See failure
@@ -34,7 +34,7 @@ bin/rubocop && exit 1 || echo "Expected rubocop errors and got them."
 
 ## Fix it
 
-sed -i '/Packs\/ClassMethodsAsPublicApis/,+2d' packages/predictor/package_rubocop.yml
+sed -i '/Packs\/ClassMethodsAsPublicApis/,+2d' packs/predictor/package_rubocop.yml
 echo '
 Packs/ClassMethodsAsPublicApis:
-  Enabled: false' >> packages/predictor/package_rubocop.yml
+  Enabled: false' >> packs/predictor/package_rubocop.yml

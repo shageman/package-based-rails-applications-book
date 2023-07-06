@@ -11,20 +11,20 @@ set -e
 #
 ###############################################################################
 
-sed -i 's/class_name: "Team"/class_name: "TeamRecord"/g' packages/games/app/public/game.rb
+sed -i 's/class_name: "Team"/class_name: "TeamRecord"/g' packs/games/app/public/game.rb
 
-mv packages/teams/app/public/team.rb packages/teams/app/models/team_record.rb
-sed -i 's/Team/TeamRecord/g' packages/teams/app/models/team_record.rb
-sed -i '/TeamRecord/a\    self.table_name = "teams"' packages/teams/app/models/team_record.rb
-cat packages/teams/app/models/team_record.rb
+mv packs/teams/app/public/team.rb packs/teams/app/models/team_record.rb
+sed -i 's/Team/TeamRecord/g' packs/teams/app/models/team_record.rb
+sed -i '/TeamRecord/a\    self.table_name = "teams"' packs/teams/app/models/team_record.rb
+cat packs/teams/app/models/team_record.rb
 
-mv packages/teams/spec/public/team_spec.rb packages/teams/spec/models/team_record_spec.rb
-sed -i 's/Team/TeamRecord/g' packages/teams/spec/models/team_record_spec.rb
+mv packs/teams/spec/public/team_spec.rb packs/teams/spec/models/team_record_spec.rb
+sed -i 's/Team/TeamRecord/g' packs/teams/spec/models/team_record_spec.rb
 
 echo 'class TeamRecord
   def self.find_by_id(id); end
 end
-' > packages/teams/app/models/team_record.rbi
+' > packs/teams/app/models/team_record.rbi
 
 echo '# typed: strict
 class Team
@@ -75,7 +75,7 @@ class Team
       self.id == other.id && self.name == other.name
   end
 end
-' > packages/teams/app/public/team.rb
+' > packs/teams/app/public/team.rb
 
 echo '# typed: false
 RSpec.describe Team, type: :model do
@@ -130,7 +130,7 @@ RSpec.describe Team, type: :model do
     end 
   end
 end
-' > packages/teams/spec/public/team_spec.rb
+' > packs/teams/spec/public/team_spec.rb
 
 echo '# typed: strict
 class TeamRepository
@@ -175,7 +175,7 @@ class TeamRepository
     TeamRecord.count
   end
 end
-' > packages/teams/app/public/team_repository.rb
+' > packs/teams/app/public/team_repository.rb
 
 echo '# typed: false
 RSpec.describe TeamRepository do
@@ -254,40 +254,40 @@ RSpec.describe TeamRepository do
     end
   end
 end
-' > packages/teams/spec/public/team_repository_spec.rb
+' > packs/teams/spec/public/team_repository_spec.rb
 
 echo '
 Packs/ClassMethodsAsPublicApis:
-  Enabled: false' >> packages/teams/package_rubocop.yml
+  Enabled: false' >> packs/teams/package_rubocop.yml
 
-sed -i 's/Team.all/TeamRepository.list/g' packages/prediction_ui/app/controllers/predictions_controller.rb
-sed -i 's/Team.find/TeamRepository.get/g' packages/prediction_ui/app/controllers/predictions_controller.rb
-sed -i 's/\["id"\]/["id"].to_i/g' packages/prediction_ui/app/controllers/predictions_controller.rb
+sed -i 's/Team.all/TeamRepository.list/g' packs/prediction_ui/app/controllers/predictions_controller.rb
+sed -i 's/Team.find/TeamRepository.get/g' packs/prediction_ui/app/controllers/predictions_controller.rb
+sed -i 's/\["id"\]/["id"].to_i/g' packs/prediction_ui/app/controllers/predictions_controller.rb
 
-sed -i 's/\[first_team.id\]/[T.must(first_team.id)]/g' packages/predictor/app/public/predictor/predictor.rb
-sed -i 's/\[second_team.id\]/[T.must(second_team.id)]/g' packages/predictor/app/public/predictor/predictor.rb
+sed -i 's/\[first_team.id\]/[T.must(first_team.id)]/g' packs/predictor/app/public/predictor/predictor.rb
+sed -i 's/\[second_team.id\]/[T.must(second_team.id)]/g' packs/predictor/app/public/predictor/predictor.rb
 
 #TODO: what is the reason we need this?
-sed -i '/sig/c\  sig { abstract.returns(T.nilable(Integer)) }' packages/predictor_interface/app/public/contender.rb
+sed -i '/sig/c\  sig { abstract.returns(T.nilable(Integer)) }' packs/predictor_interface/app/public/contender.rb
 
-sed -i 's/@teams = Team.all/@teams = TeamRepository.list/g' packages/teams_admin/app/controllers/teams_controller.rb
-sed -i 's/@team = Team.new(team_params)/@team = TeamRepository.add(Team.new(nil, team_params[:name]))/g' packages/teams_admin/app/controllers/teams_controller.rb
-sed -i 's/@team = Team.new/@team = Team.new(nil, nil)/g' packages/teams_admin/app/controllers/teams_controller.rb
-sed -i 's/if @team.save/if @team.persisted?/g' packages/teams_admin/app/controllers/teams_controller.rb
+sed -i 's/@teams = Team.all/@teams = TeamRepository.list/g' packs/teams_admin/app/controllers/teams_controller.rb
+sed -i 's/@team = Team.new(team_params)/@team = TeamRepository.add(Team.new(nil, team_params[:name]))/g' packs/teams_admin/app/controllers/teams_controller.rb
+sed -i 's/@team = Team.new/@team = Team.new(nil, nil)/g' packs/teams_admin/app/controllers/teams_controller.rb
+sed -i 's/if @team.save/if @team.persisted?/g' packs/teams_admin/app/controllers/teams_controller.rb
 sed -i '/if @team.update(team_params)/c\      @team = TeamRepository.edit(Team.new(params[:id].to_i, team_params[:name]))\
-      if @team.errors.empty?' packages/teams_admin/app/controllers/teams_controller.rb
-sed -i 's/@team.destroy/TeamRepository.delete(@team)/g' packages/teams_admin/app/controllers/teams_controller.rb
-sed -i 's/@team = Team.find(params\[:id\])/@team = TeamRepository.get(params[:id].to_i)/g' packages/teams_admin/app/controllers/teams_controller.rb
-cat packages/teams_admin/app/controllers/teams_controller.rb
+      if @team.errors.empty?' packs/teams_admin/app/controllers/teams_controller.rb
+sed -i 's/@team.destroy/TeamRepository.delete(@team)/g' packs/teams_admin/app/controllers/teams_controller.rb
+sed -i 's/@team = Team.find(params\[:id\])/@team = TeamRepository.get(params[:id].to_i)/g' packs/teams_admin/app/controllers/teams_controller.rb
+cat packs/teams_admin/app/controllers/teams_controller.rb
 
-sed -i "1i # typed: false" packages/teams_admin/spec/requests/teams_spec.rb
-sed -i 's/to change(Team, :count)/to change(TeamRepository, :count)/g' packages/teams_admin/spec/requests/teams_spec.rb
-sed -i 's/redirect_to(team_url(Team.all.last))/redirect_to(team_url(TeamRepository.list.last.id))/g' packages/teams_admin/spec/requests/teams_spec.rb
-sed -i '/expect(response).not_to be_successful/a\        expect(response.body).to include("Name can&#39;t be blank")' packages/teams_admin/spec/requests/teams_spec.rb
-sed -i 's/team.reload/team = TeamRepository.get(team.id)/g' packages/teams_admin/spec/requests/teams_spec.rb
-cat packages/teams_admin/spec/requests/teams_spec.rb
+sed -i "1i # typed: false" packs/teams_admin/spec/requests/teams_spec.rb
+sed -i 's/to change(Team, :count)/to change(TeamRepository, :count)/g' packs/teams_admin/spec/requests/teams_spec.rb
+sed -i 's/redirect_to(team_url(Team.all.last))/redirect_to(team_url(TeamRepository.list.last.id))/g' packs/teams_admin/spec/requests/teams_spec.rb
+sed -i '/expect(response).not_to be_successful/a\        expect(response.body).to include("Name can&#39;t be blank")' packs/teams_admin/spec/requests/teams_spec.rb
+sed -i 's/team.reload/team = TeamRepository.get(team.id)/g' packs/teams_admin/spec/requests/teams_spec.rb
+cat packs/teams_admin/spec/requests/teams_spec.rb
 
-sed -i "1i # typed: ignore" packages/teams_admin/spec/routing/teams_routing_spec.rb
+sed -i "1i # typed: ignore" packs/teams_admin/spec/routing/teams_routing_spec.rb
 
 sed -i "1i # typed: true" spec/support/object_creation_methods.rb
 sed -i '/defaults = /a\      id: nil,' spec/support/object_creation_methods.rb

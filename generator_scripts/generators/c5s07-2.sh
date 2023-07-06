@@ -29,14 +29,14 @@ gem 'sorbet-rails'
 bundle install --local
 
 
-sed -i "1i # typed: strict" packages/prediction_ui/app/services/prediction_ui.rb
-sed -i '/module PredictionUi/a\  extend T::Sig' packages/prediction_ui/app/services/prediction_ui.rb
-sed -i '/def self.configure/s/^/  sig {params(predictor: Predictor::Predictor).void}\n/' packages/prediction_ui/app/services/prediction_ui.rb
-sed -i '/@predictor = /c\    @predictor = T.let(predictor, T.nilable(Predictor::Predictor))' packages/prediction_ui/app/services/prediction_ui.rb
-sed -i '/self.predictor/s/^/  sig {returns(T.nilable(Predictor::Predictor))}\n/' packages/prediction_ui/app/services/prediction_ui.rb
-sed -i '/freeze/d' packages/prediction_ui/app/services/prediction_ui.rb
+sed -i "1i # typed: strict" packs/prediction_ui/app/services/prediction_ui.rb
+sed -i '/module PredictionUi/a\  extend T::Sig' packs/prediction_ui/app/services/prediction_ui.rb
+sed -i '/def self.configure/s/^/  sig {params(predictor: Predictor::Predictor).void}\n/' packs/prediction_ui/app/services/prediction_ui.rb
+sed -i '/@predictor = /c\    @predictor = T.let(predictor, T.nilable(Predictor::Predictor))' packs/prediction_ui/app/services/prediction_ui.rb
+sed -i '/self.predictor/s/^/  sig {returns(T.nilable(Predictor::Predictor))}\n/' packs/prediction_ui/app/services/prediction_ui.rb
+sed -i '/freeze/d' packs/prediction_ui/app/services/prediction_ui.rb
 
-cat packages/prediction_ui/app/services/prediction_ui.rb
+cat packs/prediction_ui/app/services/prediction_ui.rb
 
 bundle install --local
 TAPIOCA_SORBET_EXE=/usr/local/bin/sorbet bundle exec tapioca init

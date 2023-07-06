@@ -13,18 +13,18 @@ set -e
 
 rm config/initializers/configure_prediction_ui.rb
 
-rm -rf packages/prediction_ui/app/services
+rm -rf packs/prediction_ui/app/services
 
-sed -i '/predictor =/c\    predictor = ServiceLocator.instance.get_service(:predictor)' packages/prediction_ui/app/controllers/predictions_controller.rb
+sed -i '/predictor =/c\    predictor = ServiceLocator.instance.get_service(:predictor)' packs/prediction_ui/app/controllers/predictions_controller.rb
 
 echo '
 enforce_dependencies: true
 dependencies:
-- packages/games
-- packages/rails_shims
-- packages/teams
-- packages/service_locator
-' > packages/prediction_ui/package.yml
+- packs/games
+- packs/rails_shims
+- packs/teams
+- packs/service_locator
+' > packs/prediction_ui/package.yml
 
 echo 'Rails.application.config.to_prepare do
   ServiceLocator.instance.register_service(:predictor, Predictor::Predictor.new)
@@ -33,24 +33,24 @@ end
 
 echo 'enforce_dependencies: true
 dependencies:
-- packages/predictor_interface
-' > packages/predictor/package.yml
+- packs/predictor_interface
+' > packs/predictor/package.yml
 
-mkdir -p packages/service_locator/app/public
-mkdir -p packages/service_locator/spec
+mkdir -p packs/service_locator/app/public
+mkdir -p packs/service_locator/spec
 
 echo 'enforce_dependencies: true
 enforce_architecture: true
 layer: utility
 enforce_privacy: true
-' > packages/service_locator/package.yml
+' > packs/service_locator/package.yml
 
 echo '
 Packs/ClassMethodsAsPublicApis:
   Enabled: false
-' > packages/service_locator/package_rubocop.yml
+' > packs/service_locator/package_rubocop.yml
 
-sed -i '/packages\/prediction_ui/c\  - packages/service_locator' package.yml
+sed -i '/packs\/prediction_ui/c\  - packs/service_locator' package.yml
 
 echo '# typed: true
 
@@ -71,7 +71,7 @@ class ServiceLocator
     @services[name]
   end
 end
-' > packages/service_locator/app/public/service_locator.rb
+' > packs/service_locator/app/public/service_locator.rb
 
 echo '# typed: false
 RSpec.describe ServiceLocator do
@@ -90,8 +90,8 @@ RSpec.describe ServiceLocator do
     end
   end
 end
-' > packages/service_locator/spec/service_locator_spec.rb
+' > packs/service_locator/spec/service_locator_spec.rb
 
 echo 'class ServiceNotFoundError < RuntimeError
 end
-' > packages/service_locator/app/public/service_not_found_error.rb
+' > packs/service_locator/app/public/service_not_found_error.rb

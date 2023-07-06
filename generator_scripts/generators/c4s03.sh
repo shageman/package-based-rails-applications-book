@@ -18,7 +18,7 @@ sed -i '/packwerk\/architecture\/checker/a\  - packwerk/visibility/checker' pack
 echo '
 enforce_visibility: true
 visible_to:
-  - packages/games_admin' >> packages/predictor/package.yml
+  - packs/games_admin' >> packs/predictor/package.yml
 
 
 ## See failure
@@ -29,4 +29,4 @@ bin/packwerk check && exit 1 || echo "Expected packwerk check error and got it."
 
 ## Fix it
 
-sed -i 's/packages\/games_admin/packages\/prediction_ui/' packages/predictor/package.yml
+sed -i 's/packs\/games_admin/packs\/prediction_ui/' packs/predictor/package.yml

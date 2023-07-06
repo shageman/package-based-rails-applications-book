@@ -14,17 +14,17 @@ set -e
 #
 ###############################################################################
 
-rm -rf packages/service_locator
+rm -rf packs/service_locator
 rm config/initializers/register_services.rb
 
-rm -rf packages/prediction_ui/app/views/predictions/create.html.slim
+rm -rf packs/prediction_ui/app/views/predictions/create.html.slim
 
 mkdir -p app/javascript/channels
-mkdir -p packages/prediction_ui/app/channels
-mkdir -p packages/prediction_ui/app/models
-mkdir -p packages/predictor/app/models
+mkdir -p packs/prediction_ui/app/channels
+mkdir -p packs/prediction_ui/app/models
+mkdir -p packs/predictor/app/models
 
-mkdir -p packages/prediction_needed_subscriber/app/public
+mkdir -p packs/prediction_needed_subscriber/app/public
 
 echo 'import consumer from "./consumer"
 
@@ -61,7 +61,7 @@ echo 'class PredictionChannel < ApplicationCable::Channel
   def subscribed
     stream_for current_user
   end
-end' > packages/prediction_ui/app/channels/prediction_channel.rb
+end' > packs/prediction_ui/app/channels/prediction_channel.rb
 
 echo '# typed: false
 
@@ -85,7 +85,7 @@ class PredictionsController < ApplicationController
     end
   end
 end
-' > packages/prediction_ui/app/controllers/predictions_controller.rb
+' > packs/prediction_ui/app/controllers/predictions_controller.rb
 
 echo 'class PredictionCompletedSubscriber
   def self.configure
@@ -94,7 +94,7 @@ echo 'class PredictionCompletedSubscriber
     end
   end
 end
-' > packages/prediction_ui/app/models/prediction_completed_subscriber.rb
+' > packs/prediction_ui/app/models/prediction_completed_subscriber.rb
 
 echo 'h1 Predictions
 
@@ -113,7 +113,7 @@ echo 'h1 Predictions
 
 h2 Predictions 
 #predictions
-' > packages/prediction_ui/app/views/predictions/new.html.slim
+' > packs/prediction_ui/app/views/predictions/new.html.slim
 
 echo 'class PredictionNeededSubscriber
   def self.configure
@@ -131,7 +131,7 @@ echo 'class PredictionNeededSubscriber
     end
   end
 end
-' > packages/prediction_needed_subscriber/app/public/prediction_needed_subscriber.rb
+' > packs/prediction_needed_subscriber/app/public/prediction_needed_subscriber.rb
 
 echo 'module ApplicationCable
   class Connection < ActionCable::Connection::Base
@@ -152,10 +152,10 @@ echo 'module ApplicationCable
     end
   end
 end
-' > packages/rails_shims/app/channels/application_cable/connection.rb
+' > packs/rails_shims/app/channels/application_cable/connection.rb
 
 echo 'class ApplicationController < ActionController::Base
-  append_view_path(Dir.glob(Rails.root.join("packages/*/app/views")))
+  append_view_path(Dir.glob(Rails.root.join("packs/*/app/views")))
 
   before_action :ensure_session
 
@@ -169,25 +169,25 @@ echo 'class ApplicationController < ActionController::Base
     session[:current_user] ||= "user_#{SecureRandom.uuid}"
   end
 end
-' > packages/rails_shims/app/controllers/application_controller.rb
+' > packs/rails_shims/app/controllers/application_controller.rb
 
 echo 'enforce_dependencies: true
 dependencies:
-- packages/games
-- packages/teams
-- packages/predictor
-' > packages/prediction_needed_subscriber/package.yml
+- packs/games
+- packs/teams
+- packs/predictor
+' > packs/prediction_needed_subscriber/package.yml
 
 echo 'enforce_dependencies: true
 dependencies:
-- packages/games
-- packages/rails_shims
-- packages/teams
-' > packages/prediction_ui/package.yml
+- packs/games
+- packs/rails_shims
+- packs/teams
+' > packs/prediction_ui/package.yml
 
 echo '
 enforce_dependencies: true
 dependencies:
-- packages/prediction_needed_subscriber
-- packages/prediction_ui
+- packs/prediction_needed_subscriber
+- packs/prediction_ui
 ' > package.yml

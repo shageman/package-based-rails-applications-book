@@ -15,14 +15,14 @@ set -e
 sed -i 's/enforce_privacy: false/enforce_privacy: true/' ./package.yml
 
 echo '
-enforce_privacy: true' >> packages/games_admin/package.yml
+enforce_privacy: true' >> packs/games_admin/package.yml
 echo '
-enforce_privacy: true' >> packages/teams_admin/package.yml
+enforce_privacy: true' >> packs/teams_admin/package.yml
 echo '
-enforce_privacy: true' >> packages/welcome_ui/package.yml
+enforce_privacy: true' >> packs/welcome_ui/package.yml
 
 # TODO
-# sed -i 's/enforce_privacy: false/enforce_privacy: true/' packages/prediction_ui/package.yml
+# sed -i 's/enforce_privacy: false/enforce_privacy: true/' packs/prediction_ui/package.yml
 
 echo '
-enforce_privacy: true' >> packages/predictor_interface/package.yml
+enforce_privacy: true' >> packs/predictor_interface/package.yml

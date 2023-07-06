@@ -26,31 +26,31 @@ echo 'enforce_architecture: true
 layer: app' >> package.yml
 
 echo 'enforce_architecture: true
-layer: UI' >> packages/prediction_ui/package.yml
+layer: UI' >> packs/prediction_ui/package.yml
 echo 'enforce_architecture: true
-layer: UI' >> packages/welcome_ui/package.yml
+layer: UI' >> packs/welcome_ui/package.yml
 echo 'enforce_architecture: true
-layer: UI' >> packages/teams_admin/package.yml
+layer: UI' >> packs/teams_admin/package.yml
 # echo 'enforce_architecture: true
-# layer: UI' >> packages/games_admin/package.yml
+# layer: UI' >> packs/games_admin/package.yml
 
 echo 'enforce_architecture: true
-layer: data' >> packages/teams/package.yml
+layer: data' >> packs/teams/package.yml
 # echo 'enforce_architecture: true
-# layer: data' >> packages/games/package.yml
+# layer: data' >> packs/games/package.yml
 
 echo 'enforce_architecture: true
-layer: utility' >> packages/rails_shims/package.yml
+layer: utility' >> packs/rails_shims/package.yml
 echo 'enforce_architecture: true
-layer: utility' >> packages/predictor/package.yml
+layer: utility' >> packs/predictor/package.yml
 
 
 ## Create failure
 
 echo 'enforce_architecture: true
-layer: data' >> packages/games_admin/package.yml
+layer: data' >> packs/games_admin/package.yml
 echo 'enforce_architecture: true
-layer: UI' >> packages/games/package.yml
+layer: UI' >> packs/games/package.yml
 
 
 ## See failure
@@ -61,5 +61,5 @@ bin/packwerk check && exit 1 || echo "Expected packwerk check error and got it."
 
 ## Fix it
 
-sed -i 's/layer: data/layer: UI/' packages/games_admin/package.yml
-sed -i 's/layer: UI/layer: data/' packages/games/package.yml
+sed -i 's/layer: data/layer: UI/' packs/games_admin/package.yml
+sed -i 's/layer: UI/layer: data/' packs/games/package.yml

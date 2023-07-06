@@ -43,15 +43,16 @@ echo "RuboCop::Packs.configure do |config|
   config.required_pack_level_cops = %w()
 end" > config/rubocop_packs.rb
 
+mkdir -p spec/packs
 echo "RSpec.describe 'rubocop-packs validations' do
   it { expect(RuboCop::Packs.validate).to be_empty }
-end" > spec/packages/rubocop_packs_spec.rb
+end" > spec/packs/rubocop_packs_spec.rb
 
 ## Create failure
 
 echo '
 Packs/DocumentedPublicApis:
-  Enabled: true' > packages/predictor/package_rubocop.yml
+  Enabled: true' > packs/predictor/package_rubocop.yml
 
 
 ## See failure
@@ -64,7 +65,7 @@ bin/rubocop && exit 1 || echo "Expected rubocop errors and got them."
 ## Fix it
 
 sed -i '/def learn/s/^/  # Pass in a list of teams and the games that they played against each other to learn relative team strengths\
-  # Ensure that all teams are in the teams list if they participate in any games. Otherwise you will get a runtime error\n/' packages/predictor/app/public/predictor.rb
-sed -i '/def predict/s/^/  # Pass in two teams to predict the outcome of their next game based on their learned relative team strengths\n/' packages/predictor/app/public/predictor.rb
+  # Ensure that all teams are in the teams list if they participate in any games. Otherwise you will get a runtime error\n/' packs/predictor/app/public/predictor.rb
+sed -i '/def predict/s/^/  # Pass in two teams to predict the outcome of their next game based on their learned relative team strengths\n/' packs/predictor/app/public/predictor.rb
 
 
