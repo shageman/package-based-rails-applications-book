@@ -1,3 +1,4 @@
+# typed: ignore
 
 RSpec.describe GamesController, type: :routing do
   describe "routing" do

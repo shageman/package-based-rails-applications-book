@@ -2,3 +2,7 @@ enforce_dependencies: true
 dependencies:
   - packages/rails_shims
   - packages/teams
+enforce_architecture: true
+layer: UI
+
+enforce_privacy: true

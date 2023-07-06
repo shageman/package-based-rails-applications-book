@@ -1,7 +1,8 @@
-
 enforce_dependencies: true
+enforce_privacy: false
+enforce_architecture: true
+layer: data
 dependencies:
-- packages/predictor_interface
-- packages/rails_shims
-- packages/teams
-
+  - packages/predictor_interface
+  - packages/rails_shims
+  - packages/teams

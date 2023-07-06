@@ -1,0 +1,31 @@
+|<!DOCTYPE html>
+html
+  head
+    title Sportsball App
+
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    = stylesheet_link_tag "application", "data-turbolinks-track": "reload"
+    = javascript_importmap_tags
+
+  header
+    .top-bar
+      .top-bar-left
+        ul.menu
+          li
+            = link_to root_path do
+              = image_tag "logo.png", width: "15px"
+              | Sportsball
+          li =link_to "Teams", teams_path
+          li =link_to "Games", games_path
+          li =link_to "Predictions", new_prediction_path
+
+  main
+    .row
+      .small-12.columns
+        = yield
+
+  javascript:
+    $(document).foundation();

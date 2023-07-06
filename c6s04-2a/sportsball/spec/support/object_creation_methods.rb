@@ -21,6 +21,7 @@ module ObjectCreationMethods
 
   def game_params(overrides = {})
     defaults = {
+      id: nil,
       first_team_id: -> { create_team.id },
       second_team_id: -> { create_team.id },
       winning_team: 2,
@@ -56,4 +57,3 @@ module ObjectCreationMethods
     end
   end
 end
-

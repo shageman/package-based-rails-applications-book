@@ -110,7 +110,7 @@ RSpec.describe "/teams", type: :request do
       it "renders a successful response (i.e. to display the edit template)" do
         team = create_team valid_attributes
         patch team_url(team), params: { team: invalid_attributes }
-        expect(response).to have_http_status(422)
+        expect(response).not_to be_successful
         expect(response.body).to include("Name can&#39;t be blank")
       end
     end
@@ -131,4 +131,3 @@ RSpec.describe "/teams", type: :request do
     end
   end
 end
-

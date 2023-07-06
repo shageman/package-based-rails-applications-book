@@ -178,8 +178,8 @@ class Saulabs::TrueSkill::FactorGraph
   def update_skills; end
   def updated_skills; end
 end
-class Predictor::Saulabs::TrueSkill::Rating
-  def self.new(arg0, arg1); end
-  def mean; end
-end
+# class Predictor::Saulabs::TrueSkill::Rating
+#   def self.new(arg0, arg1); end
+#   def mean; end
+# end
 

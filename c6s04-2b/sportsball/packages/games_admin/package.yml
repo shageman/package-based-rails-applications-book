@@ -1,5 +1,8 @@
 enforce_dependencies: true
+enforce_privacy: true
+enforce_architecture: true
+layer: UI
 dependencies:
-  - packages/teams
   - packages/games
   - packages/rails_shims
+  - packages/teams

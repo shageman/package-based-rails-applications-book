@@ -7,8 +7,9 @@
 # bin/packwerk update-todo
 ---
 packages/predictor:
-  "::Predictor":
+  "::Predictor::Predictor":
     violations:
     - dependency
+    - visibility
     files:
     - packages/prediction_ui/app/services/prediction_ui.rb

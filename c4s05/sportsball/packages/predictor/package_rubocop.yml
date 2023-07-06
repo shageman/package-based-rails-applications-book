@@ -1,0 +1,6 @@
+
+Packs/DocumentedPublicApis:
+  Enabled: true
+
+Packs/TypedPublicApis:
+  Enabled: false

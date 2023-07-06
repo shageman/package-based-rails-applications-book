@@ -1,4 +1,7 @@
 enforce_dependencies: true
+enforce_privacy: false
+enforce_architecture: true
+layer: UI
 dependencies:
   - packages/games
   - packages/predictor_interface

@@ -1,1 +1,4 @@
 enforce_dependencies: true
+enforce_architecture: true
+layer: utility
+enforce_privacy: true

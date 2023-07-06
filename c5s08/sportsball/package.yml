@@ -1,6 +1,7 @@
-
 enforce_dependencies: true
+enforce_privacy: false
+enforce_architecture: true
+layer: app
 dependencies:
-- packages/predictor
-- packages/service_locator
-
+  - packages/service_locator
+  - packages/predictor

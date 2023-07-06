@@ -75,4 +75,3 @@ module ObjectCreationMethods
     end
   end
 end
-

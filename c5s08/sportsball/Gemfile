@@ -84,6 +84,13 @@ gem 'trueskill'
 gem 'packs-rails'
 
 
+
+gem 'packwerk-extensions', group: [:development, :test]
+
+
+gem 'rubocop-packs', require: false, group: [:development, :test]
+
+
 gem 'sorbet-runtime'
 gem 'sorbet', :group => :development
 gem 'tapioca', require: false, :group => :development

@@ -1,1 +1,3 @@
 enforce_dependencies: true
+enforce_architecture: true
+layer: utility
