@@ -1,0 +1,68 @@
+digraph package_diagram {
+  rankdir=TD
+
+  graph [
+    labelloc="t"
+    fontname="Helvetica,Arial,sans-serif"
+    dpi=100
+    layout=dot
+    label="Visualization of 6 packs, generated using `bin/packs`",
+    fontsize=24
+  ]
+  node [
+    fontname="Helvetica,Arial,sans-serif"
+    fontsize=26.0
+    fontcolor=black
+    fillcolor=white
+    color=black
+    height=1.0
+    style=filled
+    shape=plain
+  ]
+
+
+          "packages/teams" -> "packages/rails_shims" [
+            color=darkgreen
+          ]
+          "packages/prediction_ui" -> "packages/teams" [
+            color=darkgreen
+          ]
+          "packages/teams_admin" -> "packages/teams" [
+            color=darkgreen
+          ]
+          "packages/games" -> "packages/teams" [
+            color=darkgreen
+          ]
+
+            "." -> "packages/teams" [
+              color=darkred
+              style=dashed
+              constraint=false
+              # headlabel="dependency"
+                arrowhead=odot
+                headport=e
+              
+              penwidth=1
+            ]
+
+  subgraph cluster_legend {
+    label="Legend"
+
+    A [ fontsize=12 shape=box label="package"]
+    B [ fontsize=12 shape=box label="package"]
+    C [ fontsize=12 shape=box label="package"]
+    D [ fontsize=12 shape=box label="package"]
+    E [ fontsize=12 shape=box label="package"]
+    F [ fontsize=12 shape=box label="package"]
+    G [ fontsize=12 shape=box label="package"]
+    H [ fontsize=12 shape=box label="package"]
+    I [ fontsize=12 shape=box label="package"]
+    J [ fontsize=12 shape=box label="package"]
+
+    A -> B [label="accepted dependency" color=darkgreen]
+    C -> D [label="privac todo" color=darkred style=dashed arrowhead=crow]
+    E -> F [label="architecture todo" color=darkred style=dashed arrowhead=invodot]
+    G -> H [label="visibility todo" color=darkred style=dashed arrowhead=obox]
+    I -> J [label="dependency todo" color=darkred style=dashed arrowhead=odot]
+  }
+}

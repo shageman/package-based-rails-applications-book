@@ -1,0 +1,132 @@
+digraph package_diagram {
+  rankdir=TD
+
+  graph [
+    labelloc="t"
+    fontname="Helvetica,Arial,sans-serif"
+    dpi=100
+    layout=dot
+    label="Visualization of 3 packs, generated using `bin/packs`",
+    fontsize=24
+  ]
+  node [
+    fontname="Helvetica,Arial,sans-serif"
+    fontsize=26.0
+    fontcolor=black
+    fillcolor=white
+    color=black
+    height=1.0
+    style=filled
+    shape=plain
+  ]
+
+    subgraph app {
+      shape=box
+      color=darkgrey
+      fillcolor=lightblue
+      style=filled
+
+        label="app"
+        cluster=true
+        rank = 0
+
+        "." [
+            fontsize=40.0
+              URL="https://github.com/shageman/package-based-rails-applications-book/tree/main/c4s07/sportsball/"
+            label=               <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> . </td> </tr>
+                </table>
+              >
+          ]
+
+    }
+    subgraph UI {
+      shape=box
+      color=darkgrey
+      fillcolor=lightblue
+      style=filled
+
+        label="UI"
+        cluster=true
+        rank = 1
+
+        "packs/prediction_ui" [
+            fontsize=26.0
+              URL="https://github.com/shageman/package-based-rails-applications-book/tree/main/c4s07/sportsball/packs/prediction_ui"
+            label=               <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> packs/prediction_ui </td> </tr>
+                </table>
+              >
+          ]
+
+                "." -> "packs/prediction_ui" [
+                  style=invis
+                ]
+    }
+    subgraph data {
+      shape=box
+      color=darkgrey
+      fillcolor=lightblue
+      style=filled
+
+        label="data"
+        cluster=true
+        rank = 2
+
+    }
+    subgraph utility {
+      shape=box
+      color=darkgrey
+      fillcolor=lightblue
+      style=filled
+
+        label="utility"
+        cluster=true
+        rank = 3
+
+        "packs/predictor" [
+            fontsize=26.0
+              URL="https://github.com/shageman/package-based-rails-applications-book/tree/main/c4s07/sportsball/packs/predictor"
+            label= 
+              <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='16'><tr><td>
+                  <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                    <tr> <td port='private'> packs/predictor </td> </tr>
+                  </table>
+                </td></tr></table>
+              >
+          ]
+
+    }
+
+          "." -> "packs/prediction_ui" [
+            color=darkgreen
+          ]
+          "." -> "packs/predictor" [
+            color=darkgreen
+          ]
+
+
+  subgraph cluster_legend {
+    label="Legend"
+
+    A [ fontsize=12 shape=box label="package"]
+    B [ fontsize=12 shape=box label="package"]
+    C [ fontsize=12 shape=box label="package"]
+    D [ fontsize=12 shape=box label="package"]
+    E [ fontsize=12 shape=box label="package"]
+    F [ fontsize=12 shape=box label="package"]
+    G [ fontsize=12 shape=box label="package"]
+    H [ fontsize=12 shape=box label="package"]
+    I [ fontsize=12 shape=box label="package"]
+    J [ fontsize=12 shape=box label="package"]
+
+    A -> B [label="accepted dependency" color=darkgreen]
+    C -> D [label="privac todo" color=darkred style=dashed arrowhead=crow]
+    E -> F [label="architecture todo" color=darkred style=dashed arrowhead=invodot]
+    G -> H [label="visibility todo" color=darkred style=dashed arrowhead=obox]
+    I -> J [label="dependency todo" color=darkred style=dashed arrowhead=odot]
+  }
+}

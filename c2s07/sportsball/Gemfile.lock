@@ -1,3 +1,18 @@
+GIT
+  remote: https://github.com/shageman/parse_packwerk.git
+  revision: 1cbce3d1579e3d1125f82627564bd4fb6d7ebcb7
+  specs:
+    parse_packwerk (0.19.3)
+      sorbet-runtime
+
+GIT
+  remote: https://github.com/shageman/visualize_packwerk.git
+  revision: a598e94967bb46e0bb2f8e53ee6a4aa8f5c3771a
+  specs:
+    visualize_packwerk (0.2.2)
+      packs
+      parse_packwerk
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -113,8 +128,8 @@ GEM
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
     io-console (0.6.0)
-    irb (1.7.1)
-      reline (>= 0.3.0)
+    irb (1.7.2)
+      reline (>= 0.3.6)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
@@ -163,14 +178,12 @@ GEM
       sorbet-runtime (>= 0.5.9914)
       zeitwerk (>= 2.6.1)
     parallel (1.23.0)
-    parse_packwerk (0.19.3)
-      sorbet-runtime
     parser (3.2.2.3)
       ast (~> 2.4.1)
       racc
     pastel (0.8.0)
       tty-color (~> 0.5)
-    public_suffix (5.0.1)
+    public_suffix (5.0.3)
     puma (5.6.6)
       nio4r (~> 2.0)
     racc (1.7.1)
@@ -208,7 +221,7 @@ GEM
     rainbow (3.1.1)
     rake (13.0.6)
     regexp_parser (2.8.1)
-    reline (0.3.5)
+    reline (0.3.6)
       io-console (~> 0.5)
     rexml (3.2.5)
     rspec-core (3.12.2)
@@ -250,8 +263,6 @@ GEM
       sorbet-runtime
     rubocop-sorbet (0.7.0)
       rubocop (>= 0.90.0)
-    ruby-graphviz (1.2.5)
-      rexml
     ruby-progressbar (1.13.0)
     rubyzip (2.3.2)
     selenium-webdriver (4.10.0)
@@ -268,7 +279,7 @@ GEM
       railties (>= 3.1)
       slim (>= 3.0, < 6.0, != 5.0.0)
     smart_properties (1.17.0)
-    sorbet-runtime (0.5.10902)
+    sorbet-runtime (0.5.10910)
     sprockets (4.2.0)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -314,13 +325,6 @@ GEM
       thor
       tty-prompt
       visualize_packwerk
-    visualize_packwerk (0.2.1)
-      code_ownership
-      packs
-      parse_packwerk
-      rake
-      ruby-graphviz
-      sorbet-runtime
     web-console (4.2.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -350,6 +354,7 @@ DEPENDENCIES
   jbuilder
   packs-rails
   packwerk
+  parse_packwerk!
   puma (~> 5.0)
   rails (~> 7.0.6)
   rspec-rails
@@ -363,6 +368,7 @@ DEPENDENCIES
   turbo-rails
   tzinfo-data
   use_packs
+  visualize_packwerk!
   web-console
   webdrivers
 

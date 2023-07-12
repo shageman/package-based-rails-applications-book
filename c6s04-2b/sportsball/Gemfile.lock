@@ -1,3 +1,18 @@
+GIT
+  remote: https://github.com/shageman/parse_packwerk.git
+  revision: 1cbce3d1579e3d1125f82627564bd4fb6d7ebcb7
+  specs:
+    parse_packwerk (0.19.3)
+      sorbet-runtime
+
+GIT
+  remote: https://github.com/shageman/visualize_packwerk.git
+  revision: a598e94967bb46e0bb2f8e53ee6a4aa8f5c3771a
+  specs:
+    visualize_packwerk (0.2.2)
+      packs
+      parse_packwerk
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -116,8 +131,8 @@ GEM
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
     io-console (0.6.0)
-    irb (1.7.1)
-      reline (>= 0.3.0)
+    irb (1.7.2)
+      reline (>= 0.3.6)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
@@ -177,8 +192,6 @@ GEM
       parser
       rainbow (~> 3.0)
       sorbet-runtime (>= 0.5)
-    parse_packwerk (0.19.3)
-      sorbet-runtime
     parser (3.2.2.3)
       ast (~> 2.4.1)
       racc
@@ -186,7 +199,7 @@ GEM
       tty-color (~> 0.5)
     polyfill (1.9.0)
     prettier_print (1.2.1)
-    public_suffix (5.0.1)
+    public_suffix (5.0.3)
     puma (5.6.6)
       nio4r (~> 2.0)
     racc (1.7.1)
@@ -223,13 +236,13 @@ GEM
       zeitwerk (~> 2.5)
     rainbow (3.1.1)
     rake (13.0.6)
-    rbi (0.0.16)
+    rbi (0.0.17)
       ast
-      parser (>= 2.6.4.0)
+      parser (>= 3.0.0)
       sorbet-runtime (>= 0.5.9204)
-      unparser
+      unparser (>= 0.5.6)
     regexp_parser (2.8.1)
-    reline (0.3.5)
+    reline (0.3.6)
       io-console (~> 0.5)
     rexml (3.2.5)
     rspec-core (3.12.2)
@@ -271,8 +284,6 @@ GEM
       sorbet-runtime
     rubocop-sorbet (0.7.0)
       rubocop (>= 0.90.0)
-    ruby-graphviz (1.2.5)
-      rexml
     ruby-progressbar (1.13.0)
     rubyzip (2.3.2)
     safe_type (1.1.1)
@@ -290,8 +301,8 @@ GEM
       railties (>= 3.1)
       slim (>= 3.0, < 6.0, != 5.0.0)
     smart_properties (1.17.0)
-    sorbet (0.5.10902)
-      sorbet-static (= 0.5.10902)
+    sorbet (0.5.10910)
+      sorbet-static (= 0.5.10910)
     sorbet-coerce (0.7.0)
       polyfill (~> 1.8)
       safe_type (~> 1.1, >= 1.1.1)
@@ -302,11 +313,11 @@ GEM
       parser (>= 2.7)
       sorbet-coerce (>= 0.2.6)
       sorbet-runtime (>= 0.5.9892)
-    sorbet-runtime (0.5.10902)
-    sorbet-static (0.5.10902-x86_64-linux)
-    sorbet-static-and-runtime (0.5.10902)
-      sorbet (= 0.5.10902)
-      sorbet-runtime (= 0.5.10902)
+    sorbet-runtime (0.5.10910)
+    sorbet-static (0.5.10910-x86_64-linux)
+    sorbet-static-and-runtime (0.5.10910)
+      sorbet (= 0.5.10910)
+      sorbet-runtime (= 0.5.10910)
     spoom (1.2.2)
       erubi (>= 1.10.0)
       sorbet (>= 0.5.10187)
@@ -372,13 +383,6 @@ GEM
       thor
       tty-prompt
       visualize_packwerk
-    visualize_packwerk (0.2.1)
-      code_ownership
-      packs
-      parse_packwerk
-      rake
-      ruby-graphviz
-      sorbet-runtime
     web-console (4.2.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -413,6 +417,7 @@ DEPENDENCIES
   packs-rails
   packwerk
   packwerk-extensions
+  parse_packwerk!
   puma (~> 5.0)
   rails (~> 7.0.6)
   rspec-rails
@@ -431,6 +436,7 @@ DEPENDENCIES
   turbo-rails
   tzinfo-data
   use_packs
+  visualize_packwerk!
   web-console
   webdrivers
 
