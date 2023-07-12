@@ -180,7 +180,7 @@ class RuboCop::Cop::Packs::RootNamespaceIsPackName::DesiredZeitwerkApi::Namespac
   const :expected_filepath, ::String
 
   class << self
-    # source://sorbet-runtime/0.5.10902/lib/types/struct.rb#13
+    # source://sorbet-runtime/0.5.10910/lib/types/struct.rb#13
     def inherited(s); end
   end
 end
@@ -233,7 +233,7 @@ class RuboCop::Cop::PackwerkLite::ConstantResolver::ConstantReference < ::T::Str
   def referencing_package; end
 
   class << self
-    # source://sorbet-runtime/0.5.10902/lib/types/struct.rb#13
+    # source://sorbet-runtime/0.5.10910/lib/types/struct.rb#13
     def inherited(s); end
 
     # source://rubocop-packs//lib/rubocop/cop/packwerk_lite/constant_resolver.rb#37
@@ -534,7 +534,7 @@ class RuboCop::Packs::Private::Offense < ::T::Struct
   def pack; end
 
   class << self
-    # source://sorbet-runtime/0.5.10902/lib/types/struct.rb#13
+    # source://sorbet-runtime/0.5.10910/lib/types/struct.rb#13
     def inherited(s); end
   end
 end

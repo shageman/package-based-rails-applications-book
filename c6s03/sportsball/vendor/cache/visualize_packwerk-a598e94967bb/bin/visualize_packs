@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "pathname"
+require "optparse"
+require "ostruct"
+
+require_relative '../lib/visualize_packwerk'
+
+options = OpenStruct.new
+options.layers = true
+options.dependencies = true
+options.todos = true
+options.privacy = true
+options.only_package = nil
+
+OptionParser.new do |opt|
+  opt.on('--no-layers', "Don't show architectural layers") { |o| options.layers = false }
+  opt.on('--no-dependencies', "Don't show accepted dependencies") { |o| options.dependencies = o }
+  opt.on('--no-todos', "Don't show package todos") { |o| options.todos = o }
+  opt.on('--no-privacy', "Don't show privacy enforcement") { |o| options.privacy = o }
+  opt.on('--only=PACKAGE', "Don't show privacy enforcement") { |o| options.only_package = o }
+  opt.on_tail("-h", "--help", "Show this message") do
+    puts opt
+    exit
+  end
+end.parse!
+
+VisualizePackwerk.package_graph!(options)

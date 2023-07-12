@@ -5,9 +5,7 @@
 # Please run `bin/tapioca annotations` to update it.
 
 class ActiveModel::Errors
-  Elem = type_member {
-  { fixed: ActiveModel::Error }
-}
+  Elem = type_member { { fixed: ActiveModel::Error } }
 
   sig { params(attribute: T.any(Symbol, String)).returns(T::Array[String]) }
   def [](attribute); end

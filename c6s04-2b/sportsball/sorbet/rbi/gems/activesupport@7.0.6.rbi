@@ -15277,6 +15277,17 @@ class Hash
   # source://activesupport//lib/active_support/core_ext/hash/keys.rb#16
   def stringify_keys!; end
 
+  # Returns a new hash with all keys converted to symbols, as long as
+  # they respond to +to_sym+.
+  #
+  #   hash = { 'name' => 'Rob', 'age' => '28' }
+  #
+  #   hash.symbolize_keys
+  #   # => {:name=>"Rob", :age=>"28"}
+  #
+  # source://activesupport//lib/active_support/core_ext/hash/keys.rb#27
+  def symbolize_keys; end
+
   # Destructively converts all keys to symbols, as long as they respond
   # to +to_sym+. Same as +symbolize_keys+, but modifies +self+.
   #
