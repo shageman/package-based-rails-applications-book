@@ -20,6 +20,34 @@ digraph package_diagram {
     shape=plain
   ]
 
+    subgraph NotInLayer {
+      shape=box
+      color=darkgrey
+      fillcolor=lightblue
+      style=filled
+
+
+        "app/packages/welcome_ui" [
+            fontsize=40.0
+              URL="https://github.com/shageman/package-based-rails-applications-book/tree/main/c4s07/sportsball/app/packages/welcome_ui"
+            label=               <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> app/packages/welcome_ui </td> </tr>
+                </table>
+              >
+          ]
+
+        "." [
+            fontsize=26.0
+              URL="https://github.com/shageman/package-based-rails-applications-book/tree/main/c4s07/sportsball/"
+            label=               <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> . </td> </tr>
+                </table>
+              >
+          ]
+
+    }
 
 
             "app/packages/welcome_ui" -> "." [

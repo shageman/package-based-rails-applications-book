@@ -138,6 +138,14 @@ digraph package_diagram {
                   style=invis
                 ]
     }
+    subgraph NotInLayer {
+      shape=box
+      color=darkgrey
+      fillcolor=lightblue
+      style=filled
+
+
+    }
 
           "packs/prediction_ui" -> "packs/predictor_interface" [
             color=darkgreen

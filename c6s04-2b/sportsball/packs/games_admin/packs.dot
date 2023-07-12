@@ -125,6 +125,14 @@ digraph package_diagram {
                   style=invis
                 ]
     }
+    subgraph NotInLayer {
+      shape=box
+      color=darkgrey
+      fillcolor=lightblue
+      style=filled
+
+
+    }
 
           "packs/games_admin" -> "packs/games" [
             color=darkgreen

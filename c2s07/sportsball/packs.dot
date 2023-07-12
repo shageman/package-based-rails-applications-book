@@ -20,6 +20,24 @@ digraph package_diagram {
     shape=plain
   ]
 
+    subgraph NotInLayer {
+      shape=box
+      color=darkgrey
+      fillcolor=lightblue
+      style=filled
+
+
+        "." [
+            fontsize=40.0
+              URL="https://github.com/shageman/package-based-rails-applications-book/tree/main/c4s07/sportsball/"
+            label=               <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> . </td> </tr>
+                </table>
+              >
+          ]
+
+    }
 
 
 

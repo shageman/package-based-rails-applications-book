@@ -100,6 +100,14 @@ digraph package_diagram {
           ]
 
     }
+    subgraph NotInLayer {
+      shape=box
+      color=darkgrey
+      fillcolor=lightblue
+      style=filled
+
+
+    }
 
           "." -> "packs/prediction_ui" [
             color=darkgreen

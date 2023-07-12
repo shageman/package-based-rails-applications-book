@@ -100,6 +100,40 @@ digraph package_diagram {
                   style=invis
                 ]
     }
+    subgraph NotInLayer {
+      shape=box
+      color=darkgrey
+      fillcolor=lightblue
+      style=filled
+
+
+        "packs/prediction_ui" [
+            fontsize=40.0
+              URL="https://github.com/shageman/package-based-rails-applications-book/tree/main/c4s07/sportsball/packs/prediction_ui"
+            label=               <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> packs/prediction_ui </td> </tr>
+                </table>
+              >
+          ]
+
+                "packs/rails_shims" -> "packs/prediction_ui" [
+                  style=invis
+                ]
+        "." [
+            fontsize=26.0
+              URL="https://github.com/shageman/package-based-rails-applications-book/tree/main/c4s07/sportsball/"
+            label=               <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> . </td> </tr>
+                </table>
+              >
+          ]
+
+                "packs/rails_shims" -> "." [
+                  style=invis
+                ]
+    }
 
           "packs/prediction_ui" -> "packs/games" [
             color=darkgreen

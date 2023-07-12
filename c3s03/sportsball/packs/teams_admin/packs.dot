@@ -20,6 +20,44 @@ digraph package_diagram {
     shape=plain
   ]
 
+    subgraph NotInLayer {
+      shape=box
+      color=darkgrey
+      fillcolor=lightblue
+      style=filled
+
+
+        "packs/teams_admin" [
+            fontsize=40.0
+              URL="https://github.com/shageman/package-based-rails-applications-book/tree/main/c4s07/sportsball/packs/teams_admin"
+            label=               <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> packs/teams_admin </td> </tr>
+                </table>
+              >
+          ]
+
+        "packs/rails_shims" [
+            fontsize=26.0
+              URL="https://github.com/shageman/package-based-rails-applications-book/tree/main/c4s07/sportsball/packs/rails_shims"
+            label=               <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> packs/rails_shims </td> </tr>
+                </table>
+              >
+          ]
+
+        "packs/teams" [
+            fontsize=26.0
+              URL="https://github.com/shageman/package-based-rails-applications-book/tree/main/c4s07/sportsball/packs/teams"
+            label=               <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> packs/teams </td> </tr>
+                </table>
+              >
+          ]
+
+    }
 
           "packs/teams_admin" -> "packs/rails_shims" [
             color=darkgreen

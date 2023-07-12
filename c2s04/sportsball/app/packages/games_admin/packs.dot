@@ -20,6 +20,54 @@ digraph package_diagram {
     shape=plain
   ]
 
+    subgraph NotInLayer {
+      shape=box
+      color=darkgrey
+      fillcolor=lightblue
+      style=filled
+
+
+        "app/packages/games_admin" [
+            fontsize=40.0
+              URL="https://github.com/shageman/package-based-rails-applications-book/tree/main/c4s07/sportsball/app/packages/games_admin"
+            label=               <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> app/packages/games_admin </td> </tr>
+                </table>
+              >
+          ]
+
+        "app/packages/games" [
+            fontsize=26.0
+              URL="https://github.com/shageman/package-based-rails-applications-book/tree/main/c4s07/sportsball/app/packages/games"
+            label=               <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> app/packages/games </td> </tr>
+                </table>
+              >
+          ]
+
+        "app/packages/rails_shims" [
+            fontsize=26.0
+              URL="https://github.com/shageman/package-based-rails-applications-book/tree/main/c4s07/sportsball/app/packages/rails_shims"
+            label=               <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> app/packages/rails_shims </td> </tr>
+                </table>
+              >
+          ]
+
+        "." [
+            fontsize=26.0
+              URL="https://github.com/shageman/package-based-rails-applications-book/tree/main/c4s07/sportsball/"
+            label=               <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> . </td> </tr>
+                </table>
+              >
+          ]
+
+    }
 
           "app/packages/games_admin" -> "app/packages/games" [
             color=darkgreen
