@@ -1,0 +1,150 @@
+digraph package_diagram {
+  rankdir=TD
+  graph [
+    labelloc="t"
+    fontname="Helvetica,Arial,sans-serif"
+    dpi=100
+    layout=dot
+    label=<%= title %>
+    fontsize=18
+  ]
+  node [
+    fontname="Helvetica,Arial,sans-serif"
+    fontsize=26.0
+    fontcolor=black
+    fillcolor=white
+    color=black
+    height=1.0
+    style=filled
+    shape=plain
+  ]
+  <%- architecture_layers.each_with_index do |layer_name, index| -%>
+    subgraph <%= layer_name -%> {
+      shape=box
+      color=darkgrey
+      fillcolor=lightblue
+      style=filled
+      <%- if layer_name != "NotInLayer" && options.show_layers -%>
+        label="<%= layer_name -%>"
+        cluster=true
+        rank = <%= index -%>
+      <%- else -%>
+        cluster=false
+      <%- end -%>
+      <%- grouped_packages[layer_name].each do |package| -%>
+        "<%= package.name -%>" [
+            fontsize=<%= options.show_only_focus_package && package.name == options.show_only_focus_package ? 18.0 : 12.0 -%>
+            <%- if options.remote_base_url %>
+              URL="<%= options.remote_base_url %>/<%= package.name == '.' ? '' : package.name -%>"
+            <%- end %>
+            <%- if options.show_teams && code_owner(package) -%>
+              style=filled
+              fillcolor="<%= node_color.call(code_owner(package)) %>"
+            <%- end -%>
+            label= <%- if package.enforce_privacy && options.show_privacy -%><
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='16'><tr><td>
+                  <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                    <tr> <td port='private'> <%= package.name -%> </td> </tr>
+                  </table>
+                </td></tr></table>
+              >
+            <%- else -%><
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> <%= package.name -%> </td> </tr>
+                </table>
+              >
+            <%- end -%>
+          ]
+        
+      <%- end -%>
+    }
+    <%- grouped_packages[layer_name].each do |package| -%>
+      <%- if options.show_layers -%>
+        <%- if index > 0 -%>
+          <%- grouped_packages[raw_config['architecture_layers'][index - 1]].each do |upper_layer_node| -%>
+            <%- if all_package_names.include?(upper_layer_node.name) && all_package_names.include?(package.name) -%>
+              "<%= upper_layer_node.name -%>" -> "<%= package.name -%>" [ style=invis ]
+            <%- end -%>
+          <%- end -%>
+        <%- end -%>
+      <%- end -%>
+    <%- end -%>
+  <%- end -%>
+  <%- if options.show_dependencies -%>
+    <%- all_packages.each do |package| -%>
+      <%- package.dependencies.each do |to_package| -%>
+        <%- if show_edge.call(package.name, to_package) -%>
+          "<%= package.name -%>" -> "<%= to_package -%>" [ color=darkgreen ]
+        <%- end -%>
+      <%- end -%>
+    <%- end -%>
+  <%- end -%>
+  <%- if options.show_todos -%>
+    <%- all_packages.each do |package| -%>
+      <%- violations_by_package = package.violations.group_by(&:to_package_name) -%>
+      <%- violations_by_package.keys.each do |violations_to_package| -%>
+        <%- violation_types = violations_by_package[violations_to_package].group_by(&:type) -%>
+        <%- violation_types.keys.each do |violation_type| -%>
+          <%- if show_edge.call(package.name, violations_to_package) -%>
+            "<%= package.name -%>" -> "<%= violations_to_package -%>"<%= violation_type == 'privacy' ? ':private' : '' -%> [ color=darkred style=dashed
+              constraint=false
+              # headlabel="<%= violation_type -%>"
+              <%- if violation_type == 'privacy' -%>
+                arrowhead=crow
+              <%- elsif violation_type == 'architecture' -%>
+                arrowhead=invodot
+              <%- elsif violation_type == 'visibility' -%>
+                arrowhead=obox
+              <%- elsif violation_type == 'dependency' -%>
+                arrowhead=odot
+              <%- end -%>
+              <%-
+                max_edge_width = 10
+                edge_width = (violation_types[violation_type].count / max_violation_count.to_f * max_edge_width).to_i
+              -%>
+              penwidth=<%= edge_width -%>
+            ]
+          <%- end -%>
+        <%- end -%>
+      <%- end -%>
+    <%- end -%>
+  <%- end -%>
+  subgraph cluster_legend {
+    fontsize=16
+    label="Edges Styles and Arrow Heads"
+    A [ fontsize=12 shape=box label="package"]
+    B [ fontsize=12 shape=box label="package"]
+    C [ fontsize=12 shape=box label="package"]
+    D [ fontsize=12 shape=box label="package"]
+    E [ fontsize=12 shape=box label="package"]
+    F [ fontsize=12 shape=box label="package"]
+    G [ fontsize=12 shape=box label="package"]
+    H [ fontsize=12 shape=box label="package"]
+    I [ fontsize=12 shape=box label="package"]
+    J [ fontsize=12 shape=box label="package"]
+    A -> B [label="accepted dependency" color=darkgreen]
+    C -> D [label="privac todo" color=darkred style=dashed arrowhead=crow]
+    E -> F [label="architecture todo" color=darkred style=dashed arrowhead=invodot]
+    G -> H [label="visibility todo" color=darkred style=dashed arrowhead=obox]
+    I -> J [label="dependency todo" color=darkred style=dashed arrowhead=odot]
+  }
+  <%- if options.show_teams && all_team_names != [] -%>
+  subgraph cluster_teams_legend {
+    fontsize=16
+    label="Team Colors"
+
+    <%- all_team_names.each do |team_name| -%>
+      <%- if team_name -%>
+      "<%= team_name %><%= team_name %>" [
+        label="<%= team_name %>"
+        style=filled
+        fillcolor="<%= node_color.call(team_name) %>"
+        fontsize=12
+        shape=box
+      ]
+      <%- end %>
+    <%- end -%>
+  }
+  J -> "<%= all_team_names.last %><%= all_team_names.last %>" [style=invis]
+  <%- end -%>
+}

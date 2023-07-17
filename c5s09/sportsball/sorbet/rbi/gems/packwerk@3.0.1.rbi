@@ -165,7 +165,7 @@ class Packwerk::Cache::CacheContents < ::T::Struct
     sig { params(serialized_cache_contents: ::String).returns(::Packwerk::Cache::CacheContents) }
     def deserialize(serialized_cache_contents); end
 
-    # source://sorbet-runtime/0.5.10910/lib/types/struct.rb#13
+    # source://sorbet-runtime/0.5.10914/lib/types/struct.rb#13
     def inherited(s); end
   end
 end
@@ -305,7 +305,7 @@ class Packwerk::Cli::Result < ::T::Struct
   const :status, T::Boolean
 
   class << self
-    # source://sorbet-runtime/0.5.10910/lib/types/struct.rb#13
+    # source://sorbet-runtime/0.5.10914/lib/types/struct.rb#13
     def inherited(s); end
   end
 end
@@ -562,7 +562,7 @@ class Packwerk::FileProcessor::ProcessedFile < ::T::Struct
   const :offenses, T::Array[::Packwerk::Offense], default: T.unsafe(nil)
 
   class << self
-    # source://sorbet-runtime/0.5.10910/lib/types/struct.rb#13
+    # source://sorbet-runtime/0.5.10914/lib/types/struct.rb#13
     def inherited(s); end
   end
 end
@@ -1040,7 +1040,7 @@ class Packwerk::NodeProcessorFactory < ::T::Struct
   def reference_extractor(node:); end
 
   class << self
-    # source://sorbet-runtime/0.5.10910/lib/types/struct.rb#13
+    # source://sorbet-runtime/0.5.10914/lib/types/struct.rb#13
     def inherited(s); end
   end
 end
@@ -2104,7 +2104,7 @@ class Packwerk::Validator::Result < ::T::Struct
   def ok?; end
 
   class << self
-    # source://sorbet-runtime/0.5.10910/lib/types/struct.rb#13
+    # source://sorbet-runtime/0.5.10914/lib/types/struct.rb#13
     def inherited(s); end
   end
 end

@@ -1,13 +1,12 @@
 digraph package_diagram {
   rankdir=TD
-
   graph [
     labelloc="t"
     fontname="Helvetica,Arial,sans-serif"
     dpi=100
     layout=dot
-    label="Visualization of 8 packs, generated using `bin/packs`",
-    fontsize=24
+    label=<<b>sportsball: Focus on . (showing all edges between visible packs)</b><br/><font point-size='12'>Widest todo edge is 2 violations</font>>
+    fontsize=18
   ]
   node [
     fontname="Helvetica,Arial,sans-serif"
@@ -19,221 +18,154 @@ digraph package_diagram {
     style=filled
     shape=plain
   ]
-
     subgraph NotInLayer {
       shape=box
       color=darkgrey
       fillcolor=lightblue
       style=filled
-
-
+        cluster=false
         "." [
-            fontsize=40.0
-              URL="https://github.com/shageman/package-based-rails-applications-book/tree/main/c4s07/sportsball/"
-            label=               <
+            fontsize=18.0
+            label= <
                 <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
                   <tr> <td align='left'> . </td> </tr>
                 </table>
               >
           ]
-
+        
         "app/packages/prediction_ui" [
-            fontsize=26.0
-              URL="https://github.com/shageman/package-based-rails-applications-book/tree/main/c4s07/sportsball/app/packages/prediction_ui"
-            label=               <
+            fontsize=12.0
+            label= <
                 <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
                   <tr> <td align='left'> app/packages/prediction_ui </td> </tr>
                 </table>
               >
           ]
-
+        
         "app/packages/games_admin" [
-            fontsize=26.0
-              URL="https://github.com/shageman/package-based-rails-applications-book/tree/main/c4s07/sportsball/app/packages/games_admin"
-            label=               <
+            fontsize=12.0
+            label= <
                 <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
                   <tr> <td align='left'> app/packages/games_admin </td> </tr>
                 </table>
               >
           ]
-
+        
         "app/packages/teams_admin" [
-            fontsize=26.0
-              URL="https://github.com/shageman/package-based-rails-applications-book/tree/main/c4s07/sportsball/app/packages/teams_admin"
-            label=               <
+            fontsize=12.0
+            label= <
                 <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
                   <tr> <td align='left'> app/packages/teams_admin </td> </tr>
                 </table>
               >
           ]
-
+        
         "app/packages/welcome_ui" [
-            fontsize=26.0
-              URL="https://github.com/shageman/package-based-rails-applications-book/tree/main/c4s07/sportsball/app/packages/welcome_ui"
-            label=               <
+            fontsize=12.0
+            label= <
                 <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
                   <tr> <td align='left'> app/packages/welcome_ui </td> </tr>
                 </table>
               >
           ]
-
+        
         "app/packages/games" [
-            fontsize=26.0
-              URL="https://github.com/shageman/package-based-rails-applications-book/tree/main/c4s07/sportsball/app/packages/games"
-            label=               <
+            fontsize=12.0
+            label= <
                 <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
                   <tr> <td align='left'> app/packages/games </td> </tr>
                 </table>
               >
           ]
-
+        
         "app/packages/teams" [
-            fontsize=26.0
-              URL="https://github.com/shageman/package-based-rails-applications-book/tree/main/c4s07/sportsball/app/packages/teams"
-            label=               <
+            fontsize=12.0
+            label= <
                 <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
                   <tr> <td align='left'> app/packages/teams </td> </tr>
                 </table>
               >
           ]
-
+        
         "app/packages/predictor" [
-            fontsize=26.0
-              URL="https://github.com/shageman/package-based-rails-applications-book/tree/main/c4s07/sportsball/app/packages/predictor"
-            label=               <
+            fontsize=12.0
+            label= <
                 <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
                   <tr> <td align='left'> app/packages/predictor </td> </tr>
                 </table>
               >
           ]
-
+        
     }
-
-
-            "." -> "app/packages/games" [
-              color=darkred
-              style=dashed
+          "app/packages/prediction_ui" -> "app/packages/games" [ color=darkgreen ]
+          "app/packages/prediction_ui" -> "app/packages/predictor" [ color=darkgreen ]
+          "app/packages/prediction_ui" -> "app/packages/teams" [ color=darkgreen ]
+          "app/packages/games_admin" -> "app/packages/games" [ color=darkgreen ]
+          "app/packages/teams_admin" -> "app/packages/teams" [ color=darkgreen ]
+          "app/packages/games" -> "app/packages/teams" [ color=darkgreen ]
+            "." -> "app/packages/games" [ color=darkred style=dashed
               constraint=false
               # headlabel="dependency"
                 arrowhead=odot
-                headport=e
-              
-              penwidth=1
-            ]
-            "." -> "app/packages/games_admin" [
-              color=darkred
-              style=dashed
+              penwidth=5            ]
+            "." -> "app/packages/games_admin" [ color=darkred style=dashed
               constraint=false
               # headlabel="dependency"
                 arrowhead=odot
-                headport=e
-              
-              penwidth=1
-            ]
-            "." -> "app/packages/prediction_ui" [
-              color=darkred
-              style=dashed
+              penwidth=5            ]
+            "." -> "app/packages/prediction_ui" [ color=darkred style=dashed
               constraint=false
               # headlabel="dependency"
                 arrowhead=odot
-                headport=e
-              
-              penwidth=1
-            ]
-            "." -> "app/packages/predictor" [
-              color=darkred
-              style=dashed
+              penwidth=5            ]
+            "." -> "app/packages/predictor" [ color=darkred style=dashed
               constraint=false
               # headlabel="dependency"
                 arrowhead=odot
-                headport=e
-              
-              penwidth=1
-            ]
-            "." -> "app/packages/teams" [
-              color=darkred
-              style=dashed
+              penwidth=10            ]
+            "." -> "app/packages/teams" [ color=darkred style=dashed
               constraint=false
               # headlabel="dependency"
                 arrowhead=odot
-                headport=e
-              
-              penwidth=1
-            ]
-            "." -> "app/packages/teams_admin" [
-              color=darkred
-              style=dashed
+              penwidth=5            ]
+            "." -> "app/packages/teams_admin" [ color=darkred style=dashed
               constraint=false
               # headlabel="dependency"
                 arrowhead=odot
-                headport=e
-              
-              penwidth=1
-            ]
-            "app/packages/prediction_ui" -> "." [
-              color=darkred
-              style=dashed
+              penwidth=5            ]
+            "app/packages/prediction_ui" -> "." [ color=darkred style=dashed
               constraint=false
               # headlabel="dependency"
                 arrowhead=odot
-                headport=e
-              
-              penwidth=1
-            ]
-            "app/packages/games_admin" -> "." [
-              color=darkred
-              style=dashed
+              penwidth=5            ]
+            "app/packages/games_admin" -> "." [ color=darkred style=dashed
               constraint=false
               # headlabel="dependency"
                 arrowhead=odot
-                headport=e
-              
-              penwidth=1
-            ]
-            "app/packages/teams_admin" -> "." [
-              color=darkred
-              style=dashed
+              penwidth=5            ]
+            "app/packages/teams_admin" -> "." [ color=darkred style=dashed
               constraint=false
               # headlabel="dependency"
                 arrowhead=odot
-                headport=e
-              
-              penwidth=1
-            ]
-            "app/packages/welcome_ui" -> "." [
-              color=darkred
-              style=dashed
+              penwidth=5            ]
+            "app/packages/welcome_ui" -> "." [ color=darkred style=dashed
               constraint=false
               # headlabel="dependency"
                 arrowhead=odot
-                headport=e
-              
-              penwidth=1
-            ]
-            "app/packages/games" -> "." [
-              color=darkred
-              style=dashed
+              penwidth=5            ]
+            "app/packages/games" -> "." [ color=darkred style=dashed
               constraint=false
               # headlabel="dependency"
                 arrowhead=odot
-                headport=e
-              
-              penwidth=1
-            ]
-            "app/packages/teams" -> "." [
-              color=darkred
-              style=dashed
+              penwidth=5            ]
+            "app/packages/teams" -> "." [ color=darkred style=dashed
               constraint=false
               # headlabel="dependency"
                 arrowhead=odot
-                headport=e
-              
-              penwidth=1
-            ]
-
+              penwidth=5            ]
   subgraph cluster_legend {
-    label="Legend"
-
+    fontsize=16
+    label="Edges Styles and Arrow Heads"
     A [ fontsize=12 shape=box label="package"]
     B [ fontsize=12 shape=box label="package"]
     C [ fontsize=12 shape=box label="package"]
@@ -244,11 +176,17 @@ digraph package_diagram {
     H [ fontsize=12 shape=box label="package"]
     I [ fontsize=12 shape=box label="package"]
     J [ fontsize=12 shape=box label="package"]
-
     A -> B [label="accepted dependency" color=darkgreen]
     C -> D [label="privac todo" color=darkred style=dashed arrowhead=crow]
     E -> F [label="architecture todo" color=darkred style=dashed arrowhead=invodot]
     G -> H [label="visibility todo" color=darkred style=dashed arrowhead=obox]
     I -> J [label="dependency todo" color=darkred style=dashed arrowhead=odot]
   }
+  subgraph cluster_teams_legend {
+    fontsize=16
+    label="Team Colors"
+
+
+  }
+  J -> "" [style=invis]
 }

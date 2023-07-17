@@ -23,6 +23,4 @@ git ls-files --others --exclude-standard | grep 'vendor/cache/pocky' | xargs rm
 git --no-pager diff --name-only | grep 'tgz$' | xargs git checkout
 git ls-files --others --exclude-standard | grep 'tgz$' | xargs rm
 
-git --no-pager diff --name-only | grep 'credentials.yml.enc$' | xargs git checkout
-git ls-files --others --exclude-standard | grep 'credentials.yml.enc$' | xargs rm
 

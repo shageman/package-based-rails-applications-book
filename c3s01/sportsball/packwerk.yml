@@ -9,7 +9,7 @@
 exclude:
 - 'spec/support/**/*'
 - '**/lib/tasks/**/*.rake'
-- '{bin,node_modules,script,tmp,vendor}/**/*'
+- '{bin,node_modules,script,tmp,vendor,VENDORED_GEMS}/**/*'
 
 # Patterns to find package configuration files
 # package_paths: "**/"
@@ -23,3 +23,9 @@ exclude:
 
 # Where you want the cache to be stored (default below)
 # cache_directory: 'tmp/cache/packwerk'
+
+package_paths:
+- ./packs/*
+- .
+- testengine
+

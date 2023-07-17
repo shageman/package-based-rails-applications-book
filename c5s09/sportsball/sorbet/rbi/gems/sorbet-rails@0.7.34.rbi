@@ -202,7 +202,7 @@ class SorbetRails::ModelColumnUtils::ColumnType < ::T::Struct
   def to_s; end
 
   class << self
-    # source://sorbet-runtime/0.5.10910/lib/types/struct.rb#13
+    # source://sorbet-runtime/0.5.10914/lib/types/struct.rb#13
     def inherited(s); end
   end
 end
@@ -568,7 +568,7 @@ class SorbetRails::SorbetUtils::ParsedParamDef < ::T::Struct
   prop :suffix, T.nilable(::String)
 
   class << self
-    # source://sorbet-runtime/0.5.10910/lib/types/struct.rb#13
+    # source://sorbet-runtime/0.5.10914/lib/types/struct.rb#13
     def inherited(s); end
   end
 end

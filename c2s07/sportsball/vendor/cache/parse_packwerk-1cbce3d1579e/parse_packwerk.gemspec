@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.metadata = { "allowed_push_host" => "https://rubygems.org", "changelog_uri" => "https://github.com/rubyatscale/parse_packwerk/releases", "homepage_uri" => "https://github.com/rubyatscale/parse_packwerk", "source_code_uri" => "https://github.com/rubyatscale/parse_packwerk" } if s.respond_to? :metadata=
   s.require_paths = ["lib".freeze]
   s.authors = ["Gusto Engineers".freeze]
-  s.date = "2023-07-12"
+  s.date = "2023-07-17"
   s.description = "A low-dependency gem for parsing and writing packwerk YML files".freeze
   s.email = ["dev@gusto.com".freeze]
   s.files = ["README.md".freeze, "lib/parse_packwerk".freeze, "lib/parse_packwerk.rb".freeze, "lib/parse_packwerk/configuration.rb".freeze, "lib/parse_packwerk/constants.rb".freeze, "lib/parse_packwerk/extensions.rb".freeze, "lib/parse_packwerk/package.rb".freeze, "lib/parse_packwerk/package_set.rb".freeze, "lib/parse_packwerk/package_todo.rb".freeze, "lib/parse_packwerk/violation.rb".freeze]

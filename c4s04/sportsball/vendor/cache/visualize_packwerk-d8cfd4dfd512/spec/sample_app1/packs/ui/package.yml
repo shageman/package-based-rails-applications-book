@@ -1,0 +1,6 @@
+enforce_dependencies: true
+layer: app
+dependencies:
+- packs/model
+- packs/utility
+owner: UI Team

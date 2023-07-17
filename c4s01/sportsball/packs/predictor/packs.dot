@@ -1,13 +1,12 @@
 digraph package_diagram {
   rankdir=TD
-
   graph [
     labelloc="t"
     fontname="Helvetica,Arial,sans-serif"
     dpi=100
     layout=dot
-    label="Visualization of 2 packs, generated using `bin/packs`",
-    fontsize=24
+    label=<<b>sportsball: Focus on packs/predictor (showing all edges between visible packs)</b>>
+    fontsize=18
   ]
   node [
     fontname="Helvetica,Arial,sans-serif"
@@ -19,19 +18,15 @@ digraph package_diagram {
     style=filled
     shape=plain
   ]
-
     subgraph NotInLayer {
       shape=box
       color=darkgrey
       fillcolor=lightblue
       style=filled
-
-
+        cluster=false
         "packs/predictor" [
-            fontsize=40.0
-              URL="https://github.com/shageman/package-based-rails-applications-book/tree/main/c4s07/sportsball/packs/predictor"
-            label= 
-              <
+            fontsize=18.0
+            label= <
                 <table border='0' cellborder='1' cellspacing='0' cellpadding='16'><tr><td>
                   <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
                     <tr> <td port='private'> packs/predictor </td> </tr>
@@ -39,27 +34,21 @@ digraph package_diagram {
                 </td></tr></table>
               >
           ]
-
+        
         "packs/prediction_ui" [
-            fontsize=26.0
-              URL="https://github.com/shageman/package-based-rails-applications-book/tree/main/c4s07/sportsball/packs/prediction_ui"
-            label=               <
+            fontsize=12.0
+            label= <
                 <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
                   <tr> <td align='left'> packs/prediction_ui </td> </tr>
                 </table>
               >
           ]
-
+        
     }
-
-          "packs/prediction_ui" -> "packs/predictor" [
-            color=darkgreen
-          ]
-
-
+          "packs/prediction_ui" -> "packs/predictor" [ color=darkgreen ]
   subgraph cluster_legend {
-    label="Legend"
-
+    fontsize=16
+    label="Edges Styles and Arrow Heads"
     A [ fontsize=12 shape=box label="package"]
     B [ fontsize=12 shape=box label="package"]
     C [ fontsize=12 shape=box label="package"]
@@ -70,11 +59,17 @@ digraph package_diagram {
     H [ fontsize=12 shape=box label="package"]
     I [ fontsize=12 shape=box label="package"]
     J [ fontsize=12 shape=box label="package"]
-
     A -> B [label="accepted dependency" color=darkgreen]
     C -> D [label="privac todo" color=darkred style=dashed arrowhead=crow]
     E -> F [label="architecture todo" color=darkred style=dashed arrowhead=invodot]
     G -> H [label="visibility todo" color=darkred style=dashed arrowhead=obox]
     I -> J [label="dependency todo" color=darkred style=dashed arrowhead=odot]
   }
+  subgraph cluster_teams_legend {
+    fontsize=16
+    label="Team Colors"
+
+
+  }
+  J -> "" [style=invis]
 }

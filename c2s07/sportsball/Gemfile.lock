@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: https://github.com/shageman/visualize_packwerk.git
-  revision: 63549ff5951af29f230126a986a9517600b78f14
+  revision: d8cfd4dfd512abb1d32bcd47f4a828da6d19de7a
   specs:
     visualize_packwerk (0.2.2)
       packs
@@ -108,7 +108,7 @@ GEM
       code_teams (~> 1.0)
       packs
       sorbet-runtime (>= 0.5.10821)
-    code_teams (1.0.1)
+    code_teams (1.0.2)
       sorbet-runtime
     colorize (1.1.0)
     concurrent-ruby (1.2.2)
@@ -128,7 +128,7 @@ GEM
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
     io-console (0.6.0)
-    irb (1.7.2)
+    irb (1.7.4)
       reline (>= 0.3.6)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
@@ -241,7 +241,7 @@ GEM
       rspec-mocks (~> 3.12)
       rspec-support (~> 3.12)
     rspec-support (3.12.1)
-    rubocop (1.54.1)
+    rubocop (1.54.2)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
       parallel (~> 1.10)
@@ -279,7 +279,7 @@ GEM
       railties (>= 3.1)
       slim (>= 3.0, < 6.0, != 5.0.0)
     smart_properties (1.17.0)
-    sorbet-runtime (0.5.10910)
+    sorbet-runtime (0.5.10914)
     sprockets (4.2.0)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)

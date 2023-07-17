@@ -9,7 +9,7 @@
 exclude:
 - 'spec/support/**/*'
 - '**/lib/tasks/**/*.rake'
-- '{bin,node_modules,script,tmp,vendor}/**/*'
+- '{bin,node_modules,script,tmp,vendor,VENDORED_GEMS}/**/*'
 
 # Patterns to find package configuration files
 # package_paths: "**/"
@@ -33,3 +33,8 @@ architecture_layers:
   - UI
   - data
   - utility
+
+package_paths:
+- ./packs/*
+- .
+

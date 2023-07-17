@@ -62,7 +62,7 @@ class ParsePackwerk::Configuration < ::T::Struct
     sig { returns(::ParsePackwerk::Configuration) }
     def fetch; end
 
-    # source://sorbet-runtime/0.5.10910/lib/types/struct.rb#13
+    # source://sorbet-runtime/0.5.10914/lib/types/struct.rb#13
     def inherited(s); end
 
     # source://parse_packwerk//lib/parse_packwerk/configuration.rb#44
@@ -175,7 +175,7 @@ class ParsePackwerk::Package < ::T::Struct
     sig { params(pathname: ::Pathname).returns(::ParsePackwerk::Package) }
     def from(pathname); end
 
-    # source://sorbet-runtime/0.5.10910/lib/types/struct.rb#13
+    # source://sorbet-runtime/0.5.10914/lib/types/struct.rb#13
     def inherited(s); end
   end
 end
@@ -217,7 +217,7 @@ class ParsePackwerk::PackageTodo < ::T::Struct
     sig { params(pathname: ::Pathname).returns(::ParsePackwerk::PackageTodo) }
     def from(pathname); end
 
-    # source://sorbet-runtime/0.5.10910/lib/types/struct.rb#13
+    # source://sorbet-runtime/0.5.10914/lib/types/struct.rb#13
     def inherited(s); end
   end
 end
@@ -241,7 +241,7 @@ class ParsePackwerk::Violation < ::T::Struct
   def privacy?; end
 
   class << self
-    # source://sorbet-runtime/0.5.10910/lib/types/struct.rb#13
+    # source://sorbet-runtime/0.5.10914/lib/types/struct.rb#13
     def inherited(s); end
   end
 end

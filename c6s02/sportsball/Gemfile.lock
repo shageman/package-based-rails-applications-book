@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: https://github.com/shageman/visualize_packwerk.git
-  revision: 63549ff5951af29f230126a986a9517600b78f14
+  revision: d8cfd4dfd512abb1d32bcd47f4a828da6d19de7a
   specs:
     visualize_packwerk (0.2.2)
       packs
@@ -108,7 +108,7 @@ GEM
       code_teams (~> 1.0)
       packs
       sorbet-runtime (>= 0.5.10821)
-    code_teams (1.0.1)
+    code_teams (1.0.2)
       sorbet-runtime
     colorize (1.1.0)
     commander (4.6.0)
@@ -131,7 +131,7 @@ GEM
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
     io-console (0.6.0)
-    irb (1.7.2)
+    irb (1.7.4)
       reline (>= 0.3.6)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
@@ -262,7 +262,7 @@ GEM
       rspec-mocks (~> 3.12)
       rspec-support (~> 3.12)
     rspec-support (3.12.1)
-    rubocop (1.54.1)
+    rubocop (1.54.2)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
       parallel (~> 1.10)
@@ -301,8 +301,8 @@ GEM
       railties (>= 3.1)
       slim (>= 3.0, < 6.0, != 5.0.0)
     smart_properties (1.17.0)
-    sorbet (0.5.10910)
-      sorbet-static (= 0.5.10910)
+    sorbet (0.5.10914)
+      sorbet-static (= 0.5.10914)
     sorbet-coerce (0.7.0)
       polyfill (~> 1.8)
       safe_type (~> 1.1, >= 1.1.1)
@@ -313,11 +313,11 @@ GEM
       parser (>= 2.7)
       sorbet-coerce (>= 0.2.6)
       sorbet-runtime (>= 0.5.9892)
-    sorbet-runtime (0.5.10910)
-    sorbet-static (0.5.10910-x86_64-linux)
-    sorbet-static-and-runtime (0.5.10910)
-      sorbet (= 0.5.10910)
-      sorbet-runtime (= 0.5.10910)
+    sorbet-runtime (0.5.10914)
+    sorbet-static (0.5.10914-x86_64-linux)
+    sorbet-static-and-runtime (0.5.10914)
+      sorbet (= 0.5.10914)
+      sorbet-runtime (= 0.5.10914)
     spoom (1.2.2)
       erubi (>= 1.10.0)
       sorbet (>= 0.5.10187)
@@ -336,7 +336,7 @@ GEM
       railties (>= 6.0.0)
     syntax_tree (6.1.1)
       prettier_print (>= 1.2.0)
-    tapioca (0.11.7)
+    tapioca (0.11.8)
       bundler (>= 2.2.25)
       netrc (>= 0.11.0)
       parallel (>= 1.21.0)
