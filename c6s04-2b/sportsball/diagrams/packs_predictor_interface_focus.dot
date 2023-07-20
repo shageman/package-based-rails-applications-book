@@ -1,0 +1,149 @@
+digraph package_diagram {
+  rankdir=TD
+  graph [
+    labelloc="t"
+    fontname="Helvetica,Arial,sans-serif"
+    dpi=100
+    layout=dot
+    label=<<b>sportsball: Focus on packs/predictor_interface (showing only edges to/from focus pack)</b>>
+    fontsize=18
+  ]
+  node [
+    fontname="Helvetica,Arial,sans-serif"
+    fontsize=26.0
+    fontcolor=black
+    fillcolor=white
+    color=black
+    height=1.0
+    style=filled
+    shape=plain
+  ]
+    subgraph app {
+      shape=box
+      color=darkgrey
+      fillcolor=lightblue
+      style=filled
+        label="app"
+        cluster=true
+        rank = 0    }
+    subgraph UI {
+      shape=box
+      color=darkgrey
+      fillcolor=lightblue
+      style=filled
+        label="UI"
+        cluster=true
+        rank = 1        "packs/prediction_ui" [
+            fontsize=12.0
+            label= <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> packs/prediction_ui </td> </tr>
+                </table>
+              >
+          ]
+        
+    }
+    subgraph data {
+      shape=box
+      color=darkgrey
+      fillcolor=lightblue
+      style=filled
+        label="data"
+        cluster=true
+        rank = 2        "packs/games" [
+            fontsize=12.0
+            label= <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='16'><tr><td>
+                  <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                    <tr> <td port='private'> packs/games </td> </tr>
+                  </table>
+                </td></tr></table>
+              >
+          ]
+        
+        "packs/teams" [
+            fontsize=12.0
+            label= <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='16'><tr><td>
+                  <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                    <tr> <td port='private'> packs/teams </td> </tr>
+                  </table>
+                </td></tr></table>
+              >
+          ]
+        
+    }
+              "packs/prediction_ui" -> "packs/games" [ style=invis ]
+              "packs/prediction_ui" -> "packs/teams" [ style=invis ]
+    subgraph utility {
+      shape=box
+      color=darkgrey
+      fillcolor=lightblue
+      style=filled
+        label="utility"
+        cluster=true
+        rank = 3        "packs/predictor_interface" [
+            fontsize=18.0
+            label= <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='16'><tr><td>
+                  <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                    <tr> <td port='private'> packs/predictor_interface </td> </tr>
+                  </table>
+                </td></tr></table>
+              >
+          ]
+        
+        "packs/predictor" [
+            fontsize=12.0
+            label= <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='16'><tr><td>
+                  <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                    <tr> <td port='private'> packs/predictor </td> </tr>
+                  </table>
+                </td></tr></table>
+              >
+          ]
+        
+    }
+              "packs/games" -> "packs/predictor_interface" [ style=invis ]
+              "packs/teams" -> "packs/predictor_interface" [ style=invis ]
+              "packs/games" -> "packs/predictor" [ style=invis ]
+              "packs/teams" -> "packs/predictor" [ style=invis ]
+    subgraph NotInLayer {
+      shape=box
+      color=darkgrey
+      fillcolor=lightblue
+      style=filled
+        cluster=false
+    }
+          "packs/prediction_ui" -> "packs/predictor_interface" [ color=darkgreen ]
+          "packs/predictor" -> "packs/predictor_interface" [ color=darkgreen ]
+          "packs/games" -> "packs/predictor_interface" [ color=darkgreen ]
+          "packs/teams" -> "packs/predictor_interface" [ color=darkgreen ]
+  subgraph cluster_legend {
+    fontsize=16
+    label="Edges Styles and Arrow Heads"
+    A [ fontsize=12 shape=box label="package"]
+    B [ fontsize=12 shape=box label="package"]
+    C [ fontsize=12 shape=box label="package"]
+    D [ fontsize=12 shape=box label="package"]
+    E [ fontsize=12 shape=box label="package"]
+    F [ fontsize=12 shape=box label="package"]
+    G [ fontsize=12 shape=box label="package"]
+    H [ fontsize=12 shape=box label="package"]
+    I [ fontsize=12 shape=box label="package"]
+    J [ fontsize=12 shape=box label="package"]
+    A -> B [label="accepted dependency" color=darkgreen]
+    C -> D [label="privac todo" color=darkred style=dashed arrowhead=crow]
+    E -> F [label="architecture todo" color=darkred style=dashed arrowhead=invodot]
+    G -> H [label="visibility todo" color=darkred style=dashed arrowhead=obox]
+    I -> J [label="dependency todo" color=darkred style=dashed arrowhead=odot]
+  }
+  subgraph cluster_teams_legend {
+    fontsize=16
+    label="Team Colors"
+
+
+  }
+  J -> "" [style=invis]
+}
