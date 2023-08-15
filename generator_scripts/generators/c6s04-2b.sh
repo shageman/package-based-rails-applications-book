@@ -391,9 +391,19 @@ RSpec.describe GameRepository do
 end
 ' > packs/games/spec/public/game_repository_spec.rb
 
-echo '
+echo 'inherit_from: ../../.rubocop.yml
+
 Packs/ClassMethodsAsPublicApis:
-  Enabled: false' >> packs/games/package_rubocop.yml
+  Enabled: false
+
+Packs/RootNamespaceIsPackName:
+  Enabled: false
+
+Packs/TypedPublicApis:
+  Enabled: false
+
+Packs/DocumentedPublicApis:
+  Enabled: false' > packs/games/.rubocop.yml
 
 sed -i 's/Game.all/GameRepository.list/g' packs/prediction_ui/app/controllers/predictions_controller.rb
 

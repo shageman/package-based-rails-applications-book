@@ -23,3 +23,17 @@ mv ./packs/rails_shims/app/channels/application_cable/connection.rb ./packs/rail
 mv ./packs/rails_shims/app/channels/application_cable/channel.rb ./packs/rails_shims/app/public/application_cable
 
 sed -i 's/enforce_privacy: false/enforce_privacy: true/g' packs/rails_shims/package.yml
+
+echo 'inherit_from: ../../.rubocop.yml
+
+Packs/ClassMethodsAsPublicApis:
+  Enabled: false
+
+Packs/RootNamespaceIsPackName:
+  Enabled: false
+
+Packs/TypedPublicApis:
+  Enabled: false
+
+Packs/DocumentedPublicApis:
+  Enabled: false' > packs/rails_shims/.rubocop.yml

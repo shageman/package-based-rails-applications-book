@@ -18,6 +18,8 @@ gem 'rspec-rails', group: [:development, :test]
 gem 'shoulda-matchers', group: [:test]
 gem 'slim-rails'
 gem 'trueskill'
+gem 'visualize_packwerk', github: 'shageman/visualize_packwerk'
+gem 'parse_packwerk', github: 'shageman/parse_packwerk'
 " >> Gemfile
 
 bundle install --local
@@ -114,3 +116,12 @@ set -x
 
 bin/packwerk init
 
+# Uncomment default excludes and add exlude for rake tasks
+sed -i "s/# exclude:/exclude:/g" packwerk.yml
+sed -i "/bin,node_modules/c\- '{bin,node_modules,script,tmp,vendor,VENDORED_GEMS}\/**\/*'" packwerk.yml
+sed -i "/exclude:/a\- '**\/lib\/tasks\/**\/*.rake'" packwerk.yml
+
+echo "pack_paths:
+- app/packages/*
+- .
+" > packs.yml

@@ -191,3 +191,17 @@ dependencies:
 - packs/prediction_needed_subscriber
 - packs/prediction_ui
 ' > package.yml
+
+echo 'inherit_from: ../../.rubocop.yml
+
+Packs/ClassMethodsAsPublicApis:
+  Enabled: false
+
+Packs/RootNamespaceIsPackName:
+  Enabled: false
+
+Packs/TypedPublicApis:
+  Enabled: false
+
+Packs/DocumentedPublicApis:
+  Enabled: false' > packs/prediction_needed_subscriber/.rubocop.yml

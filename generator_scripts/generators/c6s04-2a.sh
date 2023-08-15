@@ -256,9 +256,19 @@ RSpec.describe TeamRepository do
 end
 ' > packs/teams/spec/public/team_repository_spec.rb
 
-echo '
+echo 'inherit_from: ../../.rubocop.yml
+
 Packs/ClassMethodsAsPublicApis:
-  Enabled: false' >> packs/teams/package_rubocop.yml
+  Enabled: false
+
+Packs/RootNamespaceIsPackName:
+  Enabled: false
+
+Packs/TypedPublicApis:
+  Enabled: false
+
+Packs/DocumentedPublicApis:
+  Enabled: false' > packs/teams/.rubocop.yml
 
 sed -i 's/Team.all/TeamRepository.list/g' packs/prediction_ui/app/controllers/predictions_controller.rb
 sed -i 's/Team.find/TeamRepository.get/g' packs/prediction_ui/app/controllers/predictions_controller.rb

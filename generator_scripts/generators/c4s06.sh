@@ -15,14 +15,14 @@ set -e
 
 echo '
 Packs/RootNamespaceIsPackName:
-  Enabled: true' >> .rubocop.yml
+  Enabled: false' >> .rubocop.yml
 
 
 ## Create failure
 
 echo '
 Packs/RootNamespaceIsPackName:
-  Enabled: true' >> packs/predictor/package_rubocop.yml
+  Enabled: true' >> packs/predictor/.rubocop.yml
 
 
 ## See failure

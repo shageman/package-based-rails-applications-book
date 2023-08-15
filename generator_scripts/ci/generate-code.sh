@@ -41,8 +41,8 @@ gem "sorbet-rails"
 gem "packwerk", group: [:development, :test]
 gem "code_ownership"
 gem "pack_stats"
-gem "visualize_packwerk"
-gem "parse_packwerk"
+gem "visualize_packwerk", github: "shageman/visualize_packwerk"
+gem "parse_packwerk", github: "shageman/parse_packwerk"
 gem "packs"
 gem "packwerk-extensions"
 gem "use_packs"
@@ -51,6 +51,11 @@ gem "code_teams"
 gem "danger-packwerk"
 gem "packs-rails"
 gem "code_manifest"
+
+gem "eventide-postgres"
+gem "evt-component_host"
+gem "evt-try"
+gem "rspec"
 ' >> Gemfile
 
 sed -i "s/gem.*tzinfo-data.*/gem 'tzinfo-data'/g" Gemfile

@@ -20,7 +20,12 @@ architecture_layers:
   - app
   - UI
   - data
-  - utility' >> packwerk.yml
+  - utility
+
+package_paths:
+- ./packs/*
+- .
+' >> packwerk.yml
 
 echo 'enforce_architecture: true
 layer: app' >> package.yml

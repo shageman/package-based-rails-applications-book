@@ -23,7 +23,25 @@ cp -r VENDORED_GEMS/* vendor/cache/ # get our saved local gems back
 find . -iname 'package_todo.yml' -delete
 bundle install --local
 bin/packwerk update
-bin/packs visualize
+
+rm -rf diagrams
+mkdir diagrams
+
+bundle exec visualize_packs > diagrams/all_packs.dot && dot diagrams/all_packs.dot -Tpng -o diagrams/all_packs.png
+
+for file in $(find . -name package.yml); do
+  if ! [[ $file == *"VENDORED_GEMS"* ]] && ! [[ $file == *"vendor"* ]]; then
+    package_name=`echo $file | sed 's/\/package.yml//g' | sed 's/\.\///'`
+    output_name=`echo $package_name | sed 's/\//_/' | sed 's/\._/root_/'`
+
+    bundle exec visualize_packs --focus_on=$package_name > diagrams/$output_name.dot && dot diagrams/$output_name.dot -Tpng -o diagrams/$output_name.png
+    bundle exec visualize_packs --focus_on=$package_name --only-edges-to-focus > diagrams/${output_name}_focus.dot && dot diagrams/${output_name}_focus.dot -Tpng -o diagrams/${output_name}_focus.png
+  else
+    echo "Skipping $file"
+  fi
+done
+
+ls -la diagrams
 
 cd ..
 tar --exclude='tmp/*' --exclude='`pwd`/gems/*' -zcf $CHAPTER-`date +%Y%m%d%H%M%S`.tgz sportsball; echo "zipping done"

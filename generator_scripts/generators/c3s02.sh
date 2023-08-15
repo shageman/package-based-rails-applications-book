@@ -57,7 +57,7 @@ sed -i "s/true/false/g" testgem/spec/testgem_spec.rb
 
 cd testgem
 mkdir -p vendor/cache
-cp ../VENDORED_GEMS/* vendor/cache/
+cp -R ../VENDORED_GEMS/* vendor/cache/
 cp -R ../.bundle .bundle
 
 sed -i '/rspec/c\gem "rspec-core"\
@@ -71,3 +71,12 @@ cd ..
 echo "gem 'testgem', path: 'testgem'" >> Gemfile
 
 echo 'enforce_dependencies: true' > testgem/package.yml
+
+echo '
+package_paths:
+- ./packs/*
+- .
+- ./testgem
+' >> packwerk.yml
+
+sed -i '/pack_paths/a\- ./testgem' packs.yml

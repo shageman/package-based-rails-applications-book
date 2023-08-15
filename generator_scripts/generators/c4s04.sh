@@ -27,32 +27,30 @@ require:
 inherit_gem:
   rubocop-packs:
     - config/default.yml
-    - config/pack_config.yml
 
 Packs/DocumentedPublicApis:
   Enabled: true' > .rubocop.yml
 
-
-echo "RuboCop::Packs.configure do |config|
-  config.permitted_pack_level_cops = %w(
-    Packs/ClassMethodsAsPublicApis
-    Packs/RootNamespaceIsPackName
-    Packs/TypedPublicApis
-    Packs/DocumentedPublicApis
-  )
-  config.required_pack_level_cops = %w()
-end" > config/rubocop_packs.rb
-
 mkdir -p spec/packs
-echo "RSpec.describe 'rubocop-packs validations' do
-  it { expect(RuboCop::Packs.validate).to be_empty }
-end" > spec/packs/rubocop_packs_spec.rb
+echo 'RSpec.describe "rubocop-packs validations" do
+  it "has only valid config files" do
+    config_files = Dir.glob("**/.rubocop.yml")
+    config_files.each do |config_file|
+      expect do
+        config = RuboCop::ConfigLoader.load_file(File.expand_path(".") + "/.rubocop.yml", check: false)
+        RuboCop::ConfigValidator.new(config).validate
+      end.to_not raise_exception
+    end
+  end
+end' > spec/packs/rubocop_packs_spec.rb
 
 ## Create failure
 
 echo '
+inherit_from: ../../.rubocop.yml
+
 Packs/DocumentedPublicApis:
-  Enabled: true' > packs/predictor/package_rubocop.yml
+  Enabled: true' > packs/predictor/.rubocop.yml
 
 
 ## See failure

@@ -45,10 +45,19 @@ layer: utility
 enforce_privacy: true
 ' > packs/service_locator/package.yml
 
-echo '
+echo 'inherit_from: ../../.rubocop.yml
+
 Packs/ClassMethodsAsPublicApis:
   Enabled: false
-' > packs/service_locator/package_rubocop.yml
+
+Packs/RootNamespaceIsPackName:
+  Enabled: false
+
+Packs/TypedPublicApis:
+  Enabled: false
+
+Packs/DocumentedPublicApis:
+  Enabled: false' > packs/service_locator/.rubocop.yml
 
 sed -i '/packs\/prediction_ui/c\  - packs/service_locator' package.yml
 

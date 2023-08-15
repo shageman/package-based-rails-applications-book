@@ -15,7 +15,8 @@ mkdir sorbet
 
 echo '--dir
 .
---ignore=/vendor/bundle
+--ignore=/vendor/
+--ignore=/VENDORED_GEMS/
 --ignore=/db
 ' > sorbet/config
 

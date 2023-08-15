@@ -30,6 +30,6 @@ bin/rubocop && exit 1 || echo "Expected rubocop errors and got them."
 
 echo '
 Packs/TypedPublicApis:
-  Enabled: false' >> packs/predictor/package_rubocop.yml
+  Enabled: false' >> packs/predictor/.rubocop.yml
 
 # Here the fix is to remove the typing requirement for the package. We'll get back to typing in C5S07-2 and will readd this cop then

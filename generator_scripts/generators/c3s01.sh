@@ -32,3 +32,12 @@ sed -i "s/TODO//g" testengine/testengine.gemspec
 
 
 echo 'enforce_dependencies: true' > testengine/package.yml
+
+echo '
+package_paths:
+- ./packs/*
+- .
+- testengine
+' >> packwerk.yml
+
+sed -i '/pack_paths/a\- ./testengine' packs.yml

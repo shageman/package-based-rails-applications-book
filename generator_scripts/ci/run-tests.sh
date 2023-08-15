@@ -19,7 +19,27 @@ rake db:create && rake db:migrate
 bin/rails zeitwerk:check
 
 
-## TESTS
+## TESTS FOR EVENTIDE-BACKEND
+if [[ "$EVENTIDE_TESTS" = "true" ]]; then
+  mkdir /usr/local/pgsql
+  chown postgres /usr/local/pgsql
+
+  su -c "/usr/lib/postgresql/14/bin/pg_ctl -D /usr/local/pgsql/data initdb" postgres
+  su -c "/usr/lib/postgresql/14/bin/pg_ctl start -D  /usr/local/pgsql/data" postgres
+
+  mkdir -p eventide-backend/prediction_component/vendor/cache/
+  cp -R VENDORED_GEMS/* eventide-backend/prediction_component/vendor/cache/ 
+
+  cd eventide-backend/prediction_component
+  bundle install --local
+
+  bundle exec rspec
+
+  cd ../..
+fi
+
+
+## TESTS FOR MAIN APP
 bundle exec rspec --exclude-pattern '**/system/**/*_spec.rb' `cat .rspec | tr '\n' ' '`
 echo 'puts defined?(TeamRecord) ? TeamRecord.count : Team.count' | bundle exec rails c
 
