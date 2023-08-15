@@ -78,18 +78,7 @@ digraph package_diagram {
       style=filled
         label="utility"
         cluster=true
-        rank = 3        "packs/predictor_interface" [
-            fontsize=18.0
-            label= <
-                <table border='0' cellborder='1' cellspacing='0' cellpadding='16'><tr><td>
-                  <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
-                    <tr> <td port='private'> packs/predictor_interface </td> </tr>
-                  </table>
-                </td></tr></table>
-              >
-          ]
-        
-        "packs/predictor" [
+        rank = 3        "packs/predictor" [
             fontsize=12.0
             label= <
                 <table border='0' cellborder='1' cellspacing='0' cellpadding='16'><tr><td>
@@ -100,11 +89,22 @@ digraph package_diagram {
               >
           ]
         
+        "packs/predictor_interface" [
+            fontsize=18.0
+            label= <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='16'><tr><td>
+                  <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                    <tr> <td port='private'> packs/predictor_interface </td> </tr>
+                  </table>
+                </td></tr></table>
+              >
+          ]
+        
     }
-              "packs/games" -> "packs/predictor_interface" [ style=invis ]
-              "packs/teams" -> "packs/predictor_interface" [ style=invis ]
               "packs/games" -> "packs/predictor" [ style=invis ]
               "packs/teams" -> "packs/predictor" [ style=invis ]
+              "packs/games" -> "packs/predictor_interface" [ style=invis ]
+              "packs/teams" -> "packs/predictor_interface" [ style=invis ]
     subgraph NotInLayer {
       shape=box
       color=darkgrey
@@ -112,12 +112,12 @@ digraph package_diagram {
       style=filled
         cluster=false
     }
+          "packs/games" -> "packs/predictor_interface" [ color=darkgreen ]
+          "packs/games" -> "packs/teams" [ color=darkgreen ]
           "packs/prediction_ui" -> "packs/games" [ color=darkgreen ]
           "packs/prediction_ui" -> "packs/predictor_interface" [ color=darkgreen ]
           "packs/prediction_ui" -> "packs/teams" [ color=darkgreen ]
           "packs/predictor" -> "packs/predictor_interface" [ color=darkgreen ]
-          "packs/games" -> "packs/predictor_interface" [ color=darkgreen ]
-          "packs/games" -> "packs/teams" [ color=darkgreen ]
           "packs/teams" -> "packs/predictor_interface" [ color=darkgreen ]
   subgraph cluster_legend {
     fontsize=16

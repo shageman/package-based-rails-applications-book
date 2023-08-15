@@ -24,29 +24,11 @@ digraph package_diagram {
       fillcolor=lightblue
       style=filled
         cluster=false
-        "packages/teams" [
-            fontsize=18.0
-            label= <
-                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
-                  <tr> <td align='left'> packages/teams </td> </tr>
-                </table>
-              >
-          ]
-        
-        "packages/prediction_ui" [
+        "." [
             fontsize=12.0
             label= <
                 <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
-                  <tr> <td align='left'> packages/prediction_ui </td> </tr>
-                </table>
-              >
-          ]
-        
-        "packages/teams_admin" [
-            fontsize=12.0
-            label= <
-                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
-                  <tr> <td align='left'> packages/teams_admin </td> </tr>
+                  <tr> <td align='left'> . </td> </tr>
                 </table>
               >
           ]
@@ -60,6 +42,15 @@ digraph package_diagram {
               >
           ]
         
+        "packages/prediction_ui" [
+            fontsize=12.0
+            label= <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> packages/prediction_ui </td> </tr>
+                </table>
+              >
+          ]
+        
         "packages/rails_shims" [
             fontsize=12.0
             label= <
@@ -69,20 +60,29 @@ digraph package_diagram {
               >
           ]
         
-        "." [
+        "packages/teams" [
+            fontsize=18.0
+            label= <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> packages/teams </td> </tr>
+                </table>
+              >
+          ]
+        
+        "packages/teams_admin" [
             fontsize=12.0
             label= <
                 <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
-                  <tr> <td align='left'> . </td> </tr>
+                  <tr> <td align='left'> packages/teams_admin </td> </tr>
                 </table>
               >
           ]
         
     }
-          "packages/teams" -> "packages/rails_shims" [ color=darkgreen ]
-          "packages/prediction_ui" -> "packages/teams" [ color=darkgreen ]
-          "packages/teams_admin" -> "packages/teams" [ color=darkgreen ]
           "packages/games" -> "packages/teams" [ color=darkgreen ]
+          "packages/prediction_ui" -> "packages/teams" [ color=darkgreen ]
+          "packages/teams" -> "packages/rails_shims" [ color=darkgreen ]
+          "packages/teams_admin" -> "packages/teams" [ color=darkgreen ]
             "." -> "packages/teams" [ color=darkred style=dashed
               constraint=false
               # headlabel="dependency"

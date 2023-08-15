@@ -74,20 +74,20 @@ digraph package_diagram {
       fillcolor=lightblue
       style=filled
         cluster=false
-        "packs/prediction_needed_subscriber" [
-            fontsize=18.0
-            label= <
-                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
-                  <tr> <td align='left'> packs/prediction_needed_subscriber </td> </tr>
-                </table>
-              >
-          ]
-        
         "." [
             fontsize=12.0
             label= <
                 <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
                   <tr> <td align='left'> . </td> </tr>
+                </table>
+              >
+          ]
+        
+        "packs/prediction_needed_subscriber" [
+            fontsize=18.0
+            label= <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> packs/prediction_needed_subscriber </td> </tr>
                 </table>
               >
           ]
@@ -102,11 +102,11 @@ digraph package_diagram {
           ]
         
     }
+          "." -> "packs/prediction_needed_subscriber" [ color=darkgreen ]
+          "packs/games" -> "packs/teams" [ color=darkgreen ]
           "packs/prediction_needed_subscriber" -> "packs/games" [ color=darkgreen ]
           "packs/prediction_needed_subscriber" -> "packs/teams" [ color=darkgreen ]
           "packs/prediction_needed_subscriber" -> "packs/predictor" [ color=darkgreen ]
-          "." -> "packs/prediction_needed_subscriber" [ color=darkgreen ]
-          "packs/games" -> "packs/teams" [ color=darkgreen ]
   subgraph cluster_legend {
     fontsize=16
     label="Edges Styles and Arrow Heads"

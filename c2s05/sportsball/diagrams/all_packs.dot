@@ -24,11 +24,20 @@ digraph package_diagram {
       fillcolor=lightblue
       style=filled
         cluster=false
-        "packages/prediction_ui" [
+        "." [
             fontsize=12.0
             label= <
                 <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
-                  <tr> <td align='left'> packages/prediction_ui </td> </tr>
+                  <tr> <td align='left'> . </td> </tr>
+                </table>
+              >
+          ]
+        
+        "packages/games" [
+            fontsize=12.0
+            label= <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> packages/games </td> </tr>
                 </table>
               >
           ]
@@ -42,11 +51,38 @@ digraph package_diagram {
               >
           ]
         
+        "packages/prediction_ui" [
+            fontsize=12.0
+            label= <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> packages/prediction_ui </td> </tr>
+                </table>
+              >
+          ]
+        
+        "packages/predictor" [
+            fontsize=12.0
+            label= <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> packages/predictor </td> </tr>
+                </table>
+              >
+          ]
+        
         "packages/rails_shims" [
             fontsize=12.0
             label= <
                 <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
                   <tr> <td align='left'> packages/rails_shims </td> </tr>
+                </table>
+              >
+          ]
+        
+        "packages/teams" [
+            fontsize=12.0
+            label= <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> packages/teams </td> </tr>
                 </table>
               >
           ]
@@ -69,55 +105,19 @@ digraph package_diagram {
               >
           ]
         
-        "packages/predictor" [
-            fontsize=12.0
-            label= <
-                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
-                  <tr> <td align='left'> packages/predictor </td> </tr>
-                </table>
-              >
-          ]
-        
-        "packages/games" [
-            fontsize=12.0
-            label= <
-                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
-                  <tr> <td align='left'> packages/games </td> </tr>
-                </table>
-              >
-          ]
-        
-        "packages/teams" [
-            fontsize=12.0
-            label= <
-                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
-                  <tr> <td align='left'> packages/teams </td> </tr>
-                </table>
-              >
-          ]
-        
-        "." [
-            fontsize=12.0
-            label= <
-                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
-                  <tr> <td align='left'> . </td> </tr>
-                </table>
-              >
-          ]
-        
     }
+          "packages/games" -> "packages/rails_shims" [ color=darkgreen ]
+          "packages/games" -> "packages/teams" [ color=darkgreen ]
+          "packages/games_admin" -> "packages/games" [ color=darkgreen ]
+          "packages/games_admin" -> "packages/rails_shims" [ color=darkgreen ]
           "packages/prediction_ui" -> "packages/games" [ color=darkgreen ]
           "packages/prediction_ui" -> "packages/predictor" [ color=darkgreen ]
           "packages/prediction_ui" -> "packages/rails_shims" [ color=darkgreen ]
           "packages/prediction_ui" -> "packages/teams" [ color=darkgreen ]
-          "packages/games_admin" -> "packages/games" [ color=darkgreen ]
-          "packages/games_admin" -> "packages/rails_shims" [ color=darkgreen ]
+          "packages/teams" -> "packages/rails_shims" [ color=darkgreen ]
           "packages/teams_admin" -> "packages/rails_shims" [ color=darkgreen ]
           "packages/teams_admin" -> "packages/teams" [ color=darkgreen ]
           "packages/welcome_ui" -> "packages/rails_shims" [ color=darkgreen ]
-          "packages/games" -> "packages/rails_shims" [ color=darkgreen ]
-          "packages/games" -> "packages/teams" [ color=darkgreen ]
-          "packages/teams" -> "packages/rails_shims" [ color=darkgreen ]
             "." -> "packages/games" [ color=darkred style=dashed
               constraint=false
               # headlabel="dependency"

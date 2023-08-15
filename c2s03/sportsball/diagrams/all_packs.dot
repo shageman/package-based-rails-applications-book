@@ -24,11 +24,20 @@ digraph package_diagram {
       fillcolor=lightblue
       style=filled
         cluster=false
-        "app/packages/prediction_ui" [
+        "." [
             fontsize=12.0
             label= <
                 <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
-                  <tr> <td align='left'> app/packages/prediction_ui </td> </tr>
+                  <tr> <td align='left'> . </td> </tr>
+                </table>
+              >
+          ]
+        
+        "app/packages/games" [
+            fontsize=12.0
+            label= <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> app/packages/games </td> </tr>
                 </table>
               >
           ]
@@ -38,6 +47,33 @@ digraph package_diagram {
             label= <
                 <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
                   <tr> <td align='left'> app/packages/games_admin </td> </tr>
+                </table>
+              >
+          ]
+        
+        "app/packages/prediction_ui" [
+            fontsize=12.0
+            label= <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> app/packages/prediction_ui </td> </tr>
+                </table>
+              >
+          ]
+        
+        "app/packages/predictor" [
+            fontsize=12.0
+            label= <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> app/packages/predictor </td> </tr>
+                </table>
+              >
+          ]
+        
+        "app/packages/teams" [
+            fontsize=12.0
+            label= <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> app/packages/teams </td> </tr>
                 </table>
               >
           ]
@@ -60,79 +96,13 @@ digraph package_diagram {
               >
           ]
         
-        "app/packages/predictor" [
-            fontsize=12.0
-            label= <
-                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
-                  <tr> <td align='left'> app/packages/predictor </td> </tr>
-                </table>
-              >
-          ]
-        
-        "app/packages/games" [
-            fontsize=12.0
-            label= <
-                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
-                  <tr> <td align='left'> app/packages/games </td> </tr>
-                </table>
-              >
-          ]
-        
-        "app/packages/teams" [
-            fontsize=12.0
-            label= <
-                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
-                  <tr> <td align='left'> app/packages/teams </td> </tr>
-                </table>
-              >
-          ]
-        
-        "." [
-            fontsize=12.0
-            label= <
-                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
-                  <tr> <td align='left'> . </td> </tr>
-                </table>
-              >
-          ]
-        
     }
+          "app/packages/games" -> "app/packages/teams" [ color=darkgreen ]
+          "app/packages/games_admin" -> "app/packages/games" [ color=darkgreen ]
           "app/packages/prediction_ui" -> "app/packages/games" [ color=darkgreen ]
           "app/packages/prediction_ui" -> "app/packages/predictor" [ color=darkgreen ]
           "app/packages/prediction_ui" -> "app/packages/teams" [ color=darkgreen ]
-          "app/packages/games_admin" -> "app/packages/games" [ color=darkgreen ]
           "app/packages/teams_admin" -> "app/packages/teams" [ color=darkgreen ]
-          "app/packages/games" -> "app/packages/teams" [ color=darkgreen ]
-            "app/packages/prediction_ui" -> "." [ color=darkred style=dashed
-              constraint=false
-              # headlabel="dependency"
-                arrowhead=odot
-              penwidth=5            ]
-            "app/packages/games_admin" -> "." [ color=darkred style=dashed
-              constraint=false
-              # headlabel="dependency"
-                arrowhead=odot
-              penwidth=5            ]
-            "app/packages/teams_admin" -> "." [ color=darkred style=dashed
-              constraint=false
-              # headlabel="dependency"
-                arrowhead=odot
-              penwidth=5            ]
-            "app/packages/welcome_ui" -> "." [ color=darkred style=dashed
-              constraint=false
-              # headlabel="dependency"
-                arrowhead=odot
-              penwidth=5            ]
-            "app/packages/games" -> "." [ color=darkred style=dashed
-              constraint=false
-              # headlabel="dependency"
-                arrowhead=odot
-              penwidth=5            ]
-            "app/packages/teams" -> "." [ color=darkred style=dashed
-              constraint=false
-              # headlabel="dependency"
-                arrowhead=odot
-              penwidth=5            ]
             "." -> "app/packages/games" [ color=darkred style=dashed
               constraint=false
               # headlabel="dependency"
@@ -159,6 +129,36 @@ digraph package_diagram {
                 arrowhead=odot
               penwidth=5            ]
             "." -> "app/packages/teams_admin" [ color=darkred style=dashed
+              constraint=false
+              # headlabel="dependency"
+                arrowhead=odot
+              penwidth=5            ]
+            "app/packages/games" -> "." [ color=darkred style=dashed
+              constraint=false
+              # headlabel="dependency"
+                arrowhead=odot
+              penwidth=5            ]
+            "app/packages/games_admin" -> "." [ color=darkred style=dashed
+              constraint=false
+              # headlabel="dependency"
+                arrowhead=odot
+              penwidth=5            ]
+            "app/packages/prediction_ui" -> "." [ color=darkred style=dashed
+              constraint=false
+              # headlabel="dependency"
+                arrowhead=odot
+              penwidth=5            ]
+            "app/packages/teams" -> "." [ color=darkred style=dashed
+              constraint=false
+              # headlabel="dependency"
+                arrowhead=odot
+              penwidth=5            ]
+            "app/packages/teams_admin" -> "." [ color=darkred style=dashed
+              constraint=false
+              # headlabel="dependency"
+                arrowhead=odot
+              penwidth=5            ]
+            "app/packages/welcome_ui" -> "." [ color=darkred style=dashed
               constraint=false
               # headlabel="dependency"
                 arrowhead=odot

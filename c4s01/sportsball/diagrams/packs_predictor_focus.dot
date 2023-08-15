@@ -24,6 +24,15 @@ digraph package_diagram {
       fillcolor=lightblue
       style=filled
         cluster=false
+        "packs/prediction_ui" [
+            fontsize=12.0
+            label= <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> packs/prediction_ui </td> </tr>
+                </table>
+              >
+          ]
+        
         "packs/predictor" [
             fontsize=18.0
             label= <
@@ -32,15 +41,6 @@ digraph package_diagram {
                     <tr> <td port='private'> packs/predictor </td> </tr>
                   </table>
                 </td></tr></table>
-              >
-          ]
-        
-        "packs/prediction_ui" [
-            fontsize=12.0
-            label= <
-                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
-                  <tr> <td align='left'> packs/prediction_ui </td> </tr>
-                </table>
               >
           ]
         

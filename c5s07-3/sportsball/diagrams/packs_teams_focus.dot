@@ -59,16 +59,7 @@ digraph package_diagram {
       style=filled
         label="data"
         cluster=true
-        rank = 2        "packs/teams" [
-            fontsize=18.0
-            label= <
-                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
-                  <tr> <td align='left'> packs/teams </td> </tr>
-                </table>
-              >
-          ]
-        
-        "packs/games" [
+        rank = 2        "packs/games" [
             fontsize=12.0
             label= <
                 <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
@@ -77,11 +68,20 @@ digraph package_diagram {
               >
           ]
         
+        "packs/teams" [
+            fontsize=18.0
+            label= <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> packs/teams </td> </tr>
+                </table>
+              >
+          ]
+        
     }
-              "packs/prediction_ui" -> "packs/teams" [ style=invis ]
-              "packs/teams_admin" -> "packs/teams" [ style=invis ]
               "packs/prediction_ui" -> "packs/games" [ style=invis ]
               "packs/teams_admin" -> "packs/games" [ style=invis ]
+              "packs/prediction_ui" -> "packs/teams" [ style=invis ]
+              "packs/teams_admin" -> "packs/teams" [ style=invis ]
     subgraph utility {
       shape=box
       color=darkgrey
@@ -110,10 +110,10 @@ digraph package_diagram {
           ]
         
     }
-              "packs/teams" -> "packs/predictor_interface" [ style=invis ]
               "packs/games" -> "packs/predictor_interface" [ style=invis ]
-              "packs/teams" -> "packs/rails_shims" [ style=invis ]
+              "packs/teams" -> "packs/predictor_interface" [ style=invis ]
               "packs/games" -> "packs/rails_shims" [ style=invis ]
+              "packs/teams" -> "packs/rails_shims" [ style=invis ]
     subgraph NotInLayer {
       shape=box
       color=darkgrey
@@ -121,11 +121,11 @@ digraph package_diagram {
       style=filled
         cluster=false
     }
+          "packs/games" -> "packs/teams" [ color=darkgreen ]
+          "packs/prediction_ui" -> "packs/teams" [ color=darkgreen ]
           "packs/teams" -> "packs/predictor_interface" [ color=darkgreen ]
           "packs/teams" -> "packs/rails_shims" [ color=darkgreen ]
-          "packs/prediction_ui" -> "packs/teams" [ color=darkgreen ]
           "packs/teams_admin" -> "packs/teams" [ color=darkgreen ]
-          "packs/games" -> "packs/teams" [ color=darkgreen ]
   subgraph cluster_legend {
     fontsize=16
     label="Edges Styles and Arrow Heads"

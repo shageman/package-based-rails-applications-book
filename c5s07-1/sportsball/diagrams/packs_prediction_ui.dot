@@ -107,12 +107,12 @@ digraph package_diagram {
       style=filled
         cluster=false
     }
-          "packs/prediction_ui" -> "packs/games" [ color=darkgreen ]
-          "packs/prediction_ui" -> "packs/rails_shims" [ color=darkgreen ]
-          "packs/prediction_ui" -> "packs/teams" [ color=darkgreen ]
           "." -> "packs/prediction_ui" [ color=darkgreen ]
           "packs/games" -> "packs/rails_shims" [ color=darkgreen ]
           "packs/games" -> "packs/teams" [ color=darkgreen ]
+          "packs/prediction_ui" -> "packs/games" [ color=darkgreen ]
+          "packs/prediction_ui" -> "packs/rails_shims" [ color=darkgreen ]
+          "packs/prediction_ui" -> "packs/teams" [ color=darkgreen ]
           "packs/teams" -> "packs/rails_shims" [ color=darkgreen ]
   subgraph cluster_legend {
     fontsize=16

@@ -103,11 +103,11 @@ digraph package_diagram {
       style=filled
         cluster=false
     }
+          "packs/games" -> "packs/rails_shims" [ color=darkgreen ]
+          "packs/games" -> "packs/teams" [ color=darkgreen ]
           "packs/games_admin" -> "packs/games" [ color=darkgreen ]
           "packs/games_admin" -> "packs/rails_shims" [ color=darkgreen ]
           "packs/games_admin" -> "packs/teams" [ color=darkgreen ]
-          "packs/games" -> "packs/rails_shims" [ color=darkgreen ]
-          "packs/games" -> "packs/teams" [ color=darkgreen ]
           "packs/teams" -> "packs/rails_shims" [ color=darkgreen ]
   subgraph cluster_legend {
     fontsize=16

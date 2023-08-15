@@ -88,8 +88,8 @@ digraph package_diagram {
       style=filled
         cluster=false
     }
-          "packs/predictor" -> "packs/predictor_interface" [ color=darkgreen ]
           "." -> "packs/predictor" [ color=darkgreen ]
+          "packs/predictor" -> "packs/predictor_interface" [ color=darkgreen ]
   subgraph cluster_legend {
     fontsize=16
     label="Edges Styles and Arrow Heads"

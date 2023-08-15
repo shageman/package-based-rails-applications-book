@@ -126,11 +126,11 @@ digraph package_diagram {
       style=filled
         cluster=false
     }
+          "." -> "packs/prediction_ui" [ color=darkgreen ]
           "packs/prediction_ui" -> "packs/games" [ color=darkgreen ]
           "packs/prediction_ui" -> "packs/predictor_interface" [ color=darkgreen ]
           "packs/prediction_ui" -> "packs/rails_shims" [ color=darkgreen ]
           "packs/prediction_ui" -> "packs/teams" [ color=darkgreen ]
-          "." -> "packs/prediction_ui" [ color=darkgreen ]
   subgraph cluster_legend {
     fontsize=16
     label="Edges Styles and Arrow Heads"

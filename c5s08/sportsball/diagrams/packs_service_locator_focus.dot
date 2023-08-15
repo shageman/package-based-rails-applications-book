@@ -87,8 +87,8 @@ digraph package_diagram {
         
     }
               "packs/service_locator" -> "packs/prediction_ui" [ style=invis ]
-          "packs/prediction_ui" -> "packs/service_locator" [ color=darkgreen ]
           "." -> "packs/service_locator" [ color=darkgreen ]
+          "packs/prediction_ui" -> "packs/service_locator" [ color=darkgreen ]
   subgraph cluster_legend {
     fontsize=16
     label="Edges Styles and Arrow Heads"

@@ -98,9 +98,9 @@ digraph package_diagram {
         
     }
               "packs/predictor_interface" -> "packs/predictor" [ style=invis ]
-          "packs/predictor" -> "packs/predictor_interface" [ color=darkgreen ]
           "packs/games" -> "packs/predictor_interface" [ color=darkgreen ]
           "packs/games" -> "packs/teams" [ color=darkgreen ]
+          "packs/predictor" -> "packs/predictor_interface" [ color=darkgreen ]
           "packs/teams" -> "packs/predictor_interface" [ color=darkgreen ]
   subgraph cluster_legend {
     fontsize=16

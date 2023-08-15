@@ -33,16 +33,7 @@ digraph package_diagram {
       style=filled
         label="UI"
         cluster=true
-        rank = 1        "packs/prediction_ui" [
-            fontsize=12.0
-            label= <
-                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
-                  <tr> <td align='left'> packs/prediction_ui </td> </tr>
-                </table>
-              >
-          ]
-        
-        "packs/games_admin" [
+        rank = 1        "packs/games_admin" [
             fontsize=12.0
             label= <
                 <table border='0' cellborder='1' cellspacing='0' cellpadding='16'><tr><td>
@@ -50,6 +41,15 @@ digraph package_diagram {
                     <tr> <td port='private'> packs/games_admin </td> </tr>
                   </table>
                 </td></tr></table>
+              >
+          ]
+        
+        "packs/prediction_ui" [
+            fontsize=12.0
+            label= <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> packs/prediction_ui </td> </tr>
+                </table>
               >
           ]
         
@@ -102,12 +102,12 @@ digraph package_diagram {
           ]
         
     }
-              "packs/prediction_ui" -> "packs/games" [ style=invis ]
               "packs/games_admin" -> "packs/games" [ style=invis ]
+              "packs/prediction_ui" -> "packs/games" [ style=invis ]
               "packs/teams_admin" -> "packs/games" [ style=invis ]
               "packs/welcome_ui" -> "packs/games" [ style=invis ]
-              "packs/prediction_ui" -> "packs/teams" [ style=invis ]
               "packs/games_admin" -> "packs/teams" [ style=invis ]
+              "packs/prediction_ui" -> "packs/teams" [ style=invis ]
               "packs/teams_admin" -> "packs/teams" [ style=invis ]
               "packs/welcome_ui" -> "packs/teams" [ style=invis ]
     subgraph utility {
@@ -136,17 +136,17 @@ digraph package_diagram {
       style=filled
         cluster=false
     }
+          "packs/games" -> "packs/rails_shims" [ color=darkgreen ]
+          "packs/games" -> "packs/teams" [ color=darkgreen ]
+          "packs/games_admin" -> "packs/games" [ color=darkgreen ]
+          "packs/games_admin" -> "packs/rails_shims" [ color=darkgreen ]
           "packs/prediction_ui" -> "packs/games" [ color=darkgreen ]
           "packs/prediction_ui" -> "packs/rails_shims" [ color=darkgreen ]
           "packs/prediction_ui" -> "packs/teams" [ color=darkgreen ]
-          "packs/games_admin" -> "packs/games" [ color=darkgreen ]
-          "packs/games_admin" -> "packs/rails_shims" [ color=darkgreen ]
+          "packs/teams" -> "packs/rails_shims" [ color=darkgreen ]
           "packs/teams_admin" -> "packs/rails_shims" [ color=darkgreen ]
           "packs/teams_admin" -> "packs/teams" [ color=darkgreen ]
           "packs/welcome_ui" -> "packs/rails_shims" [ color=darkgreen ]
-          "packs/games" -> "packs/rails_shims" [ color=darkgreen ]
-          "packs/games" -> "packs/teams" [ color=darkgreen ]
-          "packs/teams" -> "packs/rails_shims" [ color=darkgreen ]
   subgraph cluster_legend {
     fontsize=16
     label="Edges Styles and Arrow Heads"

@@ -85,15 +85,6 @@ digraph package_diagram {
       fillcolor=lightblue
       style=filled
         cluster=false
-        "packs/prediction_ui" [
-            fontsize=18.0
-            label= <
-                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
-                  <tr> <td align='left'> packs/prediction_ui </td> </tr>
-                </table>
-              >
-          ]
-        
         "." [
             fontsize=12.0
             label= <
@@ -103,13 +94,22 @@ digraph package_diagram {
               >
           ]
         
+        "packs/prediction_ui" [
+            fontsize=18.0
+            label= <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> packs/prediction_ui </td> </tr>
+                </table>
+              >
+          ]
+        
     }
-              "packs/rails_shims" -> "packs/prediction_ui" [ style=invis ]
               "packs/rails_shims" -> "." [ style=invis ]
+              "packs/rails_shims" -> "packs/prediction_ui" [ style=invis ]
+          "." -> "packs/prediction_ui" [ color=darkgreen ]
           "packs/prediction_ui" -> "packs/games" [ color=darkgreen ]
           "packs/prediction_ui" -> "packs/rails_shims" [ color=darkgreen ]
           "packs/prediction_ui" -> "packs/teams" [ color=darkgreen ]
-          "." -> "packs/prediction_ui" [ color=darkgreen ]
   subgraph cluster_legend {
     fontsize=16
     label="Edges Styles and Arrow Heads"

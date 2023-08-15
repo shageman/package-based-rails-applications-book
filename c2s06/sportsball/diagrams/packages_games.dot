@@ -33,20 +33,20 @@ digraph package_diagram {
               >
           ]
         
-        "packages/prediction_ui" [
-            fontsize=12.0
-            label= <
-                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
-                  <tr> <td align='left'> packages/prediction_ui </td> </tr>
-                </table>
-              >
-          ]
-        
         "packages/games_admin" [
             fontsize=12.0
             label= <
                 <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
                   <tr> <td align='left'> packages/games_admin </td> </tr>
+                </table>
+              >
+          ]
+        
+        "packages/prediction_ui" [
+            fontsize=12.0
+            label= <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> packages/prediction_ui </td> </tr>
                 </table>
               >
           ]
@@ -72,11 +72,11 @@ digraph package_diagram {
     }
           "packages/games" -> "packages/rails_shims" [ color=darkgreen ]
           "packages/games" -> "packages/teams" [ color=darkgreen ]
+          "packages/games_admin" -> "packages/games" [ color=darkgreen ]
+          "packages/games_admin" -> "packages/rails_shims" [ color=darkgreen ]
           "packages/prediction_ui" -> "packages/games" [ color=darkgreen ]
           "packages/prediction_ui" -> "packages/rails_shims" [ color=darkgreen ]
           "packages/prediction_ui" -> "packages/teams" [ color=darkgreen ]
-          "packages/games_admin" -> "packages/games" [ color=darkgreen ]
-          "packages/games_admin" -> "packages/rails_shims" [ color=darkgreen ]
           "packages/teams" -> "packages/rails_shims" [ color=darkgreen ]
   subgraph cluster_legend {
     fontsize=16

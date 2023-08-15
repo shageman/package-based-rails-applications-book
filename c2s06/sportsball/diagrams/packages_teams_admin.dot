@@ -24,15 +24,6 @@ digraph package_diagram {
       fillcolor=lightblue
       style=filled
         cluster=false
-        "packages/teams_admin" [
-            fontsize=18.0
-            label= <
-                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
-                  <tr> <td align='left'> packages/teams_admin </td> </tr>
-                </table>
-              >
-          ]
-        
         "packages/rails_shims" [
             fontsize=12.0
             label= <
@@ -51,10 +42,19 @@ digraph package_diagram {
               >
           ]
         
+        "packages/teams_admin" [
+            fontsize=18.0
+            label= <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> packages/teams_admin </td> </tr>
+                </table>
+              >
+          ]
+        
     }
+          "packages/teams" -> "packages/rails_shims" [ color=darkgreen ]
           "packages/teams_admin" -> "packages/rails_shims" [ color=darkgreen ]
           "packages/teams_admin" -> "packages/teams" [ color=darkgreen ]
-          "packages/teams" -> "packages/rails_shims" [ color=darkgreen ]
   subgraph cluster_legend {
     fontsize=16
     label="Edges Styles and Arrow Heads"
