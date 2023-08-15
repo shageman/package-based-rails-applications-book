@@ -1,0 +1,7 @@
+source 'https://rubygems.org'
+
+gem 'eventide-postgres'
+gem 'evt-try'
+gem 'evt-component_host'
+gem 'trueskill'
+gem 'rspec'
