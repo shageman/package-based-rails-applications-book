@@ -1,0 +1,8 @@
+architecture_layers:
+- app
+- utilities
+
+package_paths:
+- .
+- ./packs/*
+- ./packs/*/packs/*

@@ -1,0 +1,8 @@
+source 'https://rubygems.org'
+
+# Specify your gem's dependencies in modularization_tools.gemspec
+gemspec
+
+gem 'parse_packwerk', github: 'shageman/parse_packwerk'
+
+gem "rspec", "~> 3.12"

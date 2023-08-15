@@ -1,0 +1,33 @@
+GIT
+  remote: https://github.com/shageman/parse_packwerk.git
+  revision: 42216a3c351dbe8b0a03fce6b05e1ab5d477173f
+  specs:
+    parse_packwerk (0.19.3)
+      sorbet-runtime
+
+PATH
+  remote: ../..
+  specs:
+    visualize_packwerk (0.2.2)
+      packs
+      parse_packwerk
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    packs (0.0.6)
+      sorbet-runtime
+    sorbet-runtime (0.5.10932)
+
+PLATFORMS
+  arm64-darwin-22
+
+DEPENDENCIES
+  parse_packwerk!
+  visualize_packwerk!
+
+RUBY VERSION
+   ruby 3.2.2p53
+
+BUNDLED WITH
+   2.4.1

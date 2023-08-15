@@ -1,0 +1,7 @@
+enforce_dependencies: true
+enforce_privacy: true
+layer: app
+dependencies:
+- packs/utility
+- .
+owner: UI Team
