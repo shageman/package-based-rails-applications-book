@@ -5,6 +5,7 @@ module Contender
   extend T::Helpers
   interface!
 
+  # Identifier of a contender
   sig { abstract.returns(Integer) }
   def id; end
 end
