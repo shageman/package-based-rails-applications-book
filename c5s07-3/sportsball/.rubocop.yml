@@ -8,7 +8,6 @@ require:
 inherit_gem:
   rubocop-packs:
     - config/default.yml
-    - config/pack_config.yml
 
 Packs/DocumentedPublicApis:
   Enabled: true
@@ -17,7 +16,7 @@ Packs/TypedPublicApis:
   Enabled: true
 
 Packs/RootNamespaceIsPackName:
-  Enabled: true
+  Enabled: false
 
 Packs/ClassMethodsAsPublicApis:
   Enabled: true
