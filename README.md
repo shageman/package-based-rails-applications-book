@@ -73,19 +73,16 @@ You can manually start the `generate-empty-app` concourse step to generate an em
 
 Every run of the chapter-generation pipeline will use the latest version of Rails found in this folder. If you happen to delete all of the app archives, the chapter-generation pipeline will not work. In that case, either generate a new empty app or reset to the state of this repo to get the pipeline running again.
 
-### Issues
+### Building a new base image
 
-Some things to try if there are issues with concourse (in order of impact):
+On an amd64-based machine running docker, run
 
-* `fly prune-worker`
-* `docker-compose down`
-* ~~~~~~~~
-  docker stop $(docker ps -aq)     # Stop all running containers
-  docker rm $(docker ps -a -q)     # Delete all containers
-  docker rmi $(docker images -q)   # Delete all images
-  docker volume prune
-  docker system prune -a
-  ~~~~~~~~
-* reinstall docker
+```
+docker build -t shageman/ruby32-sorbet:VERSION .
+```
 
-(I have done all of these at various times. YMMV)
+When you have a good new build, publish it using the following command. Be sure to increment the version number based on what has already been published: https://hub.docker.com/r/shageman/ruby32-sorbet/tags
+
+```
+docker push shageman/ruby32-sorbet:VERSION
+```
