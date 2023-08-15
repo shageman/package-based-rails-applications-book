@@ -4,9 +4,6 @@ set -v
 set -x
 set -e
 
-apt-get -y update
-apt-get -y install ack graphviz make build-essential git
-
 export SRB_PATH="/tmp/build/$(ls -1 /tmp/build)/gems/bin"
 export PATH="$SRB_PATH:$PATH"
 

@@ -10,9 +10,6 @@ set -e
 export SRB_PATH="/tmp/build/$(ls -1 /tmp/build)/gems/bin"
 export PATH="$SRB_PATH:$PATH"
 
-apt-get -y update
-apt-get -y install ack graphviz make build-essential git
-
 gem install bundler -v 2.3.4
 
 tar -xzf code_input/$PREV_CHAPTER*.tgz -C code_output

@@ -4,9 +4,6 @@ set -v
 set -x
 set -e
 
-apt-get -y update
-apt-get -y install ack graphviz make build-essential git
-
 gem install bundler -v 2.3.4
 gem install rails
 

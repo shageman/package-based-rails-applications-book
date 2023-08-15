@@ -45,6 +45,12 @@ RUN cp bazel-bin/main/sorbet /usr/local/bin/sorbet
 # Cleanup unnecessary files
 RUN bazel clean --expunge
 
+RUN apt-get install -y postgresql libpq-dev postgresql-contrib
+
+RUN apt-get -y update
+RUN apt-get -y install ack graphviz make build-essential git uuid-runtime
+
 # # Set the entrypoint to the Sorbet binary
 # ENTRYPOINT ["/bin/bash"]
 
+EXPOSE 5432
