@@ -1,7 +1,6 @@
 .minio.sys
 _cache
 docker/keys
-docker/minio/data
 pipeline-secrets.yml
 keys
 .DS_Store
@@ -19,6 +18,5 @@ docker/minio/data/releases/*
 
 tmp
 experiments
-docker
 .tgz
 VENDORED_GEMS
