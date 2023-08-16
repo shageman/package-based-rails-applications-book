@@ -1,0 +1,6 @@
+enforce_dependencies: true
+enforce_privacy: false
+enforce_architecture: true
+layer: app
+dependencies:
+  - packs/prediction_ui

@@ -1,0 +1,6 @@
+enforce_dependencies: true
+dependencies:
+  - packs/rails_shims
+  - packs/teams
+enforce_architecture: true
+layer: UI

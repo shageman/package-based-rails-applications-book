@@ -1,0 +1,7 @@
+--dir
+.
+--ignore=/vendor/
+--ignore=/VENDORED_GEMS/
+--ignore=/db
+
+--ignore=/eventide-backend

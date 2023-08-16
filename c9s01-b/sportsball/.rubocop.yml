@@ -1,0 +1,22 @@
+
+AllCops:
+  DisabledByDefault: true
+
+require:
+  - rubocop-packs
+
+inherit_gem:
+  rubocop-packs:
+    - config/default.yml
+
+Packs/DocumentedPublicApis:
+  Enabled: true
+
+Packs/TypedPublicApis:
+  Enabled: true
+
+Packs/RootNamespaceIsPackName:
+  Enabled: false
+
+Packs/ClassMethodsAsPublicApis:
+  Enabled: true
