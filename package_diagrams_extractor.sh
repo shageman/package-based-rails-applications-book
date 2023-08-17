@@ -16,7 +16,8 @@ copyPackageDiagram () {
         OUT=$SRC
     fi
 
-    cp $SRC/sportsball/packwerk.png ../book/manuscript/resources/package_diagrams/$OUT.png
+    mkdir ../book/manuscript/resources/package_diagrams/$OUT
+    cp $SRC/sportsball/diagrams/*.png ../book/manuscript/resources/package_diagrams/$OUT/
 }
 
 rm -rf ../book/manuscript/resources/package_diagrams
