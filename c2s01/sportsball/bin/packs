@@ -24,4 +24,4 @@ end
 require "rubygems"
 require "bundler/setup"
 
-load Gem.bin_path("use_packs", "packs")
+load Gem.bin_path("packs", "packs")

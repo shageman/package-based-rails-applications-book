@@ -486,7 +486,7 @@ class Packs::Private::FileMoveOperation < ::T::Struct
     sig { params(origin_pathname: ::Pathname, new_package_root: ::Pathname).returns(::Pathname) }
     def destination_pathname_for_package_move(origin_pathname, new_package_root); end
 
-    # source://sorbet-runtime/0.5.10958/lib/types/struct.rb#13
+    # source://sorbet-runtime/0.5.10969/lib/types/struct.rb#13
     def inherited(s); end
   end
 end

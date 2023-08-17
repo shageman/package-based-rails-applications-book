@@ -123,11 +123,14 @@ digraph package_diagram {
     H [ fontsize=12 shape=box label="package"]
     I [ fontsize=12 shape=box label="package"]
     J [ fontsize=12 shape=box label="package"]
+    K [ fontsize=12 shape=box label="package"]
+    L [ fontsize=12 shape=box label="package"]
     A -> B [label="accepted dependency" color=darkgreen]
     C -> D [label="privac todo" color=darkred style=dashed arrowhead=crow]
     E -> F [label="architecture todo" color=darkred style=dashed arrowhead=invodot]
     G -> H [label="visibility todo" color=darkred style=dashed arrowhead=obox]
     I -> J [label="dependency todo" color=darkred style=dashed arrowhead=odot]
+    K -> L [label="nested package" color=purple penwidth=3]
   }
   subgraph cluster_teams_legend {
     fontsize=16

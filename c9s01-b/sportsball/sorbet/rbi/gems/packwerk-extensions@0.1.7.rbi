@@ -113,7 +113,7 @@ class Packwerk::Architecture::Package < ::T::Struct
     end
     def from(package, layers); end
 
-    # source://sorbet-runtime/0.5.10958/lib/types/struct.rb#13
+    # source://sorbet-runtime/0.5.10969/lib/types/struct.rb#13
     def inherited(s); end
   end
 end
@@ -235,7 +235,7 @@ class Packwerk::Privacy::Package < ::T::Struct
     sig { params(package: ::Packwerk::Package).returns(::Packwerk::Privacy::Package) }
     def from(package); end
 
-    # source://sorbet-runtime/0.5.10958/lib/types/struct.rb#13
+    # source://sorbet-runtime/0.5.10969/lib/types/struct.rb#13
     def inherited(s); end
 
     # source://packwerk-extensions//lib/packwerk/privacy/package.rb#43
@@ -358,7 +358,7 @@ class Packwerk::Visibility::Package < ::T::Struct
     sig { params(package: ::Packwerk::Package).returns(::Packwerk::Visibility::Package) }
     def from(package); end
 
-    # source://sorbet-runtime/0.5.10958/lib/types/struct.rb#13
+    # source://sorbet-runtime/0.5.10969/lib/types/struct.rb#13
     def inherited(s); end
   end
 end

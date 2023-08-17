@@ -1,4 +1,0 @@
-pack_paths:
-- .
-- ./packs/*
-- ./packs/*/packs/*

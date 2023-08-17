@@ -73,13 +73,13 @@ end
 
 
 gem 'packwerk', group: [:development, :test]
-gem 'use_packs'
+gem 'packs'
 gem 'rspec-rails', group: [:development, :test]
 gem 'shoulda-matchers', group: [:test]
 gem 'slim-rails'
 gem 'trueskill'
-gem 'visualize_packwerk', github: 'shageman/visualize_packwerk'
-gem 'parse_packwerk', github: 'shageman/parse_packwerk'
+gem 'visualize_packs'
+gem 'parse_packwerk'
 
 
 

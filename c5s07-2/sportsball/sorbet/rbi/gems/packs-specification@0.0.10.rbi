@@ -148,7 +148,7 @@ class Packs::Pack < ::T::Struct
     sig { params(package_yml_absolute_path: ::Pathname).returns(::Packs::Pack) }
     def from(package_yml_absolute_path); end
 
-    # source://sorbet-runtime/0.5.10958/lib/types/struct.rb#13
+    # source://sorbet-runtime/0.5.10969/lib/types/struct.rb#13
     def inherited(s); end
   end
 end
@@ -201,7 +201,7 @@ class Packs::Specification::Configuration < ::T::Struct
     sig { returns(::Packs::Specification::Configuration) }
     def fetch; end
 
-    # source://sorbet-runtime/0.5.10958/lib/types/struct.rb#13
+    # source://sorbet-runtime/0.5.10969/lib/types/struct.rb#13
     def inherited(s); end
 
     # source://packs-specification//lib/packs/specification/configuration.rb#26
