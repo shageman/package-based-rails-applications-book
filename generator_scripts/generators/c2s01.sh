@@ -13,18 +13,18 @@ set -e
 
 echo "
 gem 'packwerk', group: [:development, :test]
-gem 'use_packs'
+gem 'packs'
 gem 'rspec-rails', group: [:development, :test]
 gem 'shoulda-matchers', group: [:test]
 gem 'slim-rails'
 gem 'trueskill'
-gem 'visualize_packwerk'
+gem 'visualize_packs'
 gem 'parse_packwerk'
 " >> Gemfile
 
 bundle install --local
 
-bundle binstub use_packs packwerk
+bundle binstub packs packwerk
 
 rm -rf test
 rails generate rspec:install
