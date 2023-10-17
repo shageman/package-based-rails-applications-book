@@ -17,19 +17,27 @@ echo '
 Packs/ClassMethodsAsPublicApis:
   Enabled: true' >> .rubocop.yml
 
+echo '
+Packs/ClassMethodsAsPublicApis:
+  Enabled: true' >> packs/predictor/.rubocop.yml
+
 
 ## See failure
 
 bundle install --local
 bin/rubocop && exit 1 || echo "Expected rubocop errors and got them."
 
-bundle update visualize_packs &&  bundle exec visualize_packs > c4s07_todos.dot && dot c4s07_todos.dot -Tpng -o c4s07_todos.png
+bin/rubocop --regenerate-todo
+bundle exec visualize_packs > c4s07_a_todos.dot && dot c4s07_a_todos.dot -Tpng -o c4s07_a_todos.png
 
 
 ## Fix it
+
+sed -i '/Packs\/ClassMethodsAsPublicApis/,+2d' packs/predictor/.rubocop.yml
 
 echo '
 Packs/ClassMethodsAsPublicApis:
   Enabled: false' >> packs/predictor/.rubocop.yml
 
-bundle update visualize_packs &&  bundle exec visualize_packs > c4s07_fixed.dot && dot c4s07_fixed.dot -Tpng -o c4s07_fixed.png
+bin/rubocop --regenerate-todo
+bundle exec visualize_packs > c4s07_b_fixed.dot && dot c4s07_b_fixed.dot -Tpng -o c4s07_b_fixed.png

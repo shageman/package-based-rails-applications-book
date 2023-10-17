@@ -5,7 +5,7 @@ digraph package_diagram {
     fontname="Helvetica,Arial,sans-serif"
     dpi=100
     layout=dot
-    label=<<b>All packs</b><br/><font point-size='12'>Widest todo edge is 1 todo</font>>
+    label=<<b>All packs</b>>
     fontsize=18
   ]
   node [
@@ -121,11 +121,6 @@ digraph package_diagram {
           "packs/teams_admin" -> "packs/rails_shims" [ color=darkgreen ]
           "packs/teams_admin" -> "packs/teams" [ color=darkgreen ]
           "packs/welcome_ui" -> "packs/rails_shims" [ color=darkgreen ]
-            "packs/prediction_ui" -> "packs/predictor":private [
-                constraint=false
-              # headlabel="privacy"
-color=darkred style=dashed arrowhead=crow
-              penwidth=1            ]
     subgraph cluster_legend {
       fontsize=16
       label="Edges Styles and Arrow Heads"

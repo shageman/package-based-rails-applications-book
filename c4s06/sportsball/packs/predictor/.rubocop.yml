@@ -4,6 +4,7 @@ inherit_from: ../../.rubocop.yml
 Packs/DocumentedPublicApis:
   Enabled: true
 
+
 Packs/TypedPublicApis:
   Enabled: false
 

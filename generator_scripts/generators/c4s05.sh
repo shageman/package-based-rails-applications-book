@@ -16,6 +16,9 @@ echo '
 Packs/TypedPublicApis:
   Enabled: true' >> .rubocop.yml
 
+echo '
+Packs/TypedPublicApis:
+  Enabled: true' >> packs/predictor/.rubocop.yml
 
 ## Create failure
 
@@ -25,10 +28,13 @@ Packs/TypedPublicApis:
 bundle install --local
 bin/rubocop && exit 1 || echo "Expected rubocop errors and got them."
 
-bundle update visualize_packs &&  bundle exec visualize_packs > c4s05_todos.dot && dot c4s05_todos.dot -Tpng -o c4s05_todos.png
+bin/rubocop --regenerate-todo
+bundle exec visualize_packs > c4s05_a_todos.dot && dot c4s05_a_todos.dot -Tpng -o c4s05_a_todos.png
 
 
 ## Fix it
+
+sed -i '/Packs\/TypedPublicApis/,+2d' packs/predictor/.rubocop.yml
 
 echo '
 Packs/TypedPublicApis:
@@ -36,4 +42,5 @@ Packs/TypedPublicApis:
 
 # Here the fix is to remove the typing requirement for the package. We'll get back to typing in C5S07-2 and will readd this cop then
 
-bundle update visualize_packs &&  bundle exec visualize_packs > c4s05_fixed.dot && dot c4s05_fixed.dot -Tpng -o c4s05_fixed.png
+bin/rubocop --regenerate-todo
+bundle exec visualize_packs > c4s05_b_fixed.dot && dot c4s05_b_fixed.dot -Tpng -o c4s05_b_fixed.png

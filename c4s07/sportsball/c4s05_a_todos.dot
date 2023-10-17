@@ -133,7 +133,7 @@ digraph package_diagram {
                     <tr> <td port='private'> packs/predictor </td> </tr>
                   </table>
                   </td></tr>
-                  <tr><td CELLPADDING='1' ALIGN='RIGHT'>D: 0</td></tr>
+                  <tr><td CELLPADDING='1' ALIGN='RIGHT'>D: 0, T: 1</td></tr>
                   </table>
               >
           ]
