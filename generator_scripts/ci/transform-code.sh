@@ -16,6 +16,9 @@ tar -xzf code_input/$PREV_CHAPTER*.tgz -C code_output
 
 cd code_output/sportsball
 
+rm -f c*.dot
+rm -f c*.png
+
 cp -r VENDORED_GEMS/* vendor/cache/ # get our saved local gems back
 
 ../../generator-scripts-repo/generator_scripts/generators/$CHAPTER.sh
