@@ -57,6 +57,8 @@ layer: data' >> packs/games_admin/package.yml
 echo 'enforce_architecture: true
 layer: UI' >> packs/games/package.yml
 
+bundle update visualize_packs &&  bundle exec visualize_packs > c4s02_todos.dot && dot c4s02_todos.dot -Tpng -o c4s02_todos.png
+
 
 ## See failure
 
@@ -68,3 +70,5 @@ bin/packwerk check && exit 1 || echo "Expected packwerk check error and got it."
 
 sed -i 's/layer: data/layer: UI/' packs/games_admin/package.yml
 sed -i 's/layer: UI/layer: data/' packs/games/package.yml
+
+bundle update visualize_packs &&  bundle exec visualize_packs > c4s02_fixed.dot && dot c4s02_fixed.dot -Tpng -o c4s02_fixed.png

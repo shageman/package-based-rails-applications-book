@@ -5,9 +5,7 @@
 # Please run `bin/tapioca annotations` to update it.
 
 module ActionView
-  TemplateError = T.type_alias {
-  Template::Error
-}
+  TemplateError = T.type_alias { Template::Error }
 
   class MissingTemplate < ActionView::ActionViewError
     sig { returns(String) }

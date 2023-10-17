@@ -31,11 +31,15 @@ enforce_privacy: true" >> packs/predictor/package.yml
 bundle install --local
 bin/packwerk check && exit 1 || echo "Expected packwerk check error and got it."
 
+bundle update visualize_packs &&  bundle exec visualize_packs > c4s01_todos.dot && dot c4s01_todos.dot -Tpng -o c4s01_todos.png
+
 
 ## Fix it
 
 mkdir packs/predictor/app/public
 mv packs/predictor/app/models/predictor.rb packs/predictor/app/public
+
+bundle update visualize_packs &&  bundle exec visualize_packs > c4s01_fixed.dot && dot c4s01_fixed.dot -Tpng -o c4s01_fixed.png
 
 bundle install --local
 bin/packwerk check && echo "Expected no packwerk check error and got none."

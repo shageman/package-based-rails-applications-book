@@ -286,7 +286,7 @@ sed -i 's/@team = Team.new/@team = Team.new(nil, nil)/g' packs/teams_admin/app/c
 sed -i 's/if @team.save/if @team.persisted?/g' packs/teams_admin/app/controllers/teams_controller.rb
 sed -i '/if @team.update(team_params)/c\      @team = TeamRepository.edit(Team.new(params[:id].to_i, team_params[:name]))\
       if @team.errors.empty?' packs/teams_admin/app/controllers/teams_controller.rb
-sed -i 's/@team.destroy/TeamRepository.delete(@team)/g' packs/teams_admin/app/controllers/teams_controller.rb
+sed -i 's/@team.destroy!/TeamRepository.delete(@team)/g' packs/teams_admin/app/controllers/teams_controller.rb
 sed -i 's/@team = Team.find(params\[:id\])/@team = TeamRepository.get(params[:id].to_i)/g' packs/teams_admin/app/controllers/teams_controller.rb
 cat packs/teams_admin/app/controllers/teams_controller.rb
 

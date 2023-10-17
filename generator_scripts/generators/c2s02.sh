@@ -74,7 +74,7 @@ echo "enforce_dependencies: true" > app/packages/welcome_ui/package.yml
 
 
 
-sed -i "/config.eager_load_paths/a\    config.paths.add 'app/packages', glob: '*/{*,*/concerns}', eager_load: true" config/application.rb
+sed -i '/config.eager_load_paths/a\    config.eager_load_paths += Dir.glob("#{root}/app/packages/*/{*,*/concerns}")' config/application.rb
 
 sed -i "/ApplicationController/a\  append_view_path(Dir.glob(Rails.root.join('app\/packages\/*\/views')))" app/controllers/application_controller.rb
 
@@ -90,7 +90,7 @@ RSpec.configure do |config|
 
   config.before(:each, :type => lambda {|v| v == :view}) do
     Dir.glob(Rails.root + ('app/packages/*/views')).each do |path|
-      view.lookup_context.view_paths.push path
+      view.lookup_context.append_view_paths [path]
     end
   end
 end

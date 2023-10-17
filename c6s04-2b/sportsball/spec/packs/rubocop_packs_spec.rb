@@ -1,3 +1,5 @@
+require "rubocop"
+
 RSpec.describe "rubocop-packs validations" do
   it "has only valid config files" do
     config_files = Dir.glob("**/.rubocop.yml")

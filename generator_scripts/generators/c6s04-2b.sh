@@ -434,7 +434,7 @@ sed -i '/if @game.update(game_params)/c\      @game.first_team = TeamRepository.
 \
       @game = GameRepository.edit(@game)\
       if @game.errors.empty?' packs/games_admin/app/controllers/games_controller.rb
-sed -i 's/@game.destroy/GameRepository.delete(@game)/g' packs/games_admin/app/controllers/games_controller.rb
+sed -i 's/@game.destroy!/GameRepository.delete(@game)/g' packs/games_admin/app/controllers/games_controller.rb
 sed -i 's/@game = Game.find(params\[:id\])/@game = GameRepository.get(params[:id].to_i)/g' packs/games_admin/app/controllers/games_controller.rb
 sed -i '/params.require/c\      params[:game].delete(:id) if params[:game].has_key?(:id)\
       params[:game].delete(:first_team) if params[:game].has_key?(:first_team)\

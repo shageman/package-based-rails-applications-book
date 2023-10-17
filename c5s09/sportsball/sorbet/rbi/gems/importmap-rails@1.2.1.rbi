@@ -10,7 +10,7 @@ module Importmap; end
 # source://importmap-rails//lib/importmap/engine.rb#7
 class Importmap::Engine < ::Rails::Engine
   class << self
-    # source://activesupport/7.0.7/lib/active_support/callbacks.rb#68
+    # source://activesupport/7.1.1/lib/active_support/callbacks.rb#70
     def __callbacks; end
   end
 end

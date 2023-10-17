@@ -48,7 +48,7 @@ RUN bazel clean --expunge
 RUN apt-get install -y postgresql libpq-dev postgresql-contrib
 
 RUN apt-get -y update
-RUN apt-get -y install ack graphviz make build-essential git uuid-runtime
+RUN apt-get -y install ack graphviz make build-essential git uuid-runtime libyaml-dev
 
 # # Set the entrypoint to the Sorbet binary
 # ENTRYPOINT ["/bin/bash"]

@@ -56,7 +56,7 @@ RSpec.configure do |config|
 
   config.before(:each, :type => lambda {|v| v == :view}) do
     Dir.glob(Rails.root + ('packages/*/app/views')).each do |path|
-      view.lookup_context.view_paths.push path
+      view.lookup_context.append_view_paths [path]
     end
   end
 end

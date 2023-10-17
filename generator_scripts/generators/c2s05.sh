@@ -33,8 +33,8 @@ do
   [ ! -d spec/packages/$PACKAGE/views ] || mv spec/packages/$PACKAGE/views packages/$PACKAGE/spec
 done
 
-sed -i "/config.paths.add 'app\/packages'/d" config/application.rb
-sed -i "/config.eager_load_paths/a\    config.paths.add 'packages', glob: '*\/app\/{*,*\/concerns}', eager_load: true" config/application.rb
+sed -i "/config.eager_load_paths +='/d" config/application.rb
+sed -i '/config.eager_load_paths/a\    config.eager_load_paths += Dir.glob("#{root}/packages/*/app/{*,*/concerns}")' config/application.rb
 
 
 sed -i "/append_view_path/c\  append_view_path(Dir.glob(Rails.root.join('packages\/*\/app\/views')))" packages/rails_shims/app/controllers/application_controller.rb
@@ -55,7 +55,7 @@ RSpec.configure do |config|
 
   config.before(:each, :type => lambda {|v| v == :view}) do
     Dir.glob(Rails.root + ('packages/*/app/views')).each do |path|
-      view.lookup_context.view_paths.push path
+      view.lookup_context.append_view_paths [path]
     end
   end
 end

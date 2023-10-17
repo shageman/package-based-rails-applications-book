@@ -636,16 +636,16 @@ class BetterHtml::Tokenizer::Location < ::Parser::Source::Range
   # source://better_html//lib/better_html/tokenizer/location.rb#54
   def resize(new_size); end
 
-  # source://parser/3.2.2.3/lib/parser/source/range.rb#92
+  # source://parser/3.2.2.4/lib/parser/source/range.rb#92
   def start_column; end
 
-  # source://parser/3.2.2.3/lib/parser/source/range.rb#83
+  # source://parser/3.2.2.4/lib/parser/source/range.rb#83
   def start_line; end
 
-  # source://parser/3.2.2.3/lib/parser/source/range.rb#106
+  # source://parser/3.2.2.4/lib/parser/source/range.rb#106
   def stop_column; end
 
-  # source://parser/3.2.2.3/lib/parser/source/range.rb#99
+  # source://parser/3.2.2.4/lib/parser/source/range.rb#99
   def stop_line; end
 
   # source://better_html//lib/better_html/tokenizer/location.rb#46

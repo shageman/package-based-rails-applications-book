@@ -17,7 +17,7 @@ gem 'packs-rails'
 
 bundle install --local
 
-sed -i '/config\.paths\.add/d' config/application.rb
+sed -i '/config\.eager_load_paths +=/d' config/application.rb
 
 echo "--require spec_helper
 --require packs/rails/rspec

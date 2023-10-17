@@ -30,6 +30,8 @@ Packs/RootNamespaceIsPackName:
 bundle install --local
 bin/rubocop && exit 1 || echo "Expected rubocop errors and got them."
 
+bundle update visualize_packs &&  bundle exec visualize_packs > c4s06_todos.dot && dot c4s06_todos.dot -Tpng -o c4s06_todos.png
+
 
 ## Fix it
 
@@ -76,3 +78,5 @@ sed -i 's/Predictor/Predictor::Predictor/g' packs/predictor/spec/models/predicto
 sed -i 's/Prediction/Predictor::Prediction/g' packs/predictor/spec/models/predictor/predictor_spec.rb
 
 sed -i 's/Predictor/Predictor::Predictor/g' packs/prediction_ui/app/controllers/predictions_controller.rb
+
+bundle update visualize_packs &&  bundle exec visualize_packs > c4s06_fixed.dot && dot c4s06_fixed.dot -Tpng -o c4s06_fixed.png

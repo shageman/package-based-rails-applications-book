@@ -3,7 +3,7 @@ image_resource:
   type: registry-image
   source:
     repository: shageman/ruby32-sorbet
-    tag: '1.0.5'
+    tag: '1.0.6'
 
 inputs:
 - name: generator-scripts-repo
