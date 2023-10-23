@@ -5,7 +5,7 @@ digraph package_diagram {
     fontname="Helvetica,Arial,sans-serif"
     dpi=100
     layout=dot
-    label=<<b>All packs</b><br/><font point-size='12'>Widest todo edge is 1 todo</font>>
+    label=<<b>All packs</b><br/><br/><font point-size='12'>Widest todo edge is 1 todo</font>>
     fontsize=18
   ]
   node [
@@ -181,12 +181,12 @@ color=darkred style=dashed arrowhead=tee
       A [ fontsize=12 shape=box label="package"]
       B [ fontsize=12 shape=box label="package"]
       A -> B [label="accepted dependency" color=darkgreen]
-      K [ fontsize=12 shape=box label="package"]
-      L [ fontsize=12 shape=box label="package"]
-      K -> L [label="nested package" color=purple]
       M [ fontsize=12 shape=box label="package"]
       N [ fontsize=12 shape=box label="package"]
-      M -> N [label="visibile to" color=blue]
+      M -> N [label="nested package" color=purple]
+      O [ fontsize=12 shape=box label="package"]
+      P [ fontsize=12 shape=box label="package"]
+      O -> P [label="visibile to" color=blue]
       C [ fontsize=12 shape=box label="package"]
       D [ fontsize=12 shape=box label="package"]
       C -> D [label="privacy todo" color=darkred style=dashed arrowhead=crow]
@@ -198,7 +198,10 @@ color=darkred style=dashed arrowhead=tee
       G -> H [label="visibility todo" color=darkred style=dashed arrowhead=tee]
       I [ fontsize=12 shape=box label="package"]
       J [ fontsize=12 shape=box label="package"]
-      I -> J [label="dependency todo" color=darkred style=dashed arrowhead=odiamond]
+      I -> J [label="folder visibility todo" color=darkred style=dashed arrowhead=odot]
+      K [ fontsize=12 shape=box label="package"]
+      L [ fontsize=12 shape=box label="package"]
+      K -> L [label="dependency todo" color=darkred style=dashed arrowhead=odiamond]
       LEGEND_NODE_1 [ label="" peripheries=0 height=0 width=0 style=invis ]
       LEGEND_NODE_2 [ label="" peripheries=0 height=0 width=0 style=invis ]
       LEGEND_NODE_1 -> LEGEND_NODE_2 [ style=invis ]

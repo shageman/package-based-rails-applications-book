@@ -5,7 +5,7 @@ digraph package_diagram {
     fontname="Helvetica,Arial,sans-serif"
     dpi=100
     layout=dot
-    label=<<b>All packs</b>>
+    label=<<b>All packs</b><br/><br/><font point-size='12'>Widest todo edge is 1 todo</font>>
     fontsize=18
   ]
   node [
@@ -30,7 +30,6 @@ digraph package_diagram {
             label= <
                 <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
                   <tr> <td align='left'> . </td> </tr>
-                  <tr><td CELLPADDING='1' ALIGN='RIGHT'>D: 0</td></tr>
                 </table>
               >
           ]
@@ -125,15 +124,14 @@ digraph package_diagram {
       style=filled
         label="utility"
         cluster=true
-        rank = 3        "packs/predictor" [
+        rank = 3        "packs/games_admin/packs/predictor" [
             fontsize=12.0
             label= <
                 <table border='0' cellborder='1' cellspacing='0' cellpadding='16'><tr><td>
                   <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
-                    <tr> <td port='private'> packs/predictor </td> </tr>
+                    <tr> <td port='private'> packs/games_admin/packs/predictor </td> </tr>
                   </table>
                   </td></tr>
-                  <tr><td CELLPADDING='1' ALIGN='RIGHT'>D: 1</td></tr>
                   </table>
               >
           ]
@@ -148,8 +146,8 @@ digraph package_diagram {
           ]
         
     }
-              "packs/games" -> "packs/predictor" [ style=invis ]
-              "packs/teams" -> "packs/predictor" [ style=invis ]
+              "packs/games" -> "packs/games_admin/packs/predictor" [ style=invis ]
+              "packs/teams" -> "packs/games_admin/packs/predictor" [ style=invis ]
               "packs/games" -> "packs/rails_shims" [ style=invis ]
               "packs/teams" -> "packs/rails_shims" [ style=invis ]
     subgraph NotInLayer {
@@ -164,26 +162,32 @@ digraph package_diagram {
           "packs/games_admin" -> "packs/games" [ color=darkgreen ]
           "packs/games_admin" -> "packs/rails_shims" [ color=darkgreen ]
           "packs/prediction_ui" -> "packs/games" [ color=darkgreen ]
-          "packs/prediction_ui" -> "packs/predictor" [ color=darkgreen ]
+          "packs/prediction_ui" -> "packs/games_admin/packs/predictor" [ color=darkgreen ]
           "packs/prediction_ui" -> "packs/rails_shims" [ color=darkgreen ]
           "packs/prediction_ui" -> "packs/teams" [ color=darkgreen ]
           "packs/teams" -> "packs/rails_shims" [ color=darkgreen ]
           "packs/teams_admin" -> "packs/rails_shims" [ color=darkgreen ]
           "packs/teams_admin" -> "packs/teams" [ color=darkgreen ]
           "packs/welcome_ui" -> "packs/rails_shims" [ color=darkgreen ]
-        "packs/predictor" -> "packs/prediction_ui" [ color=blue constraint=false ]
+            "packs/prediction_ui" -> "packs/games_admin/packs/predictor" [
+                constraint=false
+              # headlabel="folder_visibility"
+color=darkred style=dashed arrowhead=odot
+              penwidth=1            ]
+          "packs/games_admin" -> "packs/games_admin/packs/predictor" [ color=purple ]
+        "packs/games_admin/packs/predictor" -> "packs/prediction_ui" [ color=blue constraint=false ]
     subgraph cluster_legend {
       fontsize=16
       label="Edges Styles and Arrow Heads"
       A [ fontsize=12 shape=box label="package"]
       B [ fontsize=12 shape=box label="package"]
       A -> B [label="accepted dependency" color=darkgreen]
-      K [ fontsize=12 shape=box label="package"]
-      L [ fontsize=12 shape=box label="package"]
-      K -> L [label="nested package" color=purple]
       M [ fontsize=12 shape=box label="package"]
       N [ fontsize=12 shape=box label="package"]
-      M -> N [label="visibile to" color=blue]
+      M -> N [label="nested package" color=purple]
+      O [ fontsize=12 shape=box label="package"]
+      P [ fontsize=12 shape=box label="package"]
+      O -> P [label="visibile to" color=blue]
       C [ fontsize=12 shape=box label="package"]
       D [ fontsize=12 shape=box label="package"]
       C -> D [label="privacy todo" color=darkred style=dashed arrowhead=crow]
@@ -195,7 +199,10 @@ digraph package_diagram {
       G -> H [label="visibility todo" color=darkred style=dashed arrowhead=tee]
       I [ fontsize=12 shape=box label="package"]
       J [ fontsize=12 shape=box label="package"]
-      I -> J [label="dependency todo" color=darkred style=dashed arrowhead=odiamond]
+      I -> J [label="folder visibility todo" color=darkred style=dashed arrowhead=odot]
+      K [ fontsize=12 shape=box label="package"]
+      L [ fontsize=12 shape=box label="package"]
+      K -> L [label="dependency todo" color=darkred style=dashed arrowhead=odiamond]
       LEGEND_NODE_1 [ label="" peripheries=0 height=0 width=0 style=invis ]
       LEGEND_NODE_2 [ label="" peripheries=0 height=0 width=0 style=invis ]
       LEGEND_NODE_1 -> LEGEND_NODE_2 [ style=invis ]

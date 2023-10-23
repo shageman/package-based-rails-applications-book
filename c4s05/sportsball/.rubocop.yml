@@ -13,6 +13,3 @@ inherit_gem:
 
 Packs/DocumentedPublicApis:
   Enabled: true
-
-Packs/TypedPublicApis:
-  Enabled: true

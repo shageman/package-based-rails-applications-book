@@ -7,3 +7,6 @@ layer: utility
 enforce_visibility: true
 visible_to:
   - packs/prediction_ui
+
+enforce_folder_visibility: true
+

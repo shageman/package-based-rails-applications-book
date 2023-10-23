@@ -6,23 +6,21 @@ set -e
 
 ###############################################################################
 #
-# Add Root namespace is pack name checker to app
+# Add typed public apis checker to app
 #
 ###############################################################################
-
 
 ## Use it
 
 echo '
-Packs/RootNamespaceIsPackName:
-  Enabled: false' >> .rubocop.yml
-
-
-## Create failure
+Packs/TypedPublicApis:
+  Enabled: true' >> .rubocop.yml
 
 echo '
-Packs/RootNamespaceIsPackName:
+Packs/TypedPublicApis:
   Enabled: true' >> packs/predictor/.rubocop.yml
+
+## Create failure
 
 
 ## See failure
@@ -36,49 +34,13 @@ bundle exec visualize_packs > c4s06_a_todos.dot && dot c4s06_a_todos.dot -Tpng -
 
 ## Fix it
 
-find . -type f
+sed -i '/Packs\/TypedPublicApis/,+2d' packs/predictor/.rubocop.yml
 
-mkdir packs/predictor/app/public/predictor
-mv packs/predictor/app/public/predictor.rb packs/predictor/app/public/predictor/predictor.rb
-cat packs/predictor/app/public/predictor/predictor.rb
+echo '
+Packs/TypedPublicApis:
+  Enabled: false' >> packs/predictor/.rubocop.yml
 
-cat packs/predictor/app/public/predictor/predictor.rb | sed 's/\(.*\)/  \1/' | tee packs/predictor/app/public/predictor/predictor2.rb
-rm packs/predictor/app/public/predictor/predictor.rb
-mv packs/predictor/app/public/predictor/predictor2.rb packs/predictor/app/public/predictor/predictor.rb
-cat packs/predictor/app/public/predictor/predictor.rb
-
-sed -i 's/  require "saulabs\/trueskill"/require "saulabs\/trueskill"/' packs/predictor/app/public/predictor/predictor.rb
-cat packs/predictor/app/public/predictor/predictor.rb
-
-sed -i '/class Predictor/s/^/module Predictor\n/' packs/predictor/app/public/predictor/predictor.rb
-cat packs/predictor/app/public/predictor/predictor.rb
-
-echo "
-end" >> packs/predictor/app/public/predictor/predictor.rb
-cat packs/predictor/app/public/predictor/predictor.rb
-
-mkdir packs/predictor/app/models/predictor
-mv packs/predictor/app/models/prediction.rb packs/predictor/app/models/predictor/prediction.rb
-cat packs/predictor/app/models/predictor/prediction.rb
-
-cat packs/predictor/app/models/predictor/prediction.rb | sed 's/\(.*\)/  \1/' | tee packs/predictor/app/models/predictor/prediction2.rb
-rm packs/predictor/app/models/predictor/prediction.rb
-mv packs/predictor/app/models/predictor/prediction2.rb packs/predictor/app/models/predictor/prediction.rb
-cat packs/predictor/app/models/predictor/prediction.rb
-
-sed -i '/class Prediction/s/^/module Predictor\n/' packs/predictor/app/models/predictor/prediction.rb
-cat packs/predictor/app/models/predictor/prediction.rb
-
-echo "
-end" >> packs/predictor/app/models/predictor/prediction.rb
-cat packs/predictor/app/models/predictor/prediction.rb
-
-mkdir packs/predictor/spec/models/predictor
-mv packs/predictor/spec/models/predictor_spec.rb packs/predictor/spec/models/predictor/predictor_spec.rb
-sed -i 's/Predictor/Predictor::Predictor/g' packs/predictor/spec/models/predictor/predictor_spec.rb
-sed -i 's/Prediction/Predictor::Prediction/g' packs/predictor/spec/models/predictor/predictor_spec.rb
-
-sed -i 's/Predictor/Predictor::Predictor/g' packs/prediction_ui/app/controllers/predictions_controller.rb
+# Here the fix is to remove the typing requirement for the package. We'll get back to typing in C5S07-2 and will readd this cop then
 
 bin/rubocop --regenerate-todo
 bundle exec visualize_packs > c4s06_b_fixed.dot && dot c4s06_b_fixed.dot -Tpng -o c4s06_b_fixed.png

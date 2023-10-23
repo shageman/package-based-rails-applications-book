@@ -6,7 +6,7 @@ set -e
 
 ###############################################################################
 #
-# Add class methods as public API checker to app
+# Add Root namespace is pack name checker to app
 #
 ###############################################################################
 
@@ -14,11 +14,14 @@ set -e
 ## Use it
 
 echo '
-Packs/ClassMethodsAsPublicApis:
-  Enabled: true' >> .rubocop.yml
+Packs/RootNamespaceIsPackName:
+  Enabled: false' >> .rubocop.yml
+
+
+## Create failure
 
 echo '
-Packs/ClassMethodsAsPublicApis:
+Packs/RootNamespaceIsPackName:
   Enabled: true' >> packs/predictor/.rubocop.yml
 
 
@@ -33,11 +36,49 @@ bundle exec visualize_packs > c4s07_a_todos.dot && dot c4s07_a_todos.dot -Tpng -
 
 ## Fix it
 
-sed -i '/Packs\/ClassMethodsAsPublicApis/,+2d' packs/predictor/.rubocop.yml
+find . -type f
 
-echo '
-Packs/ClassMethodsAsPublicApis:
-  Enabled: false' >> packs/predictor/.rubocop.yml
+mkdir packs/predictor/app/public/predictor
+mv packs/predictor/app/public/predictor.rb packs/predictor/app/public/predictor/predictor.rb
+cat packs/predictor/app/public/predictor/predictor.rb
+
+cat packs/predictor/app/public/predictor/predictor.rb | sed 's/\(.*\)/  \1/' | tee packs/predictor/app/public/predictor/predictor2.rb
+rm packs/predictor/app/public/predictor/predictor.rb
+mv packs/predictor/app/public/predictor/predictor2.rb packs/predictor/app/public/predictor/predictor.rb
+cat packs/predictor/app/public/predictor/predictor.rb
+
+sed -i 's/  require "saulabs\/trueskill"/require "saulabs\/trueskill"/' packs/predictor/app/public/predictor/predictor.rb
+cat packs/predictor/app/public/predictor/predictor.rb
+
+sed -i '/class Predictor/s/^/module Predictor\n/' packs/predictor/app/public/predictor/predictor.rb
+cat packs/predictor/app/public/predictor/predictor.rb
+
+echo "
+end" >> packs/predictor/app/public/predictor/predictor.rb
+cat packs/predictor/app/public/predictor/predictor.rb
+
+mkdir packs/predictor/app/models/predictor
+mv packs/predictor/app/models/prediction.rb packs/predictor/app/models/predictor/prediction.rb
+cat packs/predictor/app/models/predictor/prediction.rb
+
+cat packs/predictor/app/models/predictor/prediction.rb | sed 's/\(.*\)/  \1/' | tee packs/predictor/app/models/predictor/prediction2.rb
+rm packs/predictor/app/models/predictor/prediction.rb
+mv packs/predictor/app/models/predictor/prediction2.rb packs/predictor/app/models/predictor/prediction.rb
+cat packs/predictor/app/models/predictor/prediction.rb
+
+sed -i '/class Prediction/s/^/module Predictor\n/' packs/predictor/app/models/predictor/prediction.rb
+cat packs/predictor/app/models/predictor/prediction.rb
+
+echo "
+end" >> packs/predictor/app/models/predictor/prediction.rb
+cat packs/predictor/app/models/predictor/prediction.rb
+
+mkdir packs/predictor/spec/models/predictor
+mv packs/predictor/spec/models/predictor_spec.rb packs/predictor/spec/models/predictor/predictor_spec.rb
+sed -i 's/Predictor/Predictor::Predictor/g' packs/predictor/spec/models/predictor/predictor_spec.rb
+sed -i 's/Prediction/Predictor::Prediction/g' packs/predictor/spec/models/predictor/predictor_spec.rb
+
+sed -i 's/Predictor/Predictor::Predictor/g' packs/prediction_ui/app/controllers/predictions_controller.rb
 
 bin/rubocop --regenerate-todo
 bundle exec visualize_packs > c4s07_b_fixed.dot && dot c4s07_b_fixed.dot -Tpng -o c4s07_b_fixed.png

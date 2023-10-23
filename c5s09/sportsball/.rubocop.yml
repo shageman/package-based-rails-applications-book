@@ -19,6 +19,3 @@ Packs/TypedPublicApis:
 
 Packs/RootNamespaceIsPackName:
   Enabled: false
-
-Packs/ClassMethodsAsPublicApis:
-  Enabled: true

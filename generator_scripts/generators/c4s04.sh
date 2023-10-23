@@ -6,71 +6,43 @@ set -e
 
 ###############################################################################
 #
-# Add documented public APIs checker to app
+# Add folder visibility checker to app and use it for predictor
 #
 ###############################################################################
 
+sed -i '/packwerk\/architecture\/checker/a\  - packwerk/folder_visibility/checker' packwerk.yml
+
+sed -i '/- packs\/*/a\- .\/packs\/*\/packs\/*' packs.yml
+sed -i '/- .\/packs\/*/a\- .\/packs\/*\/packs\/*' packwerk.yml
+
+cat packs.yml
+cat packwerk.yml
 
 ## Use it
 
-echo "
-gem 'rubocop-packs', require: false, group: [:development, :test]
-gem 'rubocop', require: false
-" >> Gemfile
-
 echo '
-AllCops:
-  DisabledByDefault: true
-
-require:
-  - rubocop-packs
-
-inherit_gem:
-  rubocop-packs:
-    - config/default.yml
-
-Packs/DocumentedPublicApis:
-  Enabled: true' > .rubocop.yml
-
-mkdir -p spec/packs
-echo 'require "rubocop"
-
-RSpec.describe "rubocop-packs validations" do
-  it "has only valid config files" do
-    config_files = Dir.glob("**/.rubocop.yml")
-    config_files.each do |config_file|
-      expect do
-        config = RuboCop::ConfigLoader.load_file(File.expand_path(".") + "/.rubocop.yml", check: false)
-        RuboCop::ConfigValidator.new(config).validate
-      end.to_not raise_exception
-    end
-  end
-end' > spec/packs/rubocop_packs_spec.rb
-
-## Create failure
-
-echo '
-inherit_from: ../../.rubocop.yml
-
-Packs/DocumentedPublicApis:
-  Enabled: true' > packs/predictor/.rubocop.yml
+enforce_folder_visibility: true
+' >> packs/predictor/package.yml
 
 
 ## See failure
+mkdir -p packs/games_admin/packs
+mv packs/predictor packs/games_admin/packs
+sed -i 's/packs\/predictor/packs\/games_admin\/packs\/predictor/' packs/prediction_ui/package.yml
+
+cat packs/prediction_ui/package.yml
 
 bundle install --local
-bundle binstub rubocop
-bin/rubocop && exit 1 || echo "Expected rubocop errors and got them."
+bin/packwerk check && exit 1 || echo "Expected packwerk check error and got it."
 
-bin/rubocop --regenerate-todo
+bin/packwerk update
 bundle exec visualize_packs > c4s04_a_todos.dot && dot c4s04_a_todos.dot -Tpng -o c4s04_a_todos.png
 
-
 ## Fix it
+mkdir -p packs/prediction_ui/packs
+mv packs/games_admin/packs/predictor packs/prediction_ui/packs
+rm -rf packs/games_admin/packs
+sed -i 's/packs\/games_admin\/packs\/predictor/packs\/prediction_ui\/packs\/predictor/' packs/prediction_ui/package.yml
 
-sed -i '/def learn/s/^/  # Pass in a list of teams and the games that they played against each other to learn relative team strengths\
-  # Ensure that all teams are in the teams list if they participate in any games. Otherwise you will get a runtime error\n/' packs/predictor/app/public/predictor.rb
-sed -i '/def predict/s/^/  # Pass in two teams to predict the outcome of their next game based on their learned relative team strengths\n/' packs/predictor/app/public/predictor.rb
-
-bin/rubocop --regenerate-todo
+bin/packwerk update 
 bundle exec visualize_packs > c4s04_b_fixed.dot && dot c4s04_b_fixed.dot -Tpng -o c4s04_b_fixed.png

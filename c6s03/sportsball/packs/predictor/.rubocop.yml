@@ -8,9 +8,5 @@ Packs/DocumentedPublicApis:
 Packs/RootNamespaceIsPackName:
   Enabled: true
 
-
-Packs/ClassMethodsAsPublicApis:
-  Enabled: false
-
 Packs/TypedPublicApis:
   Enabled: true

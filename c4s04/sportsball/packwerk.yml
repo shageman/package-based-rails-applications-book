@@ -27,6 +27,7 @@ exclude:
 require:
   - packwerk/privacy/checker
   - packwerk/architecture/checker
+  - packwerk/folder_visibility/checker
   - packwerk/visibility/checker
 
 architecture_layers:
@@ -37,5 +38,6 @@ architecture_layers:
 
 package_paths:
 - ./packs/*
+- ./packs/*/packs/*
 - .
 

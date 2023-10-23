@@ -14,8 +14,8 @@ RSpec.describe "teams admin", type: :system do
     fill_in "Name", with: "UK"
     click_on "Create Team"
 
-    click_link "Back"
-
+    click_link "Back to teams"
+    
     expect(page).to have_content "UofL"
     expect(page).to have_content "UK"
   end

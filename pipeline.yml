@@ -155,6 +155,14 @@ resources:
     regexp: c4s07-(.*)\.tgz
     access_key_id: ((aws_key))
     secret_access_key: ((aws_secret))
+- name: c4s08-code
+  type: s3
+  source:
+    endpoint: ((s3_endpoint))
+    bucket: ((s3_bucket))
+    regexp: c4s08-(.*)\.tgz
+    access_key_id: ((aws_key))
+    secret_access_key: ((aws_secret))
 - name: c5s07-1-code
   type: s3
   source:
@@ -821,7 +829,7 @@ jobs:
       CHAPTER: c4s04
       EXPECT_NO_PACKAGE_TODO: true
       SORBET: false
-      RUBOCOP: true
+      RUBOCOP: false
 
 
 
@@ -829,17 +837,17 @@ jobs:
   plan:
   - get: generator-scripts-repo
     trigger: false
-  - get: c4s04-code
-    passed: [c4s04]
+  - get: c4s03-code
+    passed: [c4s03]
     trigger: true
   - task: c4s05-task
     file: generator-scripts-repo/generator_scripts/ci/transform-code.yml
     input_mapping:
-      code_input: c4s04-code
+      code_input: c4s03-code
     output_mapping:
       code_output: c4s05-code
     params:
-      PREV_CHAPTER: c4s04
+      PREV_CHAPTER: c4s03
       CHAPTER: c4s05
   - put: c4s05-code
     params:
@@ -936,6 +944,45 @@ jobs:
       app_code: c4s07-code
     params:
       CHAPTER: c4s07
+      EXPECT_NO_PACKAGE_TODO: true
+      SORBET: false
+      RUBOCOP: true
+
+
+
+- name: c4s08
+  plan:
+  - get: generator-scripts-repo
+    trigger: false
+  - get: c4s07-code
+    passed: [c4s07]
+    trigger: true
+  - task: c4s08-task
+    file: generator-scripts-repo/generator_scripts/ci/transform-code.yml
+    input_mapping:
+      code_input: c4s07-code
+    output_mapping:
+      code_output: c4s08-code
+    params:
+      PREV_CHAPTER: c4s07
+      CHAPTER: c4s08
+  - put: c4s08-code
+    params:
+      file: "c4s08-code/c4s08-*.tgz"
+      acl: public-read
+
+- name: c4s08-test
+  plan:
+  - get: generator-scripts-repo
+  - get: c4s08-code
+    passed: [c4s08]
+    trigger: true
+  - task: c4s08-test-task
+    file: generator-scripts-repo/generator_scripts/ci/run-tests.yml
+    input_mapping:
+      app_code: c4s08-code
+    params:
+      CHAPTER: c4s08
       EXPECT_NO_PACKAGE_TODO: true
       SORBET: false
       RUBOCOP: true
