@@ -50,6 +50,7 @@ extractChapter "c4s04"
 extractChapter "c4s05"
 extractChapter "c4s06"
 extractChapter "c4s07"
+extractChapter "c4s08"
 
 extractChapter "c5s07-1"
 extractChapter "c5s07-2"
