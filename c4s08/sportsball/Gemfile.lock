@@ -1,0 +1,398 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    actioncable (7.1.1)
+      actionpack (= 7.1.1)
+      activesupport (= 7.1.1)
+      nio4r (~> 2.0)
+      websocket-driver (>= 0.6.1)
+      zeitwerk (~> 2.6)
+    actionmailbox (7.1.1)
+      actionpack (= 7.1.1)
+      activejob (= 7.1.1)
+      activerecord (= 7.1.1)
+      activestorage (= 7.1.1)
+      activesupport (= 7.1.1)
+      mail (>= 2.7.1)
+      net-imap
+      net-pop
+      net-smtp
+    actionmailer (7.1.1)
+      actionpack (= 7.1.1)
+      actionview (= 7.1.1)
+      activejob (= 7.1.1)
+      activesupport (= 7.1.1)
+      mail (~> 2.5, >= 2.5.4)
+      net-imap
+      net-pop
+      net-smtp
+      rails-dom-testing (~> 2.2)
+    actionpack (7.1.1)
+      actionview (= 7.1.1)
+      activesupport (= 7.1.1)
+      nokogiri (>= 1.8.5)
+      rack (>= 2.2.4)
+      rack-session (>= 1.0.1)
+      rack-test (>= 0.6.3)
+      rails-dom-testing (~> 2.2)
+      rails-html-sanitizer (~> 1.6)
+    actiontext (7.1.1)
+      actionpack (= 7.1.1)
+      activerecord (= 7.1.1)
+      activestorage (= 7.1.1)
+      activesupport (= 7.1.1)
+      globalid (>= 0.6.0)
+      nokogiri (>= 1.8.5)
+    actionview (7.1.1)
+      activesupport (= 7.1.1)
+      builder (~> 3.1)
+      erubi (~> 1.11)
+      rails-dom-testing (~> 2.2)
+      rails-html-sanitizer (~> 1.6)
+    activejob (7.1.1)
+      activesupport (= 7.1.1)
+      globalid (>= 0.3.6)
+    activemodel (7.1.1)
+      activesupport (= 7.1.1)
+    activerecord (7.1.1)
+      activemodel (= 7.1.1)
+      activesupport (= 7.1.1)
+      timeout (>= 0.4.0)
+    activestorage (7.1.1)
+      actionpack (= 7.1.1)
+      activejob (= 7.1.1)
+      activerecord (= 7.1.1)
+      activesupport (= 7.1.1)
+      marcel (~> 1.0)
+    activesupport (7.1.1)
+      base64
+      bigdecimal
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      connection_pool (>= 2.2.5)
+      drb
+      i18n (>= 1.6, < 2)
+      minitest (>= 5.1)
+      mutex_m
+      tzinfo (~> 2.0)
+    addressable (2.8.5)
+      public_suffix (>= 2.0.2, < 6.0)
+    ast (2.4.2)
+    base64 (0.1.1)
+    better_html (2.0.2)
+      actionview (>= 6.0)
+      activesupport (>= 6.0)
+      ast (~> 2.0)
+      erubi (~> 1.4)
+      parser (>= 2.4)
+      smart_properties
+    bigdecimal (3.1.4)
+    bindex (0.8.1)
+    bootsnap (1.16.0)
+      msgpack (~> 1.2)
+    builder (3.2.4)
+    capybara (3.39.2)
+      addressable
+      matrix
+      mini_mime (>= 0.1.3)
+      nokogiri (~> 1.8)
+      rack (>= 1.6.0)
+      rack-test (>= 0.6.3)
+      regexp_parser (>= 1.5, < 3.0)
+      xpath (~> 3.2)
+    code_ownership (1.34.2)
+      code_teams (~> 1.0)
+      packs-specification
+      sorbet-runtime (>= 0.5.10821)
+    code_teams (1.0.2)
+      sorbet-runtime
+    concurrent-ruby (1.2.2)
+    connection_pool (2.4.1)
+    constant_resolver (0.2.0)
+    crass (1.0.6)
+    date (3.3.3)
+    debug (1.8.0)
+      irb (>= 1.5.0)
+      reline (>= 0.3.1)
+    diff-lcs (1.5.0)
+    drb (2.1.1)
+      ruby2_keywords
+    erubi (1.12.0)
+    globalid (1.2.1)
+      activesupport (>= 6.1)
+    i18n (1.14.1)
+      concurrent-ruby (~> 1.0)
+    importmap-rails (1.2.1)
+      actionpack (>= 6.0.0)
+      railties (>= 6.0.0)
+    io-console (0.6.0)
+    irb (1.8.3)
+      rdoc
+      reline (>= 0.3.8)
+    jbuilder (2.11.5)
+      actionview (>= 5.0.0)
+      activesupport (>= 5.0.0)
+    json (2.6.3)
+    language_server-protocol (3.17.0.3)
+    loofah (2.21.4)
+      crass (~> 1.0.2)
+      nokogiri (>= 1.12.0)
+    mail (2.8.1)
+      mini_mime (>= 0.1.1)
+      net-imap
+      net-pop
+      net-smtp
+    marcel (1.0.2)
+    matrix (0.4.2)
+    mini_mime (1.1.5)
+    minitest (5.20.0)
+    msgpack (1.7.2)
+    mutex_m (0.1.2)
+    net-imap (0.4.2)
+      date
+      net-protocol
+    net-pop (0.1.2)
+      net-protocol
+    net-protocol (0.2.1)
+      timeout
+    net-smtp (0.4.0)
+      net-protocol
+    nio4r (2.5.9)
+    nokogiri (1.15.4-x86_64-linux)
+      racc (~> 1.4)
+    packs (0.0.31)
+      code_ownership (>= 1.33.0)
+      packs-specification
+      packwerk
+      parse_packwerk
+      rainbow
+      sorbet-runtime
+      thor
+      tty-prompt
+    packs-rails (0.0.3)
+      activesupport
+      packs
+      railties
+    packs-specification (0.0.10)
+      sorbet-runtime
+    packwerk (3.1.0)
+      activesupport (>= 6.0)
+      ast
+      better_html
+      bundler
+      constant_resolver (>= 0.2.0)
+      parallel
+      parser
+      sorbet-runtime (>= 0.5.9914)
+      zeitwerk (>= 2.6.1)
+    packwerk-extensions (0.1.8)
+      packwerk (>= 2.2.1)
+      railties (>= 6.0.0)
+      sorbet-runtime
+      zeitwerk
+    parallel (1.23.0)
+    parse_packwerk (0.20.0)
+      sorbet-runtime
+    parser (3.2.2.4)
+      ast (~> 2.4.1)
+      racc
+    pastel (0.8.0)
+      tty-color (~> 0.5)
+    psych (5.1.1.1)
+      stringio
+    public_suffix (5.0.3)
+    puma (6.4.0)
+      nio4r (~> 2.0)
+    racc (1.7.1)
+    rack (3.0.8)
+    rack-session (2.0.0)
+      rack (>= 3.0.0)
+    rack-test (2.1.0)
+      rack (>= 1.3)
+    rackup (2.1.0)
+      rack (>= 3)
+      webrick (~> 1.8)
+    rails (7.1.1)
+      actioncable (= 7.1.1)
+      actionmailbox (= 7.1.1)
+      actionmailer (= 7.1.1)
+      actionpack (= 7.1.1)
+      actiontext (= 7.1.1)
+      actionview (= 7.1.1)
+      activejob (= 7.1.1)
+      activemodel (= 7.1.1)
+      activerecord (= 7.1.1)
+      activestorage (= 7.1.1)
+      activesupport (= 7.1.1)
+      bundler (>= 1.15.0)
+      railties (= 7.1.1)
+    rails-dom-testing (2.2.0)
+      activesupport (>= 5.0.0)
+      minitest
+      nokogiri (>= 1.6)
+    rails-html-sanitizer (1.6.0)
+      loofah (~> 2.21)
+      nokogiri (~> 1.14)
+    railties (7.1.1)
+      actionpack (= 7.1.1)
+      activesupport (= 7.1.1)
+      irb
+      rackup (>= 1.0.0)
+      rake (>= 12.2)
+      thor (~> 1.0, >= 1.2.2)
+      zeitwerk (~> 2.6)
+    rainbow (3.1.1)
+    rake (13.0.6)
+    rdoc (6.5.0)
+      psych (>= 4.0.0)
+    regexp_parser (2.8.2)
+    reline (0.3.9)
+      io-console (~> 0.5)
+    rexml (3.2.6)
+    rspec-core (3.12.2)
+      rspec-support (~> 3.12.0)
+    rspec-expectations (3.12.3)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.12.0)
+    rspec-mocks (3.12.6)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.12.0)
+    rspec-rails (6.0.3)
+      actionpack (>= 6.1)
+      activesupport (>= 6.1)
+      railties (>= 6.1)
+      rspec-core (~> 3.12)
+      rspec-expectations (~> 3.12)
+      rspec-mocks (~> 3.12)
+      rspec-support (~> 3.12)
+    rspec-support (3.12.1)
+    rubocop (1.57.1)
+      base64 (~> 0.1.1)
+      json (~> 2.3)
+      language_server-protocol (>= 3.17.0)
+      parallel (~> 1.10)
+      parser (>= 3.2.2.4)
+      rainbow (>= 2.2.2, < 4.0)
+      regexp_parser (>= 1.8, < 3.0)
+      rexml (>= 3.2.5, < 4.0)
+      rubocop-ast (>= 1.28.1, < 2.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (>= 2.4.0, < 3.0)
+    rubocop-ast (1.29.0)
+      parser (>= 3.2.1.0)
+    rubocop-packs (0.0.43)
+      activesupport
+      packs-specification
+      parse_packwerk
+      rubocop (~> 1.0)
+      rubocop-sorbet
+      sorbet-runtime
+    rubocop-sorbet (0.7.4)
+      rubocop (>= 0.90.0)
+    ruby-progressbar (1.13.0)
+    ruby2_keywords (0.0.5)
+    rubyzip (2.3.2)
+    selenium-webdriver (4.14.0)
+      rexml (~> 3.2, >= 3.2.5)
+      rubyzip (>= 1.2.2, < 3.0)
+      websocket (~> 1.0)
+    shoulda-matchers (5.3.0)
+      activesupport (>= 5.2.0)
+    slim (5.1.1)
+      temple (~> 0.10.0)
+      tilt (>= 2.1.0)
+    slim-rails (3.6.2)
+      actionpack (>= 3.1)
+      railties (>= 3.1)
+      slim (>= 3.0, < 6.0, != 5.0.0)
+    smart_properties (1.17.0)
+    sorbet-runtime (0.5.11089)
+    sprockets (4.2.1)
+      concurrent-ruby (~> 1.0)
+      rack (>= 2.2.4, < 4)
+    sprockets-rails (3.4.2)
+      actionpack (>= 5.2)
+      activesupport (>= 5.2)
+      sprockets (>= 3.0.0)
+    sqlite3 (1.6.7-x86_64-linux)
+    stimulus-rails (1.3.0)
+      railties (>= 6.0.0)
+    stringio (3.0.8)
+    temple (0.10.3)
+    thor (1.3.0)
+    tilt (2.3.0)
+    timeout (0.4.0)
+    trueskill (1.0.0)
+    tty-color (0.6.0)
+    tty-cursor (0.7.1)
+    tty-prompt (0.23.1)
+      pastel (~> 0.8)
+      tty-reader (~> 0.8)
+    tty-reader (0.9.0)
+      tty-cursor (~> 0.7)
+      tty-screen (~> 0.8)
+      wisper (~> 2.0)
+    tty-screen (0.8.1)
+    turbo-rails (1.5.0)
+      actionpack (>= 6.0.0)
+      activejob (>= 6.0.0)
+      railties (>= 6.0.0)
+    tzinfo (2.0.6)
+      concurrent-ruby (~> 1.0)
+    tzinfo-data (1.2023.3)
+      tzinfo (>= 1.0.0)
+    unicode-display_width (2.5.0)
+    visualize_packs (0.5.22)
+      packs-specification
+      parse_packwerk (>= 0.20.0)
+      sorbet-runtime
+    web-console (4.2.1)
+      actionview (>= 6.0.0)
+      activemodel (>= 6.0.0)
+      bindex (>= 0.4.0)
+      railties (>= 6.0.0)
+    webrick (1.8.1)
+    websocket (1.2.10)
+    websocket-driver (0.7.6)
+      websocket-extensions (>= 0.1.0)
+    websocket-extensions (0.1.5)
+    wisper (2.0.1)
+    xpath (3.2.0)
+      nokogiri (~> 1.8)
+    zeitwerk (2.6.12)
+
+PLATFORMS
+  x86_64-linux
+
+DEPENDENCIES
+  bootsnap
+  capybara
+  debug
+  importmap-rails
+  jbuilder
+  packs
+  packs-rails
+  packwerk
+  packwerk-extensions
+  parse_packwerk
+  puma (>= 5.0)
+  rails (~> 7.1.1)
+  rspec-rails
+  rubocop
+  rubocop-packs
+  selenium-webdriver
+  shoulda-matchers
+  slim-rails
+  sprockets-rails
+  sqlite3 (~> 1.4)
+  stimulus-rails
+  trueskill
+  turbo-rails
+  tzinfo-data
+  visualize_packs
+  web-console
+
+RUBY VERSION
+   ruby 3.2.0p0
+
+BUNDLED WITH
+   2.4.1
