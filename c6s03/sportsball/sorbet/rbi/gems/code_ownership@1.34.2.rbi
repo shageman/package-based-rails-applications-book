@@ -123,7 +123,7 @@ class CodeOwnership::Configuration < ::T::Struct
     sig { returns(::CodeOwnership::Configuration) }
     def fetch; end
 
-    # source://sorbet-runtime/0.5.11074/lib/types/struct.rb#13
+    # source://sorbet-runtime/0.5.11089/lib/types/struct.rb#13
     def inherited(s); end
 
     # source://code_ownership//lib/code_ownership/configuration.rb#35
@@ -610,7 +610,7 @@ class CodeOwnership::Private::OwnershipMappers::TeamGlobs::GlobOverlap < ::T::St
   def description; end
 
   class << self
-    # source://sorbet-runtime/0.5.11074/lib/types/struct.rb#13
+    # source://sorbet-runtime/0.5.11089/lib/types/struct.rb#13
     def inherited(s); end
   end
 end
@@ -621,7 +621,7 @@ class CodeOwnership::Private::OwnershipMappers::TeamGlobs::MappingContext < ::T:
   const :team, ::CodeTeams::Team
 
   class << self
-    # source://sorbet-runtime/0.5.11074/lib/types/struct.rb#13
+    # source://sorbet-runtime/0.5.11089/lib/types/struct.rb#13
     def inherited(s); end
   end
 end
@@ -711,7 +711,7 @@ class CodeOwnership::Private::ParseJsPackages::Package < ::T::Struct
     sig { params(pathname: ::Pathname).returns(::CodeOwnership::Private::ParseJsPackages::Package) }
     def from(pathname); end
 
-    # source://sorbet-runtime/0.5.11074/lib/types/struct.rb#13
+    # source://sorbet-runtime/0.5.11089/lib/types/struct.rb#13
     def inherited(s); end
   end
 end
