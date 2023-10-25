@@ -15,12 +15,13 @@ set -e
 
 echo "
 gem 'rubocop-packs', require: false, group: [:development, :test]
-gem 'rubocop', require: false
+gem 'rubocop', require: false, group: [:development, :test]
 " >> Gemfile
 
 echo '
 AllCops:
   DisabledByDefault: true
+  SuggestExtensions: false
 
 require:
   - rubocop-packs
@@ -63,14 +64,13 @@ bundle binstub rubocop
 bin/rubocop && exit 1 || echo "Expected rubocop errors and got them."
 
 bin/rubocop --regenerate-todo
-bundle exec visualize_packs > c4s05_a_todos.dot && dot c4s05_a_todos.dot -Tpng -o c4s05_a_todos.png
+bundle exec visualize_packs > diagrams/all_packs_with_todo.dot && dot diagrams/all_packs_with_todo.dot -Tpng -o diagrams/all_packs_with_todo.png
 
 
 ## Fix it
 
+echo '' > .rubocop_todo.yml
+
 sed -i '/def learn/s/^/  # Pass in a list of teams and the games that they played against each other to learn relative team strengths\
   # Ensure that all teams are in the teams list if they participate in any games. Otherwise you will get a runtime error\n/' packs/predictor/app/public/predictor.rb
 sed -i '/def predict/s/^/  # Pass in two teams to predict the outcome of their next game based on their learned relative team strengths\n/' packs/predictor/app/public/predictor.rb
-
-bin/rubocop --regenerate-todo
-bundle exec visualize_packs > c4s05_b_fixed.dot && dot c4s05_b_fixed.dot -Tpng -o c4s05_b_fixed.png

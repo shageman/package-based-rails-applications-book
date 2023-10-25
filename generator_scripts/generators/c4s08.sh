@@ -28,16 +28,15 @@ bundle install --local
 bin/rubocop && exit 1 || echo "Expected rubocop errors and got them."
 
 bin/rubocop --regenerate-todo
-bundle exec visualize_packs > c4s08_a_todos.dot && dot c4s08_a_todos.dot -Tpng -o c4s08_a_todos.png
+bundle exec visualize_packs > diagrams/all_packs_with_todo.dot && dot diagrams/all_packs_with_todo.dot -Tpng -o diagrams/all_packs_with_todo.png
 
 
 ## Fix it
+
+echo '' > .rubocop_todo.yml
 
 sed -i '/Packs\/ClassMethodsAsPublicApis/,+2d' packs/predictor/.rubocop.yml
 
 echo '
 Packs/ClassMethodsAsPublicApis:
   Enabled: false' >> packs/predictor/.rubocop.yml
-
-bin/rubocop --regenerate-todo
-bundle exec visualize_packs > c4s08_b_fixed.dot && dot c4s08_b_fixed.dot -Tpng -o c4s08_b_fixed.png

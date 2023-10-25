@@ -63,6 +63,7 @@ mkdir -p spec/packages/games_admin/views; mv spec/views/games/edit.html.slim_spe
 mkdir -p spec/packages/prediction_ui/helpers; mv spec/helpers/predictions_helper_spec.rb $_
 
 find . -type d -empty -delete
+mkdir diagrams
 
 echo "enforce_dependencies: true" > app/packages/games/package.yml
 echo "enforce_dependencies: true" > app/packages/games_admin/package.yml

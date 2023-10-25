@@ -32,15 +32,10 @@ bundle install --local
 bin/packwerk check && exit 1 || echo "Expected packwerk check error and got it."
 
 bin/packwerk update 
-bundle exec visualize_packs > c4s01_a_todos.dot && dot c4s01_a_todos.dot -Tpng -o c4s01_a_todos.png
+bundle exec visualize_packs > diagrams/all_packs_with_todo.dot && dot diagrams/all_packs_with_todo.dot -Tpng -o diagrams/all_packs_with_todo.png
 
 
 ## Fix it
 
 mkdir packs/predictor/app/public
 mv packs/predictor/app/models/predictor.rb packs/predictor/app/public
-
-bin/packwerk check && echo "Expected no packwerk check error and got none."
-bin/packwerk update
-
-bundle exec visualize_packs > c4s01_b_fixed.dot && dot c4s01_b_fixed.dot -Tpng -o c4s01_b_fixed.png

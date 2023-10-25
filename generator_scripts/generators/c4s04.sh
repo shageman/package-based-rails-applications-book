@@ -36,13 +36,10 @@ bundle install --local
 bin/packwerk check && exit 1 || echo "Expected packwerk check error and got it."
 
 bin/packwerk update
-bundle exec visualize_packs > c4s04_a_todos.dot && dot c4s04_a_todos.dot -Tpng -o c4s04_a_todos.png
+bundle exec visualize_packs > diagrams/all_packs_with_todo.dot && dot diagrams/all_packs_with_todo.dot -Tpng -o diagrams/all_packs_with_todo.png
 
 ## Fix it
 mkdir -p packs/prediction_ui/packs
 mv packs/games_admin/packs/predictor packs/prediction_ui/packs
 rm -rf packs/games_admin/packs
 sed -i 's/packs\/games_admin\/packs\/predictor/packs\/prediction_ui\/packs\/predictor/' packs/prediction_ui/package.yml
-
-bin/packwerk update 
-bundle exec visualize_packs > c4s04_b_fixed.dot && dot c4s04_b_fixed.dot -Tpng -o c4s04_b_fixed.png

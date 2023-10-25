@@ -3,6 +3,7 @@ inherit_from: .rubocop_todo.yml
 
 AllCops:
   DisabledByDefault: true
+  SuggestExtensions: false
 
 require:
   - rubocop-packs

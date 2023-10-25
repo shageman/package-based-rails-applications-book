@@ -38,7 +38,6 @@ if [[ "$EVENTIDE_TESTS" = "true" ]]; then
   cd ../..
 fi
 
-
 ## TESTS FOR MAIN APP
 bundle exec rspec --exclude-pattern '**/system/**/*_spec.rb' `cat .rspec | tr '\n' ' '`
 echo 'puts defined?(TeamRecord) ? TeamRecord.count : Team.count' | bundle exec rails c

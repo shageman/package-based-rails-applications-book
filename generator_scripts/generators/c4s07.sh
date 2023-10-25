@@ -31,10 +31,12 @@ bundle install --local
 bin/rubocop && exit 1 || echo "Expected rubocop errors and got them."
 
 bin/rubocop --regenerate-todo
-bundle exec visualize_packs > c4s07_a_todos.dot && dot c4s07_a_todos.dot -Tpng -o c4s07_a_todos.png
+bundle exec visualize_packs > diagrams/all_packs_with_todo.dot && dot diagrams/all_packs_with_todo.dot -Tpng -o diagrams/all_packs_with_todo.png
 
 
 ## Fix it
+
+echo '' > .rubocop_todo.yml
 
 find . -type f
 
@@ -79,6 +81,3 @@ sed -i 's/Predictor/Predictor::Predictor/g' packs/predictor/spec/models/predicto
 sed -i 's/Prediction/Predictor::Prediction/g' packs/predictor/spec/models/predictor/predictor_spec.rb
 
 sed -i 's/Predictor/Predictor::Predictor/g' packs/prediction_ui/app/controllers/predictions_controller.rb
-
-bin/rubocop --regenerate-todo
-bundle exec visualize_packs > c4s07_b_fixed.dot && dot c4s07_b_fixed.dot -Tpng -o c4s07_b_fixed.png

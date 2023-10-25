@@ -64,13 +64,10 @@ bundle install --local
 bin/packwerk check && exit 1 || echo "Expected packwerk check error and got it."
 
 bin/packwerk update
-bundle exec visualize_packs > c4s02_a_todos.dot && dot c4s02_a_todos.dot -Tpng -o c4s02_a_todos.png
+bundle exec visualize_packs > diagrams/all_packs_with_todo.dot && dot diagrams/all_packs_with_todo.dot -Tpng -o diagrams/all_packs_with_todo.png
 
 
 ## Fix it
 
 sed -i 's/layer: data/layer: UI/' packs/games_admin/package.yml
 sed -i 's/layer: UI/layer: data/' packs/games/package.yml
-
-bin/packwerk update 
-bundle exec visualize_packs > c4s02_b_fixed.dot && dot c4s02_b_fixed.dot -Tpng -o c4s02_b_fixed.png
