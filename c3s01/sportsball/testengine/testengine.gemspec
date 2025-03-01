@@ -3,8 +3,8 @@ require_relative "lib/testengine/version"
 Gem::Specification.new do |spec|
   spec.name        = "testengine"
   spec.version     = Testengine::VERSION
-  spec.authors     = [""]
-  spec.email       = [""]
+  spec.authors     = [ "" ]
+  spec.email       = [ "" ]
   spec.homepage    = ""
   spec.summary     = "Summary of Testengine."
   spec.description = "Description of Testengine."
@@ -18,5 +18,5 @@ Gem::Specification.new do |spec|
     Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
   end
 
-  spec.add_dependency "rails", ">= 7.1.1"
+  spec.add_dependency "rails", ">= 7.2.2.1"
 end
