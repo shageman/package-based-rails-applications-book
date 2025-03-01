@@ -64,7 +64,7 @@ extractChapter "c3s01" "c2s06"
 extractChapter "c3s02" "c2s06"
 extractChapter "c3s03" "c4s02"
 
-extractChapter "c5s07-1" "c2s06"
+extractChapter "c5s07-1" "c4s07"
 extractChapter "c5s07-2" "c5s07-1"
 extractChapter "c5s07-3" "c5s07-2"
 extractChapter "c5s08" "c5s07-3"
@@ -76,4 +76,20 @@ extractChapter "c6s03" "c6s02"
 extractChapter "c6s04-1" "c6s03"
 extractChapter "c6s04-2a" "c6s03"
 extractChapter "c6s04-2b" "c6s04-2a"
-extractChapter "c7s01" "c6s04-2b"
+
+
+
+
+extractChapter "c4s01" "c2s07"
+extractChapter "c4s02" "c4s01"
+extractChapter "c4s03" "c4s02"
+extractChapter "c4s04" "c4s03"
+extractChapter "c4s05" "c4s03"
+extractChapter "c4s06" "c4s05"
+extractChapter "c4s07" "c4s06"
+extractChapter "c4s08" "c4s07"
+
+extractChapter "c9s01-a" "c5s07-3"
+extractChapter "c9s01-b" "c5s07-3"
+
+extractChapter "c9s02" "c5s07-3"
