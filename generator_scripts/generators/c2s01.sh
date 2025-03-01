@@ -30,6 +30,7 @@ rm -rf test
 rails generate rspec:install
 
 bundle exec rails g controller welcome index
+sed -i 's/"/'\''/g' config/routes.rb
 sed -i "s/.*get 'welcome\/index'/  root to: 'welcome#index'/" config/routes.rb
 
 bundle exec rails g scaffold team name:string
@@ -121,7 +122,11 @@ sed -i "s/# exclude:/exclude:/g" packwerk.yml
 sed -i "/bin,node_modules/c\- '{bin,node_modules,script,tmp,vendor,VENDORED_GEMS}\/**\/*'" packwerk.yml
 sed -i "/exclude:/a\- '**\/lib\/tasks\/**\/*.rake'" packwerk.yml
 
+echo "enforce_dependencies: true" > package.yml
+
 echo "pack_paths:
 - app/packages/*
 - .
 " > packs.yml
+
+bundle add puppeteer-ruby
