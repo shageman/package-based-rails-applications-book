@@ -6,11 +6,11 @@ set -e
 
 ###############################################################################
 #
-# Add folder visibility checker to app and use it for predictor
+# Add folder privacy checker to app and use it for predictor
 #
 ###############################################################################
 
-sed -i '/packwerk\/architecture\/checker/a\  - packwerk/folder_visibility/checker' packwerk.yml
+sed -i '/packwerk\/visibility\/checker/a\  - packwerk/folder_privacy/checker' packwerk.yml
 
 sed -i '/- packs\/*/a\- .\/packs\/*\/packs\/*' packs.yml
 sed -i '/- .\/packs\/*/a\- .\/packs\/*\/packs\/*' packwerk.yml
@@ -21,7 +21,7 @@ cat packwerk.yml
 ## Use it
 
 echo '
-enforce_folder_visibility: true
+enforce_folder_privacy: true
 ' >> packs/predictor/package.yml
 
 

@@ -12,6 +12,11 @@ set -e
 
 ## Use it
 
+
+# Turn off rubocop config loading optimization that prevents nested configs from being considered
+sed -i '/ARGV.unshift/ s/^/#/' bin/rubocop
+
+
 echo '
 Packs/TypedPublicApis:
   Enabled: true' >> .rubocop.yml

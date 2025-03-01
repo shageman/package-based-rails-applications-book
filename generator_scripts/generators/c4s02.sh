@@ -6,17 +6,17 @@ set -e
 
 ###############################################################################
 #
-# Add architecture checker to app and use it for all packages
+# Add architecture layer checker to app and use it for all packages
 #
 ###############################################################################
 
-sed -i '/packwerk\/privacy\/checker/a\  - packwerk/architecture/checker' packwerk.yml
+sed -i '/packwerk\/privacy\/checker/a\  - packwerk/layer/checker' packwerk.yml
 
 
 ## Use it
 
 echo '
-architecture_layers:
+layers:
   - app
   - UI
   - data
@@ -27,34 +27,34 @@ package_paths:
 - .
 ' >> packwerk.yml
 
-echo 'enforce_architecture: true
+echo 'enforce_layers: true
 layer: app' >> package.yml
 
-echo 'enforce_architecture: true
+echo 'enforce_layers: true
 layer: UI' >> packs/prediction_ui/package.yml
-echo 'enforce_architecture: true
+echo 'enforce_layers: true
 layer: UI' >> packs/welcome_ui/package.yml
-echo 'enforce_architecture: true
+echo 'enforce_layers: true
 layer: UI' >> packs/teams_admin/package.yml
-# echo 'enforce_architecture: true
+# echo 'enforce_layers: true
 # layer: UI' >> packs/games_admin/package.yml
 
-echo 'enforce_architecture: true
+echo 'enforce_layers: true
 layer: data' >> packs/teams/package.yml
-# echo 'enforce_architecture: true
+# echo 'enforce_layers: true
 # layer: data' >> packs/games/package.yml
 
-echo 'enforce_architecture: true
+echo 'enforce_layers: true
 layer: utility' >> packs/rails_shims/package.yml
-echo 'enforce_architecture: true
+echo 'enforce_layers: true
 layer: utility' >> packs/predictor/package.yml
 
 
 ## Create failure
 
-echo 'enforce_architecture: true
+echo 'enforce_layers: true
 layer: data' >> packs/games_admin/package.yml
-echo 'enforce_architecture: true
+echo 'enforce_layers: true
 layer: UI' >> packs/games/package.yml
 
 

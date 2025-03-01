@@ -10,7 +10,7 @@ set -e
 #
 ###############################################################################
 
-sed -i '/packwerk\/architecture\/checker/a\  - packwerk/visibility/checker' packwerk.yml
+sed -i '/packwerk\/layer\/checker/a\  - packwerk/visibility/checker' packwerk.yml
 
 
 ## Use it
