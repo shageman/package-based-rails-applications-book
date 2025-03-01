@@ -26,9 +26,9 @@ exclude:
 
 require:
   - packwerk/privacy/checker
-  - packwerk/architecture/checker
+  - packwerk/layer/checker
 
-architecture_layers:
+layers:
   - app
   - UI
   - data

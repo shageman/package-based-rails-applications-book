@@ -1,12 +1,12 @@
 enforce_dependencies: true
 
 enforce_privacy: true
-enforce_architecture: true
+enforce_layers: true
 layer: utility
 
 enforce_visibility: true
 visible_to:
   - packs/prediction_ui
 
-enforce_folder_visibility: true
+enforce_folder_privacy: true
 

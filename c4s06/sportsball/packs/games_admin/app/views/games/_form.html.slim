@@ -1,9 +1,9 @@
-= form_with(model: @game) do |form|
-  - if @game.errors.any?
+= form_with(model: game) do |form|
+  - if game.errors.any?
     div style="color: red"
-      h2 = "#{pluralize(@game.errors.count, "error")} prohibited this game from being saved:"
+      h2 = "#{pluralize(game.errors.count, "error")} prohibited this game from being saved:"
       ul
-        - @game.errors.each do |error|
+        - game.errors.each do |error|
           li = error.full_message
 
   div

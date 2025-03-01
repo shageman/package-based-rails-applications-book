@@ -26,11 +26,11 @@ exclude:
 
 require:
   - packwerk/privacy/checker
-  - packwerk/architecture/checker
-  - packwerk/folder_visibility/checker
+  - packwerk/layer/checker
   - packwerk/visibility/checker
+  - packwerk/folder_privacy/checker
 
-architecture_layers:
+layers:
   - app
   - UI
   - data
