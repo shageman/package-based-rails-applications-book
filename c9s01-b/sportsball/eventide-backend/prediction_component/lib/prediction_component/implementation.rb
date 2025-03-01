@@ -9,6 +9,7 @@ require 'component_host'
 
 
 module PredictionComponent
+  TEAM_STRENGTH_STREAM_NAME = "team_strength"
   GAME_STREAM_NAME = "game"
   
   class RecordGameCreation
@@ -64,8 +65,8 @@ module PredictionComponent
     include Schema::DataStructure
 
     attribute :team_id, Numeric
-    attribute :mean, Numeric, default: 1500
-    attribute :deviation, Numeric, default: 1000
+    attribute :mean, Numeric, default: -> { 1500 }
+    attribute :deviation, Numeric, default: -> { 1000 }
     attribute :sequence, Integer
 
     def update_to(team_id, mean, deviation)
@@ -78,20 +79,6 @@ module PredictionComponent
       return false if sequence.nil?
 
       sequence >= message_sequence
-    end
-  end
-
-  class TeamStrength
-    module Transform
-      # When reading: Convert hash to TeamStrength
-      def self.instance(raw_data)
-        TeamStrength.build(raw_data)
-      end
-
-      # When writing: Convert TeamStrength to hash
-      def self.raw_data(instance)
-        instance.to_h
-      end
     end
   end
 
@@ -131,7 +118,7 @@ module PredictionComponent
   class Store
     include EntityStore
 
-    category :team_strength
+    category TEAM_STRENGTH_STREAM_NAME
     entity TeamStrength
     projection Projection
     reader MessageStore::Postgres::Read
@@ -152,7 +139,7 @@ module PredictionComponent
       Store.configure(self)
     end
 
-    category :team_strength
+    category TEAM_STRENGTH_STREAM_NAME
 
     handle RecordGameCreation do |command|
       # puts "RecordGameCreation #{command.game_id}: #{command.first_team_id} vs #{command.second_team_id}"
@@ -183,13 +170,14 @@ module PredictionComponent
 
     handle RecordGameCreationWithStrengths do |command|
       team_id = command.record_for == 1 ? command.first_team_id : command.second_team_id
-      # puts "RecordGameCreationWithStrengths #{command.game_id}: #{command.first_team_id} vs #{command.second_team_id} (#{command.record_for})"
 
       team, version = store.fetch(team_id, include: :version)
       sequence = command.metadata.global_position
 
       if team.processed?(sequence)
-        logger.info(tag: :ignored) { "Command ignored (Command: #{team.message_type}, Account ID: #{team_id}, Account Sequence: #{team.sequence}, Deposit Sequence: #{sequence})" }
+        logger.info(tag: :ignored) { 
+          "Command ignored (Command: #{team.message_type}, Team ID: #{team_id}, Team Sequence: #{team.sequence}, Global Sequence: #{sequence})" 
+        }
         return
       end
 

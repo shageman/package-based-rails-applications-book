@@ -1,9 +1,9 @@
 enforce_dependencies: true
 enforce_privacy: false
-enforce_architecture: true
+enforce_layers: true
 layer: UI
 dependencies:
-  - packs/games
-  - packs/predictor_interface
-  - packs/rails_shims
-  - packs/teams
+- packs/games
+- packs/predictor_interface
+- packs/rails_shims
+- packs/teams

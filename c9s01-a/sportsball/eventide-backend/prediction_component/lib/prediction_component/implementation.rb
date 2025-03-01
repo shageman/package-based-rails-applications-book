@@ -44,26 +44,12 @@ module PredictionComponent
     include Schema::DataStructure
 
     attribute :team_id, Numeric
-    attribute :mean, Numeric, default: 1500
-    attribute :deviation, Numeric, default: 1000
+    attribute :mean, Numeric, default: -> { 1500 }
+    attribute :deviation, Numeric, default: -> { 1000 }
 
     def update_to(mean, deviation)
       self.mean = mean
       self.deviation = deviation
-    end
-  end
-
-  class TeamStrength
-    module Transform
-      # When reading: Convert hash to TeamStrength
-      def self.instance(raw_data)
-        TeamStrength.build(raw_data)
-      end
-
-      # When writing: Convert TeamStrength to hash
-      def self.raw_data(instance)
-        instance.to_h
-      end
     end
   end
 
@@ -90,20 +76,6 @@ module PredictionComponent
       return false if sequence.nil?
 
       sequence >= message_sequence
-    end
-  end
-
-  class League
-    module Transform
-      # When reading: Convert hash to League
-      def self.instance(raw_data)
-        League.build(raw_data)
-      end
-
-      # When writing: Convert League to hash
-      def self.raw_data(instance)
-        instance.to_h
-      end
     end
   end
 
@@ -143,7 +115,7 @@ module PredictionComponent
   class Store
     include EntityStore
 
-    category :league
+    category LEAGUE_STREAM_NAME
     entity League
     projection Projection
     reader MessageStore::Postgres::Read
@@ -154,16 +126,10 @@ module PredictionComponent
     include Messaging::StreamName
 
     dependency :write, Messaging::Postgres::Write
-    dependency :clock, Clock::UTC
-    dependency :store, Store
 
     def configure
       Messaging::Postgres::Write.configure(self)
-      Clock::UTC.configure(self)
-      Store.configure(self)
     end
-
-    category :league
 
     handle RecordGameCreation do |command|
       record_game_creation = RecordGameCreation.follow(command)
@@ -189,7 +155,7 @@ module PredictionComponent
       Store.configure(self)
     end
 
-    category :league
+    category LEAGUE_STREAM_NAME
 
     handle RecordGameCreation do |command|
       league_id = command.league_id
@@ -197,7 +163,9 @@ module PredictionComponent
       sequence = command.metadata.global_position
 
       if league.processed?(sequence)
-        logger.info(tag: :ignored) { "Command ignored (Command: #{league.message_type}, Account ID: #{league_id}, Account Sequence: #{account.sequence}, Deposit Sequence: #{sequence})" }
+        logger.info(tag: :ignored) { 
+          "Command ignored (Command: #{league.message_type}, League ID: #{league_id}, League Sequence: #{league.sequence}, Global Sequence: #{sequence})" 
+        }
         return
       end
 

@@ -45,3 +45,30 @@ def wait_for_turbolinks timeout = nil
 end
 
 
+
+
+require 'capybara/rspec'
+require 'selenium/webdriver'
+
+Capybara.default_driver = :rack_test # for non-JS tests
+Capybara.javascript_driver = :headless_chrome
+
+# Register a new driver for headless Chrome
+Capybara.register_driver :headless_chrome do |app|
+  options = ::Selenium::WebDriver::Chrome::Options.new
+  # The list of arguments below are commonly used in CI
+  %w[ headless disable-gpu no-sandbox disable-dev-shm-usage window-size=1280,800 ].each do |arg|
+    options.add_argument(arg)
+  end
+
+  # If you are running your specs in Docker, you might also want:
+  # options.add_argument('--remote-debugging-port=9222')
+  # (helpful for debugging in certain setups)
+
+  Capybara::Selenium::Driver.new(
+    app,
+    browser: :chrome,
+    options: options
+  )
+end
+

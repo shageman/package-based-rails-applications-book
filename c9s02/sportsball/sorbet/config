@@ -1,0 +1,8 @@
+--dir
+.
+--ignore=/vendor/
+--ignore=/VENDORED_GEMS/
+--ignore=/db
+
+--ignore=/slices
+--ignore=/tmp
