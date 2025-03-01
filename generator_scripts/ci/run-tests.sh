@@ -14,10 +14,16 @@ cd app_code/sportsball
 cp -r VENDORED_GEMS/* vendor/cache/ # get our saved local gems back
 bundle install --local
 
-rake db:create && rake db:migrate
+bundle exec rake db:drop
+bundle exec rake db:create
+bundle exec rake db:migrate
 
 bin/rails zeitwerk:check
 
+
+if [[ "$HANAMI_TESTS" = "true" ]]; then
+  bundle exec rspec slices
+fi
 
 ## TESTS FOR EVENTIDE-BACKEND
 if [[ "$EVENTIDE_TESTS" = "true" ]]; then
@@ -39,7 +45,7 @@ if [[ "$EVENTIDE_TESTS" = "true" ]]; then
 fi
 
 ## TESTS FOR MAIN APP
-bundle exec rspec --exclude-pattern '**/system/**/*_spec.rb' `cat .rspec | tr '\n' ' '`
+bundle exec rspec --exclude-pattern '**/system/**/*_spec.rb'  `cat .rspec | tr '\n' ' '`
 echo 'puts defined?(TeamRecord) ? TeamRecord.count : Team.count' | bundle exec rails c
 
 

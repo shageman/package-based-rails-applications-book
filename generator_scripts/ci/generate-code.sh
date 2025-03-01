@@ -5,7 +5,7 @@ set -x
 set -e
 
 gem install bundler -v 2.3.4
-gem install rails
+gem install rails -v 7.2.2.1
 
 RAILSVERSION=`rails -v | sed 's/ /_/g'`
 
@@ -35,7 +35,6 @@ gem "sorbet-runtime"
 gem "sorbet", ">=0.5.10461", :group => :development
 gem "trueskill"
 gem "tapioca"
-gem "sorbet-rails"
 
 ## Add all RubyAtScale gems
 gem "packwerk", group: [:development, :test]
@@ -51,10 +50,17 @@ gem "danger-packwerk"
 gem "packs-rails"
 gem "code_manifest"
 
+### eventide gems
 gem "eventide-postgres"
 gem "evt-component_host"
 gem "evt-try"
 gem "rspec"
+
+### hanami gems
+gem "hanami", github: "hanami/hanami", branch: "exclude-more-files-from-zeitwerk"
+gem "hanami-view", github: "hanami/view", branch: "exclude-more-files-from-zeitwerk"
+gem "hanami-controller", ">= 2.2"
+gem "dry-operation"
 ' >> Gemfile
 
 sed -i "s/gem.*tzinfo-data.*/gem 'tzinfo-data'/g" Gemfile
