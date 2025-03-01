@@ -1,9 +1,9 @@
 enforce_dependencies: true
 enforce_privacy: true
 enforce_visibility: true
-enforce_architecture: true
+enforce_layers: true
 layer: utility
 dependencies:
-  - packs/predictor_interface
+- packs/predictor_interface
 visible_to:
-  - "."
+- "."

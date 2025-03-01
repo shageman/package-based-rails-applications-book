@@ -4,6 +4,7 @@ RSpec.describe "teams admin", type: :system do
 
     click_link "New Team"
 
+    expect(page).to have_selector("h1", text: "New team")
     fill_in "Name", with: "UofL"
     click_on "Create Team"
 
@@ -11,6 +12,7 @@ RSpec.describe "teams admin", type: :system do
 
     click_link "New Team"
 
+    expect(page).to have_selector("h1", text: "New team")
     fill_in "Name", with: "UK"
     click_on "Create Team"
 

@@ -35,7 +35,7 @@ class GamesController < ApplicationController
 
     respond_to do |format|
       if @game.persisted?
-        format.html { redirect_to game_url(@game), notice: "Game was successfully created." }
+        format.html { redirect_to @game, notice: "Game was successfully created." }
         format.json { render :show, status: :created, location: @game }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -57,7 +57,7 @@ class GamesController < ApplicationController
 
       @game = GameRepository.edit(@game)
       if @game.errors.empty?
-        format.html { redirect_to game_url(@game), notice: "Game was successfully updated." }
+        format.html { redirect_to @game, notice: "Game was successfully updated." }
         format.json { render :show, status: :ok, location: @game }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -71,7 +71,7 @@ class GamesController < ApplicationController
     GameRepository.delete(@game)
 
     respond_to do |format|
-      format.html { redirect_to games_url, notice: "Game was successfully destroyed." }
+      format.html { redirect_to games_path, status: :see_other, notice: "Game was successfully destroyed." }
       format.json { head :no_content }
     end
   end

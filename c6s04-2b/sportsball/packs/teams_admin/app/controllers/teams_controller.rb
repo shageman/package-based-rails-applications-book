@@ -25,7 +25,7 @@ class TeamsController < ApplicationController
 
     respond_to do |format|
       if @team.persisted?
-        format.html { redirect_to team_url(@team), notice: "Team was successfully created." }
+        format.html { redirect_to @team, notice: "Team was successfully created." }
         format.json { render :show, status: :created, location: @team }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -39,7 +39,7 @@ class TeamsController < ApplicationController
     respond_to do |format|
       @team = TeamRepository.edit(Team.new(params[:id].to_i, team_params[:name]))
       if @team.errors.empty?
-        format.html { redirect_to team_url(@team), notice: "Team was successfully updated." }
+        format.html { redirect_to @team, notice: "Team was successfully updated." }
         format.json { render :show, status: :ok, location: @team }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -53,7 +53,7 @@ class TeamsController < ApplicationController
     TeamRepository.delete(@team)
 
     respond_to do |format|
-      format.html { redirect_to teams_url, notice: "Team was successfully destroyed." }
+      format.html { redirect_to teams_path, status: :see_other, notice: "Team was successfully destroyed." }
       format.json { head :no_content }
     end
   end

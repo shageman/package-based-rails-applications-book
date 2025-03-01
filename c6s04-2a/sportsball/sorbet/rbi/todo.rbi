@@ -4,4 +4,3 @@
 
 # typed: false
 
-module T::Private::Methods::Signature; end
