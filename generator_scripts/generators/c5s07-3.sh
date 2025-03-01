@@ -158,7 +158,7 @@ bundle install --local
 
 
 echo "enforce_dependencies: true
-enforce_architecture: true
+enforce_layers: true
 layer: utility
 enforce_privacy: true" > packs/predictor_interface/package.yml
 

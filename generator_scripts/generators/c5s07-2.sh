@@ -24,7 +24,6 @@ echo "
 gem 'sorbet-runtime'
 gem 'sorbet', :group => :development
 gem 'tapioca', require: false, :group => :development
-gem 'sorbet-rails'
 " >> Gemfile
 
 bundle install --local

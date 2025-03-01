@@ -21,6 +21,7 @@ mkdir -p app/packages/rails_shims/channels/application_cable/; mv app/channels/a
 mkdir -p app/packages/rails_shims/channels/application_cable/; mv app/channels/application_cable/channel.rb $_
 
 find . -type d -empty -delete
+mkdir diagrams
 
 echo "enforce_dependencies: true" > app/packages/rails_shims/package.yml
 

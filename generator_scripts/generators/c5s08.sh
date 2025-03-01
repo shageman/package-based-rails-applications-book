@@ -40,7 +40,7 @@ mkdir -p packs/service_locator/app/public
 mkdir -p packs/service_locator/spec
 
 echo 'enforce_dependencies: true
-enforce_architecture: true
+enforce_layers: true
 layer: utility
 enforce_privacy: true
 ' > packs/service_locator/package.yml
@@ -59,7 +59,7 @@ Packs/TypedPublicApis:
 Packs/DocumentedPublicApis:
   Enabled: false' > packs/service_locator/.rubocop.yml
 
-sed -i '/packs\/prediction_ui/c\  - packs/service_locator' package.yml
+sed -i '/packs\/prediction_ui/c\- packs/service_locator' package.yml
 
 echo '# typed: true
 
