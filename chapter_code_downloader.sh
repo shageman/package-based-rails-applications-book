@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+
+# INSTALL https://min.io/docs/minio/linux/reference/minio-mc.html?ref=docs
+
+# brew install minio/stable/mc
+
+# bash +o history
+# mc alias set minio concourse-server.local:9001 minio minio123
+# bash -o history
+
+# mc alias set concourse-server http://concourse-server.local:9001 minio minio123
+
+
+extractChapter () {
+    CHAPTER=$1
+
+    if [ -z $CHAPTER ];
+        then echo "ERROR: call extractChapter as extractChapter(CHAPTER)"
+        exit 1
+    fi
+
+    echo "extractChapter for CHAPTER $CHAPTER"
+
+    FILE=$(mc ls concourse-server/releases/ | grep $CHAPTER | sort | tail -1 | awk '{print $NF}')
+    echo $FILE
+    echo $CHAPTER/$FILE
+    mc cp concourse-server/releases/$FILE docker/minio/data/releases/
+    sleep 1
+}
+
+extractChapter "c2s01"
+extractChapter "c2s02"
+extractChapter "c2s03"
+extractChapter "c2s04"
+extractChapter "c2s05"
+extractChapter "c2s06"
+extractChapter "c2s07"
+
+extractChapter "c3s01"
+extractChapter "c3s02"
+extractChapter "c3s03"
+
+extractChapter "c4s01"
+extractChapter "c4s02"
+extractChapter "c4s03"
+extractChapter "c4s04"
+extractChapter "c4s05"
+extractChapter "c4s06"
+extractChapter "c4s07"
+extractChapter "c4s08"
+
+extractChapter "c5s07-1"
+extractChapter "c5s07-2"
+extractChapter "c5s07-3"
+extractChapter "c5s08"
+extractChapter "c5s09"
+
+extractChapter "c6s01"
+extractChapter "c6s02"
+extractChapter "c6s03"
+extractChapter "c6s04-1"
+extractChapter "c6s04-2a"
+extractChapter "c6s04-2b"
+
+extractChapter "c9s01-a"
+extractChapter "c9s01-b"
+
+extractChapter "c9s02"
