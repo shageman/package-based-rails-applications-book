@@ -1,3 +1,3 @@
 enforce_dependencies: true
 dependencies:
-  - packs/rails_shims
+- packs/rails_shims

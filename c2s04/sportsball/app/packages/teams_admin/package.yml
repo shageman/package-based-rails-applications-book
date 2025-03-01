@@ -1,4 +1,4 @@
 enforce_dependencies: true
 dependencies:
-  - app/packages/rails_shims
-  - app/packages/teams
+- app/packages/rails_shims
+- app/packages/teams

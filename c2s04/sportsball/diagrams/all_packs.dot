@@ -1,0 +1,189 @@
+digraph package_diagram {
+  rankdir=TD
+  graph [
+    labelloc="t"
+    fontname="Helvetica,Arial,sans-serif"
+    dpi=100
+    layout=dot
+    label=<<b>All packs</b><br/><br/><font point-size='12'>Widest todo edge is 2 todos</font>>
+    fontsize=18
+  ]
+  node [
+    fontname="Helvetica,Arial,sans-serif"
+    fontsize=26.0
+    fontcolor=black
+    fillcolor=white
+    color=black
+    height=1.0
+    style=filled
+    shape=plain
+  ]
+    subgraph NotInLayer {
+      shape=box
+      color=darkgrey
+      fillcolor=lightblue
+      style=filled
+        cluster=false
+        "." [
+            fontsize=12.0
+            label= <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> . </td> </tr>
+                </table>
+              >
+          ]
+        
+        "app/packages/games" [
+            fontsize=12.0
+            label= <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> app/packages/games </td> </tr>
+                </table>
+              >
+          ]
+        
+        "app/packages/games_admin" [
+            fontsize=12.0
+            label= <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> app/packages/games_admin </td> </tr>
+                </table>
+              >
+          ]
+        
+        "app/packages/prediction_ui" [
+            fontsize=12.0
+            label= <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> app/packages/prediction_ui </td> </tr>
+                </table>
+              >
+          ]
+        
+        "app/packages/predictor" [
+            fontsize=12.0
+            label= <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> app/packages/predictor </td> </tr>
+                </table>
+              >
+          ]
+        
+        "app/packages/rails_shims" [
+            fontsize=12.0
+            label= <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> app/packages/rails_shims </td> </tr>
+                </table>
+              >
+          ]
+        
+        "app/packages/teams" [
+            fontsize=12.0
+            label= <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> app/packages/teams </td> </tr>
+                </table>
+              >
+          ]
+        
+        "app/packages/teams_admin" [
+            fontsize=12.0
+            label= <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> app/packages/teams_admin </td> </tr>
+                </table>
+              >
+          ]
+        
+        "app/packages/welcome_ui" [
+            fontsize=12.0
+            label= <
+                <table border='0' cellborder='1' cellspacing='0' cellpadding='4'>
+                  <tr> <td align='left'> app/packages/welcome_ui </td> </tr>
+                </table>
+              >
+          ]
+        
+    }
+          "app/packages/games" -> "app/packages/rails_shims" [ color=darkgreen ]
+          "app/packages/games" -> "app/packages/teams" [ color=darkgreen ]
+          "app/packages/games_admin" -> "app/packages/games" [ color=darkgreen ]
+          "app/packages/games_admin" -> "app/packages/rails_shims" [ color=darkgreen ]
+          "app/packages/prediction_ui" -> "app/packages/games" [ color=darkgreen ]
+          "app/packages/prediction_ui" -> "app/packages/predictor" [ color=darkgreen ]
+          "app/packages/prediction_ui" -> "app/packages/rails_shims" [ color=darkgreen ]
+          "app/packages/prediction_ui" -> "app/packages/teams" [ color=darkgreen ]
+          "app/packages/teams" -> "app/packages/rails_shims" [ color=darkgreen ]
+          "app/packages/teams_admin" -> "app/packages/rails_shims" [ color=darkgreen ]
+          "app/packages/teams_admin" -> "app/packages/teams" [ color=darkgreen ]
+          "app/packages/welcome_ui" -> "app/packages/rails_shims" [ color=darkgreen ]
+            "." -> "app/packages/games" [
+                constraint=false
+              # headlabel="dependency"
+color=darkred style=dashed arrowhead=odiamond
+              penwidth=1.0            ]
+            "." -> "app/packages/games_admin" [
+                constraint=false
+              # headlabel="dependency"
+color=darkred style=dashed arrowhead=odiamond
+              penwidth=1.0            ]
+            "." -> "app/packages/prediction_ui" [
+                constraint=false
+              # headlabel="dependency"
+color=darkred style=dashed arrowhead=odiamond
+              penwidth=1.0            ]
+            "." -> "app/packages/predictor" [
+                constraint=false
+              # headlabel="dependency"
+color=darkred style=dashed arrowhead=odiamond
+              penwidth=10.0            ]
+            "." -> "app/packages/teams" [
+                constraint=false
+              # headlabel="dependency"
+color=darkred style=dashed arrowhead=odiamond
+              penwidth=1.0            ]
+            "." -> "app/packages/teams_admin" [
+                constraint=false
+              # headlabel="dependency"
+color=darkred style=dashed arrowhead=odiamond
+              penwidth=1.0            ]
+    subgraph cluster_legend {
+      fontsize=16
+      label="Edges Styles and Arrow Heads"
+      A [ fontsize=12 shape=box label="package"]
+      B [ fontsize=12 shape=box label="package"]
+      A -> B [label="accepted dependency" color=darkgreen]
+      M [ fontsize=12 shape=box label="package"]
+      N [ fontsize=12 shape=box label="package"]
+      M -> N [label="nested package" color=purple]
+      O [ fontsize=12 shape=box label="package"]
+      P [ fontsize=12 shape=box label="package"]
+      O -> P [label="visible to" color=blue]
+      C [ fontsize=12 shape=box label="package"]
+      D [ fontsize=12 shape=box label="package"]
+      C -> D [label="privacy todo" color=darkred style=dashed arrowhead=crow]
+      E [ fontsize=12 shape=box label="package"]
+      F [ fontsize=12 shape=box label="package"]
+      E -> F [label="layer todo" color=darkred style=dashed arrowhead=obox]
+      G [ fontsize=12 shape=box label="package"]
+      H [ fontsize=12 shape=box label="package"]
+      G -> H [label="visibility todo" color=darkred style=dashed arrowhead=tee]
+      I [ fontsize=12 shape=box label="package"]
+      J [ fontsize=12 shape=box label="package"]
+      I -> J [label="folder visibility todo" color=darkred style=dashed arrowhead=odot]
+      K [ fontsize=12 shape=box label="package"]
+      L [ fontsize=12 shape=box label="package"]
+      K -> L [label="dependency todo" color=darkred style=dashed arrowhead=odiamond]
+      LEGEND_NODE_1 [ label="" peripheries=0 height=0 width=0 style=invis ]
+      LEGEND_NODE_2 [ label="" peripheries=0 height=0 width=0 style=invis ]
+      LEGEND_NODE_1 -> LEGEND_NODE_2 [ style=invis ]
+    }
+  subgraph cluster_teams_legend {
+    fontsize=16
+    label="Team Colors"
+
+
+  }
+    LEGEND_NODE_2 -> "" [style=invis]
+}
