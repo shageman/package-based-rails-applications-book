@@ -78,11 +78,11 @@ Every run of the chapter-generation pipeline will use the latest version of Rail
 On an amd64-based machine running docker, run
 
 ```
-docker build -t shageman/ruby32-sorbet:VERSION .
+docker build -t shageman/ruby33-sorbet:VERSION .
 ```
 
-When you have a good new build, publish it using the following command. Be sure to increment the version number based on what has already been published: https://hub.docker.com/r/shageman/ruby32-sorbet/tags
+When you have a good new build, publish it using the following command. Be sure to increment the version number based on what has already been published: https://hub.docker.com/r/shageman/ruby33-sorbet/tags
 
 ```
-docker push shageman/ruby32-sorbet:VERSION
+docker push shageman/ruby33-sorbet:VERSION
 ```

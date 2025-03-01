@@ -1,5 +1,5 @@
 # Base image
-FROM rubylang/ruby:3.2.0-jammy
+FROM rubylang/ruby:3.3-jammy
 
 # Set the working directory
 WORKDIR /app
