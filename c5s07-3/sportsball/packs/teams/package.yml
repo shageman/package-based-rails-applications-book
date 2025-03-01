@@ -1,7 +1,7 @@
 enforce_dependencies: true
 enforce_privacy: false
-enforce_architecture: true
+enforce_layers: true
 layer: data
 dependencies:
-  - packs/predictor_interface
-  - packs/rails_shims
+- packs/predictor_interface
+- packs/rails_shims

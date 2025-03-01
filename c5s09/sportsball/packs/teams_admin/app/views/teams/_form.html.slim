@@ -1,9 +1,9 @@
-= form_with(model: @team) do |form|
-  - if @team.errors.any?
+= form_with(model: team) do |form|
+  - if team.errors.any?
     div style="color: red"
-      h2 = "#{pluralize(@team.errors.count, "error")} prohibited this team from being saved:"
+      h2 = "#{pluralize(team.errors.count, "error")} prohibited this team from being saved:"
       ul
-        - @team.errors.each do |error|
+        - team.errors.each do |error|
           li = error.full_message
 
   div

@@ -1,5 +1,5 @@
 enforce_dependencies: true
 dependencies:
-  - packs/rails_shims
-enforce_architecture: true
+- packs/rails_shims
+enforce_layers: true
 layer: data
