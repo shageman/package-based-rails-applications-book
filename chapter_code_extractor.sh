@@ -67,3 +67,5 @@ extractChapter "c6s04-2b"
 
 extractChapter "c9s01-a"
 extractChapter "c9s01-b"
+
+extractChapter "c9s02"
